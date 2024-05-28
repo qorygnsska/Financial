@@ -277,7 +277,4 @@ public class ExportView extends JFrame {
 		setResizable(false);
 	}
 
-	public static void main(String[] args) {
-		new ExportView();
-	}
 }

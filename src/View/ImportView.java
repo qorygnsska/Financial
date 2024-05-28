@@ -280,9 +280,5 @@ public class ImportView extends JFrame {
 		setBounds(scrSize.width / 2 - 600, scrSize.height / 2 - 400, 1200, 800);
 		setResizable(false);
 	}
-	
-	public static void main(String[] args) {
-		new ImportView();
-	}
 
 }
