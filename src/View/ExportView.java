@@ -10,6 +10,9 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,8 +26,14 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
+import DatePickerEx.Dateformet;
+import DatePickerEx.JDatePickerEx;
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
 public class ExportView extends JPanel {
-	
+
 	JPanel panMain;
 	private String day;
 	private int price;
@@ -38,7 +47,7 @@ public class ExportView extends JPanel {
 	}
 
 	public ExportView(JPanel panel) {
-		panMain = panel; 
+		panMain = panel;
 		print();
 
 	}
@@ -75,7 +84,7 @@ public class ExportView extends JPanel {
 				panMain.repaint();
 			}
 		});
-		
+
 		btnPanel.add(menuBtn);
 		btnPanel.setBounds(1050, 20, 100, 50);
 		mainPanel.add(btnPanel);
@@ -167,10 +176,10 @@ public class ExportView extends JPanel {
 		updatePanel.add(datePanelL);
 
 		// 날짜 패널(오른쪽)
-		JPanel datePanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
-		JTextField dateField = new JTextField(20);
-		datePanelR.add(dateField);
-		updatePanel.add(datePanelR);
+		JDatePickerEx date = new JDatePickerEx();
+		JPanel datePan = date.datePanel();
+		datePan.setLayout(new FlowLayout(FlowLayout.LEFT));
+		updatePanel.add(datePan);
 
 		// 금액 패널(왼쪽)
 		JPanel amountPanelL = new JPanel(new FlowLayout(FlowLayout.RIGHT));
