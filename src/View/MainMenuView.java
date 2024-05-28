@@ -261,7 +261,7 @@ public class MainMenuView extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				panMain.removeAll();
-				panMain.add(new AmountView());
+				panMain.add(new AmountView(panMain));
 				panMain.revalidate();
 				panMain.repaint();
 			}
