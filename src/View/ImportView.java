@@ -29,8 +29,11 @@ public class ImportView extends JFrame {
 	private JScrollPane sp = new JScrollPane();
 	// tab
 	private JTabbedPane tabPanel = new JTabbedPane();
-
+	
 	public ImportView() {
+	}
+
+	public ImportView(JPanel panMain) {
 		screenSize();
 		print();
 

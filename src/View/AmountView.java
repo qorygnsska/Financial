@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,17 +22,21 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-public class AmountView extends JFrame {
+public class AmountView extends JPanel {
 
+	JPanel panMain;
 	Font font = new Font("함초롱돋움", Font.BOLD, 30);
 	Font font2 = new Font("함초롱돋움", Font.PLAIN, 15);
 	Font font3 = new Font("함초롱돋움", Font.BOLD, 15);
 
-	public AmountView() {
+	public AmountView(JPanel panel) {
 		setLayout(null);
-		setTitle("잔고 상세 페이지");
-		getContentPane().setBackground(new Color(255, 255, 255)); // 프레임 배경색 설정
-		screenSize(); // 프레임 크기 설정
+		
+		panMain = panel; // MainMenuView의 패널 가져옴
+		Rectangle rect = panel.getBounds(); // 패널의 정보 저장
+		setPreferredSize(rect.getSize()); // 패널의 사이즈 지정
+		
+		setBackground(new Color(255, 255, 255)); // 프레임 배경색 설정
 
 		JPanel mainPan = new JPanel();
 		mainPan.setBounds(100, 30, 1000, 600);
@@ -117,8 +122,12 @@ public class AmountView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("메인으로 이동");
-
+				// 메인으로 이동
+				panMain.removeAll(); // 현재 패널 내용 지움
+				panMain.add(new MainMenuView(panMain)); // 현재 패널에 메인메뉴 패널 추가
+				panMain.revalidate(); // 패널의 가로세로 다시 지정 
+				panMain.repaint(); // 패널 그리기
+				
 			}
 		});
 
@@ -131,17 +140,8 @@ public class AmountView extends JFrame {
 		add(btnPan); // 메인에 버튼 추가
 
 		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-	// 스크린 사이즈
-	public void screenSize() {
-		// 모니터 사이즈 받아오기
-		Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
-		// 사이즈 설정
-		setBounds(scrSize.width / 2 - 600, scrSize.height / 2 - 400, 1200, 800);
-		setResizable(false);
-	}
 
 	// 테이블 내용 가운데 정렬하기
 	public void tableCellCenter(JTable t) {

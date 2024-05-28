@@ -32,6 +32,9 @@ public class ExportView extends JFrame {
 	private JTabbedPane tabPanel = new JTabbedPane();
 
 	public ExportView() {
+	}
+
+	public ExportView(JPanel panMain) {
 		screenSize();
 		print();
 

@@ -1,19 +1,27 @@
 package View;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Controller.SignupController;
+import Model.UsersModel;
+
 public class SignupView extends JFrame {
+	SignupController signupController = new SignupController();
+	
 
 	public void newUser() {
 
@@ -22,12 +30,13 @@ public class SignupView extends JFrame {
 		back.setBackground(Color.CYAN);
 		JPanel title = new JPanel();
 		JLabel Jtitle = new JLabel("회원가입");
-		Jtitle.setFont(new Font("휴먼편지체", Font.BOLD, 30));
-		back.add(Jtitle);
+		Jtitle.setFont(new Font("궁서체", Font.BOLD, 30));
+		title.setBackground(Color.CYAN);
+		title.add(Jtitle);
 
 		JPanel jp1 = new JPanel();
 
-		jp1.setLayout(new GridLayout(6, 2));
+		jp1.setLayout(new GridLayout(4, 2));
 		JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JLabel jlid = new JLabel("아이디 : ", JLabel.CENTER);
 		jlid.setFont(new Font("휴먼편지체", Font.BOLD, 20));
@@ -75,56 +84,58 @@ public class SignupView extends JFrame {
 		JPanel juminPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JTextField jtjumin = new JTextField(5);
 		juminPanel2.setBackground(Color.CYAN);
+		JLabel jlumin2 = new JLabel("-");
 		JPasswordField jtjumin2 = new JPasswordField(5);
 
 		juminPanel.add(jljumin);
 		juminPanel2.add(jtjumin);
+		juminPanel2.add(jlumin2);
 		juminPanel2.add(jtjumin2);
 
 		jp1.add(juminPanel);
 		jp1.add(juminPanel2);
-
-		JPanel fimportPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		JLabel jlfimport = new JLabel("고정수입: ", JLabel.CENTER);
-		jlfimport.setFont(new Font("휴먼편지체", Font.BOLD, 15));
-		fimportPanel.setBackground(Color.CYAN);
-		fimportPanel.add(jlfimport);
-
-		String[] importType = { "용도", "용도", "용도" };
-		JComboBox jboxImportType = new JComboBox(importType);
-
-		JPanel fimportPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JTextField jtfimport = new JTextField(10);
-		fimportPanel2.setBackground(Color.CYAN);
-		fimportPanel2.add(jtfimport);
-		fimportPanel2.add(jboxImportType);
-		jp1.add(fimportPanel);
-		jp1.add(fimportPanel2);
-
-		JPanel fexportPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		JLabel jlfexport = new JLabel("고정지출 : ", JLabel.CENTER);
-		jlfexport.setFont(new Font("휴먼편지체", Font.BOLD, 15));
-		fexportPanel.setBackground(Color.CYAN);
-		fexportPanel.add(jlfexport);
-
-		String[] exportType = { "용도", "용도", "용도" };
-		JComboBox jboxExportType = new JComboBox(exportType);
-
-		JPanel fexportPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JTextField jtfexport = new JTextField(10);
-		fexportPanel2.setBackground(Color.CYAN);
-		fexportPanel2.add(jtfexport);
-		fexportPanel2.add(jboxExportType);
-		jp1.add(fexportPanel);
-		jp1.add(fexportPanel2);
-
 		back.add(jp1);
+		JPanel jp2 = new JPanel();
+		jp2.setLayout(new FlowLayout());
+		jp2.add(back);
+
+		setLayout(new BorderLayout());
+
+		JPanel jp3 = new JPanel();
 
 		JButton btuser = new JButton("회원가입");
-		back.add(btuser);
+		jp3.setBackground(Color.CYAN);
+		jp3.add(btuser);
+		add(title, BorderLayout.NORTH);
+		add(jp2, BorderLayout.CENTER);
+		add(jp3, BorderLayout.SOUTH);
 
 		add(back);
-		setBounds(0, 0, 400, 350);
+		setBounds(0, 0, 300, 300);
+
+		// 회원가입 버튼 이벤트
+		btuser.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String user_id = jtid.getText();
+				String user_pass = jtpw.getText();
+				String name = jtname.getText();
+				String jumin = jtjumin.getText() + jtjumin2.getText();
+				
+				// user 객체 생성
+				UsersModel user = new UsersModel(user_id, user_pass, name, jumin);
+				if(signupController.signup(user)) {
+					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+					new LoginView().user();
+					dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "회원가입 실패(중복 or 빈 칸)", "실패", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
 
 		// 화면 크기 고정하는 작업
 		setResizable(false);
@@ -133,4 +144,6 @@ public class SignupView extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
+
+
 }
