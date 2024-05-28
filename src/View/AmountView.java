@@ -117,7 +117,8 @@ public class AmountView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("메인으로 이동");
+				//new MainMenuView();
+				dispose();
 
 			}
 		});
