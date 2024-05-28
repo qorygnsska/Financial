@@ -72,7 +72,7 @@ public class JDatePickerEx extends JPanel {
 	}
 
 //	public static void main(String[] args) {
-//		new JDatePickerEx();
+
 //
 //		
 //		
