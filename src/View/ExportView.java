@@ -211,7 +211,8 @@ public class ExportView extends JPanel {
 
 		mainPanel.add(btnsPanel);
 		mainPanel.add(updatePanel);
-
+		
+		
 		add(mainPanel);
 		setVisible(true);
 	}

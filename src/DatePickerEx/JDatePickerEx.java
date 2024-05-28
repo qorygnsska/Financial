@@ -38,9 +38,9 @@ public class JDatePickerEx extends JFrame {
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
 
 		jp1.add(datePicker);
-
 		add(jp1, BorderLayout.CENTER);
-		setBounds(300, 300, 400, 400);
+	//	setBounds(300, 300, 400, 400);
+		setBounds(650, 150, 500, 300);
 
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		model.addPropertyChangeListener(new PropertyChangeListener() {
@@ -59,13 +59,13 @@ public class JDatePickerEx extends JFrame {
 
 			}
 		});
-		setVisible(true);
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setVisible(true);
+//
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	public static void main(String[] args) {
-		new JDatePickerEx();
+//		new JDatePickerEx();
 
 //		String[] date = planeDTO.getDate().split("-");
 //		int dateY = Integer.parseInt(date[0]);
