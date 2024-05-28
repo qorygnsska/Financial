@@ -28,8 +28,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class MainMenuView extends JPanel {
-	
-	
+
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -45,11 +44,10 @@ public class MainMenuView extends JPanel {
 		setBorder(new LineBorder(Color.green, 8));
 		setBackground(Color.white);
 		panMain = panel;
-		
+
 		Rectangle rect = panel.getBounds();
 		setPreferredSize(rect.getSize());
-		
-		
+
 		importTable();
 		exportTable();
 		moneyPrint();
@@ -110,17 +108,19 @@ public class MainMenuView extends JPanel {
 			JButton btn = (JButton) e.getSource();
 			if (btn == btnList[0]) {
 				System.out.println("로그아웃 버튼");
-			
+				ViewFrame.mainFrame.dispose();
+				new LoginView().user();
+
 			} else {
 				System.out.println("종료 버튼");
 				System.exit(0);
+
 			}
 
 		}
 
 	}
-	
-	
+
 	// 수입 테이블
 	public void importTable() {
 
@@ -279,61 +279,53 @@ public class MainMenuView extends JPanel {
 
 	}
 
-	
-	
 	// 소비태크
 	public void consume() {
-		JPanel conPan = new JPanel(new GridLayout(0,3));
+		JPanel conPan = new JPanel(new GridLayout(0, 3));
 		conPan.setBounds(30, 550, 300, 180);
 		conPan.setBackground(Color.white);
-		
-		conPan.setBorder(new TitledBorder(new LineBorder(Color.green,3),"소비유형"));
+
+		conPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "소비유형"));
 		JLabel[] list = new JLabel[3];
-		for(int i = 0; i < list.length; i++) {
+		for (int i = 0; i < list.length; i++) {
 			list[i] = new JLabel();
 			conPan.add(list[i]);
 			list[i].setHorizontalAlignment(JLabel.CENTER);
-			list[i].setFont(new Font("기본글씨", Font.BOLD,18));
+			list[i].setFont(new Font("기본글씨", Font.BOLD, 18));
 		}
 
 		list[0].setText("1. 교통비");
 		list[1].setText("2. 식비");
 		list[2].setText("3. 쇼핑");
-		
-		
+
 		add(conPan);
-		
-		
+
 		conPan.addMouseListener(new MouseAdapter() {
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("소비 태크 클릭");
 			}
-			
+
 		});
-		
-		
+
 	}
-	
-	
-	
+
 	// 저축
 	public void savingMoney() {
 		JPanel sPan = new JPanel();
 		sPan.setBounds(400, 550, 460, 180);
 		sPan.setBackground(Color.white);
-		
-		sPan.setBorder(new TitledBorder(new LineBorder(Color.green,3),"저축"));
-		String[] header = {"날짜","금액", "유형","비고"};
-		
+
+		sPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "저축"));
+		String[] header = { "날짜", "금액", "유형", "비고" };
+
 		DefaultTableModel saveModel = new DefaultTableModel(header, 0) {
 			public boolean isCellEditable(int rowIndex, int mColindex) {
 				return false;
 			}
 		};
-		
-		
+
 		JTable table = new JTable(saveModel);
 
 		// 테이블 컬럼 이동불가
@@ -360,15 +352,12 @@ public class MainMenuView extends JPanel {
 		table.getColumn("유형").setPreferredWidth(60);
 		table.getColumn("비고").setPreferredWidth(180);
 		sPan.add(savePane);
-		
+
 		add(sPan);
 	}
-	
-	
-	
+
 	public static void main(String[] args) {
-		//new MainMenuView();
+		// new MainMenuView();
 	}
 
-	
 }
