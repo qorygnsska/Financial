@@ -1,0 +1,67 @@
+1. 유저 테이블(users)
+id   	number
+user_id	varchar2(30)
+user_pass	 varchar2(30)
+name	varchar2(30)
+jumin 	varchar2(30)
+
+
+2. 고정 지출 테이블(fexport)
+id	number
+user_id	number
+price	number
+day	varchar(50)
+type_id	number
+memo	varchar2(100)
+
+3. 고정 수입 테이블(fimport)
+id	number
+user_id	number
+price	number
+day	varchar(50)
+type_id	number
+memo	varchar2(100)
+
+
+4. 지출 유형 테이블(extype)
+id 	number
+type	varchar2(20)
+
+5. 수입 유형 테이블(imtype)
+id 	number
+type	varchar2(20)
+
+6. 지출 테이블(export)
+id	number
+user_id	number
+price	number
+day	varchar(50)
+type_id	number
+memo	varchar2(100)
+
+
+7. 수입 테이블(import)
+id	number
+user_id	number
+price	number
+day	varchar(50)
+type_id	number
+memo	varchar2(100)
+
+
+8. 잔고 테이블(amount)
+fimport_id	number
+fexport_id	number
+import_id		number
+export_id		number
+
+
+9. 저축 테이블(saveprice)
+id	number
+user_id	number
+price	number
+day	varchar(50)
+type_id	number
+memo	varchar2(100)
+
+(뷰: 날짜 / 금액 / 합계 / 상세내용)
