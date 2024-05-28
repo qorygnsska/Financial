@@ -46,7 +46,7 @@ public class MainMenuView extends JFrame {
 		panMain.setBackground(Color.white);
 		panMain.setLayout(null);
 
-		// 창크기
+		// 창크기.
 		screenSize();
 
 		setIconImage(new ImageIcon("coin.png").getImage());
