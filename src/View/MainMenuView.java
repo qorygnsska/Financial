@@ -3,6 +3,8 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,6 +57,8 @@ public class MainMenuView extends JFrame {
 		exportTable();
 		moneyPrint();
 		userButton();
+		consume();
+		savingMoney();
 
 		setResizable(false);
 		setVisible(true);
@@ -280,4 +284,96 @@ public class MainMenuView extends JFrame {
 
 	}
 
+	
+	
+	// 소비태크
+	public void consume() {
+		JPanel conPan = new JPanel(new GridLayout(0,3));
+		conPan.setBounds(30, 550, 300, 180);
+		conPan.setBackground(Color.white);
+		
+		conPan.setBorder(new TitledBorder(new LineBorder(Color.green,3),"소비유형"));
+		JLabel[] list = new JLabel[3];
+		for(int i = 0; i < list.length; i++) {
+			list[i] = new JLabel();
+			conPan.add(list[i]);
+			list[i].setHorizontalAlignment(JLabel.CENTER);
+			list[i].setFont(new Font("기본글씨", Font.BOLD,18));
+		}
+
+		list[0].setText("1. 교통비");
+		list[1].setText("2. 식비");
+		list[2].setText("3. 쇼핑");
+		
+		
+		panMain.add(conPan);
+		
+		
+		panMain.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("소비 태크 클릭");
+			}
+			
+		});
+		
+		
+	}
+	
+	
+	
+	// 저축
+	public void savingMoney() {
+		JPanel sPan = new JPanel();
+		sPan.setBounds(400, 550, 460, 180);
+		sPan.setBackground(Color.white);
+		
+		sPan.setBorder(new TitledBorder(new LineBorder(Color.green,3),"저축"));
+		String[] header = {"날짜","금액", "유형","비고"};
+		
+		DefaultTableModel saveModel = new DefaultTableModel(header, 0) {
+			public boolean isCellEditable(int rowIndex, int mColindex) {
+				return false;
+			}
+		};
+		
+		
+		JTable table = new JTable(saveModel);
+
+		// 테이블 컬럼 이동불가
+		table.getTableHeader().setReorderingAllowed(false);
+		// 컬럼 크기 조절 불가
+		table.getTableHeader().setResizingAllowed(false);
+
+		// 테이블 cell 높이 설정
+		table.setRowHeight(30);
+
+		// 셀 내용 가운데 정렬
+		tableCellCenter(table);
+
+		// 테이블 셀 배경
+		table.setBackground(Color.white);
+		saveModel.addRow(new Object[] { "5월7일", "100000", "여가", "태국" });
+
+		JScrollPane savePane = new JScrollPane(table);
+		// JScrollPane 사이즈
+		savePane.setPreferredSize(new Dimension(440, 150));
+		// 컬럼 사이즈
+		table.getColumn("날짜").setPreferredWidth(60);
+		table.getColumn("금액").setPreferredWidth(120);
+		table.getColumn("유형").setPreferredWidth(60);
+		table.getColumn("비고").setPreferredWidth(180);
+		sPan.add(savePane);
+		
+		panMain.add(sPan);
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		new MainMenuView();
+	}
+	
+	
 }
