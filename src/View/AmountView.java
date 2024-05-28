@@ -21,17 +21,15 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-public class AmountView extends JFrame {
+public class AmountView extends JPanel {
 
 	Font font = new Font("함초롱돋움", Font.BOLD, 30);
 	Font font2 = new Font("함초롱돋움", Font.PLAIN, 15);
 	Font font3 = new Font("함초롱돋움", Font.BOLD, 15);
 
-	public AmountView() {
+	public AmountView(JPanel panel) {
 		setLayout(null);
-		setTitle("잔고 상세 페이지");
-		getContentPane().setBackground(new Color(255, 255, 255)); // 프레임 배경색 설정
-		screenSize(); // 프레임 크기 설정
+		setBackground(new Color(255, 255, 255)); // 프레임 배경색 설정
 
 		JPanel mainPan = new JPanel();
 		mainPan.setBounds(100, 30, 1000, 600);
@@ -117,8 +115,7 @@ public class AmountView extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//new MainMenuView();
-				dispose();
+			
 
 			}
 		});
@@ -132,17 +129,8 @@ public class AmountView extends JFrame {
 		add(btnPan); // 메인에 버튼 추가
 
 		setVisible(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-	// 스크린 사이즈
-	public void screenSize() {
-		// 모니터 사이즈 받아오기
-		Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
-		// 사이즈 설정
-		setBounds(scrSize.width / 2 - 600, scrSize.height / 2 - 400, 1200, 800);
-		setResizable(false);
-	}
 
 	// 테이블 내용 가운데 정렬하기
 	public void tableCellCenter(JTable t) {
