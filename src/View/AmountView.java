@@ -32,9 +32,9 @@ public class AmountView extends JPanel {
 	public AmountView(JPanel panel) {
 		setLayout(null);
 		
-		panMain = panel;
-		Rectangle rect = panel.getBounds();
-		setPreferredSize(rect.getSize());
+		panMain = panel; // MainMenuView의 패널 가져옴
+		Rectangle rect = panel.getBounds(); // 패널의 정보 저장
+		setPreferredSize(rect.getSize()); // 패널의 사이즈 지정
 		
 		setBackground(new Color(255, 255, 255)); // 프레임 배경색 설정
 
@@ -123,10 +123,10 @@ public class AmountView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 메인으로 이동
-				panMain.removeAll();
-				panMain.add(new MainMenuView(panMain));
-				panMain.revalidate();
-				panMain.repaint();
+				panMain.removeAll(); // 현재 패널 내용 지움
+				panMain.add(new MainMenuView(panMain)); // 현재 패널에 메인메뉴 패널 추가
+				panMain.revalidate(); // 패널의 가로세로 다시 지정 
+				panMain.repaint(); // 패널 그리기
 				
 			}
 		});
