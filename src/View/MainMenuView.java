@@ -29,7 +29,7 @@ import javax.swing.table.TableColumnModel;
 
 public class MainMenuView extends JPanel {
 	
-	
+	boolean res = false;
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
