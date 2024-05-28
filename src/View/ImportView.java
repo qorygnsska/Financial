@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,18 +21,22 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
-public class ImportView extends JFrame {
+public class ImportView extends JPanel {
+	
+	JPanel panMain;
 	private String day;
 	private int price;
 	private int imtype;
 	private String memo;
 
 	private JScrollPane sp = new JScrollPane();
-	// tab
 	private JTabbedPane tabPanel = new JTabbedPane();
-
+	
 	public ImportView() {
-		screenSize();
+	}
+
+	public ImportView(JPanel panel) {
+		panMain = panel; 
 		print();
 
 	}
@@ -44,7 +49,8 @@ public class ImportView extends JFrame {
 	}
 
 	public void print() {
-		setTitle("수입 상세 페이지");
+		Rectangle rect = panMain.getBounds();
+		setPreferredSize(rect.getSize());
 		setBounds(50, 50, 1200, 800);
 		setLayout(null);
 
@@ -56,6 +62,18 @@ public class ImportView extends JFrame {
 		// 메뉴 패널(메인으로 돌아가기 버튼)
 		JPanel btnPanel = new JPanel();
 		JButton menuBtn = new JButton("메인으로");
+		menuBtn.addActionListener(new ActionListener() {
+			
+			// 버튼 클릭 시 메인으로 돌아가는 이벤트
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				panMain.removeAll();
+				panMain.add(new MainMenuView(panMain));
+				panMain.revalidate();
+				panMain.repaint();
+			}
+		});
+		
 		btnPanel.add(menuBtn);
 		btnPanel.setBounds(1050, 20, 100, 50);
 		mainPanel.add(btnPanel);
@@ -194,7 +212,6 @@ public class ImportView extends JFrame {
 		mainPanel.add(updatePanel);
 
 		add(mainPanel);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
 
@@ -271,14 +288,6 @@ public class ImportView extends JFrame {
 		totalTable.getColumn("비        고").setCellRenderer(dtcrCenter);
 
 		return scrollpane;
-	}
-
-	public void screenSize() {
-		// 모니터 사이즈 받아오기
-		Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
-		// 사이즈 설정
-		setBounds(scrSize.width / 2 - 600, scrSize.height / 2 - 400, 1200, 800);
-		setResizable(false);
 	}
 
 }
