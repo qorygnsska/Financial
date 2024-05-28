@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +27,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-public class MainMenuView extends JFrame {
+public class MainMenuView extends JPanel {
+	
+	
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -37,22 +40,28 @@ public class MainMenuView extends JFrame {
 	JPanel btnPan = new JPanel();
 	JButton[] btnList = new JButton[2];
 
-	public MainMenuView() {
-		setTitle("재무관리");
-		setLayout(new BorderLayout());
-		panMain = new JPanel();
-		panMain.setBorder(new LineBorder(Color.green, 8));
+	public MainMenuView(JPanel panel) {
+	//	setTitle("재무관리");
+	//	setLayout(new BorderLayout());
+	//	panMain = new JPanel();
+		setLayout(null);
+		setBorder(new LineBorder(Color.green, 8));
+	//	setBounds(0,0, ViewFrame.width, ViewFrame.height);
+		//add(panMain);
 
-		add(panMain);
-
-		panMain.setBackground(Color.white);
-		panMain.setLayout(null);
+		//panMain.setBackground(Color.white);
+		//panMain.setLayout(null);
 
 		// 창크기
-		screenSize();
+		//screenSize();
 
-		setIconImage(new ImageIcon("coin.png").getImage());
+		//setIconImage(new ImageIcon("coin.png").getImage());
 
+		panMain = panel;
+		Rectangle rect = panel.getBounds();
+		setPreferredSize(rect.getSize());
+		
+		
 		importTable();
 		exportTable();
 		moneyPrint();
@@ -60,9 +69,9 @@ public class MainMenuView extends JFrame {
 		consume();
 		savingMoney();
 
-		setResizable(false);
+		//setResizable(false);
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	// 테이블 몸체 클릭
@@ -110,7 +119,8 @@ public class MainMenuView extends JFrame {
 		}
 
 	}
-
+	
+	/*
 	// 스크린 사이즈
 	public void screenSize() {
 		// 모니터 사이즈 받아오기
@@ -119,6 +129,7 @@ public class MainMenuView extends JFrame {
 		setBounds(scrSize.width / 2 - 600, scrSize.height / 2 - 400, 1200, 800);
 	}
 
+*/
 	// 수입 테이블
 	public void importTable() {
 
@@ -160,7 +171,7 @@ public class MainMenuView extends JFrame {
 		tableList[0].getColumn("유형").setPreferredWidth(40);
 
 		portList[0].add(paneList[0]);
-		panMain.add(portList[0]);
+		add(portList[0]);
 
 		paneList[0].addMouseListener(new MyMouseListener1());
 		tableList[0].addMouseListener(new MyMouseListener2());
@@ -205,7 +216,7 @@ public class MainMenuView extends JFrame {
 		tableList[1].getColumn("금액").setPreferredWidth(120);
 		tableList[1].getColumn("유형").setPreferredWidth(40);
 		portList[1].add(paneList[1]);
-		panMain.add(portList[1]);
+		add(portList[1]);
 
 		paneList[1].addMouseListener(new MyMouseListener1());
 		tableList[1].addMouseListener(new MyMouseListener2());
@@ -240,7 +251,7 @@ public class MainMenuView extends JFrame {
 			moneyList[i] = new JPanel();
 			moneyList[i].setBorder(new TitledBorder(new LineBorder(Color.green, 4), str[i]));
 			moneyList[i].setBackground(Color.white);
-			panMain.add(moneyList[i]);
+			add(moneyList[i]);
 			labelList[i] = new JLabel(df.format(money[i]) + "원");
 			moneyList[i].add(labelList[i]);
 			moneyList[i].setBounds(900, 120 + 90 * i, 240, 60);
@@ -251,7 +262,10 @@ public class MainMenuView extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new AmountView();
+				panMain.removeAll();
+				panMain.add(new AmountView());
+				panMain.revalidate();
+				panMain.repaint();
 			}
 		});
 
@@ -260,7 +274,7 @@ public class MainMenuView extends JFrame {
 	// 로그아웃, 종료 버튼
 	public void userButton() {
 		btnPan.setBounds(900, 600, 200, 50);
-		panMain.add(btnPan);
+		add(btnPan);
 
 		btnPan.setBackground(Color.white);
 
@@ -272,13 +286,14 @@ public class MainMenuView extends JFrame {
 			btnList[i].addActionListener(new MyButtonListener());
 		}
 
+		// 종료
 		btnList[1].addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+				//dispose();
+				//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				System.out.println("종료버튼 클릭");
 			}
 		});
 
@@ -306,10 +321,10 @@ public class MainMenuView extends JFrame {
 		list[2].setText("3. 쇼핑");
 		
 		
-		panMain.add(conPan);
+		add(conPan);
 		
 		
-		panMain.addMouseListener(new MouseAdapter() {
+		conPan.addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -366,13 +381,13 @@ public class MainMenuView extends JFrame {
 		table.getColumn("비고").setPreferredWidth(180);
 		sPan.add(savePane);
 		
-		panMain.add(sPan);
+		add(sPan);
 	}
 	
 	
 	
 	public static void main(String[] args) {
-		new MainMenuView();
+		//new MainMenuView();
 	}
 	
 	
