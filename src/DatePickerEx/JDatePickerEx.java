@@ -42,14 +42,6 @@ public class JDatePickerEx extends JPanel {
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
 		// 실제로 사용자에게 보여지는 날짜 선택 위젯(JDatePickerImpl)을 생성하고, 앞서 생성한 datePanel을 인자로 전달합니다.
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
-<<<<<<< HEAD
-
-		jp1.add(datePicker);
-		add(jp1, BorderLayout.CENTER);
-	//	setBounds(300, 300, 400, 400);
-		setBounds(650, 150, 500, 300);
-
-=======
 		
 		j1.add(datePicker);
 //		jp1.add(datePicker);
@@ -57,7 +49,6 @@ public class JDatePickerEx extends JPanel {
 //		add(j1,BorderLayout.CENTER);
 //		j1.setBounds(650, 300, 400, 400);
 		
->>>>>>> master
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 
@@ -77,24 +68,6 @@ public class JDatePickerEx extends JPanel {
 
 			}
 		});
-<<<<<<< HEAD
-//		setVisible(true);
-//
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
-	public static void main(String[] args) {
-//		new JDatePickerEx();
-
-//		String[] date = planeDTO.getDate().split("-");
-//		int dateY = Integer.parseInt(date[0]);
-//		int dateM = Integer.parseInt(date[1]) - 1;
-//		int dateD = Integer.parseInt(date[2]);
-//		model.setDate(dateY, dateM, dateD);
-//		model.setSelected(true);
-	}
-}
-=======
 		return j1;
 	}
 
@@ -111,4 +84,3 @@ public class JDatePickerEx extends JPanel {
 ////		model.setSelected(true);
 //	}
 }
->>>>>>> master
