@@ -180,10 +180,6 @@ public class ExportView extends JPanel {
 		JPanel datePan = date.datePanel();
 		datePan.setLayout(new FlowLayout(FlowLayout.LEFT));
 		updatePanel.add(datePan);
-//		JPanel datePanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
-//		JTextField dateField = new JTextField(20);
-//		datePanelR.add(dateField);
-//		updatePanel.add(datePanelR);
 
 		// 금액 패널(왼쪽)
 		JPanel amountPanelL = new JPanel(new FlowLayout(FlowLayout.RIGHT));
