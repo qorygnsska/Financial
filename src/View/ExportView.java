@@ -287,7 +287,4 @@ public class ExportView extends JPanel {
 		return scrollpane;
 	}
 
-	public static void main(String[] args) {
-		new ExportView();
-	}
 }
