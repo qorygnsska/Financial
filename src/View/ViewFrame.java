@@ -14,9 +14,12 @@ import javax.swing.border.LineBorder;
 
 public class ViewFrame extends JFrame{
 
-
+	
 	JPanel mainPan = new JPanel();
+	
+	
 	public ViewFrame() {
+		
 		setLayout(null);
 		setTitle("재무관리");
 		
@@ -30,7 +33,8 @@ public class ViewFrame extends JFrame{
 		
 		mainPan.removeAll();
 		
-		mainPan.add(new MainMenuView(mainPan),BorderLayout.CENTER);
+		MainMenuView mainMenu = new MainMenuView(mainPan);
+		mainPan.add(mainMenu,BorderLayout.CENTER);
 		// 구성 요소 가로/세로 속성 변경하여 호출
 		mainPan.revalidate();
 		// 현재 재배치한 내용으로 보이기
@@ -38,7 +42,7 @@ public class ViewFrame extends JFrame{
 //		mainPan.setBackground(Color.blue);
 
 		add(mainPan);
-		
+			
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
