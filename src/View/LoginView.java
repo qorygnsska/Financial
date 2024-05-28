@@ -139,7 +139,7 @@ public class LoginView extends JFrame {
 				
 				// 컨트롤러에 전송
 				if(loginController.login(id, pass)) {
-					new MainMenuView();
+					new ViewFrame();
 					dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 다릅니다!", "로그인 실패", JOptionPane.ERROR_MESSAGE);
