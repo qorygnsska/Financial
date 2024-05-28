@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
+import DatePickerEx.JDatePickerEx;
+
 public class ImportView extends JPanel {
 	
 	JPanel panMain;
@@ -166,10 +168,10 @@ public class ImportView extends JPanel {
 		updatePanel.add(datePanelL);
 
 		// 날짜 패널(오른쪽)
-		JPanel datePanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
-		JTextField dateField = new JTextField(20);
-		datePanelR.add(dateField);
-		updatePanel.add(datePanelR);
+		JDatePickerEx date = new JDatePickerEx();
+		JPanel datePan = date.datePanel();
+		datePan.setLayout(new FlowLayout(FlowLayout.LEFT));
+		updatePanel.add(datePan);
 
 		// 금액 패널(왼쪽)
 		JPanel amountPanelL = new JPanel(new FlowLayout(FlowLayout.RIGHT));
