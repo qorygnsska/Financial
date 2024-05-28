@@ -41,20 +41,9 @@ public class MainMenuView extends JPanel {
 	JButton[] btnList = new JButton[2];
 
 	public MainMenuView(JPanel panel) {
-	//	setTitle("재무관리");
-	//	setLayout(new BorderLayout());
-	//	panMain = new JPanel();
 		setLayout(null);
 		setBorder(new LineBorder(Color.green, 8));
-	//	setBounds(0,0, ViewFrame.width, ViewFrame.height);
-		//add(panMain);
-
-		//panMain.setBackground(Color.white);
-		//panMain.setLayout(null);
-
-
-		//setIconImage(new ImageIcon("coin.png").getImage());
-
+		setBackground(Color.white);
 		panMain = panel;
 		Rectangle rect = panel.getBounds();
 		setPreferredSize(rect.getSize());
@@ -67,9 +56,7 @@ public class MainMenuView extends JPanel {
 		consume();
 		savingMoney();
 
-		//setResizable(false);
 		setVisible(true);
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	// 테이블 몸체 클릭
@@ -79,9 +66,15 @@ public class MainMenuView extends JPanel {
 		public void mouseClicked(MouseEvent e) {
 			JScrollPane c1 = (JScrollPane) e.getSource();
 			if (c1 == paneList[0]) {
-				System.out.println("수입 패널 클릭");
+				panMain.removeAll();
+				panMain.add(new ImportView(panMain));
+				panMain.revalidate();
+				panMain.repaint();
 			} else if (c1 == paneList[1]) {
-				System.out.println("지출 패널 클릭");
+				panMain.removeAll();
+				panMain.add(new ExportView(panMain));
+				panMain.revalidate();
+				panMain.repaint();
 			}
 
 		}
@@ -94,9 +87,15 @@ public class MainMenuView extends JPanel {
 		public void mouseClicked(MouseEvent e) {
 			JTable c2 = (JTable) e.getSource();
 			if (c2 == tableList[0]) {
-				System.out.println("수입 패널 클릭");
+				panMain.removeAll();
+				panMain.add(new ImportView(panMain));
+				panMain.revalidate();
+				panMain.repaint();
 			} else if (c2 == tableList[1]) {
-				System.out.println("지출 패널 클릭");
+				panMain.removeAll();
+				panMain.add(new ExportView(panMain));
+				panMain.revalidate();
+				panMain.repaint();
 			}
 
 		}
@@ -112,22 +111,14 @@ public class MainMenuView extends JPanel {
 				System.out.println("로그아웃 버튼");
 			} else {
 				System.out.println("종료 버튼");
+				
 			}
 
 		}
 
 	}
 	
-	/*
-	// 스크린 사이즈
-	public void screenSize() {
-		// 모니터 사이즈 받아오기
-		Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
-		// 사이즈 설정
-		setBounds(scrSize.width / 2 - 600, scrSize.height / 2 - 400, 1200, 800);
-	}
-
-*/
+	
 	// 수입 테이블
 	public void importTable() {
 
@@ -283,17 +274,6 @@ public class MainMenuView extends JPanel {
 			btnPan.add(btnList[i]);
 			btnList[i].addActionListener(new MyButtonListener());
 		}
-
-		// 종료
-		btnList[1].addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//dispose();
-				//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				System.out.println("종료버튼 클릭");
-			}
-		});
 
 	}
 

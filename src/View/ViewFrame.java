@@ -14,17 +14,13 @@ import javax.swing.border.LineBorder;
 
 public class ViewFrame extends JFrame{
 
-//	public final static int width = 1200;
-//	public final static int height = 800;
-//	public final static int x = 0;
-//	public final static int y = 0;
-	
+
 	JPanel mainPan = new JPanel();
 	public ViewFrame() {
 		setLayout(null);
 		setTitle("재무관리");
 		
-		mainPan.setBounds(0, 0,1180, 760);
+		mainPan.setBounds(7, 0,1170, 755);
 		// 모니터 사이즈 받아오기
 		Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
 		// 사이즈 설정
@@ -46,10 +42,9 @@ public class ViewFrame extends JFrame{
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
 	}
 	
-
 	
 	public static void main(String[] args) {
 		new ViewFrame();
