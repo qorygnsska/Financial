@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,12 +24,18 @@ import javax.swing.table.TableColumnModel;
 
 public class AmountView extends JPanel {
 
+	JPanel panMain;
 	Font font = new Font("함초롱돋움", Font.BOLD, 30);
 	Font font2 = new Font("함초롱돋움", Font.PLAIN, 15);
 	Font font3 = new Font("함초롱돋움", Font.BOLD, 15);
 
 	public AmountView(JPanel panel) {
 		setLayout(null);
+		
+		panMain = panel;
+		Rectangle rect = panel.getBounds();
+		setPreferredSize(rect.getSize());
+		
 		setBackground(new Color(255, 255, 255)); // 프레임 배경색 설정
 
 		JPanel mainPan = new JPanel();
@@ -115,8 +122,12 @@ public class AmountView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
-
+				// 메인으로 이동
+				panMain.removeAll();
+				panMain.add(new MainMenuView(panMain));
+				panMain.revalidate();
+				panMain.repaint();
+				
 			}
 		});
 
