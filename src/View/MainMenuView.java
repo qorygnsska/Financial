@@ -29,7 +29,7 @@ import javax.swing.table.TableColumnModel;
 
 public class MainMenuView extends JPanel {
 	
-	boolean res = false;
+	
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -45,6 +45,7 @@ public class MainMenuView extends JPanel {
 		setBorder(new LineBorder(Color.green, 8));
 		setBackground(Color.white);
 		panMain = panel;
+		
 		Rectangle rect = panel.getBounds();
 		setPreferredSize(rect.getSize());
 		
@@ -109,9 +110,10 @@ public class MainMenuView extends JPanel {
 			JButton btn = (JButton) e.getSource();
 			if (btn == btnList[0]) {
 				System.out.println("로그아웃 버튼");
+			
 			} else {
 				System.out.println("종료 버튼");
-				
+				System.exit(0);
 			}
 
 		}
@@ -367,6 +369,6 @@ public class MainMenuView extends JPanel {
 	public static void main(String[] args) {
 		//new MainMenuView();
 	}
-	
+
 	
 }
