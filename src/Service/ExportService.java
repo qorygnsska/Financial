@@ -1,10 +1,10 @@
 package Service;
 
-import DAO.ExportDAO;
+import DAO.MainExportDAO;
 
 public class ExportService {
 
-	private ExportDAO dao = new ExportDAO();
+	private MainExportDAO dao = new MainExportDAO();
 	
 	// 전제 조회 후 테이블 출력
 	public String[][] select() {
