@@ -42,9 +42,7 @@ public class ExportView extends JPanel {
 	int num = 0;
 	String[] datelist = new String[2];
 	DatePickerController dpc = new DatePickerController();
-	
-	
-	
+
 	JPanel panMain;
 	private String day;
 	private int price;
@@ -111,11 +109,11 @@ public class ExportView extends JPanel {
 		checkPanel.setBackground(Color.white);
 
 		// 탭 패널 추가
-		
+
 		tabPanel.add("전체", totalPanel());
 		tabPanel.add("일별", dayPanel());
 		tabPanel.add("월별", monthPanel());
-		//tabPanel.setSelectedIndex(1);
+		// tabPanel.setSelectedIndex(1);
 		checkPanel.add(tabPanel);
 		checkPanel.setBounds(40, 50, 750, 600);
 		mainPanel.add(checkPanel);
@@ -171,7 +169,7 @@ public class ExportView extends JPanel {
 		updatePanel.add(datePanelL);
 
 		// 날짜 패널(오른쪽)
-		
+
 		datePan = jDatePickerEx();
 		datePan.setLayout(new FlowLayout(FlowLayout.LEFT));
 		datePan.setBackground(Color.white);
@@ -334,6 +332,7 @@ public class ExportView extends JPanel {
 		monthPanel.add(sp);
 		return monthPanel;
 	}
+
 //캘린더
 	public JPanel jDatePickerEx() {
 		JPanel j1 = new JPanel();
@@ -358,26 +357,20 @@ public class ExportView extends JPanel {
 
 		j1.add(datePicker);
 
-
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				
+
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 					String date = dateFormat.format(model.getValue());
 
-					datelist[num] = date;     
-				       
-		          
-		                 tabPanel.setSelectedIndex(1);
-		                    
-		                    
-		                  
-                    
-                    
+					datelist[num] = date;
+
+					tabPanel.setSelectedIndex(1);
+
 					if (datelist[0] != null) {
 
 						if (dpc.search(datelist)) {
@@ -396,17 +389,8 @@ public class ExportView extends JPanel {
 
 			}
 		});
-		return j1;		
-		
+		return j1;
+
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
