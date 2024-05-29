@@ -100,8 +100,10 @@ public class LoginView extends JFrame {
 
 		JPanel jp3 = new JPanel();
 		jp3.setBackground(Color.CYAN);
-		JLabel idpw = new JLabel("아이디 비밀번호 찾기");
-		jp3.add(idpw);
+		JLabel idsearch = new JLabel("아이디 찾기 /");
+		JLabel pwsearch = new JLabel("비밀번호 찾기");
+		jp3.add(idsearch);
+		jp3.add(pwsearch);
 
 		add(title, BorderLayout.NORTH);
 		add(jp2, BorderLayout.CENTER);
@@ -109,28 +111,39 @@ public class LoginView extends JFrame {
 
 		setBounds(0, 0, 300, 250);
 
-		jp3.addMouseListener(new MouseListener() {
+		idsearch.addMouseListener(new MouseListener() {
 			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
+			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-
+			public void mousePressed(MouseEvent e) {}
 			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-
+			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
+			public void mouseEntered(MouseEvent e) {}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				UseridpwFindView uidpwfind=	new UseridpwFindView();
+				uidpwfind.idfind();
+				dispose();
 			}
 		});
-		
+		pwsearch.addMouseListener(new MouseListener() {			
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {}			
+			@Override
+			public void mouseExited(MouseEvent e) {}			
+			@Override
+			public void mouseEntered(MouseEvent e) {}			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				UseridpwFindView uidpwfind=	new UseridpwFindView();
+				uidpwfind.pwfind();
+				dispose();
+			}
+		});
 		
 		// 로그인 버튼 클릭시 이벤트
 		jLogin.addActionListener(new ActionListener() {

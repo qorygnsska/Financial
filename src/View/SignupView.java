@@ -26,8 +26,8 @@ public class SignupView extends JFrame {
 	public void newUser() {
 
 		setTitle("회원가입");
-		JPanel back = new JPanel();
-		back.setBackground(Color.CYAN);
+		JPanel black = new JPanel();
+		black.setBackground(Color.CYAN);
 		JPanel title = new JPanel();
 		JLabel Jtitle = new JLabel("회원가입");
 		Jtitle.setFont(new Font("궁서체", Font.BOLD, 30));
@@ -94,25 +94,37 @@ public class SignupView extends JFrame {
 
 		jp1.add(juminPanel);
 		jp1.add(juminPanel2);
-		back.add(jp1);
+		black.add(jp1);
 		JPanel jp2 = new JPanel();
 		jp2.setLayout(new FlowLayout());
-		jp2.add(back);
+		jp2.add(black);
 
 		setLayout(new BorderLayout());
 
 		JPanel jp3 = new JPanel();
-
+		JButton back= new JButton("되돌아가기");
 		JButton btuser = new JButton("회원가입");
 		jp3.setBackground(Color.CYAN);
+		jp3.add(back);
 		jp3.add(btuser);
 		add(title, BorderLayout.NORTH);
 		add(jp2, BorderLayout.CENTER);
 		add(jp3, BorderLayout.SOUTH);
 
-		add(back);
+		add(black);
 		setBounds(0, 0, 300, 300);
 
+		//되돌아가기 버튼 이벤트
+		back.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				new LoginView().user();
+				dispose();
+			}
+		});
+		
 		// 회원가입 버튼 이벤트
 		btuser.addActionListener(new ActionListener() {
 
