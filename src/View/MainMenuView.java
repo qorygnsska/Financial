@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -26,6 +27,11 @@ import javax.swing.table.TableColumnModel;
 
 import Controller.MainExportController;
 import Controller.MainImportController;
+<<<<<<< HEAD
+=======
+import Controller.MainExportController;
+import Controller.MainImportController;
+>>>>>>> bs
 import Model.UsersModel;
 
 public class MainMenuView extends JPanel {

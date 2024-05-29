@@ -1,5 +1,7 @@
 package Controller;
 
+<<<<<<< HEAD
+<<<<<<<< HEAD:src/Controller/MainExportController.java
 import javax.swing.table.DefaultTableModel;
 
 import Service.MainExportService;
@@ -7,6 +9,15 @@ import Service.MainExportService;
 public class MainExportController {
 
 	private MainExportService service = new MainExportService();
+=======
+import javax.swing.table.DefaultTableModel;
+
+import Service.ExportService;
+
+public class MainExportController {
+
+	private ExportService service = new ExportService();
+>>>>>>> bs
 	
 	public DefaultTableModel getExportModel(String[] header) {
 
@@ -24,4 +35,11 @@ public class MainExportController {
 
 		return model;
 	}
+<<<<<<< HEAD
+========
+public class ExportController {
+
+>>>>>>>> bs:src/Controller/ExportController.java
+=======
+>>>>>>> bs
 }
