@@ -5,14 +5,11 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,8 +20,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import DAO.AmountDAO;
-import Model.AmountModel;
+import Controller.AmountController;
 
 public class AmountView extends JPanel {
 
@@ -33,7 +29,8 @@ public class AmountView extends JPanel {
 	Font font2 = new Font("함초롱돋움", Font.PLAIN, 15);
 	Font font3 = new Font("함초롱돋움", Font.BOLD, 15);
 
-	AmountDAO amountDAO = new AmountDAO();
+	
+	AmountController amountController = new AmountController();
 
 	public AmountView(JPanel panel) {
 		setLayout(null);
@@ -69,7 +66,7 @@ public class AmountView extends JPanel {
 
 		// 테이블의 열
 		Object[] tableHeader = { "날짜", "금액", "구분", "비고", "잔액" };
-		Object[][] data1 = amountDAO.selecet();
+		Object[][] data1 = amountController.selecet();
 
 
 		// 데이터 모델 생성
