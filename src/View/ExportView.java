@@ -66,7 +66,7 @@ public class ExportView extends JPanel {
 		Rectangle rect = panMain.getBounds();
 		setPreferredSize(rect.getSize());
 //		setBounds(50, 50, 1200, 800);
-		panMain.setBounds(7, 0, 1170, 750);
+		panMain.setBounds(7, 0, 1170, 765);
 		setLayout(null);
 
 		// 메인 패널
@@ -244,8 +244,7 @@ public class ExportView extends JPanel {
 
 		mainPanel.add(btnsPanel);
 		mainPanel.add(updatePanel);
-		
-		
+
 		add(mainPanel);
 		setVisible(true);
 	}

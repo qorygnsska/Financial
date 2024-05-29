@@ -67,6 +67,7 @@ public class ImportView extends JPanel {
 
 		// 메뉴 패널(메인으로 돌아가기 버튼)
 		JPanel btnPanel = new JPanel();
+		btnPanel.setBackground(Color.white);
 		JButton menuBtn = new JButton("메인으로");
 		menuBtn.addActionListener(new ActionListener() {
 			
