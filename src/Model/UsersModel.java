@@ -1,5 +1,7 @@
 package Model;
 
+import DAO.UsersDAO;
+
 public class UsersModel {
 	
 	private int id;
@@ -8,9 +10,28 @@ public class UsersModel {
 	private String name;
 	private String jumin;
 	
+	UsersDAO usersDAO = new UsersDAO();
+	
+	public static UsersModel user;
+	
+	public void save(String id, String pass) {
+		user = usersDAO.save(id, pass);
+	}
+
+	
 	public UsersModel() {}
 	
 	
+
+	public UsersModel(int id, String user_id, String user_pass, String name, String jumin) {
+		this.id = id;
+		this.user_id = user_id;
+		this.user_pass = user_pass;
+		this.name = name;
+		this.jumin = jumin;
+	}
+
+
 
 	public UsersModel(String user_id, String user_pass, String name, String jumin) {
 		this.user_id = user_id;
