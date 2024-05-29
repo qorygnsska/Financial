@@ -1,21 +1,17 @@
 package View;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -33,7 +29,7 @@ import Controller.ImportController;
 public class MainMenuView extends JPanel {
 
 	ImportController IC = new ImportController();
-	ExportController EX = new ExportController();
+	ExportController EC = new ExportController();
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -43,7 +39,7 @@ public class MainMenuView extends JPanel {
 	JScrollPane[] paneList = new JScrollPane[2];
 	JPanel btnPan = new JPanel();
 	JButton[] btnList = new JButton[2];
-	JPanel userPan = new JPanel();
+	JPanel userPan = new JPanel(new GridLayout(2,2));
 
 	public MainMenuView(JPanel panel) {
 		panMain = panel;
@@ -215,7 +211,7 @@ public class MainMenuView extends JPanel {
 		portList[1].setBounds(460, 120, 400, 400);
 		portList[1].setBackground(Color.white);
 		// 내용 수정 불가
-		model[1] = EX.getExportModel(header);
+		model[1] = EC.getExportModel(header);
 
 		tableList[1] = new JTable(model[1]);
 
@@ -270,7 +266,7 @@ public class MainMenuView extends JPanel {
 	public void moneyPrint() {
 
 		String[] str = { "잔고", "이 달 수입", "이 달 지출", "지난 달 수입", "지난 달 지출" };
-		DecimalFormat df = new DecimalFormat("#,##0.00");
+		DecimalFormat df = new DecimalFormat("#,##0,000");
 		int[] money = { 90000000, 80000, 7000000, 1000000, 5000000 };
 
 		for (int i = 0; i < moneyList.length; i++) {
