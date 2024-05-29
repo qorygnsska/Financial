@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Controller.DatePickerController;
@@ -68,23 +69,20 @@ public class JDatePickerEx extends JPanel {
 				
 					if (datelist[0] != null) {
 						
-					} if (datelist[0] != null && datelist[1] != null && !(datelist[0].equals(datelist[1]))) {
-					
 						if (dpc.search(datelist)) {
 							System.out.println("검색 성공");
-							num = 0;
+							
 							datelist[0]=null;
-							datelist[1]=null;
+							
 						} else {
+							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
 							System.out.println("검색 실패");
-							datelist[0]=null;
-							datelist[1]=null;
-						
-							num=0;
+							datelist[0]=null;								
+							
 						}
+						
+					} 
 
-					}
-					num += 1;
 
 					// new ExportView();
 

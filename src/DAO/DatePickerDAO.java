@@ -11,24 +11,27 @@ public class DatePickerDAO {
 	ResultSet rs;
 	public boolean seracht(String[] datelist) {
 		boolean result = false;
-		System.out.println("test DAO 실행!");
+		System.out.println("DatePicker DAO 실행!");
 		
 		con = DBUtil.getConnection();
-		String sql = "select * from import where day=? or day=?";
+		String sql = "select * from export where day=?";
 		String date1 = datelist[0];
-		String date2= datelist[1];
 		
+		System.out.println(datelist[0]);
 		try {
 			ps = con.prepareStatement(sql);
 			
 			ps.setString(1,date1);
-			ps.setString(2,date2);
+			
 			
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				System.out.println(rs.getInt("price"));
-				System.out.println(rs.getString("day"));
+				System.out.print(rs.getString("day"));
+				System.out.print(rs.getInt("price"));
+				System.out.print(rs.getInt("type_id"));
+				System.out.print(rs.getString("memo"));
+				
 				result = true;
 			}
 			
