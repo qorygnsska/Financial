@@ -354,9 +354,8 @@ public class ExportView extends JPanel {
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
 		// 실제로 사용자에게 보여지는 날짜 선택 위젯(JDatePickerImpl)을 생성하고, 앞서 생성한 datePanel을 인자로 전달합니다.
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
-
 		j1.add(datePicker);
-
+		
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 
@@ -364,11 +363,15 @@ public class ExportView extends JPanel {
 			public void propertyChange(PropertyChangeEvent evt) {
 
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
+					 
+					
+				
+					
+					
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 					String date = dateFormat.format(model.getValue());
-
+					
 					datelist[num] = date;
-
 					tabPanel.setSelectedIndex(1);
 
 					if (datelist[0] != null) {
