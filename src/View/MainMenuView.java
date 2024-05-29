@@ -27,8 +27,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import Controller.ImportController;
+
 public class MainMenuView extends JPanel {
 
+	ImportController IC = new ImportController();
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -150,7 +153,7 @@ public class MainMenuView extends JPanel {
 
 		// 테이블 셀 배경
 		tableList[0].setBackground(Color.white);
-		model[0].addRow(new Object[] { "5월7일", "100000", "급여" });
+//		model[0].addRow(new Object[] { "5월7일", "100000", "급여" });
 
 		paneList[0] = new JScrollPane(tableList[0]);
 
@@ -197,7 +200,7 @@ public class MainMenuView extends JPanel {
 
 		// 테이블 셀 배경
 		tableList[1].setBackground(Color.white);
-		model[1].addRow(new Object[] { "5월7일", "100000", "급여" });
+//		model[1].addRow(new Object[] { "5월7일", "100000", "급여" });
 
 		paneList[1] = new JScrollPane(tableList[1]);
 		// JScrollPane 사이즈
