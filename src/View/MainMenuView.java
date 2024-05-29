@@ -280,7 +280,7 @@ public class MainMenuView extends JPanel {
 	// 소비태크
 	public void consume() {
 		JPanel conPan = new JPanel(new GridLayout(0, 3));
-		conPan.setBounds(30, 550, 300, 180);
+		conPan.setBounds(30, 530, 300, 180);
 		conPan.setBackground(Color.white);
 
 		conPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "소비유형"));
@@ -312,7 +312,7 @@ public class MainMenuView extends JPanel {
 	// 저축
 	public void savingMoney() {
 		JPanel sPan = new JPanel();
-		sPan.setBounds(400, 550, 460, 180);
+		sPan.setBounds(400, 530, 460, 180);
 		sPan.setBackground(Color.white);
 
 		sPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "저축"));
