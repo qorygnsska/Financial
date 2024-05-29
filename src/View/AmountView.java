@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import Controller.AmountController;
+import Model.UsersModel;
 
 public class AmountView extends JPanel {
 
@@ -34,6 +35,7 @@ public class AmountView extends JPanel {
 
 	public AmountView(JPanel panel) {
 		setLayout(null);
+		System.out.println(UsersModel.user.getName());
 
 		panMain = panel; // MainMenuView의 패널 가져옴
 		Rectangle rect = panel.getBounds(); // 패널의 정보 저장

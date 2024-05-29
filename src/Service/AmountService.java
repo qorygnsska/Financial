@@ -7,6 +7,7 @@ public class AmountService {
 	
 	public Object[][] select() {
 		System.out.println("amount 서비스 실행!!!!!!!!!!!!!");
+		
 		return amountDAO.selecet();
 	}
 

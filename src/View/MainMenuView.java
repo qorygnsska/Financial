@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,6 +26,7 @@ import javax.swing.table.TableColumnModel;
 
 import Controller.ExportController;
 import Controller.ImportController;
+import Model.UsersModel;
 
 public class MainMenuView extends JPanel {
 
@@ -47,8 +49,8 @@ public class MainMenuView extends JPanel {
 		setPreferredSize(rect.getSize());
 		
 		setLayout(null);
-		setBorder(new LineBorder(Color.green, 8));
-		panMain.setBounds(7, 0, 1170, 765);
+		setBorder(new LineBorder(Color.white, 100));
+		
 		setBackground(Color.white);
 
 		importTable();
@@ -130,9 +132,9 @@ public class MainMenuView extends JPanel {
 			
 			userPan.setBackground(Color.white);
 			JLabel nameTitle = new JLabel("이름 : ");
-			JLabel name = new JLabel("심재호");
+			JLabel name = new JLabel(UsersModel.user.getName());
 			JLabel dayTitle = new JLabel("날짜 : ");
-			JLabel day = new JLabel("2024-05-29");
+			JLabel day = new JLabel(LocalDate.now().toString());
 			
 			
 			nameTitle.setHorizontalAlignment(JLabel.RIGHT);

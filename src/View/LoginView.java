@@ -19,12 +19,15 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Controller.LoginController;
+import Model.UsersModel;
 
 public class LoginView extends JFrame {
 	private static Font font1 = new Font("휴먼편지체", Font.BOLD, 20);
 	private static Font font2 = new Font("휴먼편지체", Font.BOLD, 30);
 	
-	LoginController loginController = new LoginController();
+	LoginController loginController = new LoginController();	
+	
+	UsersModel usersModel = new UsersModel();
 
 	public void user() {
 
@@ -139,6 +142,7 @@ public class LoginView extends JFrame {
 				
 				// 컨트롤러에 전송
 				if(loginController.login(id, pass)) {
+					usersModel.save(id, pass);
 					new ViewFrame();
 					dispose();
 				}else {

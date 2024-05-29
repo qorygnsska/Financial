@@ -58,14 +58,14 @@ public class ImportView extends JPanel {
 	public void print() {
 		Rectangle rect = panMain.getBounds();
 		setPreferredSize(rect.getSize());
-		panMain.setBounds(7, 0, 1170, 765);
+		//setBounds(7, 0, 1170, 765);
 		setLayout(null);
 
 		// main 패널 (tab 생성 포함)
 		mainPanel = new JPanel();
-		mainPanel.setBorder(new LineBorder(Color.green, 8));
+		//mainPanel.setBorder(new LineBorder(Color.green, 8));
 		mainPanel.setBackground(Color.white);
-		mainPanel.setBounds(0, 0, 1170, 750);
+		mainPanel.setBounds(0, 0, 1200, 800);
 		mainPanel.setLayout(null);
 
 		// 메뉴 패널(메인으로 돌아가기 버튼)
