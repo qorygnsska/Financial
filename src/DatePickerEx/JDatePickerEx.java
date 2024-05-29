@@ -60,78 +60,25 @@ public class JDatePickerEx extends JPanel {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
+				
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 					String date = dateFormat.format(model.getValue());
 
 					datelist[num] = date;
 
-			
-
+                  ExportView view =  new ExportView();
+                  
+        //          view.tabPanel.setSelectedIndex();
+                    
+                    
+                    revalidate();
+                    repaint();
+                    
+                    
 					if (datelist[0] != null) {
 
 						if (dpc.search(datelist)) {
-							System.out.println("검색 성공");
-
-							datelist[0] = null;
-						} else {
-							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
-							System.out.println("검색 실패");
-							datelist[0] = null;
-						}
-
-					}
-
-				}
-
-			}
-		});
-		return j1;
-	}
-}
-
-
-
- class ImportJDatePickerEx extends JPanel {
-	int num = 0;
-	String[] datelist = new String[2];
-	DatePickerController dpc = new DatePickerController();
-
-	public ImportJDatePickerEx() {
-	}
-
-	public JPanel datePanel() {
-		JPanel j1 = new JPanel();
-
-		LocalDate now = LocalDate.now();
-		int year = now.getYear();// 년도 저장
-		int month = now.getMonthValue();// 월 저장
-		int day = now.getDayOfMonth();// 일 저장
-
-		UtilDateModel model = new UtilDateModel();
-	
-		model.setDate(year, month - 1, day);// 현재날짜를 표시
-		model.setSelected(true); // 텍스트 필드에 보이기
-		
-		JDatePanelImpl datePanel = new JDatePanelImpl(model);
-	
-		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
-
-		j1.add(datePicker);
-
-		model.addPropertyChangeListener(new PropertyChangeListener() {
-
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-					String date = dateFormat.format(model.getValue());
-
-					datelist[num] = date;				
-
-					if (datelist[0] != null) {
-
-						if (dpc.importsearch(datelist)) {
 							System.out.println("검색 성공");
 
 							datelist[0] = null;
