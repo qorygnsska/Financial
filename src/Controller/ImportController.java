@@ -8,7 +8,7 @@ public class ImportController {
 
 	private ImportService service = new ImportService();
 
-	public DefaultTableModel getModel(String[] header) {
+	public DefaultTableModel getImportModel(String[] header) {
 
 		DefaultTableModel model = new DefaultTableModel(header, 0) {
 			public boolean isCellEditable(int rowIndex, int mColindex) {

@@ -27,11 +27,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import Controller.ExportController;
 import Controller.ImportController;
 
 public class MainMenuView extends JPanel {
 
 	ImportController IC = new ImportController();
+	ExportController EX = new ExportController();
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -134,11 +136,7 @@ public class MainMenuView extends JPanel {
 		portList[0].setBounds(30, 120, 400, 400);
 		portList[0].setBackground(Color.white);
 		// 내용 수정 불가
-		model[0] = new DefaultTableModel(header, 0) {
-			public boolean isCellEditable(int rowIndex, int mColindex) {
-				return false;
-			}
-		};
+		model[0] = IC.getImportModel(header);
 
 		tableList[0] = new JTable(model[0]);
 		// 테이블 컬럼 이동불가
@@ -180,11 +178,7 @@ public class MainMenuView extends JPanel {
 		portList[1].setBounds(460, 120, 400, 400);
 		portList[1].setBackground(Color.white);
 		// 내용 수정 불가
-		model[1] = new DefaultTableModel(header, 0) {
-			public boolean isCellEditable(int rowIndex, int mColindex) {
-				return false;
-			}
-		};
+		model[1] = EX.getExportModel(header);
 
 		tableList[1] = new JTable(model[1]);
 
