@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /Controller/
 /DAO/
 /DatePickerEx/
@@ -6,5 +7,10 @@
 /Service/
 =======
 >>>>>>> master
+=======
+/DAO/
+/Service/
+/Controller/
+>>>>>>> shim
 /View/
 /DatePickerEx/

@@ -27,8 +27,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import Controller.ImportController;
+
 public class MainMenuView extends JPanel {
 
+	ImportController IC = new ImportController();
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -151,7 +154,7 @@ public class MainMenuView extends JPanel {
 
 		// 테이블 셀 배경
 		tableList[0].setBackground(Color.white);
-		model[0].addRow(new Object[] { "5월7일", "100000", "급여" });
+//		model[0].addRow(new Object[] { "5월7일", "100000", "급여" });
 
 		paneList[0] = new JScrollPane(tableList[0]);
 
@@ -198,7 +201,7 @@ public class MainMenuView extends JPanel {
 
 		// 테이블 셀 배경
 		tableList[1].setBackground(Color.white);
-		model[1].addRow(new Object[] { "5월7일", "100000", "급여" });
+//		model[1].addRow(new Object[] { "5월7일", "100000", "급여" });
 
 		paneList[1] = new JScrollPane(tableList[1]);
 		// JScrollPane 사이즈
@@ -283,7 +286,7 @@ public class MainMenuView extends JPanel {
 	// 소비태크
 	public void consume() {
 		JPanel conPan = new JPanel(new GridLayout(0, 3));
-		conPan.setBounds(30, 530, 300, 180);
+		conPan.setBounds(30, 550, 300, 180);
 		conPan.setBackground(Color.white);
 
 		conPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "소비유형"));
@@ -315,7 +318,7 @@ public class MainMenuView extends JPanel {
 	// 저축
 	public void savingMoney() {
 		JPanel sPan = new JPanel();
-		sPan.setBounds(400, 530, 460, 180);
+		sPan.setBounds(400, 550, 460, 180);
 		sPan.setBackground(Color.white);
 
 		sPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "저축"));
