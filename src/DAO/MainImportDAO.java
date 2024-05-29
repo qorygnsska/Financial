@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class ImportDAO {
+public class MainImportDAO {
 
 	private Connection conn;
 	private PreparedStatement pt;
