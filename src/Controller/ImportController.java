@@ -16,9 +16,9 @@ public class ImportController {
 			}
 		};
 
-		String[][] rowData = service.select();
+		Object[][] rowData = service.select();
 
-		for (String[] row : rowData) {
+		for (Object[] row : rowData) {
 			model.addRow(row);
 		}
 

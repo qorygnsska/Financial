@@ -43,6 +43,7 @@ public class MainMenuView extends JPanel {
 	JScrollPane[] paneList = new JScrollPane[2];
 	JPanel btnPan = new JPanel();
 	JButton[] btnList = new JButton[2];
+	JPanel userPan = new JPanel();
 
 	public MainMenuView(JPanel panel) {
 		panMain = panel;
@@ -60,10 +61,11 @@ public class MainMenuView extends JPanel {
 		userButton();
 		consume();
 		savingMoney();
+		userInfo();
 
 		setVisible(true);
 	}
-
+	
 	// 테이블 몸체 클릭
 	private class MyMouseListener1 extends MouseAdapter {
 
@@ -127,6 +129,41 @@ public class MainMenuView extends JPanel {
 
 	}
 
+	// 유저 정보 패널
+		public void userInfo() {
+			
+			userPan.setBackground(Color.white);
+			JLabel nameTitle = new JLabel("이름 : ");
+			JLabel name = new JLabel("심재호");
+			JLabel dayTitle = new JLabel("날짜 : ");
+			JLabel day = new JLabel("2024-05-29");
+			
+			
+			nameTitle.setHorizontalAlignment(JLabel.RIGHT);
+			name.setHorizontalAlignment(JLabel.LEFT);
+			
+			dayTitle.setHorizontalAlignment(JLabel.RIGHT);
+			day.setHorizontalAlignment(JLabel.LEFT);
+			
+			nameTitle.setFont(new Font("기본글씨", Font.BOLD, 18));
+			name.setFont(new Font("기본글씨", Font.BOLD, 18));
+			dayTitle.setFont(new Font("기본글씨", Font.BOLD, 18));
+			day.setFont(new Font("기본글씨", Font.BOLD, 18));
+			
+			
+			userPan.setBounds(900, 10, 200, 100);
+			userPan.add(nameTitle);
+			userPan.add(name);
+			userPan.add(dayTitle);
+			userPan.add(day);
+			
+			
+			
+			add(userPan);
+			
+		}
+	
+	
 	// 수입 테이블
 	public void importTable() {
 
