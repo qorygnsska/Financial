@@ -25,7 +25,7 @@ public class ViewFrame extends JFrame {
 		mainFrame.setTitle("재무관리");
 
 
-		mainPan.setBounds(7, 0, 1170, 755);
+		mainPan.setBounds(7, 0, 1170, 750);
 		// 모니터 사이즈 받아오기
 		Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
 		// 사이즈 설정

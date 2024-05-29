@@ -27,8 +27,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import Controller.ExportController;
+import Controller.ImportController;
+
 public class MainMenuView extends JPanel {
 
+	ImportController IC = new ImportController();
+	ExportController EX = new ExportController();
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -46,7 +51,7 @@ public class MainMenuView extends JPanel {
 		
 		setLayout(null);
 		setBorder(new LineBorder(Color.green, 8));
-		setBounds(0, 0, 1170, 750);
+		panMain.setBounds(7, 0, 1170, 765);
 		setBackground(Color.white);
 
 		importTable();
@@ -131,11 +136,7 @@ public class MainMenuView extends JPanel {
 		portList[0].setBounds(30, 120, 400, 400);
 		portList[0].setBackground(Color.white);
 		// 내용 수정 불가
-		model[0] = new DefaultTableModel(header, 0) {
-			public boolean isCellEditable(int rowIndex, int mColindex) {
-				return false;
-			}
-		};
+		model[0] = IC.getImportModel(header);
 
 		tableList[0] = new JTable(model[0]);
 		// 테이블 컬럼 이동불가
@@ -151,7 +152,7 @@ public class MainMenuView extends JPanel {
 
 		// 테이블 셀 배경
 		tableList[0].setBackground(Color.white);
-		model[0].addRow(new Object[] { "5월7일", "100000", "급여" });
+//		model[0].addRow(new Object[] { "5월7일", "100000", "급여" });
 
 		paneList[0] = new JScrollPane(tableList[0]);
 
@@ -177,11 +178,7 @@ public class MainMenuView extends JPanel {
 		portList[1].setBounds(460, 120, 400, 400);
 		portList[1].setBackground(Color.white);
 		// 내용 수정 불가
-		model[1] = new DefaultTableModel(header, 0) {
-			public boolean isCellEditable(int rowIndex, int mColindex) {
-				return false;
-			}
-		};
+		model[1] = EX.getExportModel(header);
 
 		tableList[1] = new JTable(model[1]);
 
@@ -198,7 +195,7 @@ public class MainMenuView extends JPanel {
 
 		// 테이블 셀 배경
 		tableList[1].setBackground(Color.white);
-		model[1].addRow(new Object[] { "5월7일", "100000", "급여" });
+//		model[1].addRow(new Object[] { "5월7일", "100000", "급여" });
 
 		paneList[1] = new JScrollPane(tableList[1]);
 		// JScrollPane 사이즈
