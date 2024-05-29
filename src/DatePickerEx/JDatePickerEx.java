@@ -26,6 +26,7 @@ public class JDatePickerEx extends JPanel {
 
 	public JPanel datePanel() {
 		JPanel j1 = new JPanel();
+<<<<<<< HEAD
 
 		// 현재 날짜를 가져옴
 		LocalDate now = LocalDate.now();
@@ -37,6 +38,16 @@ public class JDatePickerEx extends JPanel {
 //		JPanel j1 = new JPanel();
 
 		// SqlDateModel: 날짜 선택기는 선택한 날짜를 java.sql.Date 형식의 개체로 반환합니다
+=======
+		
+		//현재 날짜를 가져옴
+		LocalDate now= LocalDate.now();
+		int year= now.getYear();//년도 저장
+		int month=now.getMonthValue();//월 저장
+		int day=now.getDayOfMonth();//일 저장
+		
+		//	SqlDateModel: 날짜 선택기는 선택한 날짜를 java.sql.Date 형식의 개체로 반환합니다
+>>>>>>> master
 		// 날짜를 저장하고 관리하기 위해 UtilDateModel 객체를 생성합니다.
 		UtilDateModel model = new UtilDateModel();
 		// 초기 날짜 설정 Month는 +1반환 해서 결과 월이 나옴 5월을 표기하고 싶으면 4로넣어야함
@@ -50,11 +61,15 @@ public class JDatePickerEx extends JPanel {
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
 
 		j1.add(datePicker);
+<<<<<<< HEAD
 //		jp1.add(datePicker);
 
 //		add(j1,BorderLayout.CENTER);
 //		j1.setBounds(650, 300, 400, 400);
 
+=======
+		
+>>>>>>> master
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 
@@ -64,6 +79,7 @@ public class JDatePickerEx extends JPanel {
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");			
 					String date=dateFormat.format(model.getValue());
 					System.out.println(date);
+<<<<<<< HEAD
 				
 					datelist[num] = date;
 				
@@ -88,6 +104,8 @@ public class JDatePickerEx extends JPanel {
 
 					// 선택한 날짜 출력
 					// System.out.println(model.getValue());
+=======
+>>>>>>> master
 				}
 
 			}
@@ -95,6 +113,7 @@ public class JDatePickerEx extends JPanel {
 		return j1;
 	}
 
+<<<<<<< HEAD
 //	public static void main(String[] args) {
 
 //
@@ -107,4 +126,6 @@ public class JDatePickerEx extends JPanel {
 ////		model.setDate(dateY, dateM, dateD);
 ////		model.setSelected(true);
 //	}
+=======
+>>>>>>> master
 }
