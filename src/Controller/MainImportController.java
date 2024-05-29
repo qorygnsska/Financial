@@ -2,11 +2,11 @@ package Controller;
 
 import javax.swing.table.DefaultTableModel;
 
-import Service.ImportService;
+import Service.MainImportService;
 
-public class ImportController {
+public class MainImportController {
 
-	private ImportService service = new ImportService();
+	private MainImportService service = new MainImportService();
 
 	public DefaultTableModel getImportModel(String[] header) {
 
