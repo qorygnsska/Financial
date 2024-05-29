@@ -51,7 +51,7 @@ public class MainMenuView extends JPanel {
 		
 		setLayout(null);
 		setBorder(new LineBorder(Color.green, 8));
-		setBounds(0, 0, 1170, 750);
+		panMain.setBounds(7, 0, 1170, 765);
 		setBackground(Color.white);
 
 		importTable();
