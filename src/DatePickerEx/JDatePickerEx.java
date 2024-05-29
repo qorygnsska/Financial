@@ -84,10 +84,7 @@ public class JDatePickerEx extends JPanel {
 					} 
 
 
-					// new ExportView();
-
-					// 선택한 날짜 출력
-					// System.out.println(model.getValue());
+					
 				}
 
 			}
