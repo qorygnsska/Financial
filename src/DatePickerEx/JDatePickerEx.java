@@ -26,11 +26,7 @@ public class JDatePickerEx extends JPanel {
 		int year= now.getYear();//년도 저장
 		int month=now.getMonthValue();//월 저장
 		int day=now.getDayOfMonth();//일 저장
-//		setLayout(new BorderLayout());
 		
-//		JPanel j1 = new JPanel();
-		
-	
 		//	SqlDateModel: 날짜 선택기는 선택한 날짜를 java.sql.Date 형식의 개체로 반환합니다
 		// 날짜를 저장하고 관리하기 위해 UtilDateModel 객체를 생성합니다.
 		UtilDateModel model = new UtilDateModel();
@@ -44,10 +40,6 @@ public class JDatePickerEx extends JPanel {
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
 		
 		j1.add(datePicker);
-//		jp1.add(datePicker);
-		
-//		add(j1,BorderLayout.CENTER);
-//		j1.setBounds(650, 300, 400, 400);
 		
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		model.addPropertyChangeListener(new PropertyChangeListener() {
@@ -57,13 +49,6 @@ public class JDatePickerEx extends JPanel {
 				if ("value".equals(evt.getPropertyName())&&"value"!=null) {
 					String date=model.getYear() + "-" + (model.getMonth() + 1) + "-" + model.getDay();
 					System.out.println(date);
-					
-					
-				//new ExportView();
-					
-					
-					// 선택한 날짜 출력
-					// System.out.println(model.getValue());
 				}
 
 			}
@@ -71,16 +56,4 @@ public class JDatePickerEx extends JPanel {
 		return j1;
 	}
 
-//	public static void main(String[] args) {
-//		new JDatePickerEx();
-//
-//		
-//		
-////		String[] date = planeDTO.getDate().split("-");
-////		int dateY = Integer.parseInt(date[0]);
-////		int dateM = Integer.parseInt(date[1]) - 1;
-////		int dateD = Integer.parseInt(date[2]);
-////		model.setDate(dateY, dateM, dateD);
-////		model.setSelected(true);
-//	}
 }
