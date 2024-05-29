@@ -10,14 +10,14 @@ public class ImportDAO {
 	private PreparedStatement pt;
 	private ResultSet rs;
 	
-	public String[][] select() {
-		String[][] result = null;
+	public Object[][] select() {
+		Object[][] result = null;
 
 		try {
 
 			conn = DBUtil.getConnection();
 
-			String countSql = "select count(*) from users";
+			String countSql = "select count(*) from amount";
 
 			pt = conn.prepareStatement(countSql);
 			rs = pt.executeQuery();
@@ -32,11 +32,11 @@ public class ImportDAO {
 			}
 
 			// 조회하는 sql문 작성
-			String sql = "select * from users";
-
+			String sql = "select day, price, type from amount where user_id = ?";
+			
 			pt = conn.prepareStatement(sql);
-
-			ResultSet rs = pt.executeQuery();
+			pt.setInt(1, 5);
+			rs = pt.executeQuery();
 
 			// 2차원 배열을 선언
 			result = new String[row][3];
@@ -45,12 +45,16 @@ public class ImportDAO {
 			// 저장하는 변수
 			int index = 0;
 
+			System.out.println("와일문 시작 전");
 			while (rs.next()) {
+				
 				// 결과를 받아와서 테이블에 추가하는
 				// 명령문!
-				result[index][0] = rs.getString("user_id");
-				result[index][1] = rs.getString("user_pass");
-				result[index][2] = rs.getString("name");
+				result[index][0] = rs.getString("day");
+				result[index][1] = rs.getString("price");
+				result[index][2] = rs.getString("type");
+//				result[index][3] = rs.getString("content");
+//				result[index][4] = rs.getString("memo");
 				index++;
 			}
 			// 닫기
