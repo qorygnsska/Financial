@@ -12,6 +12,7 @@ public class ImportDAO {
 	
 	public Object[][] select() {
 		Object[][] result = null;
+		System.out.println("다오 셀렉트");
 
 		try {
 
