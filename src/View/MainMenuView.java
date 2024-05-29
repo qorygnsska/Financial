@@ -24,14 +24,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import Controller.ExportController;
-import Controller.ImportController;
+import Controller.MainExportController;
+import Controller.MainImportController;
 import Model.UsersModel;
 
 public class MainMenuView extends JPanel {
 
-	ImportController IC = new ImportController();
-	ExportController EC = new ExportController();
+	MainImportController IC = new MainImportController();
+	MainExportController EC = new MainExportController();
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];

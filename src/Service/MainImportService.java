@@ -2,7 +2,7 @@ package Service;
 
 import DAO.MainImportDAO;
 
-public class ImportService {
+public class MainImportService {
 
 	private MainImportDAO dao = new MainImportDAO();
 	

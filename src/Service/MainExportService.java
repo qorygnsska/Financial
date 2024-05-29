@@ -2,7 +2,7 @@ package Service;
 
 import DAO.MainExportDAO;
 
-public class ExportService {
+public class MainExportService {
 
 	private MainExportDAO dao = new MainExportDAO();
 	
