@@ -114,7 +114,6 @@ public class ExportView extends JPanel {
 		JPanel dayPanel = new JPanel();
 		dayPanel.setBounds(100, 50, 1000, 600);
 		dayPanel.setBackground(Color.white);
-//		dayPanel.setBorder(new TitledBorder(new LineBorder(Color.green, 3)));
 		String[] column1 = { "날짜", "금        액", "구분", "비        고" };
 		String[][] rowData1 = { { "24/05/27", "2000000", "교통비", "전철 및 버스 이용" }, { "24/05/27", "30000", "교통비", "택시비" } };
 		sp = totalCheck(rowData1, column1);
@@ -124,7 +123,6 @@ public class ExportView extends JPanel {
 		JPanel monthPanel = new JPanel();
 		monthPanel.setBounds(100, 50, 1000, 600);
 		monthPanel.setBackground(Color.white);
-//		monthPanel.setBorder(new TitledBorder(new LineBorder(Color.green, 3)));
 		String[] column2 = { "날짜", "금        액", "구분", "비        고" };
 		String[][] rowData2 = { { "24/05/27", "5000000", "기타", "oo 결혼식" },
 				{ "24/05/27", "1000000", "기타", "길가다가 잃어버림" } };

@@ -12,21 +12,21 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Controller.DatePickerController;
+import View.ExportView;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 public class JDatePickerEx extends JPanel {
-	 int num = 0;
-	 String[] datelist = new String[2];
-	DatePickerController dpc= new DatePickerController();
+	int num = 0;
+	String[] datelist = new String[2];
+	DatePickerController dpc = new DatePickerController();
 
 	public JDatePickerEx() {
 	}
 
 	public JPanel datePanel() {
 		JPanel j1 = new JPanel();
-
 		// 현재 날짜를 가져옴
 		LocalDate now = LocalDate.now();
 		int year = now.getYear();// 년도 저장
@@ -61,47 +61,99 @@ public class JDatePickerEx extends JPanel {
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");			
-					String date=dateFormat.format(model.getValue());
-					System.out.println(date);
-				
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					String date = dateFormat.format(model.getValue());
+
 					datelist[num] = date;
-				
+
+			
+
 					if (datelist[0] != null) {
-						
+
 						if (dpc.search(datelist)) {
 							System.out.println("검색 성공");
-							
-							datelist[0]=null;
-							
+
+							datelist[0] = null;
 						} else {
 							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
 							System.out.println("검색 실패");
-							datelist[0]=null;								
-							
+							datelist[0] = null;
 						}
-						
-					} 
 
+					}
 
-					
 				}
 
 			}
 		});
 		return j1;
 	}
-
-//	public static void main(String[] args) {
-
-//
-//		
-//		
-////		String[] date = planeDTO.getDate().split("-");
-////		int dateY = Integer.parseInt(date[0]);
-////		int dateM = Integer.parseInt(date[1]) - 1;
-////		int dateD = Integer.parseInt(date[2]);
-////		model.setDate(dateY, dateM, dateD);
-////		model.setSelected(true);
-//	}
 }
+
+
+
+ class ImportJDatePickerEx extends JPanel {
+	int num = 0;
+	String[] datelist = new String[2];
+	DatePickerController dpc = new DatePickerController();
+
+	public ImportJDatePickerEx() {
+	}
+
+	public JPanel datePanel() {
+		JPanel j1 = new JPanel();
+
+		LocalDate now = LocalDate.now();
+		int year = now.getYear();// 년도 저장
+		int month = now.getMonthValue();// 월 저장
+		int day = now.getDayOfMonth();// 일 저장
+
+		UtilDateModel model = new UtilDateModel();
+	
+		model.setDate(year, month - 1, day);// 현재날짜를 표시
+		model.setSelected(true); // 텍스트 필드에 보이기
+		
+		JDatePanelImpl datePanel = new JDatePanelImpl(model);
+	
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
+
+		j1.add(datePicker);
+
+		model.addPropertyChangeListener(new PropertyChangeListener() {
+
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				if ("value".equals(evt.getPropertyName()) && "value" != null) {
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					String date = dateFormat.format(model.getValue());
+
+					datelist[num] = date;				
+
+					if (datelist[0] != null) {
+
+						if (dpc.importsearch(datelist)) {
+							System.out.println("검색 성공");
+
+							datelist[0] = null;
+						} else {
+							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+							System.out.println("검색 실패");
+							datelist[0] = null;
+						}
+
+					}
+
+				}
+
+			}
+		});
+		return j1;
+	}
+}
+
+
+
+
+
+
+
