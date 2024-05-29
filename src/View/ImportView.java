@@ -41,7 +41,7 @@ public class ImportView extends JPanel {
 	int num = 0;
 	String[] datelist = new String[2];
 	DatePickerController dpc = new DatePickerController();
-	
+
 	JPanel panMain;
 	private String day;
 	private int price;
@@ -167,8 +167,8 @@ public class ImportView extends JPanel {
 		updatePanel.add(datePanelL);
 
 		// 날짜 패널(오른쪽)
-		
-		datePan =  imprtJDatePickerEx();
+
+		datePan = imprtJDatePickerEx();
 		datePan.setLayout(new FlowLayout(FlowLayout.LEFT));
 		datePan.setBackground(Color.white);
 		updatePanel.add(datePan);
@@ -335,7 +335,6 @@ public class ImportView extends JPanel {
 		return monthPanel;
 	}
 
-	
 	public JPanel imprtJDatePickerEx() {
 		JPanel j1 = new JPanel();
 		// 현재 날짜를 가져옴
@@ -359,26 +358,20 @@ public class ImportView extends JPanel {
 
 		j1.add(datePicker);
 
-
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				
+
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 					String date = dateFormat.format(model.getValue());
 
-					datelist[num] = date;     
-				       
-		          
-		                 tabPanel.setSelectedIndex(1);
-		                    
-		                    
-		                  
-                    
-                    
+					datelist[num] = date;
+
+					tabPanel.setSelectedIndex(1);
+
 					if (datelist[0] != null) {
 
 						if (dpc.importsearch(datelist)) {
@@ -397,11 +390,8 @@ public class ImportView extends JPanel {
 
 			}
 		});
-		return j1;		
-		
+		return j1;
+
 	}
-	
-	
-	
-	
+
 }
