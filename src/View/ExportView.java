@@ -60,6 +60,8 @@ public class ExportView extends JPanel {
 			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
 	DefaultTableModel[] exportModel = new DefaultTableModel[4];
 	ExportController ec = new ExportController();
+	
+	public static String date ;
 
 	public ExportView() {
 	}
@@ -128,43 +130,6 @@ public class ExportView extends JPanel {
 		checkPanel.setBounds(40, 50, 750, 600);
 		mainPanel.add(checkPanel);
 
-		// 버튼 패널(추가, 수정, 삭제)
-		btnsPanel = new JPanel();
-		btnsPanel.setBounds(870, 600, 250, 100);
-		btnsPanel.setBackground(Color.white);
-
-		// 추가 버튼
-		JButton addBtn = new JButton("추가");
-		btnsPanel.add(addBtn);
-		addBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-
-		// 수정 버튼
-		JButton updateBtn = new JButton("수정");
-		btnsPanel.add(updateBtn);
-		updateBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-
-		// 삭제 버튼
-		JButton deleteBtn = new JButton("삭제");
-		btnsPanel.add(deleteBtn);
-		deleteBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
 
 		// 수정 패널(추가, 수정, 삭제)
 		updatePanel = new JPanel(new GridLayout(4, 2));
@@ -228,6 +193,50 @@ public class ExportView extends JPanel {
 		memoPanelR.setBackground(Color.white);
 		updatePanel.add(memoPanelR);
 
+		// 버튼 패널(추가, 수정, 삭제)
+		btnsPanel = new JPanel();
+		btnsPanel.setBounds(870, 600, 250, 100);
+		btnsPanel.setBackground(Color.white);
+		
+		// 추가 버튼
+		JButton addBtn = new JButton("추가");
+		btnsPanel.add(addBtn);
+		addBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String dateText = date;
+				String amount = amountField.getText();
+				String type = typeBox.getActionCommand();
+				String memo = memoField.getText();
+				System.out.println(dateText + " " + amount + " " + type + " " + memo);
+				
+				
+			}
+		});
+		
+		// 수정 버튼
+		JButton updateBtn = new JButton("수정");
+		btnsPanel.add(updateBtn);
+		updateBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		// 삭제 버튼
+		JButton deleteBtn = new JButton("삭제");
+		btnsPanel.add(deleteBtn);
+		deleteBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
 		mainPanel.add(btnsPanel);
 		mainPanel.add(updatePanel);
 
@@ -379,6 +388,9 @@ public class ExportView extends JPanel {
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
 		j1.add(datePicker);
 		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
+		date = dateFormat.format(model.getValue());
+		
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 
@@ -386,10 +398,14 @@ public class ExportView extends JPanel {
 			public void propertyChange(PropertyChangeEvent evt) {
 
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
+<<<<<<< HEAD
 								
 					
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 					String date = dateFormat.format(model.getValue());
+=======
+					date = dateFormat.format(model.getValue());
+>>>>>>> master
 					
 					datelist[num] = date;
 					tabPanel.setSelectedIndex(1);
@@ -398,7 +414,6 @@ public class ExportView extends JPanel {
 
 						if (dpc.search(datelist)) {
 							System.out.println("검색 성공");
-
 							datelist[0] = null;
 						} else {
 							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
