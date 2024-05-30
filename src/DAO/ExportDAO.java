@@ -42,10 +42,10 @@ public class ExportDAO {
 						 " join extype ex on ex.id = e.type_id " +
 						 " where u.user_id = ? ";
 			System.out.println("s3");
-			
-			pt.setString(1, UsersModel.user.getUser_id());
 			pt = conn.prepareStatement(sql);
+			pt.setString(1, UsersModel.user.getUser_id());
 			System.out.println("s4");
+			System.out.println("s5");
 			ResultSet rs = pt.executeQuery();
 			
 			result = new String[row][4];
@@ -59,7 +59,7 @@ public class ExportDAO {
 				result[index][3] = rs.getString("memo");
 				index++;
 			}
-			System.out.println("s5");
+			System.out.println("s6");
 			rs.close();
 			pt.close();
 			conn.close();

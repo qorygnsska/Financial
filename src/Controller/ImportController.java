@@ -2,10 +2,10 @@ package Controller;
 
 import javax.swing.table.DefaultTableModel;
 
-import Service.ExportService;
+import Service.ImportService;
 
-public class ExportController {
-	private ExportService exportService = new ExportService();
+public class ImportController {
+	private ImportService importService = new ImportService();
 
 	public DefaultTableModel getExport(String[] header) {
 		DefaultTableModel exportModel = new DefaultTableModel(header, 0) {
@@ -14,7 +14,7 @@ public class ExportController {
 			}
 		};
 		
-		String[][] rowData = exportService.select();
+		String[][] rowData = importService.select();
 		
 		for(String[] row: rowData) {
 			exportModel.addRow(row);
