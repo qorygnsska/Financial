@@ -388,7 +388,7 @@ public class ExportView extends JPanel {
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
 		j1.add(datePicker);
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
 		
 		// 날짜가 변경될 때마다 호출되는 listener 추가
