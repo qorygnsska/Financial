@@ -2,6 +2,7 @@ package Controller;
 
 import javax.swing.table.DefaultTableModel;
 
+import Model.ExportModel;
 import Service.ExportService;
 
 public class ExportController {
@@ -22,5 +23,10 @@ public class ExportController {
 		
 		return exportModel;
 		
+	}
+
+	public boolean add(ExportModel exportModel) {
+		System.out.println("(ExportController)지출 내역 추가 중");
+		return exportService.add(exportModel);
 	}
 }
