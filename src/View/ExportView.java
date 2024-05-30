@@ -394,12 +394,11 @@ public class ExportView extends JPanel {
 			public void propertyChange(PropertyChangeEvent evt) {
 
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-		
+	
 					
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
-					String date = dateFormat.format(model.getValue());
+					
+				date = dateFormat.format(model.getValue());
 
-					date = dateFormat.format(model.getValue());
 
 					
 					datelist[num] = date;
