@@ -27,8 +27,10 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import Controller.ImportController;
 import Controller.DatePickerController;
 import DatePickerEx.Dateformet;
 
@@ -52,7 +54,9 @@ public class ImportView extends JPanel {
 	private JTabbedPane tabPanel = new JTabbedPane();
 	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,
 			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
-
+	DefaultTableModel[] importModel = new DefaultTableModel[4];
+	ImportController ic = new ImportController();
+	
 	public ImportView() {
 	}
 
@@ -223,8 +227,14 @@ public class ImportView extends JPanel {
 		setVisible(true);
 	}
 
-	public JScrollPane totalCheck(String[][] rowData, String[] column) {
-		JTable totalTable = new JTable(rowData, column);
+	public JScrollPane totalCheck() {
+		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		importModel[0] = ic.getImport(header);
+		
+		JTable totalTable = new JTable(importModel[0]);
+		totalTable.getTableHeader().setReorderingAllowed(false);
+		totalTable.getTableHeader().setResizingAllowed(false);
+		totalTable.setRowHeight(20);
 		JScrollPane scrollpane = new JScrollPane(totalTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
@@ -236,9 +246,9 @@ public class ImportView extends JPanel {
 		TableColumnModel tcm = totalTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
-		totalTable.getColumn("날짜").setPreferredWidth(30);
+		totalTable.getColumn("날짜").setPreferredWidth(50);
 		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("금        액").setPreferredWidth(250);
+		totalTable.getColumn("금        액").setPreferredWidth(230);
 		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
 		totalTable.getColumn("구분").setPreferredWidth(30);
 		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
@@ -248,8 +258,15 @@ public class ImportView extends JPanel {
 		return scrollpane;
 	}
 
-	public JScrollPane dayCheck(String[][] rowData, String[] column) {
-		JTable totalTable = new JTable(rowData, column);
+
+	public JScrollPane dayCheck() {
+		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		importModel[0] = ic.getImport(header);
+		
+		JTable totalTable = new JTable(importModel[0]);
+		totalTable.getTableHeader().setReorderingAllowed(false);
+		totalTable.getTableHeader().setResizingAllowed(false);
+		totalTable.setRowHeight(20);
 		JScrollPane scrollpane = new JScrollPane(totalTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
@@ -261,9 +278,9 @@ public class ImportView extends JPanel {
 		TableColumnModel tcm = totalTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
-		totalTable.getColumn("날짜").setPreferredWidth(30);
+		totalTable.getColumn("날짜").setPreferredWidth(50);
 		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("금        액").setPreferredWidth(250);
+		totalTable.getColumn("금        액").setPreferredWidth(230);
 		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
 		totalTable.getColumn("구분").setPreferredWidth(30);
 		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
@@ -273,8 +290,14 @@ public class ImportView extends JPanel {
 		return scrollpane;
 	}
 
-	public JScrollPane monthCheck(String[][] rowData, String[] column) {
-		JTable totalTable = new JTable(rowData, column);
+	public JScrollPane monthCheck() {
+		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		importModel[0] = ic.getImport(header);
+		
+		JTable totalTable = new JTable(importModel[0]);
+		totalTable.getTableHeader().setReorderingAllowed(false);
+		totalTable.getTableHeader().setResizingAllowed(false);
+		totalTable.setRowHeight(20);
 		JScrollPane scrollpane = new JScrollPane(totalTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
@@ -286,9 +309,9 @@ public class ImportView extends JPanel {
 		TableColumnModel tcm = totalTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
-		totalTable.getColumn("날짜").setPreferredWidth(30);
+		totalTable.getColumn("날짜").setPreferredWidth(50);
 		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("금        액").setPreferredWidth(250);
+		totalTable.getColumn("금        액").setPreferredWidth(230);
 		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
 		totalTable.getColumn("구분").setPreferredWidth(30);
 		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
@@ -303,10 +326,7 @@ public class ImportView extends JPanel {
 		totalPanel = new JPanel();
 		totalPanel.setBounds(0, 0, 800, 600);
 		totalPanel.setBackground(Color.white);
-		String[] column = { "날짜", "금        액", "구분", "비        고" };
-		String[][] rowData = { { "24/05/27", "3000000", "급여", "보너스 제외" }, { "24/05/27", "1000000", "급여", "보너스" } };
-		sp = totalCheck(rowData, column);
-		totalPanel.add(sp);
+		totalPanel.add(totalCheck());
 		return totalPanel;
 	}
 
@@ -315,11 +335,7 @@ public class ImportView extends JPanel {
 		dayPanel = new JPanel();
 		dayPanel.setBounds(100, 50, 1000, 600);
 		dayPanel.setBackground(Color.white);
-		String[] column1 = { "날짜", "금        액", "구분", "비        고" };
-		String[][] rowData1 = { { "24/05/27", "4000000", "급여", "보너스 제외 및 알바비 포함" },
-				{ "24/05/27", "2000", "이자", "은행 이자" } };
-		sp = totalCheck(rowData1, column1);
-		dayPanel.add(sp);
+		dayPanel.add(dayCheck());
 		return dayPanel;
 	}
 
@@ -328,10 +344,7 @@ public class ImportView extends JPanel {
 		monthPanel = new JPanel();
 		monthPanel.setBounds(100, 50, 1000, 600);
 		monthPanel.setBackground(Color.white);
-		String[] column2 = { "날짜", "금        액", "구분", "비        고" };
-		String[][] rowData2 = { { "24/05/27", "5000000", "급여", "보너스 포함" }, { "24/05/27", "1000000", "기타", "길에서 주움" } };
-		sp = totalCheck(rowData2, column2);
-		monthPanel.add(sp);
+		monthPanel.add(monthCheck());
 		return monthPanel;
 	}
 //캘린더

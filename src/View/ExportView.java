@@ -255,9 +255,9 @@ public class ExportView extends JPanel {
 		TableColumnModel tcm = totalTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
-		totalTable.getColumn("날짜").setPreferredWidth(30);
+		totalTable.getColumn("날짜").setPreferredWidth(50);
 		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("금        액").setPreferredWidth(250);
+		totalTable.getColumn("금        액").setPreferredWidth(230);
 		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
 		totalTable.getColumn("구분").setPreferredWidth(30);
 		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
@@ -278,15 +278,17 @@ public class ExportView extends JPanel {
 		JScrollPane scrollpane = new JScrollPane(totalTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
+		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
 		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
 		dtcrCenter.setHorizontalAlignment(JLabel.CENTER);
 		DefaultTableCellRenderer dtcrRight = new DefaultTableCellRenderer();
 		dtcrRight.setHorizontalAlignment(JLabel.RIGHT);
 		TableColumnModel tcm = totalTable.getColumnModel();
 
-		totalTable.getColumn("날짜").setPreferredWidth(30);
+		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
+		totalTable.getColumn("날짜").setPreferredWidth(50);
 		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("금        액").setPreferredWidth(250);
+		totalTable.getColumn("금        액").setPreferredWidth(230);
 		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
 		totalTable.getColumn("구분").setPreferredWidth(30);
 		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
@@ -307,15 +309,17 @@ public class ExportView extends JPanel {
 		JScrollPane scrollpane = new JScrollPane(totalTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
+		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
 		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
 		dtcrCenter.setHorizontalAlignment(JLabel.CENTER);
 		DefaultTableCellRenderer dtcrRight = new DefaultTableCellRenderer();
 		dtcrRight.setHorizontalAlignment(JLabel.RIGHT);
 		TableColumnModel tcm = totalTable.getColumnModel();
 
-		totalTable.getColumn("날짜").setPreferredWidth(30);
+		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
+		totalTable.getColumn("날짜").setPreferredWidth(50);
 		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("금        액").setPreferredWidth(250);
+		totalTable.getColumn("금        액").setPreferredWidth(230);
 		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
 		totalTable.getColumn("구분").setPreferredWidth(30);
 		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
