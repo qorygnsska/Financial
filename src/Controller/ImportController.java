@@ -8,7 +8,7 @@ public class ImportController {
 	private ImportService importService = new ImportService();
 
 	public DefaultTableModel getImport(String[] header) {
-		DefaultTableModel exportModel = new DefaultTableModel(header, 0) {
+		DefaultTableModel importModel = new DefaultTableModel(header, 0) {
 			public boolean isCellEditable(int rowIndex, int mColindex) {
 				return false;
 			}
@@ -17,10 +17,10 @@ public class ImportController {
 		String[][] rowData = importService.select();
 		
 		for(String[] row: rowData) {
-			exportModel.addRow(row);
+			importModel.addRow(row);
 		}
 		
-		return exportModel;
+		return importModel;
 		
 	}
 }
