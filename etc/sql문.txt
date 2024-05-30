@@ -6,7 +6,7 @@ CREATE TABLE users (
     user_id   VARCHAR2(30) UNIQUE not null, -- id
     user_pass VARCHAR2(30) not null, -- 비밀번호
     name      VARCHAR2(30) not null, -- 이름
-    jumin     VARCHAR2(30) not null,  -- 주민번호
+    jumin     VARCHAR2(30) not null  -- 주민번호
 );
 
 
@@ -129,10 +129,13 @@ insert into extype(type) values('교통비');
 insert into extype(type) values('식비');
 insert into extype(type) values('쇼핑');
 insert into extype(type) values('여가');
+insert into extype(type) values('고정지출');
+insert into extype(type) values('저축');
 
 -- 수입 imtype
 insert into imtype(type) values('급여');
 insert into imtype(type) values('이자');
+insert into imtype(type) values('고정수입');
 
 -- 고정 지출 fexport
 insert into fexport(user_id, price, day, type_id, memo) values( , , , , );

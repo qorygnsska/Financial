@@ -1,15 +1,19 @@
 package Service;
 
 import DAO.ExportDAO;
+import Model.ExportModel;
 
 public class ExportService {
-
 	private ExportDAO dao = new ExportDAO();
-	
-	// 전제 조회 후 테이블 출력
+
 	public String[][] select() {
-				
-		return dao.select();		
+
+		return dao.select();
+	}
+
+	public boolean add(ExportModel exportModel) {
+		System.out.println("(ExportService)지출 내역 추가 중");
+		return dao.add(exportModel);
 	}
 
 }

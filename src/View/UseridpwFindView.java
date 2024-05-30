@@ -32,6 +32,7 @@ public class UseridpwFindView extends JFrame {
 	private JPanel jp1;
 	private JButton backbtn;
 
+	//아이디 찾기 메소드
 	public void idfind() {
 		jpmain = new JPanel();
 		setTitle("아이디 찾기");
@@ -54,6 +55,7 @@ public class UseridpwFindView extends JFrame {
 
 		jpmain.setBounds(10, 10, 300, 150);
 		add(jpmain);
+		//로그인화면으로 되돌아가기
 		backbtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -63,7 +65,7 @@ public class UseridpwFindView extends JFrame {
 
 			}
 		});
-
+		//검색버튼
 		idbtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -88,7 +90,7 @@ public class UseridpwFindView extends JFrame {
 		setVisible(true);
 
 	}
-
+	//비밀번호 찾기 메소드
 	public void pwfind() {
 		jp1 = new JPanel();
 		jpmain = new JPanel();
@@ -123,7 +125,7 @@ public class UseridpwFindView extends JFrame {
 
 		jpmain.setBounds(10, 10, 250, 180);
 		add(jpmain);
-
+		//로그인화면으로 되돌아가기
 		backbtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -133,7 +135,7 @@ public class UseridpwFindView extends JFrame {
 
 			}
 		});
-
+		//비밀번호 검색 
 		idbtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -152,7 +154,7 @@ public class UseridpwFindView extends JFrame {
 			}
 		});
 
-		// setResizable(false); // 화면 크기 고정하는 작업
+		 setResizable(false); // 화면 크기 고정하는 작업
 		// 화면 중앙에 배치할 수있도록 메서드
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
