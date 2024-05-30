@@ -39,7 +39,7 @@ import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 public class ImportView extends JPanel {
-
+ static String date;
 	int num = 0;
 	String[] datelist = new String[2];
 	DatePickerController dpc = new DatePickerController();
@@ -376,7 +376,7 @@ public class ImportView extends JPanel {
 
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
-					String date = dateFormat.format(model.getValue());
+					 date = dateFormat.format(model.getValue());
 						System.out.println(date);
 					datelist[num] = date;
 
