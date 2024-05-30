@@ -81,9 +81,7 @@ public class AmountView extends JPanel {
 		// 테이블 생성
 		JTable amountTable = new JTable(model);
 
-		// amountTable.setBackground(Color.PINK); // 셀 배경색 변경
-		// amountTable.setGridColor(Color.WHITE); // 셀 테두리색 변경
-		// amountTable.setForeground(Color.WHITE); // 셀 글자색 변경
+		
 		amountTable.setRowHeight(30); // 행의 높이 설정
 
 		amountTable.setFont(font2);
