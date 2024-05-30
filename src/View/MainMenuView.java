@@ -27,12 +27,14 @@ import javax.swing.table.TableColumnModel;
 
 import Controller.MainExportController;
 import Controller.MainImportController;
+import Controller.SaveController;
 import Model.UsersModel;
 
 public class MainMenuView extends JPanel {
 
 	MainImportController IC = new MainImportController();
 	MainExportController EC = new MainExportController();
+	SaveController SC = new SaveController();
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -43,7 +45,8 @@ public class MainMenuView extends JPanel {
 	JPanel btnPan = new JPanel();
 	JButton[] btnList = new JButton[2];
 	JPanel userPan = new JPanel(new GridLayout(2,2));
-
+	DefaultTableModel saveModel;
+	
 	public MainMenuView(JPanel panel) {
 		panMain = panel;
 		Rectangle rect = panel.getBounds();
@@ -354,11 +357,8 @@ public class MainMenuView extends JPanel {
 		sPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "저축"));
 		String[] header = { "날짜", "금액", "유형", "비고" };
 
-		DefaultTableModel saveModel = new DefaultTableModel(header, 0) {
-			public boolean isCellEditable(int rowIndex, int mColindex) {
-				return false;
-			}
-		};
+		saveModel = SC.getSaveModel(header);
+		
 
 		JTable table = new JTable(saveModel);
 
@@ -375,7 +375,7 @@ public class MainMenuView extends JPanel {
 
 		// 테이블 셀 배경
 		table.setBackground(Color.white);
-		saveModel.addRow(new Object[] { "5월7일", "100000", "여가", "태국" });
+//		saveModel.addRow(new Object[] { "5월7일", "100000", "여가", "태국" });
 
 		JScrollPane savePane = new JScrollPane(table);
 		// JScrollPane 사이즈

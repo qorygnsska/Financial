@@ -130,6 +130,7 @@ insert into extype(type) values('식비');
 insert into extype(type) values('쇼핑');
 insert into extype(type) values('여가');
 insert into extype(type) values('고정지출');
+insert into extype(type) values('저축');
 
 -- 수입 imtype
 insert into imtype(type) values('급여');
