@@ -118,43 +118,6 @@ public class ExportView extends JPanel {
 		checkPanel.setBounds(40, 50, 750, 600);
 		mainPanel.add(checkPanel);
 
-		// 버튼 패널(추가, 수정, 삭제)
-		btnsPanel = new JPanel();
-		btnsPanel.setBounds(870, 600, 250, 100);
-		btnsPanel.setBackground(Color.white);
-
-		// 추가 버튼
-		JButton addBtn = new JButton("추가");
-		btnsPanel.add(addBtn);
-		addBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-
-		// 수정 버튼
-		JButton updateBtn = new JButton("수정");
-		btnsPanel.add(updateBtn);
-		updateBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-
-		// 삭제 버튼
-		JButton deleteBtn = new JButton("삭제");
-		btnsPanel.add(deleteBtn);
-		deleteBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
 
 		// 수정 패널(추가, 수정, 삭제)
 		updatePanel = new JPanel(new GridLayout(4, 2));
@@ -218,6 +181,47 @@ public class ExportView extends JPanel {
 		memoPanelR.setBackground(Color.white);
 		updatePanel.add(memoPanelR);
 
+		// 버튼 패널(추가, 수정, 삭제)
+		btnsPanel = new JPanel();
+		btnsPanel.setBounds(870, 600, 250, 100);
+		btnsPanel.setBackground(Color.white);
+		
+		// 추가 버튼
+		JButton addBtn = new JButton("추가");
+		btnsPanel.add(addBtn);
+		addBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String dateText = date.getName();
+				String amount = amountField.getText();
+				String type = typeBox.getActionCommand();
+				
+			}
+		});
+		
+		// 수정 버튼
+		JButton updateBtn = new JButton("수정");
+		btnsPanel.add(updateBtn);
+		updateBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+		// 삭제 버튼
+		JButton deleteBtn = new JButton("삭제");
+		btnsPanel.add(deleteBtn);
+		deleteBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
 		mainPanel.add(btnsPanel);
 		mainPanel.add(updatePanel);
 
