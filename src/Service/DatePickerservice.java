@@ -10,4 +10,9 @@ DatePickerDAO tdao = new DatePickerDAO();
 		return tdao.seracht(datelist);
 	}
 
+	public boolean importsearch(String[] datelist) {
+		System.out.println("importsearch실행");
+		return tdao.importseracht(datelist);
+	}
+
 }

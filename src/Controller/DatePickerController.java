@@ -12,6 +12,13 @@ public class DatePickerController {
 		return ts.search(datelist);
 	}
 
+
+	public boolean importsearch(String[] datelist) {
+		System.out.println("컨트롤러 실행");
+		return ts.importsearch(datelist);
+		
+	}
+
 	
 
 	
