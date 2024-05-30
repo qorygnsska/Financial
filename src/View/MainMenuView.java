@@ -390,8 +390,4 @@ public class MainMenuView extends JPanel {
 		add(sPan);
 	}
 
-	public static void main(String[] args) {
-		// new MainMenuView();
-	}
-
 }
