@@ -368,6 +368,9 @@ public class ImportView extends JPanel {
 		
 		j1.add(datePicker);
 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
+		date = dateFormat.format(model.getValue());
+		
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 			
@@ -375,9 +378,7 @@ public class ImportView extends JPanel {
 			public void propertyChange(PropertyChangeEvent evt) {
 
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
-					 date = dateFormat.format(model.getValue());
-						System.out.println(date);
+					date = dateFormat.format(model.getValue());
 					datelist[num] = date;
 
 					tabPanel.setSelectedIndex(1);
