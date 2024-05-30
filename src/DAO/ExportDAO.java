@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import Model.ExportModel;
 import Model.UsersModel;
 
 public class ExportDAO {
@@ -68,6 +69,34 @@ public class ExportDAO {
 			e.printStackTrace();
 		}
 		
+		return result;
+	}
+
+	// 지출 내역 추가
+	public boolean add(ExportModel exportModel) {
+		System.out.println("(ExportDAO) 지출 내역 추가 중");
+		boolean result = false;
+		
+		conn = DBUtil.getConnection();
+		String sql = "insert into export(user_id, price, day, type_id, memo) values(?, ?, ?, ?, ?)";
+		
+		try {
+			
+			pt = conn.prepareStatement(sql);
+			pt.setInt(1, exportModel.getId());
+			pt.setInt(2, exportModel.getPrice());
+			pt.setString(3, exportModel.getDay());
+			pt.setInt(4, exportModel.getType_id());
+			pt.setString(5, exportModel.getMemo());
+			
+			int num = pt.executeUpdate();
+			
+			if(num > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 }
