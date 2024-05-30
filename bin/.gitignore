@@ -1,5 +1,9 @@
 /Controller/
 /DAO/
+<<<<<<< HEAD
+/Model/
+=======
+>>>>>>> shim
 /Service/
 /View/
 /Model/
