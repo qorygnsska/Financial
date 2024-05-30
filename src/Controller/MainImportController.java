@@ -1,7 +1,5 @@
 package Controller;
 
-<<<<<<< HEAD
-<<<<<<<< HEAD:src/Controller/MainImportController.java
 import javax.swing.table.DefaultTableModel;
 
 import Service.MainImportService;
@@ -9,15 +7,6 @@ import Service.MainImportService;
 public class MainImportController {
 
 	private MainImportService service = new MainImportService();
-=======
-import javax.swing.table.DefaultTableModel;
-
-import Service.ImportService;
-
-public class MainImportController {
-
-	private ImportService service = new ImportService();
->>>>>>> bs
 
 	public DefaultTableModel getImportModel(String[] header) {
 
@@ -36,11 +25,4 @@ public class MainImportController {
 
 		return model;
 	}
-<<<<<<< HEAD
-========
-public class ImportController {
-
->>>>>>>> bs:src/Controller/ImportController.java
-=======
->>>>>>> bs
 }
