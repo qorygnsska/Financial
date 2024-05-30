@@ -21,9 +21,10 @@ public class ImportDAO {
 			
 			conn = DBUtil.getConnection();
 			
-			String countSql = "select count(*) from import";
+			String countSql = "select count(*) from import join imtype on imtype.id = import.type_id where user_id = ?";
 			
 			pt = conn.prepareStatement(countSql);
+			pt.setString(1, UsersModel.user.getUser_id());
 			rs = pt.executeQuery();
 			
 			int row = 0;

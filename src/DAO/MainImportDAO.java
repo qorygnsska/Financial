@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import Model.UsersModel;
+
 public class MainImportDAO {
 
 	private Connection conn;
@@ -18,9 +20,10 @@ public class MainImportDAO {
 
 			conn = DBUtil.getConnection();
 
-			String countSql = "select count(*) from amount";
+			String countSql = "select count(*) from import join imtype on imtype.id = import.type_id where user_id = ?";
 
 			pt = conn.prepareStatement(countSql);
+			pt.setString(1, UsersModel.user.getUser_id());
 			rs = pt.executeQuery();
 
 			int row = 0;
@@ -33,10 +36,10 @@ public class MainImportDAO {
 			}
 
 			// 조회하는 sql문 작성
-			String sql = "select day, price, type from amount where user_id = ?";
+			String sql = "select day, price, type from import join imtype on imtype.id = import.type_id where user_id = ?";
 			
 			pt = conn.prepareStatement(sql);
-			pt.setInt(1, 5);
+			pt.setString(1, UsersModel.user.getUser_id());
 			rs = pt.executeQuery();
 
 			// 2차원 배열을 선언

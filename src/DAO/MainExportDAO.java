@@ -18,9 +18,10 @@ public class MainExportDAO {
 
 			conn = DBUtil.getConnection();
 
-			String countSql = "select count(*) from users";
+			String countSql = "select count(*) from export join extype on extype.id = export.type_id where user_id = ?";
 
 			pt = conn.prepareStatement(countSql);
+			pt.setString(1, UsersModel.user.getUser_id());
 			rs = pt.executeQuery();
 
 			int row = 0;
@@ -33,7 +34,7 @@ public class MainExportDAO {
 			}
 
 			// 조회하는 sql문 작성
-			String sql = "select * from export join extype on extype.id = export.type_id where user_id = ? ";
+			String sql = "select day, price, type from export join extype on extype.id = export.type_id where user_id = ? ";
 
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, UsersModel.user.getUser_id());

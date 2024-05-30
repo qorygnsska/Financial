@@ -20,9 +20,10 @@ public class ExportDAO {
 			
 			conn = DBUtil.getConnection();
 			
-			String countSql = "select count(*) from export";
+			String countSql = "select count(*) from export join extype on extype.id = export.type_id where user_id = ?";
 			
 			pt = conn.prepareStatement(countSql);
+			pt.setString(1, UsersModel.user.getUser_id());
 			rs = pt.executeQuery();
 			
 			int row = 0;
