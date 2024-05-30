@@ -14,14 +14,19 @@ public class UsersModel {
 	
 	public static UsersModel user;
 	
+	
 	public void save(String id, String pass) {
 		user = usersDAO.save(id, pass);
 	}
 
 	
+	
 	public UsersModel() {}
 	
 	
+
+
+
 
 	public UsersModel(int id, String user_id, String user_pass, String name, String jumin) {
 		this.id = id;

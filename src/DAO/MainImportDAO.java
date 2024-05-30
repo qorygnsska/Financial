@@ -23,7 +23,7 @@ public class MainImportDAO {
 			String countSql = "select count(*) from import join imtype on imtype.id = import.type_id where user_id = ?";
 
 			pt = conn.prepareStatement(countSql);
-			pt.setString(1, UsersModel.user.getUser_id());
+			pt.setInt(1, UsersModel.user.getId());
 			rs = pt.executeQuery();
 
 			int row = 0;
@@ -39,7 +39,7 @@ public class MainImportDAO {
 			String sql = "select day, price, type from import join imtype on imtype.id = import.type_id where user_id = ?";
 			
 			pt = conn.prepareStatement(sql);
-			pt.setString(1, UsersModel.user.getUser_id());
+			pt.setInt(1, UsersModel.user.getId());
 			rs = pt.executeQuery();
 
 			// 2차원 배열을 선언

@@ -37,7 +37,7 @@ public class MainExportDAO {
 			String sql = "select day, price, type from export join extype on extype.id = export.type_id where user_id = ? ";
 
 			pt = conn.prepareStatement(sql);
-			pt.setString(1, UsersModel.user.getUser_id());
+			pt.setInt(1, UsersModel.user.getId());
 
 			ResultSet rs = pt.executeQuery();
 

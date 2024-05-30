@@ -10,11 +10,16 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -26,9 +31,18 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import Controller.ImportController;
-import DatePickerEx.JDatePickerEx;
+import Controller.DatePickerController;
+import DatePickerEx.Dateformet;
+
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 public class ImportView extends JPanel {
+
+	int num = 0;
+	String[] datelist = new String[2];
+	DatePickerController dpc = new DatePickerController();
 
 	JPanel panMain;
 	private String day;
@@ -157,8 +171,8 @@ public class ImportView extends JPanel {
 		updatePanel.add(datePanelL);
 
 		// 날짜 패널(오른쪽)
-		JDatePickerEx date = new JDatePickerEx();
-		datePan = date.datePanel();
+
+		datePan = imprtJDatePickerEx();
 		datePan.setLayout(new FlowLayout(FlowLayout.LEFT));
 		datePan.setBackground(Color.white);
 		updatePanel.add(datePan);
@@ -332,6 +346,62 @@ public class ImportView extends JPanel {
 		monthPanel.setBackground(Color.white);
 		monthPanel.add(monthCheck());
 		return monthPanel;
+	}
+//캘린더
+	public JPanel imprtJDatePickerEx() {
+		JPanel j1 = new JPanel();
+		// 현재 날짜를 가져옴...
+		LocalDate now = LocalDate.now();
+		int year = now.getYear();// 년도 저장
+		int month = now.getMonthValue();// 월 저장
+		int day = now.getDayOfMonth();// 일 저장
+
+		
+		UtilDateModel model = new UtilDateModel();
+		
+		model.setDate(year, month - 1, day);// 현재날짜를 표시
+		model.setSelected(true); // 텍스트 필드에 보이기
+		
+		JDatePanelImpl datePanel = new JDatePanelImpl(model);
+		
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
+		
+		j1.add(datePicker);
+
+		// 날짜가 변경될 때마다 호출되는 listener 추가
+		model.addPropertyChangeListener(new PropertyChangeListener() {
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+
+				if ("value".equals(evt.getPropertyName()) && "value" != null) {
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
+					String date = dateFormat.format(model.getValue());
+						System.out.println(date);
+					datelist[num] = date;
+
+					tabPanel.setSelectedIndex(1);
+
+					if (datelist[0] != null) {
+
+						if (dpc.importsearch(datelist)) {
+							System.out.println("검색 성공");
+
+							datelist[0] = null;
+						} else {
+							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+							System.out.println("검색 실패");
+							datelist[0] = null;
+						}
+
+					}
+
+				}
+
+			}
+		});
+		return j1;
+
 	}
 
 }
