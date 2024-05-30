@@ -29,9 +29,14 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+<<<<<<< HEAD
 import Controller.DatePickerController;
+=======
+import Controller.ExportController;
+>>>>>>> master
 import DatePickerEx.Dateformet;
 
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -53,12 +58,16 @@ public class ExportView extends JPanel {
 	public JTabbedPane tabPanel = new JTabbedPane();
 	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,
 			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
+	DefaultTableModel[] exportModel = new DefaultTableModel[4];
+	ExportController ec = new ExportController();
 
 	public ExportView() {
 	}
 
 	public ExportView(JPanel panel) {
+		System.out.println("뷰 생성");
 		panMain = panel;
+		System.out.println("프레임 생성");
 		print();
 
 	}
@@ -71,6 +80,7 @@ public class ExportView extends JPanel {
 	}
 
 	public void print() {
+		System.out.println("프레임 생성 시작");
 		Rectangle rect = panMain.getBounds();
 		setPreferredSize(rect.getSize());
 		//panMain.setBounds(7, 0, 1170, 765);
@@ -225,8 +235,15 @@ public class ExportView extends JPanel {
 		setVisible(true);
 	}
 
-	public JScrollPane totalCheck(String[][] rowData, String[] column) {
-		JTable totalTable = new JTable(rowData, column);
+	public JScrollPane totalCheck() {
+		System.out.println("테이블");
+		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		exportModel[0] = ec.getExport(header);
+		
+		JTable totalTable = new JTable(exportModel[0]);
+		totalTable.getTableHeader().setReorderingAllowed(false);
+		totalTable.getTableHeader().setResizingAllowed(false);
+		totalTable.setRowHeight(20);
 		JScrollPane scrollpane = new JScrollPane(totalTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
@@ -250,8 +267,14 @@ public class ExportView extends JPanel {
 		return scrollpane;
 	}
 
-	public JScrollPane dayCheck(String[][] rowData, String[] column) {
-		JTable totalTable = new JTable(rowData, column);
+	public JScrollPane dayCheck() {
+		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		exportModel[0] = ec.getExport(header);
+		
+		JTable totalTable = new JTable(exportModel[0]);
+		totalTable.getTableHeader().setReorderingAllowed(false);
+		totalTable.getTableHeader().setResizingAllowed(false);
+		totalTable.setRowHeight(20);
 		JScrollPane scrollpane = new JScrollPane(totalTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
@@ -273,8 +296,14 @@ public class ExportView extends JPanel {
 		return scrollpane;
 	}
 
-	public JScrollPane monthCheck(String[][] rowData, String[] column) {
-		JTable totalTable = new JTable(rowData, column);
+	public JScrollPane monthCheck() {
+		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		exportModel[0] = ec.getExport(header);
+		
+		JTable totalTable = new JTable(exportModel[0]);
+		totalTable.getTableHeader().setReorderingAllowed(false);
+		totalTable.getTableHeader().setResizingAllowed(false);
+		totalTable.setRowHeight(20);
 		JScrollPane scrollpane = new JScrollPane(totalTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
@@ -301,10 +330,7 @@ public class ExportView extends JPanel {
 		totalPanel = new JPanel();
 		totalPanel.setBounds(0, 0, 800, 600);
 		totalPanel.setBackground(Color.white);
-		String[] column = { "날짜", "금        액", "구분", "비        고" };
-		String[][] rowData = { { "24/05/27", "3000000", "기타", "부모님 용돈" }, { "24/05/27", "100000", "쇼핑", "친구생일 선물" } };
-		sp = totalCheck(rowData, column);
-		totalPanel.add(sp);
+		totalPanel.add(totalCheck());
 		return totalPanel;
 	}
 
@@ -313,10 +339,7 @@ public class ExportView extends JPanel {
 		dayPanel = new JPanel();
 		dayPanel.setBounds(100, 50, 1000, 600);
 		dayPanel.setBackground(Color.white);
-		String[] column1 = { "날짜", "금        액", "구분", "비        고" };
-		String[][] rowData1 = { { "24/05/27", "2000000", "교통비", "전철 및 버스 이용" }, { "24/05/27", "30000", "교통비", "택시비" } };
-		sp = totalCheck(rowData1, column1);
-		dayPanel.add(sp);
+		dayPanel.add(dayCheck());
 		return dayPanel;
 	}
 
@@ -325,11 +348,7 @@ public class ExportView extends JPanel {
 		monthPanel = new JPanel();
 		monthPanel.setBounds(100, 50, 1000, 600);
 		monthPanel.setBackground(Color.white);
-		String[] column2 = { "날짜", "금        액", "구분", "비        고" };
-		String[][] rowData2 = { { "24/05/27", "5000000", "기타", "oo 결혼식" },
-				{ "24/05/27", "1000000", "기타", "길가다가 잃어버림" } };
-		sp = totalCheck(rowData2, column2);
-		monthPanel.add(sp);
+		monthPanel.add(monthCheck());
 		return monthPanel;
 	}
 

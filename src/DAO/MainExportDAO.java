@@ -6,69 +6,64 @@ import java.sql.ResultSet;
 
 import Model.UsersModel;
 
-public class ImportDAO {
-
+public class MainExportDAO {
 	private Connection conn;
 	private PreparedStatement pt;
 	private ResultSet rs;
-
-	private LoginDAO loginDAO = new LoginDAO();
-
-	public String[][] select(){
+	
+	public String[][] select() {
 		String[][] result = null;
-		
+
 		try {
-			
+
 			conn = DBUtil.getConnection();
-			
-			String countSql = "select count(*) from import";
-			
+
+			String countSql = "select count(*) from users";
+
 			pt = conn.prepareStatement(countSql);
 			rs = pt.executeQuery();
-			
+
 			int row = 0;
-			
-			System.out.println("s1");
-			if(rs.next()) {
+
+			if (rs.next()) {
 				row = rs.getInt(1);
-				System.out.println(row);
-			}else {
+//				System.out.println(row);
+			} else {
 				return result;
 			}
-			System.out.println("s2");
-			
-			String sql = "select day, price, im.type, memo " +
-						 " from users u " + 
-						 " join import i on i.user_id = u.id " + 
-						 " join imtype im on im.id = i.type_id " +
-						 " where u.user_id = ? ";
-			System.out.println("s3");
-			
+
+			// 조회하는 sql문 작성
+			String sql = "select * from export join extype on extype.id = export.type_id where user_id = ? ";
+
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, UsersModel.user.getUser_id());
-			System.out.println("s4");
+
 			ResultSet rs = pt.executeQuery();
-			
-			result = new String[row][4];
-			
+
+			// 2차원 배열을 선언
+			result = new String[row][3];
+
+			// 2차원 배열의 index를 (공간의 번호)
+			// 저장하는 변수
 			int index = 0;
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
+				// 결과를 받아와서 테이블에 추가하는
+				// 명령문!
 				result[index][0] = rs.getString("day");
 				result[index][1] = rs.getString("price");
 				result[index][2] = rs.getString("type");
-				result[index][3] = rs.getString("memo");
 				index++;
 			}
-			System.out.println("s5");
+			// 닫기
 			rs.close();
 			pt.close();
 			conn.close();
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-
 }
