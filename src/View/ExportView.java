@@ -32,11 +32,11 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-<<<<<<< HEAD
+
 import Controller.DatePickerController;
-=======
+
 import Controller.ExportController;
->>>>>>> master
+
 import DatePickerEx.Dateformet;
 
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
