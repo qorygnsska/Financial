@@ -10,6 +10,9 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
@@ -39,7 +42,7 @@ import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 public class ImportView extends JPanel {
-
+ static String date;
 	int num = 0;
 	String[] datelist = new String[2];
 	DatePickerController dpc = new DatePickerController();
@@ -49,11 +52,12 @@ public class ImportView extends JPanel {
 	private int price;
 	private int imtype;
 	private String memo;
-
+	private JTable totalTable;
 	private JScrollPane sp = new JScrollPane();
 	private JTabbedPane tabPanel = new JTabbedPane();
 	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,
 			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
+	private JTextField amountField;
 	DefaultTableModel[] importModel = new DefaultTableModel[4];
 	ImportController ic = new ImportController();
 	
@@ -73,6 +77,24 @@ public class ImportView extends JPanel {
 		this.memo = memo;
 	}
 
+	// 테이블 마우스 클릭
+	private class MyMouseListener1 extends MouseAdapter {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// 테이블에서 선택한 행 가져오기
+			int selectRow = totalTable.getSelectedRow();
+			System.out.println("선택한 행:" + selectRow);
+			// 선택한 행이 있는지 확인
+			if(selectRow!=-1) {
+					
+				
+			}
+
+		}
+	}
+	
+	
 	public void print() {
 		Rectangle rect = panMain.getBounds();
 		setPreferredSize(rect.getSize());
@@ -143,7 +165,16 @@ public class ImportView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				  
+				// 테이블에서 선택한 행 가져오기
+				int selectRow = totalTable.getSelectedRow();
+				System.out.println("선택한 행:" + selectRow);
+				// 선택한 행이 있는지 확인
+				if(selectRow!=-1) {
+						
+					
+				}
+				
 			}
 		});
 
@@ -154,7 +185,9 @@ public class ImportView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				// 테이블에서 선택한 행 가져오기
+				int selectRow = totalTable.getSelectedRow();
+				System.out.println("선택한 행:" + selectRow);
 			}
 		});
 
@@ -186,7 +219,7 @@ public class ImportView extends JPanel {
 
 		// 금액 패널(오른쪽)
 		amountPanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
-		JTextField amountField = new JTextField(20);
+		amountField = new JTextField(20);
 		amountPanelR.add(amountField);
 		amountPanelR.setBackground(Color.white);
 		updatePanel.add(amountPanelR);
@@ -231,7 +264,7 @@ public class ImportView extends JPanel {
 		String[] header = {"날짜", "금        액", "구분", "비        고"};
 		importModel[0] = ic.getImport(header);
 		
-		JTable totalTable = new JTable(importModel[0]);
+	    totalTable = new JTable(importModel[0]);
 		totalTable.getTableHeader().setReorderingAllowed(false);
 		totalTable.getTableHeader().setResizingAllowed(false);
 		totalTable.setRowHeight(20);
@@ -255,6 +288,10 @@ public class ImportView extends JPanel {
 		totalTable.getColumn("비        고").setPreferredWidth(250);
 		totalTable.getColumn("비        고").setCellRenderer(dtcrCenter);
 
+		totalTable.addMouseListener(new MyMouseListener1());
+			
+			
+		
 		return scrollpane;
 	}
 
@@ -263,7 +300,7 @@ public class ImportView extends JPanel {
 		String[] header = {"날짜", "금        액", "구분", "비        고"};
 		importModel[0] = ic.getImport(header);
 		
-		JTable totalTable = new JTable(importModel[0]);
+		totalTable = new JTable(importModel[0]);
 		totalTable.getTableHeader().setReorderingAllowed(false);
 		totalTable.getTableHeader().setResizingAllowed(false);
 		totalTable.setRowHeight(20);
@@ -368,6 +405,9 @@ public class ImportView extends JPanel {
 		
 		j1.add(datePicker);
 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
+		date = dateFormat.format(model.getValue());
+		
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 			
@@ -375,9 +415,7 @@ public class ImportView extends JPanel {
 			public void propertyChange(PropertyChangeEvent evt) {
 
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
-					String date = dateFormat.format(model.getValue());
-						System.out.println(date);
+					date = dateFormat.format(model.getValue());
 					datelist[num] = date;
 
 					tabPanel.setSelectedIndex(1);
