@@ -19,8 +19,8 @@ public class SaveDAO {
 
 			conn = DBUtil.getConnection();
 
-			String countSql = "select count(*) from saveprice"
-					+ " join users on users.id = saveprice.user_id"
+			String countSql = "select count(*) from saveprice "
+					+ " join users on users.id = saveprice.user_id "
 					+ " where saveprice.user_id = ?";
 
 			pt = conn.prepareStatement(countSql);
@@ -68,7 +68,7 @@ public class SaveDAO {
 			conn.close();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("저축테이블에 데이터가 없음");
 		}
 
 		return result;
