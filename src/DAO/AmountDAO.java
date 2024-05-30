@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import Model.UsersModel;
+
 public class AmountDAO {
 	Connection con;
 	PreparedStatement ps;
@@ -14,18 +16,18 @@ public class AmountDAO {
 		System.out.println("Amount DAO의 select 실행!!");
 
 		con = DBUtil.getConnection();
-		String sql = "select day, price, type, content, memo from amount where user_id = 5 order by day desc"; // 아이디가
-																												// 5인
-																												// 데이터
-																												// sql
-		String sql2 = "select count(*) from amount"; // 데이터 개수 sql
+		String sql = "select day, price, type, content, memo from amount where user_id = ? order by day desc"; // 접속중인 아이디의 데이터값 찾기
+		
+		String sql2 = "select count(*) from amount where user_id = ?"; // 접속중인 아이디의 데이터 개수 sql
 
-		// 아이디가 5인 총액 sql
-		String sql3 = "select (select sum(price) from amount where type = '수입' or type = '고정수입') - (select sum(price) from amount where type = '지출' or type = '고정지출') as 합 from amount where user_id = 5 and rownum <= 1";
+		// 접속중인 아이디의 총액 sql
+		String sql3 = "select (select sum(price) from amount where user_id = ? and (type = '수입' or type = '고정수입') ) - (select sum(price) from amount where user_id = ? and (type = '지출' or type = '고정지출')) as 합 from amount where rownum <= 1";
 
 		try {
 			ps = con.prepareStatement(sql2);
-
+			
+			ps.setInt(1, UsersModel.user.getId());
+	
 			rs = ps.executeQuery();
 
 			int row = 0;
@@ -34,6 +36,9 @@ public class AmountDAO {
 			}
 
 			ps = con.prepareStatement(sql3);
+			
+			ps.setInt(1, UsersModel.user.getId());
+			ps.setInt(2, UsersModel.user.getId());
 
 			rs = ps.executeQuery();
 			int sum = 0;
@@ -42,6 +47,7 @@ public class AmountDAO {
 			}
 
 			ps = con.prepareStatement(sql);
+			ps.setInt(1, UsersModel.user.getId());
 			rs = ps.executeQuery();
 			result = new String[row][5];
 			int index = 0;

@@ -38,7 +38,8 @@ import Controller.DatePickerController;
 import Controller.ExportController;
 
 import DatePickerEx.Dateformet;
-
+import Model.ExportModel;
+import Model.UsersModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -206,12 +207,26 @@ public class ExportView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String dateText = date;
-				String amount = amountField.getText();
-				String type = typeBox.getActionCommand();
+				int amount = Integer.parseInt(amountField.getText());
+				String type = typeBox.getSelectedItem().toString();
+				int type_id = 1;
+				
+				// 콤보박스에서 type을 받으면 type_id로 저장하는 반복문
+				for(int i = 0; i < typeBox.getItemCount(); i++) {
+					if(type.equals(typeBox.getItemAt(i))) {
+						type_id = i + 1;
+					}
+				}
+				
 				String memo = memoField.getText();
-				System.out.println(dateText + " " + amount + " " + type + " " + memo);
+				System.out.println(UsersModel.user.getId() + " " + dateText + " " + amount + " " + type + " " + memo);
 				
-				
+				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
+				if(ec.add(exportModel)) {
+					JOptionPane.showMessageDialog(null, "지출 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(null, "지출 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
