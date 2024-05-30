@@ -57,6 +57,7 @@ public class ImportView extends JPanel {
 	private JTabbedPane tabPanel = new JTabbedPane();
 	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,
 			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
+	private JTextField amountField;
 	DefaultTableModel[] importModel = new DefaultTableModel[4];
 	ImportController ic = new ImportController();
 	
@@ -218,7 +219,7 @@ public class ImportView extends JPanel {
 
 		// 금액 패널(오른쪽)
 		amountPanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
-		JTextField amountField = new JTextField(20);
+		amountField = new JTextField(20);
 		amountPanelR.add(amountField);
 		amountPanelR.setBackground(Color.white);
 		updatePanel.add(amountPanelR);
@@ -299,7 +300,7 @@ public class ImportView extends JPanel {
 		String[] header = {"날짜", "금        액", "구분", "비        고"};
 		importModel[0] = ic.getImport(header);
 		
-		JTable totalTable = new JTable(importModel[0]);
+		totalTable = new JTable(importModel[0]);
 		totalTable.getTableHeader().setReorderingAllowed(false);
 		totalTable.getTableHeader().setResizingAllowed(false);
 		totalTable.setRowHeight(20);
