@@ -350,7 +350,7 @@ public class ImportView extends JPanel {
 //캘린더
 	public JPanel imprtJDatePickerEx() {
 		JPanel j1 = new JPanel();
-		// 현재 날짜를 가져옴
+		// 현재 날짜를 가져옴...
 		LocalDate now = LocalDate.now();
 		int year = now.getYear();// 년도 저장
 		int month = now.getMonthValue();// 월 저장
