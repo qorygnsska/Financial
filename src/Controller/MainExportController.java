@@ -2,11 +2,11 @@ package Controller;
 
 import javax.swing.table.DefaultTableModel;
 
-import Service.ExportService;
+import Service.MainExportService;
 
 public class MainExportController {
 
-	private ExportService service = new ExportService();
+	private MainExportService service = new MainExportService();
 	
 	public DefaultTableModel getExportModel(String[] header) {
 

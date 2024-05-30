@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import Model.UsersModel;
+
 public class MainExportDAO {
 	private Connection conn;
 	private PreparedStatement pt;
@@ -31,9 +33,10 @@ public class MainExportDAO {
 			}
 
 			// 조회하는 sql문 작성
-			String sql = "select * from users";
+			String sql = "select * from export join extype on extype.id = export.type_id where user_id = ? ";
 
 			pt = conn.prepareStatement(sql);
+			pt.setString(1, UsersModel.user.getUser_id());
 
 			ResultSet rs = pt.executeQuery();
 
@@ -47,9 +50,9 @@ public class MainExportDAO {
 			while (rs.next()) {
 				// 결과를 받아와서 테이블에 추가하는
 				// 명령문!
-				result[index][0] = rs.getString("user_id");
-				result[index][1] = rs.getString("user_pass");
-				result[index][2] = rs.getString("name");
+				result[index][0] = rs.getString("day");
+				result[index][1] = rs.getString("price");
+				result[index][2] = rs.getString("type");
 				index++;
 			}
 			// 닫기

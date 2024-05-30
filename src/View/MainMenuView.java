@@ -27,8 +27,6 @@ import javax.swing.table.TableColumnModel;
 
 import Controller.MainExportController;
 import Controller.MainImportController;
-import Controller.MainExportController;
-import Controller.MainImportController;
 import Model.UsersModel;
 
 public class MainMenuView extends JPanel {
