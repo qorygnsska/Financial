@@ -2,6 +2,7 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -32,7 +33,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-
 import Controller.DatePickerController;
 
 import Controller.ExportController;
@@ -57,12 +57,13 @@ public class ExportView extends JPanel {
 
 	private JScrollPane sp = new JScrollPane();
 	public JTabbedPane tabPanel = new JTabbedPane();
-	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,
-			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
+	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, selectPanel, btnsPanel,
+			updatePanel, datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL,
+			memoPanelR;
 	DefaultTableModel[] exportModel = new DefaultTableModel[4];
 	ExportController ec = new ExportController();
-	
-	public static String date ;
+
+	public static String date;
 
 	public ExportView() {
 	}
@@ -86,12 +87,12 @@ public class ExportView extends JPanel {
 		System.out.println("프레임 생성 시작");
 		Rectangle rect = panMain.getBounds();
 		setPreferredSize(rect.getSize());
-		//panMain.setBounds(7, 0, 1170, 765);
+		// panMain.setBounds(7, 0, 1170, 765);
 		setLayout(null);
 
 		// 메인 패널
 		mainPanel = new JPanel();
-		//mainPanel.setBorder(new LineBorder(Color.green, 8));
+		// mainPanel.setBorder(new LineBorder(Color.green, 8));
 		mainPanel.setBackground(Color.white);
 		mainPanel.setBounds(0, 0, 1200, 800);
 		mainPanel.setLayout(null);
@@ -126,11 +127,11 @@ public class ExportView extends JPanel {
 		tabPanel.add("전체", totalPanel());
 		tabPanel.add("일별", dayPanel());
 		tabPanel.add("월별", monthPanel());
+		tabPanel.add("기간", selectPanel());
 		// tabPanel.setSelectedIndex(1);
 		checkPanel.add(tabPanel);
 		checkPanel.setBounds(40, 50, 750, 600);
 		mainPanel.add(checkPanel);
-
 
 		// 수정 패널(추가, 수정, 삭제)
 		updatePanel = new JPanel(new GridLayout(4, 2));
@@ -198,60 +199,60 @@ public class ExportView extends JPanel {
 		btnsPanel = new JPanel();
 		btnsPanel.setBounds(870, 600, 250, 100);
 		btnsPanel.setBackground(Color.white);
-		
+
 		// 추가 버튼
 		JButton addBtn = new JButton("추가");
 		btnsPanel.add(addBtn);
 		addBtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String dateText = date;
 				int amount = Integer.parseInt(amountField.getText());
 				String type = typeBox.getSelectedItem().toString();
 				int type_id = 1;
-				
+
 				// 콤보박스에서 type을 받으면 type_id로 저장하는 반복문
-				for(int i = 0; i < typeBox.getItemCount(); i++) {
-					if(type.equals(typeBox.getItemAt(i))) {
+				for (int i = 0; i < typeBox.getItemCount(); i++) {
+					if (type.equals(typeBox.getItemAt(i))) {
 						type_id = i + 1;
 					}
 				}
-				
+
 				String memo = memoField.getText();
 				System.out.println(UsersModel.user.getId() + " " + dateText + " " + amount + " " + type + " " + memo);
-				
+
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
-				if(ec.add(exportModel)) {
+				if (ec.add(exportModel)) {
 					JOptionPane.showMessageDialog(null, "지출 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "지출 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-		
+
 		// 수정 버튼
 		JButton updateBtn = new JButton("수정");
 		btnsPanel.add(updateBtn);
 		updateBtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
-		
+
 		// 삭제 버튼
 		JButton deleteBtn = new JButton("삭제");
 		btnsPanel.add(deleteBtn);
 		deleteBtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 		});
-		
+
 		mainPanel.add(btnsPanel);
 		mainPanel.add(updatePanel);
 
@@ -261,9 +262,9 @@ public class ExportView extends JPanel {
 
 	public JScrollPane totalCheck() {
 		System.out.println("테이블");
-		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		String[] header = { "날짜", "금        액", "구분", "비        고" };
 		exportModel[0] = ec.getExport(header);
-		
+
 		JTable totalTable = new JTable(exportModel[0]);
 		totalTable.getTableHeader().setReorderingAllowed(false);
 		totalTable.getTableHeader().setResizingAllowed(false);
@@ -292,9 +293,9 @@ public class ExportView extends JPanel {
 	}
 
 	public JScrollPane dayCheck() {
-		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		String[] header = { "날짜", "금        액", "구분", "비        고" };
 		exportModel[0] = ec.getExport(header);
-		
+
 		JTable totalTable = new JTable(exportModel[0]);
 		totalTable.getTableHeader().setReorderingAllowed(false);
 		totalTable.getTableHeader().setResizingAllowed(false);
@@ -323,9 +324,40 @@ public class ExportView extends JPanel {
 	}
 
 	public JScrollPane monthCheck() {
-		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		String[] header = { "날짜", "금        액", "구분", "비        고" };
 		exportModel[0] = ec.getExport(header);
-		
+
+		JTable totalTable = new JTable(exportModel[0]);
+		totalTable.getTableHeader().setReorderingAllowed(false);
+		totalTable.getTableHeader().setResizingAllowed(false);
+		totalTable.setRowHeight(20);
+		JScrollPane scrollpane = new JScrollPane(totalTable);
+		scrollpane.setPreferredSize(new Dimension(700, 550));
+
+		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
+		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
+		dtcrCenter.setHorizontalAlignment(JLabel.CENTER);
+		DefaultTableCellRenderer dtcrRight = new DefaultTableCellRenderer();
+		dtcrRight.setHorizontalAlignment(JLabel.RIGHT);
+		TableColumnModel tcm = totalTable.getColumnModel();
+
+		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
+		totalTable.getColumn("날짜").setPreferredWidth(50);
+		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
+		totalTable.getColumn("금        액").setPreferredWidth(230);
+		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
+		totalTable.getColumn("구분").setPreferredWidth(30);
+		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
+		totalTable.getColumn("비        고").setPreferredWidth(250);
+		totalTable.getColumn("비        고").setCellRenderer(dtcrCenter);
+
+		return scrollpane;
+	}
+
+	private JScrollPane selectCheck() {
+		String[] header = { "날짜", "금        액", "구분", "비        고" };
+		exportModel[0] = ec.getExport(header);
+
 		JTable totalTable = new JTable(exportModel[0]);
 		totalTable.getTableHeader().setReorderingAllowed(false);
 		totalTable.getTableHeader().setResizingAllowed(false);
@@ -380,7 +412,16 @@ public class ExportView extends JPanel {
 		return monthPanel;
 	}
 
-//캘린더
+	// 기간 조회 패널
+	private Component selectPanel() {
+		selectPanel = new JPanel();
+		selectPanel.setBounds(100, 50, 1000, 600);
+		selectPanel.setBackground(Color.white);
+		selectPanel.add(selectCheck());
+		return null;
+	}
+
+	// 캘린더
 	public JPanel jDatePickerEx() {
 		JPanel j1 = new JPanel();
 		// 현재 날짜를 가져옴
@@ -390,18 +431,18 @@ public class ExportView extends JPanel {
 		int day = now.getDayOfMonth();// 일 저장
 
 		UtilDateModel model = new UtilDateModel();
-	
+
 		model.setDate(year, month - 1, day);// 현재날짜를 표시
 		model.setSelected(true); // 텍스트 필드에 보이기
-	
+
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
-	
+
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
 		j1.add(datePicker);
-		
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
-		
+
 		tabPanel.setSelectedIndex(1);
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		model.addPropertyChangeListener(new PropertyChangeListener() {
@@ -410,13 +451,9 @@ public class ExportView extends JPanel {
 			public void propertyChange(PropertyChangeEvent evt) {
 
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-	
-					
-					
-				date = dateFormat.format(model.getValue());
 
-
-					
+					date = dateFormat.format(model.getValue());
+					date = dateFormat.format(model.getValue());
 					datelist[num] = date;
 					tabPanel.setSelectedIndex(1);
 
