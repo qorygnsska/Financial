@@ -17,6 +17,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -65,6 +66,7 @@ public class ImportView extends JPanel {
 	private JTextField amountField;
 	private JTextField memoField;
 	private JComboBox typeBox;
+
 
 	private int selectrownum = 0;
 
@@ -165,6 +167,7 @@ public class ImportView extends JPanel {
 		}
 	}
 
+
 	public JScrollPane refresh(JScrollPane scrollpane) {
 		String[] header = { "날짜", "금        액", "구분", "비        고" };
 		importModel[0] = ic.getImport(header);
@@ -193,6 +196,7 @@ public class ImportView extends JPanel {
 		dayTable.addMouseListener(new MyMouseListener2());
 		return scrollpane;
 	}
+
 
 	public void print() {
 		Rectangle rect = panMain.getBounds();
@@ -272,8 +276,7 @@ public class ImportView extends JPanel {
 				if (ic.add(importModel)) {
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 
-					// refresh() 호출
-					removeAll();
+				
 					tabPanel.add("일별", dayPanel.add(dayCheck()));
 					repaint();
 				} else {
@@ -307,14 +310,17 @@ public class ImportView extends JPanel {
 				System.out.println(selectrownum + " " + UsersModel.user.getId() + " " + dateText + " " + amount + " "
 						+ type + " " + memo);
 
-				ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
+
+				ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
 						selectrownum);
-				
+				if (ic.update(importmodel)) {
 			
-				if (ic.update(importModel)) {
 					
 					
+									
 					
+					
+		
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -339,6 +345,13 @@ public class ImportView extends JPanel {
 			}
 		});
 
+		
+		
+		
+		
+		
+		
+		
 		// 수정 패널(추가, 수정, 삭제)
 		updatePanel = new JPanel(new GridLayout(4, 2));
 		updatePanel.setBounds(650, 250, 500, 300);
@@ -407,6 +420,7 @@ public class ImportView extends JPanel {
 		add(mainPanel);
 		setVisible(true);
 	}
+	
 
 	public JScrollPane totalCheck() {
 		String[] header = { "날짜", "금        액", "구분", "비        고" };
@@ -531,8 +545,11 @@ public class ImportView extends JPanel {
 		return monthPanel;
 	}
 
+
+
 	//캘린더
 	public JPanel imprtJDatePickerEx() {
+	
 		JPanel j1 = new JPanel();
 		// 현재 날짜를 가져옴...
 		LocalDate now = LocalDate.now();
@@ -552,8 +569,8 @@ public class ImportView extends JPanel {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
 
-		// 날짜가 변경될 때마다 호출되는 listener 추가
-		tabPanel.setSelectedIndex(1);
+	
+		
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 
 			@Override

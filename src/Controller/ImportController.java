@@ -31,8 +31,8 @@ public class ImportController {
 		return importService.add(importModel);
 	}
 
-	public boolean update(ImportModel importModel) {
+	public boolean update(ImportModel importmodel) {
 		System.out.println("(IMportController)실행중");
-		return importService.update(importModel);
+		return importService.update(importmodel);
 	}
 }

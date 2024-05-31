@@ -63,7 +63,7 @@ public class ExportView extends JPanel {
 
 	private JScrollPane sp = new JScrollPane();
 	private JTabbedPane tabPanel = new JTabbedPane();
-	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,
+	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,selectPanel,
 			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
 	private JTextField amountField;
 	private JTextField memoField;
@@ -454,7 +454,7 @@ public class ExportView extends JPanel {
 		TableColumnModel tcm = monthTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
-<<<<<<< HEAD
+
 		totalTable.getColumn("날짜").setPreferredWidth(50);
 		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
 		totalTable.getColumn("금        액").setPreferredWidth(230);
@@ -495,7 +495,7 @@ public class ExportView extends JPanel {
 		totalTable.getColumn("비        고").setPreferredWidth(250);
 		totalTable.getColumn("비        고").setCellRenderer(dtcrCenter);
 
-=======
+
 		monthTable.getColumn("날짜").setPreferredWidth(50);
 		monthTable.getColumn("날짜").setCellRenderer(dtcrCenter);
 		monthTable.getColumn("금        액").setPreferredWidth(230);
@@ -505,7 +505,7 @@ public class ExportView extends JPanel {
 		monthTable.getColumn("비        고").setPreferredWidth(250);
 		monthTable.getColumn("비        고").setCellRenderer(dtcrCenter);
 		monthTable.addMouseListener(new MyMouseListener3());
->>>>>>> bs
+
 		return scrollpane;
 	}
 
@@ -536,7 +536,7 @@ public class ExportView extends JPanel {
 		return monthPanel;
 	}
 
-<<<<<<< HEAD
+
 	// 기간 조회 패널
 	private Component selectPanel() {
 		selectPanel = new JPanel();
@@ -546,12 +546,11 @@ public class ExportView extends JPanel {
 		return null;
 	}
 
-	// 캘린더
-	public JPanel jDatePickerEx() {
-=======
+
+
 //캘린더
 	public JPanel imprtJDatePickerEx() {
->>>>>>> bs
+
 		JPanel j1 = new JPanel();
 		// 현재 날짜를 가져옴...
 		LocalDate now = LocalDate.now();
@@ -559,11 +558,10 @@ public class ExportView extends JPanel {
 		int month = now.getMonthValue();// 월 저장
 		int day = now.getDayOfMonth();// 일 저장
 
-<<<<<<< HEAD
+
 		UtilDateModel model = new UtilDateModel();
 
-=======
->>>>>>> bs
+
 		model.setDate(year, month - 1, day);// 현재날짜를 표시
 		model.setSelected(true); // 텍스트 필드에 보이기
 
@@ -576,10 +574,9 @@ public class ExportView extends JPanel {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
 
-<<<<<<< HEAD
+
 		tabPanel.setSelectedIndex(1);
-=======
->>>>>>> bs
+
 		// 날짜가 변경될 때마다 호출되는 listener 추가
 		tabPanel.setSelectedIndex(1);
 		model.addPropertyChangeListener(new PropertyChangeListener() {
@@ -588,13 +585,12 @@ public class ExportView extends JPanel {
 			public void propertyChange(PropertyChangeEvent evt) {
 
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-<<<<<<< HEAD
+
 
 					date = dateFormat.format(model.getValue());
 					date = dateFormat.format(model.getValue());
-=======
+
 					date = dateFormat.format(model.getValue());
->>>>>>> bs
 					datelist[num] = date;
 					tabPanel.setSelectedIndex(1);
 					if (datelist[0] != null) {

@@ -65,6 +65,8 @@ public class ImportDAO {
 		return result;
 	}
 
+	
+
 	// 수입 내역 추가
 	public boolean add(ImportModel importModel) {
 		System.out.println("(ImportDAO) 수입 내역 추가 중");
@@ -94,6 +96,7 @@ public class ImportDAO {
 	}
 
 	public boolean update(ImportModel importModel) {
+
 		System.out.println("importdao 실행");
 		boolean result = false;
 
@@ -102,12 +105,15 @@ public class ImportDAO {
 		try {
 
 			pt = conn.prepareStatement(sql);
+
+		
 			pt.setInt(1, importModel.getPrice());
 			pt.setString(2, importModel.getDay());
 			pt.setInt(3, importModel.getType_id());
 			pt.setString(4, importModel.getMemo());
 			pt.setInt(5, importModel.getId());
 			pt.setInt(6, importModel.getIdnum());
+
 			int num = pt.executeUpdate();
 
 			if (num > 0) {
