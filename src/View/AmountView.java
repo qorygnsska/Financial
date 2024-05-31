@@ -87,6 +87,7 @@ public class AmountView extends JPanel {
 		amountTable.getTableHeader().setResizingAllowed(false);
 		// 테이블 내용 가운데 정렬
 		tableCellCenter(amountTable);
+		// 테이블 셀 색깔 설정
 		tableCellColor(amountTable);
 
 		// 스크롤 생성
@@ -155,10 +156,11 @@ public class AmountView extends JPanel {
 
 	// 금액 색상 바꾸기
 	public void tableCellColor(JTable t) {
-	    int targetColumnIndex = 1;
-	    TableColumnModel tcm = t.getColumnModel();
-	    TableColumn column = tcm.getColumn(targetColumnIndex);
-	    column.setCellRenderer(new CustomTableCellRenderer(targetColumnIndex));
+		int targetColumnIndex = 1;
+		TableColumnModel tcm = t.getColumnModel();
+
+		TableColumn column = tcm.getColumn(targetColumnIndex);
+		column.setCellRenderer(new CustomTableCellRenderer(targetColumnIndex));
 	}
 
 }
