@@ -63,8 +63,9 @@ public class ExportView extends JPanel {
 
 	private JScrollPane sp = new JScrollPane();
 	private JTabbedPane tabPanel = new JTabbedPane();
-	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,selectPanel,
-			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
+	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,
+			selectPanel, datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL,
+			memoPanelR;
 	private JTextField amountField;
 	private JTextField memoField;
 	private JComboBox typeBox;
@@ -244,6 +245,13 @@ public class ExportView extends JPanel {
 
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
 				if (ec.add(exportModel)) {
+					
+					tabPanel.removeAll();
+					tabPanel.add("전체", dayPanel.add(totalCheck()));
+					tabPanel.add("일별", dayPanel.add(dayCheck()));
+					tabPanel.add("월별", dayPanel.add(monthCheck()));
+					tabPanel.revalidate();
+					tabPanel.repaint();
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -278,6 +286,13 @@ public class ExportView extends JPanel {
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
 						selectrownum);
 				if (ec.update(exportModel)) {
+					
+					tabPanel.removeAll();
+					tabPanel.add("전체", dayPanel.add(totalCheck()));
+					tabPanel.add("일별", dayPanel.add(dayCheck()));
+					tabPanel.add("월별", dayPanel.add(monthCheck()));
+					tabPanel.revalidate();
+					tabPanel.repaint();
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -495,7 +510,6 @@ public class ExportView extends JPanel {
 		totalTable.getColumn("비        고").setPreferredWidth(250);
 		totalTable.getColumn("비        고").setCellRenderer(dtcrCenter);
 
-
 		monthTable.getColumn("날짜").setPreferredWidth(50);
 		monthTable.getColumn("날짜").setCellRenderer(dtcrCenter);
 		monthTable.getColumn("금        액").setPreferredWidth(230);
@@ -536,7 +550,6 @@ public class ExportView extends JPanel {
 		return monthPanel;
 	}
 
-
 	// 기간 조회 패널
 	private Component selectPanel() {
 		selectPanel = new JPanel();
@@ -545,8 +558,6 @@ public class ExportView extends JPanel {
 		selectPanel.add(selectCheck());
 		return null;
 	}
-
-
 
 //캘린더
 	public JPanel imprtJDatePickerEx() {
@@ -558,9 +569,7 @@ public class ExportView extends JPanel {
 		int month = now.getMonthValue();// 월 저장
 		int day = now.getDayOfMonth();// 일 저장
 
-
 		UtilDateModel model = new UtilDateModel();
-
 
 		model.setDate(year, month - 1, day);// 현재날짜를 표시
 		model.setSelected(true); // 텍스트 필드에 보이기
@@ -574,18 +583,14 @@ public class ExportView extends JPanel {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
 
-
-		tabPanel.setSelectedIndex(1);
-
 		// 날짜가 변경될 때마다 호출되는 listener 추가
-		tabPanel.setSelectedIndex(1);
+	
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-
 
 					date = dateFormat.format(model.getValue());
 					date = dateFormat.format(model.getValue());
