@@ -11,8 +11,8 @@ public class ImportService {
 		return dao.select();
 	}
 
-	public boolean update(ImportModel importModel) {
+	public boolean update(ImportModel importmodel) {
 		System.out.println("ImportService 실행중");
-		return dao.update(importModel);
+		return dao.update(importmodel);
 	}
 }

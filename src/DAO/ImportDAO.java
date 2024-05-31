@@ -70,7 +70,7 @@ public class ImportDAO {
 		return result;
 	}
 
-	public boolean update(ImportModel importModel) {
+	public boolean update(ImportModel importmodel) {
 		System.out.println("importdao 실행");
 		boolean result = false;
 
@@ -79,12 +79,12 @@ public class ImportDAO {
 	try {
 			
 			pt = conn.prepareStatement(sql);
-			pt.setInt(1, importModel.getPrice());
-			pt.setString(2, importModel.getDay() );
-			pt.setInt(3, importModel.getType_id());
-			pt.setString(4, importModel.getMemo());
-			pt.setInt(5, importModel.getId());
-			pt.setInt(6, importModel.getIdnum());
+			pt.setInt(1, importmodel.getPrice());
+			pt.setString(2, importmodel.getDay() );
+			pt.setInt(3, importmodel.getType_id());
+			pt.setString(4, importmodel.getMemo());
+			pt.setInt(5, importmodel.getId());
+			pt.setInt(6, importmodel.getIdnum());
 			int num = pt.executeUpdate();
 			
 			if(num > 0) {

@@ -17,6 +17,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -32,8 +33,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-
-
 
 import Controller.ImportController;
 import Controller.DatePickerController;
@@ -60,7 +59,7 @@ public class ImportView extends JPanel {
 	private JTable totalTable;
 	private JTable dayTable;
 	private JTable monthTable;
-	
+
 	private JScrollPane sp = new JScrollPane();
 	private JTabbedPane tabPanel = new JTabbedPane();
 	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,
@@ -69,8 +68,9 @@ public class ImportView extends JPanel {
 	private JTextField memoField;
 	private JComboBox typeBox;
 	
-	private int selectrownum=0;
-	
+
+	private int selectrownum = 0;
+
 	DefaultTableModel[] importModel = new DefaultTableModel[4];
 	ImportController ic = new ImportController();
 
@@ -99,81 +99,74 @@ public class ImportView extends JPanel {
 			// 테이블에서 선택한 행 가져오기
 			int selectRow = totalTable.getSelectedRow();
 			System.out.println("선택한 행:" + selectRow);
-		selectrownum=selectRow+1;
+			selectrownum = selectRow + 1;
 			// 선택한 행이 있는지 확인
 			if (selectRow != -1) {
-				String datetext=(String)dayTable.getValueAt(selectRow, 0);
-				
-				int year=2000+Integer.parseInt(datetext.substring(0,2)) ;
-				int month=Integer.parseInt(datetext.substring(4,5));
-				int day=Integer.parseInt(datetext.substring(6));
-				
-	
-				
-				
-			
-				model.setDate(year, month-1, day);			
-				amountField.setText((String)dayTable.getValueAt(selectRow, 1));
+				String datetext = (String) dayTable.getValueAt(selectRow, 0);
+
+				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
+				int month = Integer.parseInt(datetext.substring(4, 5));
+				int day = Integer.parseInt(datetext.substring(6));
+
+				model.setDate(year, month - 1, day);
+				amountField.setText((String) dayTable.getValueAt(selectRow, 1));
 				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
-		
-			
-			}							
+
+			}
 		}
 	}
+
 	// 일별조회테이블 마우스 클릭
-		private class MyMouseListener2 extends MouseAdapter {
+	private class MyMouseListener2 extends MouseAdapter {
 
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// 테이블에서 선택한 행 가져오기
-				int selectRow = dayTable.getSelectedRow();
-				System.out.println("선택한 행:" + selectRow);
-				selectrownum=selectRow+1;
-				// 선택한 행이 있는지 확인
-				if (selectRow != -1) {
-					String datetext=(String)dayTable.getValueAt(selectRow, 0);
-					
-					int year=2000+Integer.parseInt(datetext.substring(0,2)) ;
-					int month=Integer.parseInt(datetext.substring(4,5));
-					int day=Integer.parseInt(datetext.substring(6));
-				
-					model.setDate(year, month-1, day);
-					
-					
-					amountField.setText((String)dayTable.getValueAt(selectRow, 1));
-					memoField.setText((String) dayTable.getValueAt(selectRow, 3));
-			
-					
-				}				
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// 테이블에서 선택한 행 가져오기
+			int selectRow = dayTable.getSelectedRow();
+			System.out.println("선택한 행:" + selectRow);
+			selectrownum = selectRow + 1;
+			// 선택한 행이 있는지 확인
+			if (selectRow != -1) {
+				String datetext = (String) dayTable.getValueAt(selectRow, 0);
+
+				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
+				int month = Integer.parseInt(datetext.substring(4, 5));
+				int day = Integer.parseInt(datetext.substring(6));
+
+				model.setDate(year, month - 1, day);
+
+				amountField.setText((String) dayTable.getValueAt(selectRow, 1));
+				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
+
 			}
 		}
-			
-		// 월별테이블 마우스 클릭
-		private class MyMouseListener3 extends MouseAdapter {
+	}
 
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// 테이블에서 선택한 행 가져오기
-				int selectRow = monthTable.getSelectedRow();
-				System.out.println("선택한 행:" + selectRow);
-				selectrownum=selectRow+1;
-				// 선택한 행이 있는지 확인
-				if (selectRow != -1) {
-					String datetext=(String)dayTable.getValueAt(selectRow, 0);
-					
-					int year=2000+Integer.parseInt(datetext.substring(0,2)) ;
-					int month=Integer.parseInt(datetext.substring(4,5));
-					int day=Integer.parseInt(datetext.substring(6));
-				
-				
-					model.setDate(year, month-1, day);
-				
-					amountField.setText((String)dayTable.getValueAt(selectRow, 1));
-					memoField.setText((String) dayTable.getValueAt(selectRow, 3));
-			
-				}									
+	// 월별테이블 마우스 클릭
+	private class MyMouseListener3 extends MouseAdapter {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// 테이블에서 선택한 행 가져오기
+			int selectRow = monthTable.getSelectedRow();
+			System.out.println("선택한 행:" + selectRow);
+			selectrownum = selectRow + 1;
+			// 선택한 행이 있는지 확인
+			if (selectRow != -1) {
+				String datetext = (String) dayTable.getValueAt(selectRow, 0);
+
+				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
+				int month = Integer.parseInt(datetext.substring(4, 5));
+				int day = Integer.parseInt(datetext.substring(6));
+
+				model.setDate(year, month - 1, day);
+
+				amountField.setText((String) dayTable.getValueAt(selectRow, 1));
+				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
+
 			}
 		}
+	}
 
 	public void print() {
 		Rectangle rect = panMain.getBounds();
@@ -245,32 +238,39 @@ public class ImportView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String dateText = date;
 				int amount = Integer.parseInt(amountField.getText());
 				String type = typeBox.getSelectedItem().toString();
 				int type_id = 1;
-				
+
 				// 콤보박스에서 type을 받으면 type_id로 저장하는 반복문
-				for(int i = 0; i < typeBox.getItemCount(); i++) {
-					if(type.equals(typeBox.getItemAt(i))) {
+				for (int i = 0; i < typeBox.getItemCount(); i++) {
+					if (type.equals(typeBox.getItemAt(i))) {
 						type_id = i + 1;
 					}
 				}
 				String memo = memoField.getText();
-				
-				System.out.println(selectrownum+" "+UsersModel.user.getId() + " " + dateText + " " + amount + " " + type + " " + memo);
-				
-				ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,selectrownum);
-				if(ic.update(importModel)) {
+
+				System.out.println(selectrownum + " " + UsersModel.user.getId() + " " + dateText + " " + amount + " "
+						+ type + " " + memo);
+
+				ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
+						selectrownum);
+				if (ic.update(importmodel)) {
+			
+					
+						
+					
+					
+					
+
+					
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
-							
-			
-				
-				
+
 				amountField.setText("");
 				memoField.setText("");
 
@@ -290,6 +290,13 @@ public class ImportView extends JPanel {
 			}
 		});
 
+		
+		
+		
+		
+		
+		
+		
 		// 수정 패널(추가, 수정, 삭제)
 		updatePanel = new JPanel(new GridLayout(4, 2));
 		updatePanel.setBounds(650, 250, 500, 300);
@@ -333,7 +340,7 @@ public class ImportView extends JPanel {
 		// 유형 패널(오른쪽)
 		typePanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
 		String[] exportType = { "급여", "이자", "기타" };
-	    typeBox = new JComboBox(exportType);
+		typeBox = new JComboBox(exportType);
 		typePanelR.add(typeBox);
 		typePanelR.setBackground(Color.white);
 		updatePanel.add(typePanelR);
@@ -358,6 +365,7 @@ public class ImportView extends JPanel {
 		add(mainPanel);
 		setVisible(true);
 	}
+	
 
 	public JScrollPane totalCheck() {
 		String[] header = { "날짜", "금        액", "구분", "비        고" };
@@ -481,16 +489,31 @@ public class ImportView extends JPanel {
 		return monthPanel;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //캘린더
 	public JPanel imprtJDatePickerEx() {
+	
 		JPanel j1 = new JPanel();
 		// 현재 날짜를 가져옴...
 		LocalDate now = LocalDate.now();
 		int year = now.getYear();// 년도 저장
 		int month = now.getMonthValue();// 월 저장
 		int day = now.getDayOfMonth();// 일 저장
-
-	
 
 		model.setDate(year, month - 1, day);// 현재날짜를 표시
 		model.setSelected(true); // 텍스트 필드에 보이기
@@ -504,8 +527,8 @@ public class ImportView extends JPanel {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
 
-		// 날짜가 변경될 때마다 호출되는 listener 추가
-		tabPanel.setSelectedIndex(1);
+	
+		
 		model.addPropertyChangeListener(new PropertyChangeListener() {
 
 			@Override
