@@ -17,6 +17,8 @@ public class ExportController {
 		
 		String[][] rowData = exportService.select();
 		
+		exportModel.setRowCount(0);
+		
 		for(String[] row: rowData) {
 			exportModel.addRow(row);
 		}
@@ -26,6 +28,11 @@ public class ExportController {
 	public boolean add(ExportModel exportModel) {
 		System.out.println("(ExportController)지출 내역 추가 중");
 		return exportService.add(exportModel);
+	}
+	
+	public boolean update(ExportModel exportModel) {
+		System.out.println("(ExportController)실행중");
+		return exportService.update(exportModel);
 	}
 	
 }

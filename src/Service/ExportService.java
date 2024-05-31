@@ -15,5 +15,10 @@ public class ExportService {
 		System.out.println("(ExportService)지출 내역 추가 중");
 		return dao.add(exportModel);
 	}
+	
+	public boolean update(ExportModel exportModel) {
+		System.out.println("ExportService 실행중");
+		return dao.update(exportModel);
+	}
 
 }

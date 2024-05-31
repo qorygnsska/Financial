@@ -10,6 +10,11 @@ public class ImportService {
 
 		return dao.select();
 	}
+	
+	public boolean add(ImportModel importModel) {
+		System.out.println("(ImportService)지출 내역 추가 중");
+		return dao.add(importModel);
+	}
 
 	public boolean update(ImportModel importModel) {
 		System.out.println("ImportService 실행중");

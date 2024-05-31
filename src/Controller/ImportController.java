@@ -15,6 +15,7 @@ public class ImportController {
 			}
 		};
 		
+		importModel.setRowCount(0);
 		String[][] rowData = importService.select();
 		
 		for(String[] row: rowData) {
@@ -23,6 +24,11 @@ public class ImportController {
 		
 		return importModel;
 		
+	}
+	
+	public boolean add(ImportModel importModel) {
+		System.out.println("(ImportController)지출 내역 추가 중");
+		return importService.add(importModel);
 	}
 
 	public boolean update(ImportModel importModel) {

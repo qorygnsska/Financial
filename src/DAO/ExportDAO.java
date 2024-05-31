@@ -29,25 +29,20 @@ public class ExportDAO {
 			
 			int row = 0;
 			
-			System.out.println("s1");
 			if(rs.next()) {
 				row = rs.getInt(1);
 				System.out.println(row);
 			}else {
 				return result;
 			}
-			System.out.println("s2");
 			
 			String sql = "select day, price, ex.type, memo " +
 						 " from users u " + 
 						 " join export e on e.user_id = u.id " + 
 						 " join extype ex on ex.id = e.type_id " +
 						 " where u.user_id = ? ";
-			System.out.println("s3");
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, UsersModel.user.getUser_id());
-			System.out.println("s4");
-			System.out.println("s5");
 			ResultSet rs = pt.executeQuery();
 			
 			result = new String[row][4];
@@ -61,7 +56,6 @@ public class ExportDAO {
 				result[index][3] = rs.getString("memo");
 				index++;
 			}
-			System.out.println("s6");
 			rs.close();
 			pt.close();
 			conn.close();
@@ -97,6 +91,34 @@ public class ExportDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return result;
+	}
+	
+	public boolean update(ExportModel exportModel) {
+		System.out.println("exportdao 실행");
+		boolean result = false;
+
+		conn = DBUtil.getConnection();
+		String sql = "update export set price=?, day=?,type_id=?, memo=? where user_id=? and id=?";
+		try {
+
+			pt = conn.prepareStatement(sql);
+			pt.setInt(1, exportModel.getPrice());
+			pt.setString(2, exportModel.getDay());
+			pt.setInt(3, exportModel.getType_id());
+			pt.setString(4, exportModel.getMemo());
+			pt.setInt(5, exportModel.getId());
+			pt.setInt(6, exportModel.getIdnum());
+			int num = pt.executeUpdate();
+			System.out.println(exportModel.getId());
+			System.out.println(exportModel.getIdnum());
+			if (num > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 }
