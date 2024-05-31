@@ -14,5 +14,10 @@ DatePickerDAO tdao = new DatePickerDAO();
 		System.out.println("importsearch실행");
 		return tdao.importseracht(datelist);
 	}
+	
+	public boolean exportsearch(String[] datelist) {
+		System.out.println("exportsearch실행");
+		return tdao.exportseracht(datelist);
+	}
 
 }

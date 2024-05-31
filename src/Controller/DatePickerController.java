@@ -19,7 +19,11 @@ public class DatePickerController {
 		
 	}
 
-	
+	public boolean exportsearch(String[] datelist) {
+		System.out.println("컨트롤러 실행");
+		return ts.exportsearch(datelist);
+		
+	}
 
 	
 
