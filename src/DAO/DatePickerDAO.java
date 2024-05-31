@@ -49,7 +49,7 @@ public class DatePickerDAO {
 		System.out.println("DatePicker DAO 실행!");
 
 		con = DBUtil.getConnection();
-		String sql = "select day,price,ex.type ,memo from import e\r\n" + "join imtype im on e.type_id=im.id\r\n"
+		String sql = "select day,price,im.type ,memo from import e\r\n" + "join imtype im on e.type_id=im.id\r\n"
 				+ "where day=?";
 		String date1 = datelist[0];
 
