@@ -6,7 +6,7 @@ public class ExportModel {
 	private int price;
 	private int type_id;
 	private String memo;
-	
+	private int idnum;
 	public ExportModel() {
 	}
 	
@@ -18,6 +18,26 @@ public class ExportModel {
 		this.memo = memo;
 	}
 	
+	
+	
+	public ExportModel(int id, String day, int price, int type_id, String memo, int idnum) {
+		super();
+		this.id = id;
+		this.day = day;
+		this.price = price;
+		this.type_id = type_id;
+		this.memo = memo;
+		this.idnum = idnum;
+	}
+	
+	public int getIdnum() {
+		return idnum;
+	}
+
+	public void setIdnum(int idnum) {
+		this.idnum = idnum;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -52,7 +72,7 @@ public class ExportModel {
 	@Override
 	public String toString() {
 		return "ExportModel [id=" + id + ", day=" + day + ", price=" + price + ", type_id=" + type_id + ", memo=" + memo
-				+ "]";
+				+ ", idnum=" + idnum + "]";
 	}
 	
 }

@@ -37,7 +37,6 @@ import javax.swing.table.TableColumnModel;
 import Controller.ImportController;
 import Controller.DatePickerController;
 import DatePickerEx.Dateformet;
-import Model.ExportModel;
 import Model.ImportModel;
 import Model.UsersModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -67,7 +66,10 @@ public class ImportView extends JPanel {
 	private JTextField amountField;
 	private JTextField memoField;
 	private JComboBox typeBox;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> master
 
 	private int selectrownum = 0;
 
@@ -167,6 +169,38 @@ public class ImportView extends JPanel {
 			}
 		}
 	}
+<<<<<<< HEAD
+=======
+
+	public JScrollPane refresh(JScrollPane scrollpane) {
+		String[] header = { "날짜", "금        액", "구분", "비        고" };
+		importModel[0] = ic.getImport(header);
+
+		dayTable = new JTable(importModel[0]);
+		dayTable.getTableHeader().setReorderingAllowed(false);
+		dayTable.getTableHeader().setResizingAllowed(false);
+		dayTable.setRowHeight(20);
+		scrollpane = new JScrollPane(dayTable);
+		scrollpane.setPreferredSize(new Dimension(700, 550));
+
+		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
+		dtcrCenter.setHorizontalAlignment(JLabel.CENTER);
+		DefaultTableCellRenderer dtcrRight = new DefaultTableCellRenderer();
+		dtcrRight.setHorizontalAlignment(JLabel.RIGHT);
+		TableColumnModel tcm = dayTable.getColumnModel();
+
+		dayTable.getColumn("날짜").setPreferredWidth(50);
+		dayTable.getColumn("날짜").setCellRenderer(dtcrCenter);
+		dayTable.getColumn("금        액").setPreferredWidth(230);
+		dayTable.getColumn("금        액").setCellRenderer(dtcrRight);
+		dayTable.getColumn("구분").setPreferredWidth(30);
+		dayTable.getColumn("구분").setCellRenderer(dtcrCenter);
+		dayTable.getColumn("비        고").setPreferredWidth(250);
+		dayTable.getColumn("비        고").setCellRenderer(dtcrCenter);
+		dayTable.addMouseListener(new MyMouseListener2());
+		return scrollpane;
+	}
+>>>>>>> master
 
 	public void print() {
 		Rectangle rect = panMain.getBounds();
@@ -227,6 +261,32 @@ public class ImportView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String dateText = date;
+				int amount = Integer.parseInt(amountField.getText());
+				String type = typeBox.getSelectedItem().toString();
+				int type_id = 1;
+
+				// 콤보박스에서 type을 받으면 type_id로 저장하는 반복문
+				for (int i = 0; i < typeBox.getItemCount(); i++) {
+					if (type.equals(typeBox.getItemAt(i))) {
+						type_id = i + 1;
+					}
+				}
+
+				String memo = memoField.getText();
+				System.out.println(UsersModel.user.getId() + " " + dateText + " " + amount + " " + type + " " + memo);
+
+				ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
+				if (ic.add(importModel)) {
+					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+
+					// refresh() 호출
+					removeAll();
+					tabPanel.add("일별", dayPanel.add(dayCheck()));
+					repaint();
+				} else {
+					JOptionPane.showMessageDialog(null, "수입 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
+				}
 
 			}
 		});
@@ -255,6 +315,7 @@ public class ImportView extends JPanel {
 				System.out.println(selectrownum + " " + UsersModel.user.getId() + " " + dateText + " " + amount + " "
 						+ type + " " + memo);
 
+<<<<<<< HEAD
 				ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
 						selectrownum);
 				if (ic.update(importmodel)) {
@@ -266,6 +327,16 @@ public class ImportView extends JPanel {
 					
 
 					
+=======
+				ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
+						selectrownum);
+				
+			
+				if (ic.update(importModel)) {
+					
+					
+					
+>>>>>>> master
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -432,6 +503,7 @@ public class ImportView extends JPanel {
 	}
 
 	public JScrollPane monthCheck() {
+	
 		String[] header = { "날짜", "금        액", "구분", "비        고" };
 		importModel[0] = ic.getImport(header);
 
@@ -489,6 +561,7 @@ public class ImportView extends JPanel {
 		return monthPanel;
 	}
 
+<<<<<<< HEAD
 	
 	
 	
@@ -506,6 +579,9 @@ public class ImportView extends JPanel {
 	
 	
 //캘린더
+=======
+	//캘린더
+>>>>>>> master
 	public JPanel imprtJDatePickerEx() {
 	
 		JPanel j1 = new JPanel();

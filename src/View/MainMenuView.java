@@ -25,16 +25,20 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import Controller.ConsumeController;
 import Controller.MainExportController;
 import Controller.MainImportController;
 import Controller.SaveController;
+import DAO.AmountDAO;
 import Model.UsersModel;
 
 public class MainMenuView extends JPanel {
 
+	DecimalFormat df = new DecimalFormat("#,##0,000");
 	MainImportController IC = new MainImportController();
 	MainExportController EC = new MainExportController();
 	SaveController SC = new SaveController();
+	ConsumeController CC = new ConsumeController(); 
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -46,6 +50,8 @@ public class MainMenuView extends JPanel {
 	JButton[] btnList = new JButton[2];
 	JPanel userPan = new JPanel(new GridLayout(2,2));
 	DefaultTableModel saveModel;
+	
+	AmountDAO amountDAO = new AmountDAO();
 	
 	public MainMenuView(JPanel panel) {
 		panMain = panel;
@@ -136,6 +142,7 @@ public class MainMenuView extends JPanel {
 			
 			userPan.setBackground(Color.white);
 			JLabel nameTitle = new JLabel("이름 : ");
+			System.out.println(UsersModel.user.getName());
 			JLabel name = new JLabel(UsersModel.user.getName());
 			JLabel dayTitle = new JLabel("날짜 : ");
 			JLabel day = new JLabel(LocalDate.now().toString());
@@ -270,17 +277,18 @@ public class MainMenuView extends JPanel {
 
 	// 잔고 및 수입지출
 	public void moneyPrint() {
+		String amount = amountDAO.amount();
 
 		String[] str = { "잔고", "이 달 수입", "이 달 지출", "지난 달 수입", "지난 달 지출" };
-		DecimalFormat df = new DecimalFormat("#,##0,000");
-		int[] money = { 90000000, 80000, 7000000, 1000000, 5000000 };
+		
+		String[] money = { amount, "z", "z", "z", "z"};
 
 		for (int i = 0; i < moneyList.length; i++) {
 			moneyList[i] = new JPanel();
 			moneyList[i].setBorder(new TitledBorder(new LineBorder(Color.green, 4), str[i]));
 			moneyList[i].setBackground(Color.white);
 			add(moneyList[i]);
-			labelList[i] = new JLabel(df.format(money[i]) + "원");
+			labelList[i] = new JLabel(money[i]);
 			moneyList[i].add(labelList[i]);
 			moneyList[i].setBounds(900, 120 + 90 * i, 240, 60);
 
@@ -290,6 +298,7 @@ public class MainMenuView extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				removeAll();
 				panMain.removeAll();
 				panMain.add(new AmountView(panMain));
 				panMain.revalidate();
@@ -331,9 +340,16 @@ public class MainMenuView extends JPanel {
 			list[i].setFont(new Font("기본글씨", Font.BOLD, 18));
 		}
 
-		list[0].setText("1. 교통비");
-		list[1].setText("2. 식비");
-		list[2].setText("3. 쇼핑");
+		String[] ar = CC.consumeTag();
+		
+		try {
+			list[0].setText("1. " + ar[0]);
+			list[1].setText("2. " + ar[1]);
+			list[2].setText("3. " + ar[2]);
+		} catch (Exception e) {
+			list[2].setText("");
+		}
+
 
 		add(conPan);
 

@@ -6,21 +6,28 @@ import java.sql.ResultSet;
 
 import Model.UsersModel;
 
-public class MainImportDAO {
+public class ConsumeDAO {
 
 	private Connection conn;
 	private PreparedStatement pt;
 	private ResultSet rs;
+
 	
 	public String[][] select() {
 		String[][] result = null;
-		System.out.println("다오 셀렉트");
 
 		try {
 
 			conn = DBUtil.getConnection();
 
-			String countSql = "select count(*) from import join imtype on imtype.id = import.type_id where user_id = ?";
+			String countSql = "SELECT count(*)\r\n" + 
+					"from (\r\n" + 
+					"SELECT SUM(price)\r\n" + 
+					"FROM export\r\n" + 
+					"WHERE\r\n" + 
+					"user_id = ?\r\n" + 
+					"GROUP BY type_id\r\n" + 
+					")";
 
 			pt = conn.prepareStatement(countSql);
 			pt.setInt(1, UsersModel.user.getId());
@@ -34,32 +41,33 @@ public class MainImportDAO {
 			} else {
 				return result;
 			}
-
 			// 조회하는 sql문 작성
-			String sql = "select day, price, type from import join imtype on imtype.id = import.type_id where user_id = ?";
+			String sql = "select sum(price) as 합계, type from export\r\n" + 
+					"join extype on extype.id = export.type_id\r\n" + 
+					"where user_id = ?\r\n" + 
+					"group by type_id, type\r\n" + 
+					"order by sum(price) desc";
 			
 			pt = conn.prepareStatement(sql);
 			pt.setInt(1, UsersModel.user.getId());
-			rs = pt.executeQuery();
+			ResultSet rs = pt.executeQuery();
 
 			// 2차원 배열을 선언
-			result = new String[row][3];
+			result = new String[row][2];
 
 			// 2차원 배열의 index를 (공간의 번호)
 			// 저장하는 변수
 			int index = 0;
-
-			System.out.println("와일문 시작 전");
 			while (rs.next()) {
-				
 				// 결과를 받아와서 테이블에 추가하는
 				// 명령문!
-				result[index][0] = rs.getString("day");
-				result[index][1] = rs.getString("price");
-				result[index][2] = rs.getString("type");
-
+				System.out.println();
+				result[index][0] = rs.getString("합계");
+				result[index][1] = rs.getString("type");
+				
 				index++;
 			}
+			
 			// 닫기
 			rs.close();
 			pt.close();
