@@ -3,6 +3,7 @@ package View;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+// 잔고 색 테이블 클래스
 public class CustomTableCellRenderer extends DefaultTableCellRenderer {
     private int targetColumnIndex;
 
