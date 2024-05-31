@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import Controller.ConsumeController;
 import Controller.MainExportController;
 import Controller.MainImportController;
 import Controller.SaveController;
@@ -35,6 +36,7 @@ public class MainMenuView extends JPanel {
 	MainImportController IC = new MainImportController();
 	MainExportController EC = new MainExportController();
 	SaveController SC = new SaveController();
+	ConsumeController CC = new ConsumeController(); 
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -331,9 +333,16 @@ public class MainMenuView extends JPanel {
 			list[i].setFont(new Font("기본글씨", Font.BOLD, 18));
 		}
 
-		list[0].setText("1. 교통비");
-		list[1].setText("2. 식비");
-		list[2].setText("3. 쇼핑");
+		String[] ar = CC.consumeTag();
+		
+		try {
+			list[0].setText("1. " + ar[0]);
+			list[1].setText("2. " + ar[1]);
+			list[2].setText("3. " + ar[2]);
+		} catch (Exception e) {
+			list[2].setText("");
+		}
+
 
 		add(conPan);
 

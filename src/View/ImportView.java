@@ -10,6 +10,9 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
@@ -30,16 +33,21 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+
+
 import Controller.ImportController;
 import Controller.DatePickerController;
 import DatePickerEx.Dateformet;
-
+import Model.ExportModel;
+import Model.ImportModel;
+import Model.UsersModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
 public class ImportView extends JPanel {
-
+	UtilDateModel model = new UtilDateModel();
+	static String date;
 	int num = 0;
 	String[] datelist = new String[2];
 	DatePickerController dpc = new DatePickerController();
@@ -49,14 +57,23 @@ public class ImportView extends JPanel {
 	private int price;
 	private int imtype;
 	private String memo;
-
+	private JTable totalTable;
+	private JTable dayTable;
+	private JTable monthTable;
+	
 	private JScrollPane sp = new JScrollPane();
 	private JTabbedPane tabPanel = new JTabbedPane();
 	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,
 			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
+	private JTextField amountField;
+	private JTextField memoField;
+	private JComboBox typeBox;
+	
+	private int selectrownum=0;
+	
 	DefaultTableModel[] importModel = new DefaultTableModel[4];
 	ImportController ic = new ImportController();
-	
+
 	public ImportView() {
 	}
 
@@ -73,15 +90,100 @@ public class ImportView extends JPanel {
 		this.memo = memo;
 	}
 
+	// 전체조회테이블 마우스 클릭
+	private class MyMouseListener1 extends MouseAdapter {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			JPanel j1 = new JPanel();
+			// 테이블에서 선택한 행 가져오기
+			int selectRow = totalTable.getSelectedRow();
+			System.out.println("선택한 행:" + selectRow);
+		selectrownum=selectRow+1;
+			// 선택한 행이 있는지 확인
+			if (selectRow != -1) {
+				String datetext=(String)dayTable.getValueAt(selectRow, 0);
+				
+				int year=2000+Integer.parseInt(datetext.substring(0,2)) ;
+				int month=Integer.parseInt(datetext.substring(4,5));
+				int day=Integer.parseInt(datetext.substring(6));
+				
+	
+				
+				
+			
+				model.setDate(year, month-1, day);			
+				amountField.setText((String)dayTable.getValueAt(selectRow, 1));
+				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
+		
+			
+			}							
+		}
+	}
+	// 일별조회테이블 마우스 클릭
+		private class MyMouseListener2 extends MouseAdapter {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// 테이블에서 선택한 행 가져오기
+				int selectRow = dayTable.getSelectedRow();
+				System.out.println("선택한 행:" + selectRow);
+				selectrownum=selectRow+1;
+				// 선택한 행이 있는지 확인
+				if (selectRow != -1) {
+					String datetext=(String)dayTable.getValueAt(selectRow, 0);
+					
+					int year=2000+Integer.parseInt(datetext.substring(0,2)) ;
+					int month=Integer.parseInt(datetext.substring(4,5));
+					int day=Integer.parseInt(datetext.substring(6));
+				
+					model.setDate(year, month-1, day);
+					
+					
+					amountField.setText((String)dayTable.getValueAt(selectRow, 1));
+					memoField.setText((String) dayTable.getValueAt(selectRow, 3));
+			
+					
+				}				
+			}
+		}
+			
+		// 월별테이블 마우스 클릭
+		private class MyMouseListener3 extends MouseAdapter {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// 테이블에서 선택한 행 가져오기
+				int selectRow = monthTable.getSelectedRow();
+				System.out.println("선택한 행:" + selectRow);
+				selectrownum=selectRow+1;
+				// 선택한 행이 있는지 확인
+				if (selectRow != -1) {
+					String datetext=(String)dayTable.getValueAt(selectRow, 0);
+					
+					int year=2000+Integer.parseInt(datetext.substring(0,2)) ;
+					int month=Integer.parseInt(datetext.substring(4,5));
+					int day=Integer.parseInt(datetext.substring(6));
+				
+				
+					model.setDate(year, month-1, day);
+				
+					amountField.setText((String)dayTable.getValueAt(selectRow, 1));
+					memoField.setText((String) dayTable.getValueAt(selectRow, 3));
+			
+				}									
+			}
+		}
+
 	public void print() {
 		Rectangle rect = panMain.getBounds();
 		setPreferredSize(rect.getSize());
-		//setBounds(7, 0, 1170, 765);
+		// setBounds(7, 0, 1170, 765);
 		setLayout(null);
 
 		// main 패널 (tab 생성 포함)
 		mainPanel = new JPanel();
-		//mainPanel.setBorder(new LineBorder(Color.green, 8));
+		// mainPanel.setBorder(new LineBorder(Color.green, 8));
 		mainPanel.setBackground(Color.white);
 		mainPanel.setBounds(0, 0, 1200, 800);
 		mainPanel.setLayout(null);
@@ -143,6 +245,34 @@ public class ImportView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				String dateText = date;
+				int amount = Integer.parseInt(amountField.getText());
+				String type = typeBox.getSelectedItem().toString();
+				int type_id = 1;
+				
+				// 콤보박스에서 type을 받으면 type_id로 저장하는 반복문
+				for(int i = 0; i < typeBox.getItemCount(); i++) {
+					if(type.equals(typeBox.getItemAt(i))) {
+						type_id = i + 1;
+					}
+				}
+				String memo = memoField.getText();
+				
+				System.out.println(selectrownum+" "+UsersModel.user.getId() + " " + dateText + " " + amount + " " + type + " " + memo);
+				
+				ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,selectrownum);
+				if(ic.update(importModel)) {
+					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
+				}
+							
+			
+				
+				
+				amountField.setText("");
+				memoField.setText("");
 
 			}
 		});
@@ -154,7 +284,9 @@ public class ImportView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				// 테이블에서 선택한 행 가져오기
+				int selectRow = totalTable.getSelectedRow();
+				System.out.println("선택한 행:" + selectRow);
 			}
 		});
 
@@ -186,7 +318,7 @@ public class ImportView extends JPanel {
 
 		// 금액 패널(오른쪽)
 		amountPanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
-		JTextField amountField = new JTextField(20);
+		amountField = new JTextField(20);
 		amountPanelR.add(amountField);
 		amountPanelR.setBackground(Color.white);
 		updatePanel.add(amountPanelR);
@@ -201,7 +333,7 @@ public class ImportView extends JPanel {
 		// 유형 패널(오른쪽)
 		typePanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
 		String[] exportType = { "급여", "이자", "기타" };
-		JComboBox typeBox = new JComboBox(exportType);
+	    typeBox = new JComboBox(exportType);
 		typePanelR.add(typeBox);
 		typePanelR.setBackground(Color.white);
 		updatePanel.add(typePanelR);
@@ -215,7 +347,7 @@ public class ImportView extends JPanel {
 
 		// 비고 패널(오른쪽)
 		memoPanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
-		JTextField memoField = new JTextField(20);
+		memoField = new JTextField(20);
 		memoPanelR.add(memoField);
 		memoPanelR.setBackground(Color.white);
 		updatePanel.add(memoPanelR);
@@ -228,10 +360,10 @@ public class ImportView extends JPanel {
 	}
 
 	public JScrollPane totalCheck() {
-		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		String[] header = { "날짜", "금        액", "구분", "비        고" };
 		importModel[0] = ic.getImport(header);
-		
-		JTable totalTable = new JTable(importModel[0]);
+
+		totalTable = new JTable(importModel[0]);
 		totalTable.getTableHeader().setReorderingAllowed(false);
 		totalTable.getTableHeader().setResizingAllowed(false);
 		totalTable.setRowHeight(20);
@@ -254,20 +386,21 @@ public class ImportView extends JPanel {
 		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
 		totalTable.getColumn("비        고").setPreferredWidth(250);
 		totalTable.getColumn("비        고").setCellRenderer(dtcrCenter);
+
+		totalTable.addMouseListener(new MyMouseListener1());
 
 		return scrollpane;
 	}
 
-
 	public JScrollPane dayCheck() {
-		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		String[] header = { "날짜", "금        액", "구분", "비        고" };
 		importModel[0] = ic.getImport(header);
-		
-		JTable totalTable = new JTable(importModel[0]);
-		totalTable.getTableHeader().setReorderingAllowed(false);
-		totalTable.getTableHeader().setResizingAllowed(false);
-		totalTable.setRowHeight(20);
-		JScrollPane scrollpane = new JScrollPane(totalTable);
+
+		dayTable = new JTable(importModel[0]);
+		dayTable.getTableHeader().setReorderingAllowed(false);
+		dayTable.getTableHeader().setResizingAllowed(false);
+		dayTable.setRowHeight(20);
+		JScrollPane scrollpane = new JScrollPane(dayTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
 		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
@@ -275,30 +408,30 @@ public class ImportView extends JPanel {
 		dtcrCenter.setHorizontalAlignment(JLabel.CENTER);
 		DefaultTableCellRenderer dtcrRight = new DefaultTableCellRenderer();
 		dtcrRight.setHorizontalAlignment(JLabel.RIGHT);
-		TableColumnModel tcm = totalTable.getColumnModel();
+		TableColumnModel tcm = dayTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
-		totalTable.getColumn("날짜").setPreferredWidth(50);
-		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("금        액").setPreferredWidth(230);
-		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
-		totalTable.getColumn("구분").setPreferredWidth(30);
-		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("비        고").setPreferredWidth(250);
-		totalTable.getColumn("비        고").setCellRenderer(dtcrCenter);
-
+		dayTable.getColumn("날짜").setPreferredWidth(50);
+		dayTable.getColumn("날짜").setCellRenderer(dtcrCenter);
+		dayTable.getColumn("금        액").setPreferredWidth(230);
+		dayTable.getColumn("금        액").setCellRenderer(dtcrRight);
+		dayTable.getColumn("구분").setPreferredWidth(30);
+		dayTable.getColumn("구분").setCellRenderer(dtcrCenter);
+		dayTable.getColumn("비        고").setPreferredWidth(250);
+		dayTable.getColumn("비        고").setCellRenderer(dtcrCenter);
+		dayTable.addMouseListener(new MyMouseListener2());
 		return scrollpane;
 	}
 
 	public JScrollPane monthCheck() {
-		String[] header = {"날짜", "금        액", "구분", "비        고"};
+		String[] header = { "날짜", "금        액", "구분", "비        고" };
 		importModel[0] = ic.getImport(header);
-		
-		JTable totalTable = new JTable(importModel[0]);
-		totalTable.getTableHeader().setReorderingAllowed(false);
-		totalTable.getTableHeader().setResizingAllowed(false);
-		totalTable.setRowHeight(20);
-		JScrollPane scrollpane = new JScrollPane(totalTable);
+
+		monthTable = new JTable(importModel[0]);
+		monthTable.getTableHeader().setReorderingAllowed(false);
+		monthTable.getTableHeader().setResizingAllowed(false);
+		monthTable.setRowHeight(20);
+		JScrollPane scrollpane = new JScrollPane(monthTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
 		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
@@ -306,18 +439,18 @@ public class ImportView extends JPanel {
 		dtcrCenter.setHorizontalAlignment(JLabel.CENTER);
 		DefaultTableCellRenderer dtcrRight = new DefaultTableCellRenderer();
 		dtcrRight.setHorizontalAlignment(JLabel.RIGHT);
-		TableColumnModel tcm = totalTable.getColumnModel();
+		TableColumnModel tcm = monthTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
-		totalTable.getColumn("날짜").setPreferredWidth(50);
-		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("금        액").setPreferredWidth(230);
-		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
-		totalTable.getColumn("구분").setPreferredWidth(30);
-		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("비        고").setPreferredWidth(250);
-		totalTable.getColumn("비        고").setCellRenderer(dtcrCenter);
-
+		monthTable.getColumn("날짜").setPreferredWidth(50);
+		monthTable.getColumn("날짜").setCellRenderer(dtcrCenter);
+		monthTable.getColumn("금        액").setPreferredWidth(230);
+		monthTable.getColumn("금        액").setCellRenderer(dtcrRight);
+		monthTable.getColumn("구분").setPreferredWidth(30);
+		monthTable.getColumn("구분").setCellRenderer(dtcrCenter);
+		monthTable.getColumn("비        고").setPreferredWidth(250);
+		monthTable.getColumn("비        고").setCellRenderer(dtcrCenter);
+		monthTable.addMouseListener(new MyMouseListener3());
 		return scrollpane;
 	}
 
@@ -347,6 +480,7 @@ public class ImportView extends JPanel {
 		monthPanel.add(monthCheck());
 		return monthPanel;
 	}
+
 //캘린더
 	public JPanel imprtJDatePickerEx() {
 		JPanel j1 = new JPanel();
@@ -356,32 +490,31 @@ public class ImportView extends JPanel {
 		int month = now.getMonthValue();// 월 저장
 		int day = now.getDayOfMonth();// 일 저장
 
-		
-		UtilDateModel model = new UtilDateModel();
-		
+	
+
 		model.setDate(year, month - 1, day);// 현재날짜를 표시
 		model.setSelected(true); // 텍스트 필드에 보이기
-		
+
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
-		
+
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
-		
+
 		j1.add(datePicker);
 
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
+		date = dateFormat.format(model.getValue());
+
 		// 날짜가 변경될 때마다 호출되는 listener 추가
+		tabPanel.setSelectedIndex(1);
 		model.addPropertyChangeListener(new PropertyChangeListener() {
-			
+
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
 
 				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-					SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
-					String date = dateFormat.format(model.getValue());
-						System.out.println(date);
+					date = dateFormat.format(model.getValue());
 					datelist[num] = date;
-
 					tabPanel.setSelectedIndex(1);
-
 					if (datelist[0] != null) {
 
 						if (dpc.importsearch(datelist)) {

@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 
 import Model.UsersModel;
 
-public class SaveDAO {
+public class ConsumeDAO {
 
 	private Connection conn;
 	private PreparedStatement pt;
 	private ResultSet rs;
+
 	
 	public String[][] select() {
 		String[][] result = null;
@@ -19,9 +20,14 @@ public class SaveDAO {
 
 			conn = DBUtil.getConnection();
 
-			String countSql = "select count(*) from saveprice "
-					+ " join users on users.id = saveprice.user_id "
-					+ " where saveprice.user_id = ?";
+			String countSql = "SELECT count(*)\r\n" + 
+					"from (\r\n" + 
+					"SELECT SUM(price)\r\n" + 
+					"FROM export\r\n" + 
+					"WHERE\r\n" + 
+					"user_id = ?\r\n" + 
+					"GROUP BY type_id\r\n" + 
+					")";
 
 			pt = conn.prepareStatement(countSql);
 			pt.setInt(1, UsersModel.user.getId());
@@ -36,17 +42,18 @@ public class SaveDAO {
 				return result;
 			}
 			// 조회하는 sql문 작성
-			String sql = "select day, price, type, memo from saveprice"
-					+ " join extype on extype.id = saveprice.type_id"
-					+ " join users on users.id = saveprice.user_id"
-					+ " where users.id = ? and saveprice.type_id = 6";
+			String sql = "select sum(price) as 합계, type from export\r\n" + 
+					"join extype on extype.id = export.type_id\r\n" + 
+					"where user_id = ?\r\n" + 
+					"group by type_id, type\r\n" + 
+					"order by sum(price) desc";
 			
 			pt = conn.prepareStatement(sql);
 			pt.setInt(1, UsersModel.user.getId());
 			ResultSet rs = pt.executeQuery();
 
 			// 2차원 배열을 선언
-			result = new String[row][4];
+			result = new String[row][2];
 
 			// 2차원 배열의 index를 (공간의 번호)
 			// 저장하는 변수
@@ -55,10 +62,9 @@ public class SaveDAO {
 				// 결과를 받아와서 테이블에 추가하는
 				// 명령문!
 				System.out.println();
-				result[index][0] = rs.getString("day");
-				result[index][1] = rs.getString("price");
-				result[index][2] = rs.getString("type");
-				result[index][3] = rs.getString("memo");
+				result[index][0] = rs.getString("합계");
+				result[index][1] = rs.getString("type");
+				
 				index++;
 			}
 			
@@ -68,7 +74,7 @@ public class SaveDAO {
 			conn.close();
 
 		} catch (Exception e) {
-			System.out.println("저축테이블에 데이터가 없음");
+			e.printStackTrace();
 		}
 
 		return result;

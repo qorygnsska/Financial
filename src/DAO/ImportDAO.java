@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import Model.ImportModel;
 import Model.UsersModel;
 
 public class ImportDAO {
@@ -14,47 +15,44 @@ public class ImportDAO {
 
 	private LoginDAO loginDAO = new LoginDAO();
 
-	public String[][] select(){
+	public String[][] select() {
 		String[][] result = null;
-		
+
 		try {
-			
+
 			conn = DBUtil.getConnection();
-			
+
 			String countSql = "select count(*) from import where user_id = ?";
-			
+
 			pt = conn.prepareStatement(countSql);
 			pt.setInt(1, UsersModel.user.getId());
 			rs = pt.executeQuery();
-			
+
 			int row = 0;
-			
+
 			System.out.println("s1");
-			if(rs.next()) {
+			if (rs.next()) {
 				row = rs.getInt(1);
 				System.out.println(row);
-			}else {
+			} else {
 				return result;
 			}
 			System.out.println("s2");
-			
-			String sql = "select day, price, im.type, memo " +
-						 " from users u " + 
-						 " join import i on i.user_id = u.id " + 
-						 " join imtype im on im.id = i.type_id " +
-						 " where u.user_id = ? ";
+
+			String sql = "select day, price, im.type, memo " + " from users u " + " join import i on i.user_id = u.id "
+					+ " join imtype im on im.id = i.type_id " + " where u.user_id = ? ";
 			System.out.println("s3");
-			
+
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, UsersModel.user.getUser_id());
 			System.out.println("s4");
 			ResultSet rs = pt.executeQuery();
-			
+
 			result = new String[row][4];
-			
+
 			int index = 0;
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				result[index][0] = rs.getString("day");
 				result[index][1] = rs.getString("price");
 				result[index][2] = rs.getString("type");
@@ -65,10 +63,37 @@ public class ImportDAO {
 			rs.close();
 			pt.close();
 			conn.close();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
+		return result;
+	}
+
+	public boolean update(ImportModel importModel) {
+		System.out.println("importdao 실행");
+		boolean result = false;
+
+		conn = DBUtil.getConnection();
+		String sql = "update import set price=?, day=?,type_id=?, memo=? where user_id=? and id=?";
+	try {
+			
+			pt = conn.prepareStatement(sql);
+			pt.setInt(1, importModel.getPrice());
+			pt.setString(2, importModel.getDay() );
+			pt.setInt(3, importModel.getType_id());
+			pt.setString(4, importModel.getMemo());
+			pt.setInt(5, importModel.getId());
+			pt.setInt(6, importModel.getIdnum());
+			int num = pt.executeUpdate();
+			
+			if(num > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 
