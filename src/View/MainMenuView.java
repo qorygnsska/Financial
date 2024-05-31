@@ -334,10 +334,10 @@ public class MainMenuView extends JPanel {
 		}
 
 		String[] ar = CC.consumeTag();
-		list[0].setText("1. " + ar[0]);
-		list[1].setText("2. " + ar[1]);
+		
 		try {
-			
+			list[0].setText("1. " + ar[0]);
+			list[1].setText("2. " + ar[1]);
 			list[2].setText("3. " + ar[2]);
 		} catch (Exception e) {
 			list[2].setText("");
