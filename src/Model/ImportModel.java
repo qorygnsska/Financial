@@ -6,7 +6,7 @@ public class ImportModel {
 	private int price;
 	private int type_id;
 	private String memo;
-	
+	private int idnum;
 	public ImportModel() {
 	}
 	
@@ -18,6 +18,27 @@ public class ImportModel {
 		this.memo = memo;
 	}
 	
+	
+	
+	public ImportModel(int id, String day, int price, int type_id, String memo, int idnum) {
+		super();
+		this.id = id;
+		this.day = day;
+		this.price = price;
+		this.type_id = type_id;
+		this.memo = memo;
+		this.idnum = idnum;
+	}
+	
+
+	public int getIdnum() {
+		return idnum;
+	}
+
+	public void setIdnum(int idnum) {
+		this.idnum = idnum;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -48,10 +69,11 @@ public class ImportModel {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ImportModel [id=" + id + ", day=" + day + ", price=" + price + ", type_id=" + type_id + ", memo=" + memo
-				+ "]";
+				+ ", idnum=" + idnum + "]";
 	}
+	
 }

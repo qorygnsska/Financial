@@ -2,6 +2,7 @@ package Controller;
 
 import javax.swing.table.DefaultTableModel;
 
+import Model.ImportModel;
 import Service.ImportService;
 
 public class ImportController {
@@ -22,5 +23,10 @@ public class ImportController {
 		
 		return importModel;
 		
+	}
+
+	public boolean update(ImportModel importModel) {
+		System.out.println("(IMportController)실행중");
+		return importService.update(importModel);
 	}
 }

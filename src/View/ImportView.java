@@ -38,6 +38,8 @@ import javax.swing.table.TableColumnModel;
 import Controller.ImportController;
 import Controller.DatePickerController;
 import DatePickerEx.Dateformet;
+import Model.ExportModel;
+import Model.ImportModel;
 import Model.UsersModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -66,6 +68,9 @@ public class ImportView extends JPanel {
 	private JTextField amountField;
 	private JTextField memoField;
 	private JComboBox typeBox;
+	
+	private int selectrownum=0;
+	
 	DefaultTableModel[] importModel = new DefaultTableModel[4];
 	ImportController ic = new ImportController();
 
@@ -94,7 +99,7 @@ public class ImportView extends JPanel {
 			// 테이블에서 선택한 행 가져오기
 			int selectRow = totalTable.getSelectedRow();
 			System.out.println("선택한 행:" + selectRow);
-
+		selectrownum=selectRow+1;
 			// 선택한 행이 있는지 확인
 			if (selectRow != -1) {
 				String datetext=(String)dayTable.getValueAt(selectRow, 0);
@@ -123,6 +128,7 @@ public class ImportView extends JPanel {
 				// 테이블에서 선택한 행 가져오기
 				int selectRow = dayTable.getSelectedRow();
 				System.out.println("선택한 행:" + selectRow);
+				selectrownum=selectRow+1;
 				// 선택한 행이 있는지 확인
 				if (selectRow != -1) {
 					String datetext=(String)dayTable.getValueAt(selectRow, 0);
@@ -150,6 +156,7 @@ public class ImportView extends JPanel {
 				// 테이블에서 선택한 행 가져오기
 				int selectRow = monthTable.getSelectedRow();
 				System.out.println("선택한 행:" + selectRow);
+				selectrownum=selectRow+1;
 				// 선택한 행이 있는지 확인
 				if (selectRow != -1) {
 					String datetext=(String)dayTable.getValueAt(selectRow, 0);
@@ -249,10 +256,16 @@ public class ImportView extends JPanel {
 					if(type.equals(typeBox.getItemAt(i))) {
 						type_id = i + 1;
 					}
-					String memo = memoField.getText();
-					
-					System.out.println(UsersModel.user.getId() + " " + dateText + " " + amount + " " + type + " " + memo);
-					
+				}
+				String memo = memoField.getText();
+				
+				System.out.println(selectrownum+" "+UsersModel.user.getId() + " " + dateText + " " + amount + " " + type + " " + memo);
+				
+				ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,selectrownum);
+				if(ic.update(importModel)) {
+					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
 							
 			
