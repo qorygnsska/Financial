@@ -1,9 +1,12 @@
 package View;
 
+import java.awt.Component;
+
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
-// 잔고 색 테이블 클래스
+// 잔고 색 변경 and 금액 컬럼 가운데 정렬
 public class CustomTableCellRenderer extends DefaultTableCellRenderer {
     private int targetColumnIndex;
 
@@ -12,10 +15,12 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer {
     }
 
     @Override
-    public java.awt.Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        java.awt.Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        
+        setHorizontalAlignment(SwingConstants.CENTER); // 렌더러의 가로정렬을 CENTER로
         if (column == targetColumnIndex && value instanceof String) {
+        	
             String textValue = (String) value;
             if (textValue.startsWith("+")) {
                 cellComponent.setForeground(java.awt.Color.red);

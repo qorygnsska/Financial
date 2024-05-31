@@ -29,6 +29,7 @@ import Controller.ConsumeController;
 import Controller.MainExportController;
 import Controller.MainImportController;
 import Controller.SaveController;
+import DAO.AmountDAO;
 import Model.UsersModel;
 
 public class MainMenuView extends JPanel {
@@ -49,6 +50,8 @@ public class MainMenuView extends JPanel {
 	JButton[] btnList = new JButton[2];
 	JPanel userPan = new JPanel(new GridLayout(2,2));
 	DefaultTableModel saveModel;
+	
+	AmountDAO amountDAO = new AmountDAO();
 	
 	public MainMenuView(JPanel panel) {
 		panMain = panel;
@@ -274,17 +277,18 @@ public class MainMenuView extends JPanel {
 
 	// 잔고 및 수입지출
 	public void moneyPrint() {
+		String amount = amountDAO.amount();
 
 		String[] str = { "잔고", "이 달 수입", "이 달 지출", "지난 달 수입", "지난 달 지출" };
 		
-		int[] money = { 90000000, 80000, 7000000, 1000000, 5000000 };
+		String[] money = { amount, "z", "z", "z", "z"};
 
 		for (int i = 0; i < moneyList.length; i++) {
 			moneyList[i] = new JPanel();
 			moneyList[i].setBorder(new TitledBorder(new LineBorder(Color.green, 4), str[i]));
 			moneyList[i].setBackground(Color.white);
 			add(moneyList[i]);
-			labelList[i] = new JLabel(df.format(money[i]) + "원");
+			labelList[i] = new JLabel(money[i]);
 			moneyList[i].add(labelList[i]);
 			moneyList[i].setBounds(900, 120 + 90 * i, 240, 60);
 
@@ -294,6 +298,7 @@ public class MainMenuView extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				removeAll();
 				panMain.removeAll();
 				panMain.add(new AmountView(panMain));
 				panMain.revalidate();
