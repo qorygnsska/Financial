@@ -245,6 +245,13 @@ public class ExportView extends JPanel {
 
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
 				if (ec.add(exportModel)) {
+					
+					tabPanel.removeAll();
+					tabPanel.add("전체", dayPanel.add(totalCheck()));
+					tabPanel.add("일별", dayPanel.add(dayCheck()));
+					tabPanel.add("월별", dayPanel.add(monthCheck()));
+					tabPanel.revalidate();
+					tabPanel.repaint();
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -279,6 +286,13 @@ public class ExportView extends JPanel {
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
 						selectrownum);
 				if (ec.update(exportModel)) {
+					
+					tabPanel.removeAll();
+					tabPanel.add("전체", dayPanel.add(totalCheck()));
+					tabPanel.add("일별", dayPanel.add(dayCheck()));
+					tabPanel.add("월별", dayPanel.add(monthCheck()));
+					tabPanel.revalidate();
+					tabPanel.repaint();
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
