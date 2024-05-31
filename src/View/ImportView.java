@@ -66,10 +66,7 @@ public class ImportView extends JPanel {
 	private JTextField amountField;
 	private JTextField memoField;
 	private JComboBox typeBox;
-<<<<<<< HEAD
-	
-=======
->>>>>>> master
+
 
 	private int selectrownum = 0;
 
@@ -169,8 +166,7 @@ public class ImportView extends JPanel {
 			}
 		}
 	}
-<<<<<<< HEAD
-=======
+
 
 	public JScrollPane refresh(JScrollPane scrollpane) {
 		String[] header = { "날짜", "금        액", "구분", "비        고" };
@@ -200,7 +196,7 @@ public class ImportView extends JPanel {
 		dayTable.addMouseListener(new MyMouseListener2());
 		return scrollpane;
 	}
->>>>>>> master
+
 
 	public void print() {
 		Rectangle rect = panMain.getBounds();
@@ -280,8 +276,7 @@ public class ImportView extends JPanel {
 				if (ic.add(importModel)) {
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 
-					// refresh() 호출
-					removeAll();
+				
 					tabPanel.add("일별", dayPanel.add(dayCheck()));
 					repaint();
 				} else {
@@ -315,28 +310,17 @@ public class ImportView extends JPanel {
 				System.out.println(selectrownum + " " + UsersModel.user.getId() + " " + dateText + " " + amount + " "
 						+ type + " " + memo);
 
-<<<<<<< HEAD
+
 				ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
 						selectrownum);
 				if (ic.update(importmodel)) {
 			
 					
-						
+					
+									
 					
 					
-					
-
-					
-=======
-				ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
-						selectrownum);
-				
-			
-				if (ic.update(importModel)) {
-					
-					
-					
->>>>>>> master
+		
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -561,27 +545,9 @@ public class ImportView extends JPanel {
 		return monthPanel;
 	}
 
-<<<<<<< HEAD
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//캘린더
-=======
+
+
 	//캘린더
->>>>>>> master
 	public JPanel imprtJDatePickerEx() {
 	
 		JPanel j1 = new JPanel();

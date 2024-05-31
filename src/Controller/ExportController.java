@@ -31,13 +31,12 @@ public class ExportController {
 		System.out.println("(ExportController)지출 내역 추가 중");
 		return exportService.add(exportModel);
 	}
-<<<<<<< HEAD
-=======
+
 	
 	public boolean update(ExportModel exportModel) {
 		System.out.println("(ExportController)실행중");
 		return exportService.update(exportModel);
 	}
 	
->>>>>>> bs
+
 }
