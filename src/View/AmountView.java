@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import Controller.AmountController;
@@ -30,7 +31,6 @@ public class AmountView extends JPanel {
 	Font font2 = new Font("함초롱돋움", Font.PLAIN, 15);
 	Font font3 = new Font("함초롱돋움", Font.BOLD, 15);
 
-	
 	AmountController amountController = new AmountController();
 
 	public AmountView(JPanel panel) {
@@ -64,12 +64,9 @@ public class AmountView extends JPanel {
 		JPanel tablePan = new JPanel();
 		tablePan.setBorder(new LineBorder(Color.green, 2));
 
-		
-
 		// 테이블의 열
 		Object[] tableHeader = { "날짜", "금액", "구분", "비고", "잔액" };
 		Object[][] data1 = amountController.selecet();
-
 
 		// 데이터 모델 생성
 		DefaultTableModel model = new DefaultTableModel(data1, tableHeader) {
@@ -81,7 +78,6 @@ public class AmountView extends JPanel {
 		// 테이블 생성
 		JTable amountTable = new JTable(model);
 
-		
 		amountTable.setRowHeight(30); // 행의 높이 설정
 
 		amountTable.setFont(font2);
@@ -91,6 +87,7 @@ public class AmountView extends JPanel {
 		amountTable.getTableHeader().setResizingAllowed(false);
 		// 테이블 내용 가운데 정렬
 		tableCellCenter(amountTable);
+		tableCellColor(amountTable);
 
 		// 스크롤 생성
 		JScrollPane js = new JScrollPane();
@@ -154,6 +151,14 @@ public class AmountView extends JPanel {
 
 		}
 
+	}
+
+	// 금액 색상 바꾸기
+	public void tableCellColor(JTable t) {
+	    int targetColumnIndex = 1;
+	    TableColumnModel tcm = t.getColumnModel();
+	    TableColumn column = tcm.getColumn(targetColumnIndex);
+	    column.setCellRenderer(new CustomTableCellRenderer(targetColumnIndex));
 	}
 
 }
