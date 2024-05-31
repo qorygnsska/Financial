@@ -12,8 +12,8 @@ public class MainImportDAO {
 	private PreparedStatement pt;
 	private ResultSet rs;
 	
-	public Object[][] select() {
-		Object[][] result = null;
+	public String[][] select() {
+		String[][] result = null;
 		System.out.println("다오 셀렉트");
 
 		try {
@@ -30,7 +30,7 @@ public class MainImportDAO {
 
 			if (rs.next()) {
 				row = rs.getInt(1);
-				System.out.println(row);
+//				System.out.println(row);
 			} else {
 				return result;
 			}
@@ -57,8 +57,7 @@ public class MainImportDAO {
 				result[index][0] = rs.getString("day");
 				result[index][1] = rs.getString("price");
 				result[index][2] = rs.getString("type");
-//				result[index][3] = rs.getString("content");
-//				result[index][4] = rs.getString("memo");
+
 				index++;
 			}
 			// 닫기

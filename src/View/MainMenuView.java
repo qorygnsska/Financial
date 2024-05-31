@@ -33,6 +33,7 @@ import Model.UsersModel;
 
 public class MainMenuView extends JPanel {
 
+	DecimalFormat df = new DecimalFormat("#,##0,000");
 	MainImportController IC = new MainImportController();
 	MainExportController EC = new MainExportController();
 	SaveController SC = new SaveController();
@@ -138,6 +139,7 @@ public class MainMenuView extends JPanel {
 			
 			userPan.setBackground(Color.white);
 			JLabel nameTitle = new JLabel("이름 : ");
+			System.out.println(UsersModel.user.getName());
 			JLabel name = new JLabel(UsersModel.user.getName());
 			JLabel dayTitle = new JLabel("날짜 : ");
 			JLabel day = new JLabel(LocalDate.now().toString());
@@ -274,7 +276,7 @@ public class MainMenuView extends JPanel {
 	public void moneyPrint() {
 
 		String[] str = { "잔고", "이 달 수입", "이 달 지출", "지난 달 수입", "지난 달 지출" };
-		DecimalFormat df = new DecimalFormat("#,##0,000");
+		
 		int[] money = { 90000000, 80000, 7000000, 1000000, 5000000 };
 
 		for (int i = 0; i < moneyList.length; i++) {

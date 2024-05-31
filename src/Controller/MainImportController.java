@@ -17,9 +17,9 @@ public class MainImportController {
 		};
 		System.out.println("임포트 컨트롤러 2차원 배열 값 넣기 전");
 		
-		Object[][] rowData = service.select();
+		String[][] rowData = service.select();
 
-		for (Object[] row : rowData) {
+		for (String[] row : rowData) {
 			model.addRow(row);
 		}
 
