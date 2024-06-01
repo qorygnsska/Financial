@@ -38,7 +38,7 @@ public class ImportDAO {
 			}
 
 			String sql = "select day, price, im.type, memo " + " from users u " + " join import i on i.user_id = u.id "
-					+ " join imtype im on im.id = i.type_id " + " where u.user_id = ? ";
+					+ " join imtype im on im.id = i.type_id " + " where u.user_id = ? order by day asc";
 
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, UsersModel.user.getUser_id());
@@ -96,27 +96,40 @@ public class ImportDAO {
 	}
 
 	public boolean update(ImportModel importModel) {
-
+		int sqlnum=0;
 		System.out.println("importdao 실행");
 		boolean result = false;
 
 		conn = DBUtil.getConnection();
-		String sql = "update import set price=?, day=?,type_id=?, memo=? where user_id=? and id=?";
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day asc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import";
 		try {
 
 			pt = conn.prepareStatement(sql);
 
-		
+			pt.setInt(1, importModel.getIdnum());
+
+			rs=pt.executeQuery();
+
+			if (rs.next()) {
+			 sqlnum=rs.getInt("idnum");
+			
+			}
+			
+			String sql1 = "update import set price=?, day=?,type_id=?, memo=? where user_id=? and id=?";
+			pt = conn.prepareStatement(sql1);
+
+			
 			pt.setInt(1, importModel.getPrice());
 			pt.setString(2, importModel.getDay());
 			pt.setInt(3, importModel.getType_id());
 			pt.setString(4, importModel.getMemo());
 			pt.setInt(5, importModel.getId());
-			pt.setInt(6, importModel.getIdnum());
+			pt.setInt(6, sqlnum);
 
 			int num = pt.executeUpdate();
 
 			if (num > 0) {
+			
 				result = true;
 			}
 		} catch (Exception e) {
