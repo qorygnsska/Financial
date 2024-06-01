@@ -40,7 +40,7 @@ public class ExportDAO {
 						 " from users u " + 
 						 " join export e on e.user_id = u.id " + 
 						 " join extype ex on ex.id = e.type_id " +
-						 " where u.user_id = ? ";
+						 " where u.user_id = ? order by day asc";
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, UsersModel.user.getUser_id());
 			ResultSet rs = pt.executeQuery();
@@ -95,24 +95,37 @@ public class ExportDAO {
 	}
 	
 	public boolean update(ExportModel exportModel) {
+		int sqlnum=0;
 		System.out.println("exportdao 실행");
 		boolean result = false;
 
 		conn = DBUtil.getConnection();
-		String sql = "update export set price=?, day=?,type_id=?, memo=? where user_id=? and id=?";
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day asc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export";
 		try {
 
 			pt = conn.prepareStatement(sql);
+
+			pt.setInt(1, exportModel.getIdnum());
+
+			rs=pt.executeQuery();
+
+			if (rs.next()) {
+			 sqlnum=rs.getInt("idnum");
+			
+			}
+			String sql1 = "update export set price=?, day=?,type_id=?, memo=? where user_id=? and id=?";
+			pt = conn.prepareStatement(sql1);
 			pt.setInt(1, exportModel.getPrice());
 			pt.setString(2, exportModel.getDay());
 			pt.setInt(3, exportModel.getType_id());
 			pt.setString(4, exportModel.getMemo());
 			pt.setInt(5, exportModel.getId());
-			pt.setInt(6, exportModel.getIdnum());
+			pt.setInt(6,sqlnum);
+	
 			int num = pt.executeUpdate();
-			System.out.println(exportModel.getId());
-			System.out.println(exportModel.getIdnum());
+
 			if (num > 0) {
+			
 				result = true;
 			}
 		} catch (Exception e) {

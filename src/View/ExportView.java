@@ -569,7 +569,6 @@ public class ExportView extends JPanel {
 		int month = now.getMonthValue();// 월 저장
 		int day = now.getDayOfMonth();// 일 저장
 
-		UtilDateModel model = new UtilDateModel();
 
 		model.setDate(year, month - 1, day);// 현재날짜를 표시
 		model.setSelected(true); // 텍스트 필드에 보이기
