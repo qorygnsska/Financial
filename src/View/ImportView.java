@@ -39,6 +39,7 @@ import Controller.DatePickerController;
 import DatePickerEx.Dateformet;
 import Model.ImportModel;
 import Model.UsersModel;
+import net.sourceforge.jdatepicker.JDatePanel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -452,7 +453,7 @@ public class ImportView extends JPanel {
 
 	public JScrollPane dayCheck() {
 		String[] header = { "날짜", "금        액", "구분", "비        고" };
-		importModel[0] = ic.getImport(header);
+		importModel[0] = ic.getImportdayselect(header);
 
 		dayTable = new JTable(importModel[0]);
 		dayTable.getTableHeader().setReorderingAllowed(false);
@@ -480,6 +481,11 @@ public class ImportView extends JPanel {
 		dayTable.addMouseListener(new MyMouseListener2());
 		return scrollpane;
 	}
+	
+	
+	
+	
+	
 
 	public JScrollPane monthCheck() {
 
@@ -552,23 +558,25 @@ public class ImportView extends JPanel {
 
 		model.setDate(year, month - 1, day);// 현재날짜를 표시
 		model.setSelected(true); // 텍스트 필드에 보이기
-
+		
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
 
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
-
+		
+	
+		
 		j1.add(datePicker);
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
 
-		model.addPropertyChangeListener(new PropertyChangeListener() {
-
+		
+		
+		datePanel.addActionListener(new ActionListener() {
+			
 			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-
-				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-					
+			public void actionPerformed(ActionEvent e) {
+			
 					tabPanel.setSelectedIndex(1);
 					date = dateFormat.format(model.getValue());
 					datelist[num] = date;
@@ -577,6 +585,13 @@ public class ImportView extends JPanel {
 						if (dpc.importsearch(datelist)) {
 							System.out.println("검색 성공");
 
+							tabPanel.removeAll();
+							tabPanel.add("전체", dayPanel.add(totalCheck()));
+							tabPanel.add("일별", dayPanel.add(dayCheck()));
+							tabPanel.add("월별", dayPanel.add(monthCheck()));
+							tabPanel.revalidate();
+							tabPanel.repaint();
+							tabPanel.setSelectedIndex(1);
 							datelist[0] = null;
 						} else {
 							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
@@ -586,12 +601,50 @@ public class ImportView extends JPanel {
 
 					}
 
-				}
-
+			
 			}
 		});
+		
+		
+		
+//		model.addPropertyChangeListener(new PropertyChangeListener() {
+//
+//			@Override
+//			public void propertyChange(PropertyChangeEvent evt) {
+//
+//				if ("value".equals(evt.getPropertyName()) && "value" != null) {
+//					
+//					tabPanel.setSelectedIndex(1);
+//					date = dateFormat.format(model.getValue());
+//					datelist[num] = date;
+//					if (datelist[0] != null) {
+//
+//						if (dpc.importsearch(datelist)) {
+//							System.out.println("검색 성공");
+//
+//							datelist[0] = null;
+//						} else {
+//							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+//							System.out.println("검색 실패");
+//							datelist[0] = null;
+//						}
+//
+//					}
+//
+//				}
+//
+//			}
+//		});
 		return j1;
 
 	}
+	
+
+	
+	
+	
+	
+	
+	
 
 }

@@ -1,11 +1,12 @@
 package Service;
 
+import DAO.DatePickerDAO;
 import DAO.ImportDAO;
 import Model.ImportModel;
 
 public class ImportService {
 	private ImportDAO dao = new ImportDAO();
-
+	private DatePickerDAO dpdao=new DatePickerDAO();
 	public String[][] select() {
 
 		return dao.select();
@@ -19,5 +20,10 @@ public class ImportService {
 	public boolean update(ImportModel importmodel) {
 		System.out.println("ImportService 실행중");
 		return dao.update(importmodel);
+	}
+
+	public String[][] getImportdayselect() {
+		
+		return  dpdao.getImportdayselect();
 	}
 }
