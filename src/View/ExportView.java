@@ -421,7 +421,7 @@ public class ExportView extends JPanel {
 
 	public JScrollPane dayCheck() {
 		String[] header = { "날짜", "금        액", "구분", "비        고" };
-		exportModel[0] = ec.getExport(header);
+		exportModel[0] = ec.getExportdayselect(header);
 
 		dayTable = new JTable(exportModel[0]);
 		dayTable.getTableHeader().setReorderingAllowed(false);
@@ -582,26 +582,29 @@ public class ExportView extends JPanel {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
 
-		// 날짜가 변경될 때마다 호출되는 listener 추가
+		
+		
 	
-		model.addPropertyChangeListener(new PropertyChangeListener() {
-
+	datePanel.addActionListener(new ActionListener() {
+			
 			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-
-				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-
-					date = dateFormat.format(model.getValue());
-					date = dateFormat.format(model.getValue());
-
+			public void actionPerformed(ActionEvent e) {
+			
+					tabPanel.setSelectedIndex(1);
 					date = dateFormat.format(model.getValue());
 					datelist[num] = date;
-					tabPanel.setSelectedIndex(1);
 					if (datelist[0] != null) {
 
 						if (dpc.exportsearch(datelist)) {
 							System.out.println("검색 성공");
 
+							tabPanel.removeAll();
+							tabPanel.add("전체", dayPanel.add(totalCheck()));
+							tabPanel.add("일별", dayPanel.add(dayCheck()));
+							tabPanel.add("월별", dayPanel.add(monthCheck()));
+							tabPanel.revalidate();
+							tabPanel.repaint();
+							tabPanel.setSelectedIndex(1);
 							datelist[0] = null;
 						} else {
 							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
@@ -611,10 +614,45 @@ public class ExportView extends JPanel {
 
 					}
 
-				}
-
+			
 			}
 		});
+		
+		
+		
+		// 날짜가 변경될 때마다 호출되는 listener 추가
+	
+//		model.addPropertyChangeListener(new PropertyChangeListener() {
+//
+//			@Override
+//			public void propertyChange(PropertyChangeEvent evt) {
+//
+//				if ("value".equals(evt.getPropertyName()) && "value" != null) {
+//
+//					date = dateFormat.format(model.getValue());
+//					date = dateFormat.format(model.getValue());
+//
+//					date = dateFormat.format(model.getValue());
+//					datelist[num] = date;
+//					tabPanel.setSelectedIndex(1);
+//					if (datelist[0] != null) {
+//
+//						if (dpc.exportsearch(datelist)) {
+//							System.out.println("검색 성공");
+//
+//							datelist[0] = null;
+//						} else {
+//							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+//							System.out.println("검색 실패");
+//							datelist[0] = null;
+//						}
+//
+//					}
+//
+//				}
+//
+//			}
+//		});
 		return j1;
 
 	}
