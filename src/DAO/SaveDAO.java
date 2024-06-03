@@ -36,10 +36,10 @@ public class SaveDAO {
 				return result;
 			}
 			// 조회하는 sql문 작성
-			String sql = "select day, price, type, memo from saveprice"
+			String sql = "select day, price, type, nvl(memo, '없음') as memo from saveprice"
 					+ " join extype on extype.id = saveprice.type_id"
 					+ " join users on users.id = saveprice.user_id"
-					+ " where users.id = ? and saveprice.type_id = 6";
+					+ " where users.id = ? and type = '저축'";
 			
 			pt = conn.prepareStatement(sql);
 			pt.setInt(1, UsersModel.user.getId());
@@ -68,7 +68,8 @@ public class SaveDAO {
 			conn.close();
 
 		} catch (Exception e) {
-			System.out.println("저축테이블에 데이터가 없음");
+//			System.out.println("저축테이블에 데이터가 없음");
+			e.printStackTrace();
 		}
 
 		return result;

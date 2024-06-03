@@ -378,9 +378,9 @@ public class MainMenuView extends JPanel {
 
 		sPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "저축"));
 		String[] header = { "날짜", "금액", "유형", "비고" };
-
+		
 		saveModel = SC.getSaveModel(header);
-
+		
 		JTable table = new JTable(saveModel);
 
 		// 테이블 컬럼 이동불가
