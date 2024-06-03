@@ -124,6 +124,7 @@ public class MainMenuView extends JPanel {
 			JButton btn = (JButton) e.getSource();
 			if (btn == btnList[0]) {
 				System.out.println("로그아웃 버튼");
+				ViewFrame.mainFan.removeAll();
 				ViewFrame.mainFrame.dispose();
 				new LoginView().user();
 
