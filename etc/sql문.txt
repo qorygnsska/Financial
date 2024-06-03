@@ -113,9 +113,10 @@ CREATE TABLE amount (
     NOT NULL, -- 참조할 아이디
     price   NUMBER NOT NULL, -- 금액
     day     VARCHAR(50) NOT NULL, -- 작성한 날짜
-    type    VARCHAR(20) CHECK ( type IN ( '지출', '고정지출', '수입', '고정수입' ) ), -- 타입 나누기
+    type    VARCHAR(20) CHECK ( type IN ( '지출', '수입' ) ), -- 타입 나누기
     content VARCHAR(20) NOT NULL, -- 유형의 내용(버스비, 통신비, 월급)
-    memo    VARCHAR2(100) -- 세부내용
+    memo    VARCHAR2(100), -- 세부내용
+    foreign_id number not null -- 수입, 지출, 고정 수입, 고정 지출 아이디 저장
 );
 
 ==============================================
