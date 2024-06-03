@@ -103,15 +103,15 @@ public class ExportView extends JPanel {
 			selectrownum = selectRow + 1;
 			// 선택한 행이 있는지 확인
 			if (selectRow != -1) {
-				String datetext = (String) dayTable.getValueAt(selectRow, 0);
+				String datetext = (String) totalTable.getValueAt(selectRow, 0);
 
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
 
 				model.setDate(year, month - 1, day);
-				amountField.setText((String) dayTable.getValueAt(selectRow, 1));
-				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
+				amountField.setText((String) totalTable.getValueAt(selectRow, 1));
+				memoField.setText((String) totalTable.getValueAt(selectRow, 3));
 
 			}
 		}
@@ -154,7 +154,7 @@ public class ExportView extends JPanel {
 			selectrownum = selectRow + 1;
 			// 선택한 행이 있는지 확인
 			if (selectRow != -1) {
-				String datetext = (String) dayTable.getValueAt(selectRow, 0);
+				String datetext = (String) monthTable.getValueAt(selectRow, 0);
 
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
@@ -162,8 +162,8 @@ public class ExportView extends JPanel {
 
 				model.setDate(year, month - 1, day);
 
-				amountField.setText((String) dayTable.getValueAt(selectRow, 1));
-				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
+				amountField.setText((String) monthTable.getValueAt(selectRow, 1));
+				memoField.setText((String) monthTable.getValueAt(selectRow, 3));
 
 			}
 		}
