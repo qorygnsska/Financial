@@ -31,4 +31,9 @@ public class ImportService {
 		
 		return dpdao.getImportmonthselect();
 	}
+
+	public boolean delete(ImportModel importmodel) {
+		System.out.println("ImportService 실행중");
+		return dao.delete(importmodel);
+	}
 }

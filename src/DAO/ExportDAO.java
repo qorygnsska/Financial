@@ -100,7 +100,7 @@ public class ExportDAO {
 		boolean result = false;
 
 		conn = DBUtil.getConnection();
-		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day asc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id=?";
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id=?";
 		try {
 
 			pt = conn.prepareStatement(sql);
