@@ -1,17 +1,6 @@
-<<<<<<< HEAD
-=======
-/DAO/
-/Service/
 /Controller/
->>>>>>> shim
+/DAO/
+/DatePickerEx/
+/Model/
+/Service/
 /View/
-<<<<<<< HEAD
-/Controller/
-/Service/
-/DAO/
-/Model/
-/DatePickerEx/
-=======
-/DatePickerEx/
-/Model/
->>>>>>> shim
