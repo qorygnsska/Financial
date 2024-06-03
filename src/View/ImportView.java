@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -282,12 +283,20 @@ public class ImportView extends JPanel {
 				if (ic.add(importModel)) {
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 					tabPanel.removeAll();
-					
+
 					tabPanel.add("전체", dayPanel.add(totalCheck()));
 					tabPanel.add("일별", dayPanel.add(dayCheck()));
-					tabPanel.add("월별", dayPanel.add(monthCheck()));
+					tabPanel.add("월별", dayPanel.add(monthCheck()));	
 					tabPanel.revalidate();
 					tabPanel.repaint();
+					ViewFrame.mainFan.removeAll();
+					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
+
+					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
+					// 구성 요소 가로/세로 속성 변경하여 호출
+					ViewFrame.mainFan.revalidate();
+					// 현재 재배치한 내용으로 보이기
+					ViewFrame.mainFan.repaint();
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
@@ -330,6 +339,14 @@ public class ImportView extends JPanel {
 					tabPanel.add("월별", dayPanel.add(monthCheck()));
 					tabPanel.revalidate();
 					tabPanel.repaint();
+					ViewFrame.mainFan.removeAll();
+					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
+
+					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
+					// 구성 요소 가로/세로 속성 변경하여 호출
+					ViewFrame.mainFan.revalidate();
+					// 현재 재배치한 내용으로 보이기
+					ViewFrame.mainFan.repaint();
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
