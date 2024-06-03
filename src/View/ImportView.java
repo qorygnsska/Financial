@@ -51,6 +51,7 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 public class ImportView extends JPanel {
 	UtilDateModel model = new UtilDateModel();
 	static String date;
+	public static String monthdate;
 	int num = 0;
 	String[] datelist = new String[2];
 	DatePickerController dpc = new DatePickerController();
@@ -617,18 +618,19 @@ public class ImportView extends JPanel {
 		
 		 
 			tabPanel.setSelectedIndex(2);
-			date = dateFormat.format(model.getValue());
-			datelist[num] = date;
-		
+			monthdate = dateFormat.format(model.getValue());
+			datelist[num] = monthdate;
+			
 			if (datelist[0] != null) {
 
 				if (dpc.importmonthsearch(datelist)) {
 					System.out.println("검색 성공");
-
+					
 					tabPanel.removeAll();
 					tabPanel.add("전체", monthPanel.add(totalCheck()));
 					tabPanel.add("일별", monthPanel.add(dayCheck()));
 					tabPanel.add("월별", monthPanel.add(monthCheck()));
+					
 					tabPanel.revalidate();
 					tabPanel.repaint();
 					tabPanel.setSelectedIndex(2);

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import Model.UsersModel;
+import View.ImportView;
 
 public class DatePickerDAO {
 
@@ -12,8 +13,7 @@ public class DatePickerDAO {
 	PreparedStatement ps;
 	ResultSet rs;
 static String date1=null;
-
-	
+static  String date2;
 	public boolean importseracht(String[] datelist) {
 		boolean result = false;
 		System.out.println("DatePicker DAO 실행!");
@@ -117,7 +117,7 @@ static String date1=null;
 			result = new String[row][4];
 
 			int index = 0;
-
+			
 			while (rs.next()) {
 				result[index][0] = rs.getString("day");
 				result[index][1] = rs.getString("price");
@@ -193,7 +193,8 @@ String[][] result = null;
 	//수입 월별 조회 dao
 	public String[][] getImportmonthselect() {
 		String[][] result = null;
-
+	
+					
 		try {
 
 			con = DBUtil.getConnection();
@@ -213,15 +214,17 @@ String[][] result = null;
 				return result;
 			}
 
-			String sql = "select day, price, im.type, memo\r\n" + 
-					"from users u\r\n" + 
-					"join import i on i.user_id = u.id\r\n" + 
-					"join imtype im on im.id = i.type_id\r\n" + 
-					"where substr(day, 1, 5) >= ? and substr(day, 1, 5) <= ? order by day asc";
+			String sql =  "select day, price, im.type, memo " + " from users u " + " join import i on i.user_id = u.id "
+					+ " join imtype im on im.id = i.type_id " + " where u.user_id = ?  and substr(day, 1, 5)=?  order by day desc";
 			
+			 
 			ps = con.prepareStatement(sql);
-			ps.setString(1,date1);
-			ps.setString(2, date1);
+			ps.setString(1, UsersModel.user.getUser_id());
+			ps.setString(2, date2);
+			System.out.println("선택한 월 결과" + date2);
+			
+			
+		
 			ResultSet rs = ps.executeQuery();
 
 				
@@ -246,6 +249,9 @@ String[][] result = null;
 		return result;
 	}
 
+	
+	
+	//수입 월 데이터가 있는지 확인하는 dao
 	public boolean importmonthseracht(String[] datelist) {
 		boolean result = false;
 		System.out.println("DatePicker DAO 실행!");
@@ -258,8 +264,9 @@ String[][] result = null;
 				"where substr(day, 1, 5) >= ? and substr(day, 1, 5) <= ? order by day asc";
 		 date1 = datelist[0];
 		 
-		 String date2=date1.substring(0,5);
-		 System.out.println(date2);
+		  date2=date1.substring(0,5);
+		 System.out.println("확인하기============="+date2);
+		 
 		try {
 			ps = con.prepareStatement(sql);
 
