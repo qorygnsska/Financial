@@ -1,4 +1,8 @@
-/Controller/
-/DAO/
 /Service/
+/DAO/
+<<<<<<< HEAD
+/Service/
+=======
+/Controller/
+>>>>>>> 7ff58814f9fee247750e37b0f5a8df7d30bcdf99
 /View/
