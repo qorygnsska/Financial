@@ -38,7 +38,7 @@ public class ImportDAO {
 			}
 
 			String sql = "select day, price, im.type, memo " + " from users u " + " join import i on i.user_id = u.id "
-					+ " join imtype im on im.id = i.type_id " + " where u.user_id = ? order by day asc";
+					+ " join imtype im on im.id = i.type_id " + " where u.user_id = ? order by day desc";
 
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, UsersModel.user.getUser_id());

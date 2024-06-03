@@ -105,7 +105,7 @@ public class AmountDAO {
 			ps.setString(3, amountModel.getDay());
 			ps.setString(4, amountModel.getType());
 			ps.setString(5, amountModel.getContent());
-			ps.setString(6, amountModel.getContent());
+			ps.setString(6, amountModel.getMemo());
 			
 			int res = ps.executeUpdate();
 			
