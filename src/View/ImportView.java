@@ -613,16 +613,16 @@ public class ImportView extends JPanel {
 		 int selectedMonthIndex = monthComboBox.getSelectedIndex();
 		 Calendar calendar = Calendar.getInstance();
 		 calendar.setTime((Date)model.getValue());
-		 calendar.set(Calendar.MONTH, selectedMonthIndex);
+		 calendar.set(Calendar.MONTH, selectedMonthIndex); 
 		 model.setValue(calendar.getTime());
 		
-		 
+		 	//월탭 선택
 			tabPanel.setSelectedIndex(2);
 			monthdate = dateFormat.format(model.getValue());
 			datelist[num] = monthdate;
 			
 			if (datelist[0] != null) {
-
+				//데이터가 있는지 확인하고 있다면 조건의맞는 값을 불러와 테이블을 지웠다가 다시 그린다.
 				if (dpc.importmonthsearch(datelist)) {
 					System.out.println("검색 성공");
 					
@@ -641,10 +641,7 @@ public class ImportView extends JPanel {
 					datelist[0] = null;
 				}
 
-			}
-		 
-		 
-		 
+			}		 
 		 
 		 }
 		 }
