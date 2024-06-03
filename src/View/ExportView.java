@@ -5,23 +5,18 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -29,16 +24,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import Controller.DatePickerController;
-
 import Controller.ExportController;
+import DAO.AmountDAO;
 import DatePickerEx.Dateformet;
+import Model.AmountModel;
 import Model.ExportModel;
 import Model.UsersModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -74,6 +68,8 @@ public class ExportView extends JPanel {
 
 	DefaultTableModel[] exportModel = new DefaultTableModel[4];
 	ExportController ec = new ExportController();
+	
+	AmountDAO amountDAO = new AmountDAO();
 
 	public ExportView() {
 	}
@@ -242,6 +238,17 @@ public class ExportView extends JPanel {
 
 				String memo = memoField.getText();
 				System.out.println(UsersModel.user.getId() + " " + dateText + " " + amount + " " + type + " " + memo);
+				
+				// amount 추가 코드
+				String amounttype = "";
+				if (type.equals("고정지출")) {
+					amounttype = "고정지출";
+				} else {
+					amounttype = "지출";
+				}
+				AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
+				amountDAO.insert(amountModel);
+				// amount 추가 코드 끝
 
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
 				if (ec.add(exportModel)) {
@@ -291,6 +298,17 @@ public class ExportView extends JPanel {
 
 				System.out.println(selectrownum + " " + UsersModel.user.getId() + " " + dateText + " " + amount + " "
 						+ type + " " + memo);
+				
+				// amount 수정 코드
+				String amounttype = "";
+				if(type.equals("고정지출")) {
+					amounttype = "고정지출";
+				}else {
+					amounttype = "지출";
+				}
+				AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo, selectrownum);
+				amountDAO.update(amountModel);
+				// amount 수정 코드 끝
 
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
 						selectrownum);
@@ -332,6 +350,10 @@ public class ExportView extends JPanel {
 				// 테이블에서 선택한 행 가져오기
 				int selectRow = totalTable.getSelectedRow();
 				System.out.println("선택한 행:" + selectRow);
+				
+				// amount 삭제 코드
+				amountDAO.delete(selectrownum);
+				// amount 삭제 코드 끝
 			}
 		});
 
