@@ -39,8 +39,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import Controller.ImportController;
+import DAO.AmountDAO;
 import Controller.DatePickerController;
 import DatePickerEx.Dateformet;
+import Model.AmountModel;
 import Model.ImportModel;
 import Model.UsersModel;
 import net.sourceforge.jdatepicker.JDatePanel;
@@ -77,6 +79,8 @@ public class ImportView extends JPanel {
 
 	DefaultTableModel[] importModel = new DefaultTableModel[4];
 	ImportController ic = new ImportController();
+	
+	AmountDAO amountDAO = new AmountDAO();
 
 	public ImportView() {
 	}
@@ -282,13 +286,19 @@ public class ImportView extends JPanel {
 
 				String memo = memoField.getText();
 				System.out.println(UsersModel.user.getId() + " " + dateText + " " + amount + " " + type + " " + memo);
+				
 
 				ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
-
-				
-			
 				
 				if (ic.add(importModel)) {
+					
+					// amount 추가 코드
+					String amounttype = "수입";
+					
+					AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
+					amountDAO.insert(amountModel);
+					// amount 추가 코드 끝
+					
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 					ViewFrame.mainFan.removeAll();
 					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
@@ -334,6 +344,13 @@ public class ImportView extends JPanel {
 
 				System.out.println(selectrownum + " " + UsersModel.user.getId() + " " + dateText + " " + amount + " "
 						+ type + " " + memo);
+				
+				// amount 수정 코드
+				String amounttype = "수입";
+				
+				AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo, selectrownum);
+				amountDAO.update(amountModel);
+				// amount 수정 코드 끝
 
 				ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
 						selectrownum);
@@ -386,6 +403,11 @@ public class ImportView extends JPanel {
 
 				System.out.println(selectrownum + " " + UsersModel.user.getId() + " " + dateText + " " + amount + " "
 						+ type + " " + memo);
+				
+				// amount 삭제 코드
+				String amounttype = "수입";
+				amountDAO.delete(selectrownum, amounttype);
+				// amount 삭제 코드 끝
 
 				ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
 						selectrownum);

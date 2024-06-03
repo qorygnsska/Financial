@@ -252,19 +252,16 @@ public class ExportView extends JPanel {
 					JOptionPane.showMessageDialog(null, "저축 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				}
 				else {
-					// amount 추가 코드
-					String amounttype = "";
-					if (type.equals("고정지출")) {
-						amounttype = "고정지출";
-					} else {
-						amounttype = "지출";
-					}
-					AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
-					amountDAO.insert(amountModel);
-					// amount 추가 코드 끝
 					
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
 				if (ec.add(exportModel)) {
+					
+					// amount 추가 코드
+					String amounttype = "지출";
+					
+					AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
+					amountDAO.insert(amountModel);
+					// amount 추가 코드 끝
 					
 					tabPanel.removeAll();
 					tabPanel.add("전체", dayPanel.add(totalCheck()));
@@ -316,12 +313,8 @@ public class ExportView extends JPanel {
 						+ type + " " + memo);
 				
 				// amount 수정 코드
-				String amounttype = "";
-				if(type.equals("고정지출")) {
-					amounttype = "고정지출";
-				}else {
-					amounttype = "지출";
-				}
+				String amounttype = "지출";
+				
 				AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo, selectrownum);
 				amountDAO.update(amountModel);
 				// amount 수정 코드 끝
@@ -368,7 +361,8 @@ public class ExportView extends JPanel {
 				System.out.println("선택한 행:" + selectRow);
 				
 				// amount 삭제 코드
-				amountDAO.delete(selectrownum);
+				String amounttype = "지출";
+				amountDAO.delete(selectrownum, amounttype);
 				// amount 삭제 코드 끝
 			}
 		});

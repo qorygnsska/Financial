@@ -119,11 +119,6 @@ public class AmountView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AmountModel amountModel = new AmountModel("24/06/03", 9000, "지출", "식비", "영진식당 감", 5);
-				amountDAO.delete(3);
-				
-				
-				
 				// 메인으로 이동
 				panMain.removeAll(); // 현재 패널 내용 지움
 				panMain.add(new MainMenuView(panMain)); // 현재 패널에 메인메뉴 패널 추가
