@@ -53,4 +53,21 @@ public class ImportController {
 		return importModel;
 		
 	}
+
+	public DefaultTableModel getImportmonthselect(String[] header) {
+		DefaultTableModel importModel = new DefaultTableModel(header, 0) {
+			public boolean isCellEditable(int rowIndex, int mColindex) {
+				return false;
+			}
+		};
+		
+		importModel.setRowCount(0);
+		String[][] rowData = importService.getImportmonthselect();
+		
+		for(String[] row: rowData) {
+			importModel.addRow(row);
+		}
+		
+		return importModel;
+	}
 	}
