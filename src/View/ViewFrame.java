@@ -16,8 +16,8 @@ public class ViewFrame{
 
 	
 	public static JFrame mainFrame = new JFrame();
-	MainMenuView mainMenu;
-	JPanel mainFan = new JPanel();
+	public static MainMenuView mainMenu;
+	public static JPanel mainFan = new JPanel();
 
 	public ViewFrame() {
 
@@ -33,6 +33,7 @@ public class ViewFrame{
 
 		mainFrame.setIconImage(new ImageIcon("coin.png").getImage());
 
+		
 		mainFan.removeAll();
 
 		mainMenu = new MainMenuView(mainFan);
