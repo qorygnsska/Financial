@@ -10,10 +10,14 @@ import java.awt.HeadlessException;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -44,6 +48,7 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 public class ExportView extends JPanel {
 	UtilDateModel model = new UtilDateModel();
 	static String date;
+	public static String monthdate;
 	int num = 0;
 	String[] datelist = new String[2];
 	DatePickerController dpc = new DatePickerController();
@@ -508,7 +513,7 @@ public class ExportView extends JPanel {
 
 	public JScrollPane monthCheck() {
 		String[] header = { "날짜", "금        액", "구분", "비        고" };
-		exportModel[0] = ec.getExport(header);
+		exportModel[0] = ec.getExportmonthselect(header);
 
 		monthTable = new JTable(exportModel[0]);
 		monthTable.getTableHeader().setReorderingAllowed(false);
@@ -638,6 +643,68 @@ public class ExportView extends JPanel {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
 
+		
+		
+		
+		
+		
+		 // JComboBox 생성
+		 String[] months = {"1월", "2월", "3월", "4월", "5월", "6월", "7월",
+		 "8월", "9월", "10월", "11월", "12월"};
+		 JComboBox<String> monthComboBox = new JComboBox<>(months);
+		 j1.add(monthComboBox);
+
+		 // JComboBox에서 월 선택시 JDatePicker의 월을 변경
+		 monthComboBox.addItemListener(new ItemListener() {
+		 public void itemStateChanged(ItemEvent e) {
+		 if (e.getStateChange() == ItemEvent.SELECTED) {
+		 int selectedMonthIndex = monthComboBox.getSelectedIndex();
+		 Calendar calendar = Calendar.getInstance();
+		 calendar.setTime((Date)model.getValue());
+		 calendar.set(Calendar.MONTH, selectedMonthIndex);
+		 model.setValue(calendar.getTime());
+		
+		 
+			tabPanel.setSelectedIndex(2);
+			monthdate = dateFormat.format(model.getValue());
+			datelist[num] = monthdate;
+			
+			if (datelist[0] != null) {
+
+				if (dpc.exportmonthsearch(datelist)) {
+					System.out.println("검색 성공");
+					
+					tabPanel.removeAll();
+					tabPanel.add("전체", monthPanel.add(totalCheck()));
+					tabPanel.add("일별", monthPanel.add(dayCheck()));
+					tabPanel.add("월별", monthPanel.add(monthCheck()));
+					
+					tabPanel.revalidate();
+					tabPanel.repaint();
+					tabPanel.setSelectedIndex(2);
+					datelist[0] = null;
+				} else {
+					JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+					System.out.println("검색 실패");
+					datelist[0] = null;
+				}
+
+			}
+		 
+		 
+		 
+		 
+		 }
+		 }
+		 });	
+				
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	

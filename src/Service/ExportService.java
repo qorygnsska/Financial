@@ -28,5 +28,10 @@ public class ExportService {
 		return dpdao.getExportdayselect();
 	}
 
+	public String[][] getExportmonthselect() {
+		
+		return dpdao.getExportmonthselect();
+	}
+
 
 }
