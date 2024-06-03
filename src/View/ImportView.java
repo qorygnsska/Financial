@@ -69,8 +69,8 @@ public class ImportView extends JPanel {
 	private JTabbedPane tabPanel = new JTabbedPane();
 	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,
 			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
-	private JTextField amountField;
-	private JTextField memoField;
+	private  JTextField amountField;
+	private  JTextField memoField;
 	private JComboBox typeBox;
 
 	private int selectrownum = 0;
@@ -99,22 +99,26 @@ public class ImportView extends JPanel {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			JPanel j1 = new JPanel();
+			//JPanel j1 = new JPanel();
 			// 테이블에서 선택한 행 가져오기
 			int selectRow = totalTable.getSelectedRow();
 			System.out.println("선택한 행:" + selectRow);
 			selectrownum = selectRow + 1;
 			// 선택한 행이 있는지 확인
 			if (selectRow != -1) {
-				String datetext = (String) dayTable.getValueAt(selectRow, 0);
-
+				System.out.println("실행");
+				String datetext = (String) totalTable.getValueAt(selectRow, 0);
+			
+				
+				
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
 
 				model.setDate(year, month - 1, day);
-				amountField.setText((String) dayTable.getValueAt(selectRow, 1));
-				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
+				amountField.setText((String) totalTable.getValueAt(selectRow, 1));
+				System.out.println((String) totalTable.getValueAt(selectRow, 1));
+				memoField.setText((String) totalTable.getValueAt(selectRow, 3));
 
 			}
 		}
@@ -131,8 +135,16 @@ public class ImportView extends JPanel {
 			selectrownum = selectRow + 1;
 			// 선택한 행이 있는지 확인
 			if (selectRow != -1) {
+<<<<<<< HEAD
+				
 				String datetext = (String) dayTable.getValueAt(selectRow, 0);
 
+=======
+				String datetext = (String)dayTable.getValueAt(selectRow, 0);
+				System.out.println((String)dayTable.getValueAt(selectRow, 0));
+				
+				
+>>>>>>> 7614f9e7e8f094b0d64ac5ea3bcd6aef0a32dfd8
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
@@ -157,17 +169,18 @@ public class ImportView extends JPanel {
 			selectrownum = selectRow + 1;
 			// 선택한 행이 있는지 확인
 			if (selectRow != -1) {
-				String datetext = (String) dayTable.getValueAt(selectRow, 0);
-
+				
+				String datetext = (String) monthTable.getValueAt(selectRow, 0);
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
 
+				
 				model.setDate(year, month - 1, day);
 
-				amountField.setText((String) dayTable.getValueAt(selectRow, 1));
-				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
-
+				amountField.setText((String) monthTable.getValueAt(selectRow, 1));
+				memoField.setText((String) monthTable.getValueAt(selectRow, 3));
+			
 			}
 		}
 	}
@@ -294,9 +307,9 @@ public class ImportView extends JPanel {
 
 					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
 					// 구성 요소 가로/세로 속성 변경하여 호출
-					ViewFrame.mainFan.revalidate();
-					// 현재 재배치한 내용으로 보이기
-					ViewFrame.mainFan.repaint();
+//					ViewFrame.mainFan.revalidate();
+//					// 현재 재배치한 내용으로 보이기
+//					ViewFrame.mainFan.repaint();
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
@@ -614,12 +627,7 @@ public class ImportView extends JPanel {
 		 
 		 }
 		 }
-		 });
-		
-		
-		
-		
-		
+		 });	
 		
 		
 		datePanel.addActionListener(new ActionListener() {

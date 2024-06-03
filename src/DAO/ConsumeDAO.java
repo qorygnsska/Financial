@@ -13,6 +13,7 @@ public class ConsumeDAO {
 	private ResultSet rs;
 
 	
+	// 소비태그 1위부터 3위까지
 	public String[][] select() {
 		String[][] result = null;
 
@@ -25,7 +26,7 @@ public class ConsumeDAO {
 					"SELECT SUM(price)\r\n" + 
 					"FROM export\r\n" + 
 					"WHERE\r\n" + 
-					"user_id = ?\r\n" + 
+					"user_id = ? AND substr(day,0,5) = substr(sysdate,0,5)\r\n" + 
 					"GROUP BY type_id\r\n" + 
 					")";
 
@@ -44,7 +45,7 @@ public class ConsumeDAO {
 			// 조회하는 sql문 작성
 			String sql = "select sum(price) as 합계, type from export\r\n" + 
 					"join extype on extype.id = export.type_id\r\n" + 
-					"where user_id = ? and substr(day,0,4) = substr(sysdate,0,4)\r\n" + 
+					"where user_id = ? and substr(day,0,5) = substr(sysdate,0,5) and export.type_id in(1,2,3,4)\r\n" + 
 					"group by type_id, type\r\n" + 
 					"order by sum(price) desc";
 			
