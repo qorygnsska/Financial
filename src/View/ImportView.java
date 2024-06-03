@@ -10,6 +10,8 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -18,6 +20,8 @@ import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -278,6 +282,7 @@ public class ImportView extends JPanel {
 				if (ic.add(importModel)) {
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 					tabPanel.removeAll();
+					
 					tabPanel.add("전체", dayPanel.add(totalCheck()));
 					tabPanel.add("일별", dayPanel.add(dayCheck()));
 					tabPanel.add("월별", dayPanel.add(monthCheck()));
@@ -570,6 +575,34 @@ public class ImportView extends JPanel {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
 
+		
+		 // JComboBox 생성
+		 String[] months = {"1월", "2월", "3월", "4월", "5월", "6월", "7월",
+		 "8월", "9월", "10월", "11월", "12월"};
+		 JComboBox<String> monthComboBox = new JComboBox<>(months);
+		 j1.add(monthComboBox);
+
+		 // JComboBox에서 월 선택시 JDatePicker의 월을 변경
+		 monthComboBox.addItemListener(new ItemListener() {
+		 public void itemStateChanged(ItemEvent e) {
+		 if (e.getStateChange() == ItemEvent.SELECTED) {
+		 int selectedMonthIndex = monthComboBox.getSelectedIndex();
+		 Calendar calendar = Calendar.getInstance();
+		 calendar.setTime((Date)model.getValue());
+		 calendar.set(Calendar.MONTH, selectedMonthIndex);
+		 model.setValue(calendar.getTime());
+		
+		 
+		 
+		 
+		 }
+		 }
+		 });
+		
+		
+		
+		
+		
 		
 		
 		datePanel.addActionListener(new ActionListener() {
