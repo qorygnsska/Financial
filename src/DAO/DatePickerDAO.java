@@ -190,4 +190,100 @@ String[][] result = null;
 		return result;
 	}
 
+	//수입 월별 조회 dao
+	public String[][] getImportmonthselect() {
+		String[][] result = null;
+
+		try {
+
+			con = DBUtil.getConnection();
+
+			String countSql = "select count(*) from import where user_id = ?";
+
+			ps = con.prepareStatement(countSql);
+			ps.setInt(1, UsersModel.user.getId());
+			rs = ps.executeQuery();
+
+			int row = 0;
+
+			if (rs.next()) {
+				row = rs.getInt(1);
+				System.out.println(row);
+			} else {
+				return result;
+			}
+
+			String sql = "select day, price, im.type, memo\r\n" + 
+					"from users u\r\n" + 
+					"join import i on i.user_id = u.id\r\n" + 
+					"join imtype im on im.id = i.type_id\r\n" + 
+					"where substr(day, 1, 5) >= ? and substr(day, 1, 5) <= ? order by day asc";
+			
+			ps = con.prepareStatement(sql);
+			ps.setString(1,date1);
+			ps.setString(2, date1);
+			ResultSet rs = ps.executeQuery();
+
+				
+			result = new String[row][4];
+
+			int index = 0;
+
+			while (rs.next()) {
+				result[index][0] = rs.getString("day");
+				result[index][1] = rs.getString("price");
+				result[index][2] = rs.getString("type");
+				result[index][3] = rs.getString("memo");
+				index++;
+			}
+			rs.close();
+			ps.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public boolean importmonthseracht(String[] datelist) {
+		boolean result = false;
+		System.out.println("DatePicker DAO 실행!");
+
+		con = DBUtil.getConnection();
+		String sql = "select day, price, im.type, memo\r\n" + 
+				"from users u\r\n" + 
+				"join import i on i.user_id = u.id\r\n" + 
+				"join imtype im on im.id = i.type_id\r\n" + 
+				"where substr(day, 1, 5) >= ? and substr(day, 1, 5) <= ? order by day asc";
+		 date1 = datelist[0];
+		 
+		 String date2=date1.substring(0,5);
+		 System.out.println(date2);
+		try {
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, date2);
+			ps.setString(2, date2);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				System.out.print(rs.getString("day") + " ");
+				System.out.print(rs.getInt("price") + " ");
+				System.out.print(rs.getString("type") + " ");
+				System.out.print(rs.getString("memo"));
+				System.out.println();
+
+				result = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	
+	}
+
 }

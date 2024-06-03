@@ -23,7 +23,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -302,9 +301,9 @@ public class ImportView extends JPanel {
 
 					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
 					// 구성 요소 가로/세로 속성 변경하여 호출
-//					ViewFrame.mainFan.revalidate();
-//					// 현재 재배치한 내용으로 보이기
-//					ViewFrame.mainFan.repaint();
+					ViewFrame.mainFan.revalidate();
+					// 현재 재배치한 내용으로 보이기
+					ViewFrame.mainFan.repaint();
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
@@ -349,7 +348,6 @@ public class ImportView extends JPanel {
 					tabPanel.repaint();
 					ViewFrame.mainFan.removeAll();
 					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
-
 					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
 					// 구성 요소 가로/세로 속성 변경하여 호출
 					ViewFrame.mainFan.revalidate();
@@ -520,7 +518,7 @@ public class ImportView extends JPanel {
 	public JScrollPane monthCheck() {
 
 		String[] header = { "날짜", "금        액", "구분", "비        고" };
-		importModel[0] = ic.getImport(header);
+		importModel[0] = ic.getImportmonthselect(header);
 
 		monthTable = new JTable(importModel[0]);
 		monthTable.getTableHeader().setReorderingAllowed(false);
@@ -618,13 +616,38 @@ public class ImportView extends JPanel {
 		 model.setValue(calendar.getTime());
 		
 		 
+			tabPanel.setSelectedIndex(2);
+			date = dateFormat.format(model.getValue());
+			datelist[num] = date;
+		
+			if (datelist[0] != null) {
+
+				if (dpc.importmonthsearch(datelist)) {
+					System.out.println("검색 성공");
+
+					tabPanel.removeAll();
+					tabPanel.add("전체", monthPanel.add(totalCheck()));
+					tabPanel.add("일별", monthPanel.add(dayCheck()));
+					tabPanel.add("월별", monthPanel.add(monthCheck()));
+					tabPanel.revalidate();
+					tabPanel.repaint();
+					tabPanel.setSelectedIndex(2);
+					datelist[0] = null;
+				} else {
+					JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+					System.out.println("검색 실패");
+					datelist[0] = null;
+				}
+
+			}
+		 
+		 
 		 
 		 
 		 }
 		 }
 		 });	
-		
-		
+				
 		datePanel.addActionListener(new ActionListener() {
 			
 			@Override
@@ -658,36 +681,7 @@ public class ImportView extends JPanel {
 			}
 		});
 		
-		
-		
-//		model.addPropertyChangeListener(new PropertyChangeListener() {
-//
-//			@Override
-//			public void propertyChange(PropertyChangeEvent evt) {
-//
-//				if ("value".equals(evt.getPropertyName()) && "value" != null) {
-//					
-//					tabPanel.setSelectedIndex(1);
-//					date = dateFormat.format(model.getValue());
-//					datelist[num] = date;
-//					if (datelist[0] != null) {
-//
-//						if (dpc.importsearch(datelist)) {
-//							System.out.println("검색 성공");
-//
-//							datelist[0] = null;
-//						} else {
-//							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
-//							System.out.println("검색 실패");
-//							datelist[0] = null;
-//						}
-//
-//					}
-//
-//				}
-//
-//			}
-//		});
+	
 		return j1;
 
 	}

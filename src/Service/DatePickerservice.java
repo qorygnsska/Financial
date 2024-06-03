@@ -17,4 +17,9 @@ DatePickerDAO tdao = new DatePickerDAO();
 		return tdao.exportseracht(datelist);
 	}
 
+	public boolean importmonthsearch(String[] datelist) {
+		
+		return tdao.importmonthseracht(datelist);
+	}
+
 }

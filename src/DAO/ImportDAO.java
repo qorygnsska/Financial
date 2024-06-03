@@ -101,13 +101,13 @@ public class ImportDAO {
 		boolean result = false;
 
 		conn = DBUtil.getConnection();
-		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day asc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import";
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day asc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id=?";
 		try {
 
 			pt = conn.prepareStatement(sql);
 
 			pt.setInt(1, importModel.getIdnum());
-
+			pt.setInt(2, UsersModel.user.getId());
 			rs=pt.executeQuery();
 
 			if (rs.next()) {
