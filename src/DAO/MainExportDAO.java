@@ -18,7 +18,7 @@ public class MainExportDAO {
 
 			conn = DBUtil.getConnection();
 
-			String countSql = "select count(*) from export where user_id = ?";
+			String countSql = "select count(*) from export where user_id = ? and substr(day,0,5) = substr(sysdate,0,5)";
 
 			pt = conn.prepareStatement(countSql);
 			pt.setInt(1, UsersModel.user.getId());
@@ -29,12 +29,12 @@ public class MainExportDAO {
 			if (rs.next()) {
 				row = rs.getInt(1);
 //				System.out.println(row);
-			} else {
+			} else {				
 				return result;
 			}
 
 			// 조회하는 sql문 작성
-			String sql = "select day, price, type from export join extype on extype.id = export.type_id where user_id = ? ";
+			String sql = "select day, price, type from export join extype on extype.id = export.type_id where user_id = ? and substr(day,0,5) = substr(sysdate,0,5)";
 
 			pt = conn.prepareStatement(sql);
 			pt.setInt(1, UsersModel.user.getId());
@@ -43,7 +43,7 @@ public class MainExportDAO {
 
 			// 2차원 배열을 선언
 			result = new String[row][3];
-
+			
 			// 2차원 배열의 index를 (공간의 번호)
 			// 저장하는 변수
 			int index = 0;

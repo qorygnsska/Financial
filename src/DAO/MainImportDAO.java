@@ -20,7 +20,7 @@ public class MainImportDAO {
 
 			conn = DBUtil.getConnection();
 
-			String countSql = "select count(*) from import join imtype on imtype.id = import.type_id where user_id = ?";
+			String countSql = "select count(*) from import where user_id = ? and substr(day,0,5) = substr(sysdate,0,5)";
 
 			pt = conn.prepareStatement(countSql);
 			pt.setInt(1, UsersModel.user.getId());
@@ -32,11 +32,12 @@ public class MainImportDAO {
 				row = rs.getInt(1);
 //				System.out.println(row);
 			} else {
+
 				return result;
 			}
 
 			// 조회하는 sql문 작성
-			String sql = "select day, price, type from import join imtype on imtype.id = import.type_id where user_id = ?";
+			String sql = "select day, price, type from import join imtype on imtype.id = import.type_id where user_id = ? and substr(day,0,5) = substr(sysdate,0,5)";
 			
 			pt = conn.prepareStatement(sql);
 			pt.setInt(1, UsersModel.user.getId());
@@ -50,6 +51,7 @@ public class MainImportDAO {
 			int index = 0;
 
 			System.out.println("와일문 시작 전");
+			
 			while (rs.next()) {
 				
 				// 결과를 받아와서 테이블에 추가하는
