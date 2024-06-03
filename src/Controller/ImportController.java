@@ -70,4 +70,9 @@ public class ImportController {
 		
 		return importModel;
 	}
+
+	public boolean delete(ImportModel importmodel) {
+		System.out.println("(IMportController)실행중");
+		return importService.delete(importmodel);
+	}
 	}

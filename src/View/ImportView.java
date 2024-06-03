@@ -39,8 +39,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import Controller.ImportController;
+import DAO.AmountDAO;
 import Controller.DatePickerController;
 import DatePickerEx.Dateformet;
+import Model.AmountModel;
 import Model.ImportModel;
 import Model.UsersModel;
 import net.sourceforge.jdatepicker.JDatePanel;
@@ -77,6 +79,8 @@ public class ImportView extends JPanel {
 
 	DefaultTableModel[] importModel = new DefaultTableModel[4];
 	ImportController ic = new ImportController();
+	
+	AmountDAO amountDAO = new AmountDAO();
 
 	public ImportView() {
 	}
@@ -282,29 +286,34 @@ public class ImportView extends JPanel {
 
 				String memo = memoField.getText();
 				System.out.println(UsersModel.user.getId() + " " + dateText + " " + amount + " " + type + " " + memo);
+				
 
 				ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
-
-				
-			
 				
 				if (ic.add(importModel)) {
+					
+					// amount 추가 코드
+					String amounttype = "수입";
+					
+					AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
+					amountDAO.insert(amountModel);
+					// amount 추가 코드 끝
+					
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
-					tabPanel.removeAll();
-
-					tabPanel.add("전체", dayPanel.add(totalCheck()));
-					tabPanel.add("일별", dayPanel.add(dayCheck()));
-					tabPanel.add("월별", dayPanel.add(monthCheck()));	
-					tabPanel.revalidate();
-					tabPanel.repaint();
 					ViewFrame.mainFan.removeAll();
 					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
-
 					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
 					// 구성 요소 가로/세로 속성 변경하여 호출
 					ViewFrame.mainFan.revalidate();
 					// 현재 재배치한 내용으로 보이기
 					ViewFrame.mainFan.repaint();
+					tabPanel.removeAll();
+					tabPanel.add("전체", dayPanel.add(totalCheck()));
+					tabPanel.add("일별", dayPanel.add(dayCheck()));
+					tabPanel.add("월별", dayPanel.add(monthCheck()));	
+					tabPanel.revalidate();
+					tabPanel.repaint();
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
@@ -335,6 +344,13 @@ public class ImportView extends JPanel {
 
 				System.out.println(selectrownum + " " + UsersModel.user.getId() + " " + dateText + " " + amount + " "
 						+ type + " " + memo);
+				
+				// amount 수정 코드
+				String amounttype = "수입";
+				
+				AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo, selectrownum);
+				amountDAO.update(amountModel);
+				// amount 수정 코드 끝
 
 				ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
 						selectrownum);
@@ -372,9 +388,52 @@ public class ImportView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// 테이블에서 선택한 행 가져오기
-				int selectRow = totalTable.getSelectedRow();
-				System.out.println("선택한 행:" + selectRow);
+				String dateText = date;
+				int amount = Integer.parseInt(amountField.getText());
+				String type = typeBox.getSelectedItem().toString();
+				int type_id = 1;
+
+				// 콤보박스에서 type을 받으면 type_id로 저장하는 반복문
+				for (int i = 0; i < typeBox.getItemCount(); i++) {
+					if (type.equals(typeBox.getItemAt(i))) {
+						type_id = i + 1;
+					}
+				}
+				String memo = memoField.getText();
+
+				System.out.println(selectrownum + " " + UsersModel.user.getId() + " " + dateText + " " + amount + " "
+						+ type + " " + memo);
+				
+				// amount 삭제 코드
+				String amounttype = "수입";
+				amountDAO.delete(selectrownum, amounttype);
+				// amount 삭제 코드 끝
+
+				ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
+						selectrownum);
+				
+				
+				if (ic.delete(importmodel)) {
+					tabPanel.removeAll();
+					tabPanel.add("전체", dayPanel.add(totalCheck()));
+					tabPanel.add("일별", dayPanel.add(dayCheck()));
+					tabPanel.add("월별", dayPanel.add(monthCheck()));
+					tabPanel.revalidate();
+					tabPanel.repaint();
+					ViewFrame.mainFan.removeAll();
+					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
+					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
+					// 구성 요소 가로/세로 속성 변경하여 호출
+					ViewFrame.mainFan.revalidate();
+					// 현재 재배치한 내용으로 보이기
+					ViewFrame.mainFan.repaint();
+					JOptionPane.showMessageDialog(null, "수입 내역에 삭제되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "수입 내역에 삭제되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
+				}
+
+				amountField.setText("");
+				memoField.setText("");
 			}
 		});
 
@@ -613,16 +672,16 @@ public class ImportView extends JPanel {
 		 int selectedMonthIndex = monthComboBox.getSelectedIndex();
 		 Calendar calendar = Calendar.getInstance();
 		 calendar.setTime((Date)model.getValue());
-		 calendar.set(Calendar.MONTH, selectedMonthIndex);
+		 calendar.set(Calendar.MONTH, selectedMonthIndex); 
 		 model.setValue(calendar.getTime());
 		
-		 
+		 	//월탭 선택
 			tabPanel.setSelectedIndex(2);
 			monthdate = dateFormat.format(model.getValue());
 			datelist[num] = monthdate;
 			
 			if (datelist[0] != null) {
-
+				//데이터가 있는지 확인하고 있다면 조건의맞는 값을 불러와 테이블을 지웠다가 다시 그린다.
 				if (dpc.importmonthsearch(datelist)) {
 					System.out.println("검색 성공");
 					
@@ -641,10 +700,7 @@ public class ImportView extends JPanel {
 					datelist[0] = null;
 				}
 
-			}
-		 
-		 
-		 
+			}		 
 		 
 		 }
 		 }

@@ -95,17 +95,31 @@ public class AmountDAO {
 	// amount에 값 추가!!
 	public void insert(AmountModel amountModel) {
 		con = DBUtil.getConnection();
-		String sql = "insert into amount(user_id, price, day, type, content, memo) values(?, ?, ?, ?, ?, ?)";
+		String sql = "insert into amount(user_id, price, day, type, content, memo, foreign_id) values(?, ?, ?, ?, ?, ?, ?)";
+		String sql1 = "select max(id) from import";
+		String sql2 = "select max(id) from export";
+		
+		int maxid = 0;
 
 		try {
-			ps = con.prepareStatement(sql);
+			if(amountModel.getType().equals("수입")) {
+				ps = con.prepareStatement(sql1);
+			}else if(amountModel.getType().equals("지출")) {
+				ps = con.prepareStatement(sql2);
+			}
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				maxid = rs.getInt(1);
+			}
 			
+			ps = con.prepareStatement(sql);
 			ps.setInt(1, UsersModel.user.getId());
 			ps.setInt(2, amountModel.getPrice());
 			ps.setString(3, amountModel.getDay());
 			ps.setString(4, amountModel.getType());
 			ps.setString(5, amountModel.getContent());
 			ps.setString(6, amountModel.getMemo());
+			ps.setInt(7, maxid);
 			
 			int res = ps.executeUpdate();
 			
@@ -147,33 +161,40 @@ public class AmountDAO {
 	
 	// 잔액 테이블 수정
 	public void update(AmountModel amountModel) {
-		int sqlid = 0;
+		int maxid = 0;
 		con = DBUtil.getConnection();
 		// 아이디 찾는 sql
-		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from amount where user_id = ?";
+		String sql2 = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id = ?";
+		String sql3 = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id = ?";
 		// 수정하는 sql
-		String sql2 = "update amount set price=?, day=?, type=?, content=?, memo=? where user_id=? and id=?";
+		String sql = "update amount set price=?, day=?, type=?, content=?, memo=? where user_id=? and foreign_id = ? and type = ?";
 		
 		try {
-			ps = con.prepareStatement(sql);
+			if(amountModel.getType().equals("수입")) {
+				ps = con.prepareStatement(sql2);
+			}else if(amountModel.getType().equals("지출")) {
+				ps = con.prepareStatement(sql3);
+			}
+			
 			ps.setInt(1, amountModel.getRownum());
 			ps.setInt(2, UsersModel.user.getId());
 			
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				sqlid = rs.getInt(1);
+				maxid = rs.getInt(1);
 			}
 			
-			ps = con.prepareStatement(sql2);
+			ps = con.prepareStatement(sql);
 			ps.setInt(1, amountModel.getPrice());
 			ps.setString(2, amountModel.getDay());
 			ps.setString(3, amountModel.getType());
 			ps.setString(4, amountModel.getContent());
 			ps.setString(5, amountModel.getMemo());
 			ps.setInt(6, UsersModel.user.getId());
-			ps.setInt(7, sqlid);
+			ps.setInt(7, maxid);
+			ps.setString(8, amountModel.getType());
 			
-			int res = ps.executeUpdate();
+			ps.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -183,30 +204,38 @@ public class AmountDAO {
 	
 	
 	// 잔액 테이블 삭제
-	public void delete(int rownum) {
-		int sqlid = 0;
+	public void delete(int rownum, String amounttype) {
+		int maxid = 0;
 		con = DBUtil.getConnection();
 		
 		// 아이디 찾는 sql
-		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from amount where user_id = ?";
+		String sql2 = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id = ?";
+		String sql3 = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id = ?";
 		// 삭제하는 sql
-		String sql2 = "delete from amount where id = ?";
+		String sql = "delete from amount where foreign_id = ? and user_id = ? and type = ?";
 		
 		try {
-			ps = con.prepareStatement(sql);
+			if(amounttype.equals("수입")) {
+				ps = con.prepareStatement(sql2);
+			}else if(amounttype.equals("지출")) {
+				ps = con.prepareStatement(sql3);
+			}
+			
 			ps.setInt(1, rownum);
 			ps.setInt(2, UsersModel.user.getId());
 			
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				sqlid = rs.getInt(1);
+				maxid = rs.getInt(1);
 			}
 			
-			ps = con.prepareStatement(sql2);
-			ps.setInt(1, sqlid);
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, maxid);
+			ps.setInt(2, UsersModel.user.getId());
+			ps.setString(3, amounttype);
 			
-			int res = ps.executeUpdate();
+			ps.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
