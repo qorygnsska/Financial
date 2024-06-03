@@ -28,4 +28,8 @@ public class SaveController {
 	public void insert(SaveModel model) {
 			service.insert(model);
 	}
+	
+	public void update(SaveModel model) {
+			service.update(model);
+	}
 }

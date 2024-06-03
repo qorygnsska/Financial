@@ -21,4 +21,8 @@ public class SaveService {
 	public void insert(SaveModel model) {
 		dao.insert(model);
 	}
+	
+	public void update(SaveModel model) {
+		dao.update(model);
+	}
 }

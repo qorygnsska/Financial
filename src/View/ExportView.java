@@ -30,10 +30,12 @@ import javax.swing.table.TableColumnModel;
 
 import Controller.DatePickerController;
 import Controller.ExportController;
+import Controller.SaveController;
 import DAO.AmountDAO;
 import DatePickerEx.Dateformet;
 import Model.AmountModel;
 import Model.ExportModel;
+import Model.SaveModel;
 import Model.UsersModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -70,6 +72,7 @@ public class ExportView extends JPanel {
 	ExportController ec = new ExportController();
 	
 	AmountDAO amountDAO = new AmountDAO();
+	SaveController SC = new SaveController();
 
 	public ExportView() {
 	}
@@ -239,17 +242,27 @@ public class ExportView extends JPanel {
 				String memo = memoField.getText();
 				System.out.println(UsersModel.user.getId() + " " + dateText + " " + amount + " " + type + " " + memo);
 				
-				// amount 추가 코드
-				String amounttype = "";
-				if (type.equals("고정지출")) {
-					amounttype = "고정지출";
-				} else {
-					amounttype = "지출";
-				}
-				AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
-				amountDAO.insert(amountModel);
-				// amount 추가 코드 끝
+				
 
+				// saveprice 추가코드 시작
+				
+				if (type.equals("저축")) {
+					SaveModel model = new SaveModel(amount, dateText, type_id, memo, selectrownum);
+					SC.insert(model);
+					JOptionPane.showMessageDialog(null, "저축 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+				}
+				else {
+					// amount 추가 코드
+					String amounttype = "";
+					if (type.equals("고정지출")) {
+						amounttype = "고정지출";
+					} else {
+						amounttype = "지출";
+					}
+					AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
+					amountDAO.insert(amountModel);
+					// amount 추가 코드 끝
+					
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
 				if (ec.add(exportModel)) {
 					
@@ -266,12 +279,15 @@ public class ExportView extends JPanel {
 					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
 					// 구성 요소 가로/세로 속성 변경하여 호출
 					ViewFrame.mainFan.revalidate();
+					
 					// 현재 재배치한 내용으로 보이기
 					ViewFrame.mainFan.repaint();
 					JOptionPane.showMessageDialog(null, "지출 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "지출 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
+				
+				}  // saveprice 추가코드 끝
 			}
 		});
 

@@ -101,7 +101,7 @@ public class SaveDAO {
 		} catch (Exception e) {}
 	}
 	
-	public void update() {
+	public void update(SaveModel model) {
 		
 		int sqlid = 0;
 		
@@ -110,7 +110,36 @@ public class SaveDAO {
 			
 			String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from saveprice where user_id = ?";
 			
-			String sql2 = "update amount set price=?, day=?, type=?, content=?, memo=? where user_id=? and id=?";
+			pt = conn.prepareStatement(sql);
+			
+			pt.setInt(1, model.getRowNum());
+			pt.setInt(2, UsersModel.user.getId());
+			
+			rs = pt.executeQuery();
+			
+			
+			if(rs.next()) {
+				sqlid = rs.getInt(1);
+			}else {
+				System.out.println("없는데?");
+			}
+			
+			
+			String sql2 = "update saveprice set price=?, day=?, type_id=?, memo=? where user_id=? and id=?";
+			
+			pt = conn.prepareStatement(sql2);
+			pt.setInt(1, model.getPrice());
+			pt.setString(2, model.getDay());
+			pt.setInt(3, model.getType_id());
+			pt.setString(4, model.getMemo());
+			pt.setInt(5, UsersModel.user.getId());
+			pt.setInt(6, sqlid);
+			
+			int row = pt.executeUpdate();
+			
+			if(row > 0) {
+				 System.out.println("저축 수정 완료");
+			}
 			
 		} catch (Exception e) {
 		}

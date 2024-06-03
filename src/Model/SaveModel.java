@@ -2,27 +2,21 @@ package Model;
 
 public class SaveModel {
 
-	private int user_id;
 	private int price;
 	private String day;
 	private int type_id;
 	private String memo;
 	private int rowNum;
-	public SaveModel(int user_id, int price, String day, int type_id, String memo, int rowNum) {
+	public SaveModel(int price, String day, int type_id, String memo, int rowNum) {
 		
-		this.user_id = user_id;
 		this.price = price;
 		this.day = day;
 		this.type_id = type_id;
 		this.memo = memo;
 		this.rowNum = rowNum;
 	}
-	public int getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
+	
+	
 	public int getPrice() {
 		return price;
 	}
@@ -46,6 +40,16 @@ public class SaveModel {
 	}
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+
+	public int getRowNum() {
+		return rowNum;
+	}
+
+
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
 	}
 	
 	
