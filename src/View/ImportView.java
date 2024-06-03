@@ -135,16 +135,11 @@ public class ImportView extends JPanel {
 			selectrownum = selectRow + 1;
 			// 선택한 행이 있는지 확인
 			if (selectRow != -1) {
-<<<<<<< HEAD
-				
-				String datetext = (String) dayTable.getValueAt(selectRow, 0);
-
-=======
+			
 				String datetext = (String)dayTable.getValueAt(selectRow, 0);
 				System.out.println((String)dayTable.getValueAt(selectRow, 0));
 				
 				
->>>>>>> 7614f9e7e8f094b0d64ac5ea3bcd6aef0a32dfd8
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
