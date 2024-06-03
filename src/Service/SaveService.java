@@ -1,6 +1,7 @@
 package Service;
 
 import DAO.SaveDAO;
+import Model.SaveModel;
 
 public class SaveService {
 
@@ -17,4 +18,7 @@ public class SaveService {
 			return arr;
 	}
 
+	public void insert(SaveModel model) {
+		dao.insert(model);
+	}
 }

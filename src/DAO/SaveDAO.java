@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import Model.SaveModel;
 import Model.UsersModel;
 
 public class SaveDAO {
@@ -73,5 +74,45 @@ public class SaveDAO {
 		}
 
 		return result;
+	}
+	
+	
+	 // 지출상세에서 저축 추가하면 저축테이블에 값 저장
+	public void insert(SaveModel model) {
+		
+		try {
+			conn = DBUtil.getConnection();
+			
+			String sql = "insert into saveprice(user_id, price, day, type_id, memo)\r\n" + 
+					"values (?,?,?,?,?)";
+			
+			pt = conn.prepareStatement(sql);
+			pt.setInt(1,UsersModel.user.getId());
+			pt.setInt(2, model.getPrice());
+			pt.setString(3, model.getDay());
+			pt.setInt(4, model.getType_id());
+			pt.setString(5, model.getMemo());
+			
+			int row = pt.executeUpdate();
+			if(row > 0) {
+				System.out.println("추가 성공");
+			}
+			
+		} catch (Exception e) {}
+	}
+	
+	public void update() {
+		
+		int sqlid = 0;
+		
+		try {
+			conn = DBUtil.getConnection();
+			
+			String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from saveprice where user_id = ?";
+			
+			String sql2 = "update amount set price=?, day=?, type=?, content=?, memo=? where user_id=? and id=?";
+			
+		} catch (Exception e) {
+		}
 	}
 }

@@ -2,6 +2,7 @@ package Controller;
 
 import javax.swing.table.DefaultTableModel;
 
+import Model.SaveModel;
 import Service.SaveService;
 
 public class SaveController {
@@ -22,5 +23,9 @@ public class SaveController {
 		}
 
 		return model;
+	}
+	
+	public void insert(SaveModel model) {
+			service.insert(model);
 	}
 }
