@@ -40,7 +40,7 @@ public class ExportDAO {
 						 " from users u " + 
 						 " join export e on e.user_id = u.id " + 
 						 " join extype ex on ex.id = e.type_id " +
-						 " where u.user_id = ? order by day asc";
+						 " where u.user_id = ? order by day desc";
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, UsersModel.user.getUser_id());
 			ResultSet rs = pt.executeQuery();
