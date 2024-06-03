@@ -405,9 +405,9 @@ public class ImportView extends JPanel {
 					ViewFrame.mainFan.revalidate();
 					// 현재 재배치한 내용으로 보이기
 					ViewFrame.mainFan.repaint();
-					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(null, "수입 내역에 삭제되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "수입 내역에 삭제되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
 
 				amountField.setText("");
