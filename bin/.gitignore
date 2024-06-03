@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Controller/
 /DAO/
 <<<<<<< HEAD
@@ -5,4 +6,9 @@
 /Model/
 >>>>>>> 7614f9e7e8f094b0d64ac5ea3bcd6aef0a32dfd8
 /Service/
+=======
+>>>>>>> shim
 /View/
+/DAO/
+/Service/
+/Controller/
