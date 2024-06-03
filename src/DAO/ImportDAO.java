@@ -30,22 +30,18 @@ public class ImportDAO {
 
 			int row = 0;
 
-			System.out.println("s1");
 			if (rs.next()) {
 				row = rs.getInt(1);
 				System.out.println(row);
 			} else {
 				return result;
 			}
-			System.out.println("s2");
 
 			String sql = "select day, price, im.type, memo " + " from users u " + " join import i on i.user_id = u.id "
-					+ " join imtype im on im.id = i.type_id " + " where u.user_id = ? ";
-			System.out.println("s3");
+					+ " join imtype im on im.id = i.type_id " + " where u.user_id = ? order by day asc";
 
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, UsersModel.user.getUser_id());
-			System.out.println("s4");
 			ResultSet rs = pt.executeQuery();
 
 			result = new String[row][4];
@@ -59,7 +55,6 @@ public class ImportDAO {
 				result[index][3] = rs.getString("memo");
 				index++;
 			}
-			System.out.println("s5");
 			rs.close();
 			pt.close();
 			conn.close();
@@ -70,24 +65,71 @@ public class ImportDAO {
 		return result;
 	}
 
+	
+
+	// 수입 내역 추가
+	public boolean add(ImportModel importModel) {
+		System.out.println("(ImportDAO) 수입 내역 추가 중");
+		boolean result = false;
+
+		conn = DBUtil.getConnection();
+		String sql = "insert into import(user_id, price, day, type_id, memo) values(?, ?, ?, ?, ?)";
+
+		try {
+
+			pt = conn.prepareStatement(sql);
+			pt.setInt(1, importModel.getId());
+			pt.setInt(2, importModel.getPrice());
+			pt.setString(3, importModel.getDay());
+			pt.setInt(4, importModel.getType_id());
+			pt.setString(5, importModel.getMemo());
+
+			int num = pt.executeUpdate();
+
+			if (num > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public boolean update(ImportModel importModel) {
+		int sqlnum=0;
 		System.out.println("importdao 실행");
 		boolean result = false;
 
 		conn = DBUtil.getConnection();
-		String sql = "update import set price=?, day=?,type_id=?, memo=? where user_id=? and id=?";
-	try {
-			
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day asc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import";
+		try {
+
 			pt = conn.prepareStatement(sql);
+
+			pt.setInt(1, importModel.getIdnum());
+
+			rs=pt.executeQuery();
+
+			if (rs.next()) {
+			 sqlnum=rs.getInt("idnum");
+			
+			}
+			
+			String sql1 = "update import set price=?, day=?,type_id=?, memo=? where user_id=? and id=?";
+			pt = conn.prepareStatement(sql1);
+
+			
 			pt.setInt(1, importModel.getPrice());
-			pt.setString(2, importModel.getDay() );
+			pt.setString(2, importModel.getDay());
 			pt.setInt(3, importModel.getType_id());
 			pt.setString(4, importModel.getMemo());
 			pt.setInt(5, importModel.getId());
-			pt.setInt(6, importModel.getIdnum());
+			pt.setInt(6, sqlnum);
+
 			int num = pt.executeUpdate();
+
+			if (num > 0) {
 			
-			if(num > 0) {
 				result = true;
 			}
 		} catch (Exception e) {

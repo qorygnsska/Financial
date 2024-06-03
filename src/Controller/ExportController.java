@@ -17,6 +17,8 @@ public class ExportController {
 		
 		String[][] rowData = exportService.select();
 		
+		exportModel.setRowCount(0);
+		
 		for(String[] row: rowData) {
 			exportModel.addRow(row);
 		}
@@ -29,4 +31,31 @@ public class ExportController {
 		System.out.println("(ExportController)지출 내역 추가 중");
 		return exportService.add(exportModel);
 	}
+
+	
+	public boolean update(ExportModel exportModel) {
+		System.out.println("(ExportController)실행중");
+		return exportService.update(exportModel);
+	}
+
+	//일별조회
+	public DefaultTableModel getExportdayselect(String[] header) {
+		DefaultTableModel exportModel = new DefaultTableModel(header, 0) {
+			public boolean isCellEditable(int rowIndex, int mColindex) {
+				return false;
+			}
+		};
+		
+		String[][] rowData = exportService.getExportdayselect();
+		
+		exportModel.setRowCount(0);
+		
+		for(String[] row: rowData) {
+			exportModel.addRow(row);
+		}
+		
+		return exportModel;
+	}
+	
+
 }
