@@ -44,7 +44,7 @@ public class ConsumeDAO {
 			// 조회하는 sql문 작성
 			String sql = "select sum(price) as 합계, type from export\r\n" + 
 					"join extype on extype.id = export.type_id\r\n" + 
-					"where user_id = ?\r\n" + 
+					"where user_id = ? and substr(day,0,4) = substr(sysdate,0,4)\r\n" + 
 					"group by type_id, type\r\n" + 
 					"order by sum(price) desc";
 			
