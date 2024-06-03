@@ -37,7 +37,7 @@ public class MainImportDAO {
 			}
 
 			// 조회하는 sql문 작성
-			String sql = "select day, price, type from import join imtype on imtype.id = import.type_id where user_id = ? and substr(day,0,5) = substr(sysdate,0,5)";
+			String sql = "select day, price, type from import join imtype on imtype.id = import.type_id where user_id = ? and substr(day,0,5) = substr(sysdate,0,5) order by day desc";
 			
 			pt = conn.prepareStatement(sql);
 			pt.setInt(1, UsersModel.user.getId());

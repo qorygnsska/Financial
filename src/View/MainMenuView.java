@@ -50,6 +50,8 @@ public class MainMenuView extends JPanel {
 	JButton[] btnList = new JButton[2];
 	JPanel userPan = new JPanel(new GridLayout(2, 2));
 	DefaultTableModel saveModel;
+	private Color colBack = new Color(255, 255, 255);
+	private Color colLine = new Color(225, 235, 255);
 
 	AmountDAO amountDAO = new AmountDAO();
 
@@ -59,9 +61,8 @@ public class MainMenuView extends JPanel {
 		setPreferredSize(rect.getSize());
 
 		setLayout(null);
-		setBorder(new LineBorder(Color.white, 100));
 
-		setBackground(Color.white);
+		setBackground(colBack);
 
 		importTable();
 		exportTable();
@@ -141,7 +142,7 @@ public class MainMenuView extends JPanel {
 	// 유저 정보 패널
 	public void userInfo() {
 
-		userPan.setBackground(Color.white);
+		userPan.setBackground(colBack);
 		JLabel nameTitle = new JLabel("이름 : ");
 		System.out.println(UsersModel.user.getName());
 		JLabel name = new JLabel(UsersModel.user.getName());
@@ -174,9 +175,9 @@ public class MainMenuView extends JPanel {
 
 		String[] header = { "날짜", "금액", "유형" };
 		portList[0] = new JPanel();
-		portList[0].setBorder(new TitledBorder(new LineBorder(Color.green, 3), " 수입 "));
+		portList[0].setBorder(new TitledBorder(new LineBorder(colLine,7,true), "수입"));
 		portList[0].setBounds(30, 120, 400, 400);
-		portList[0].setBackground(Color.white);
+		portList[0].setBackground(colBack);
 		// 내용 수정 불가
 		model[0] = IC.getImportModel(header);
 
@@ -217,9 +218,9 @@ public class MainMenuView extends JPanel {
 	public void exportTable() {
 		String[] header = { "날짜", "금액", "유형" };
 		portList[1] = new JPanel();
-		portList[1].setBorder(new TitledBorder(new LineBorder(Color.green, 3), " 지출 "));
+		portList[1].setBorder(new TitledBorder(new LineBorder(colLine,7,true), " 지출 "));
 		portList[1].setBounds(460, 120, 400, 400);
-		portList[1].setBackground(Color.white);
+		portList[1].setBackground(colBack);
 		// 내용 수정 불가
 		model[1] = EC.getExportModel(header);
 
@@ -282,8 +283,8 @@ public class MainMenuView extends JPanel {
 
 		for (int i = 0; i < moneyList.length; i++) {
 			moneyList[i] = new JPanel();
-			moneyList[i].setBorder(new TitledBorder(new LineBorder(Color.green, 4), str[i]));
-			moneyList[i].setBackground(Color.white);
+			moneyList[i].setBorder(new TitledBorder(new LineBorder(colLine,3,true), str[i]));
+			moneyList[i].setBackground(colBack);
 			add(moneyList[i]);
 			labelList[i] = new JLabel(money[i]);
 			moneyList[i].add(labelList[i]);
@@ -291,6 +292,7 @@ public class MainMenuView extends JPanel {
 
 		}
 
+		moneyList[0].setBorder(new TitledBorder(new LineBorder(colLine,7,true), str[0]));
 		moneyList[0].addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -310,7 +312,7 @@ public class MainMenuView extends JPanel {
 		btnPan.setBounds(900, 600, 200, 50);
 		add(btnPan);
 
-		btnPan.setBackground(Color.white);
+		btnPan.setBackground(colBack);
 
 		String[] list = { "로그아웃", "종료" };
 
@@ -326,9 +328,9 @@ public class MainMenuView extends JPanel {
 	public void consume() {
 		JPanel conPan = new JPanel(new GridLayout(0, 3));
 		conPan.setBounds(30, 530, 300, 180);
-		conPan.setBackground(Color.white);
+		conPan.setBackground(colBack);
 
-		conPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "소비유형"));
+		conPan.setBorder(new TitledBorder(new LineBorder(colLine,3,true), "소비유형"));
 		JLabel[] list = new JLabel[3];
 		for (int i = 0; i < list.length; i++) {
 			list[i] = new JLabel();
@@ -375,9 +377,9 @@ public class MainMenuView extends JPanel {
 	public void savingMoney() {
 		JPanel sPan = new JPanel();
 		sPan.setBounds(400, 530, 460, 180);
-		sPan.setBackground(Color.white);
+		sPan.setBackground(colBack);
 
-		sPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "저축"));
+		sPan.setBorder(new TitledBorder(new LineBorder(colLine,3,true), "저축"));
 		String[] header = { "날짜", "금액", "유형", "비고" };
 		
 		saveModel = SC.getSaveModel(header);

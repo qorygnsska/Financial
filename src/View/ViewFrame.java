@@ -23,8 +23,10 @@ public class ViewFrame{
 
 		mainFrame.setTitle("재무관리");
 
-		//mainFan.setLayout(null);
+//		mainFan.setLayout(null);
 		mainFan.setBounds(0, 0, 1200, 800);
+//		mainFan.setBackground(new Color(255, 250, 255));
+		mainFan.setBackground(Color.white);
 		// 모니터 사이즈 받아오기
 		Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
 		// 사이즈 설정
@@ -46,7 +48,7 @@ public class ViewFrame{
 //		mainPan.setBackground(Color.blue);
 
 
-		mainFrame.add(mainFan);
+		mainFrame.add(mainFan,BorderLayout.CENTER);
 
 //		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);
