@@ -31,8 +31,26 @@ public class ImportController {
 		return importService.add(importModel);
 	}
 
-	public boolean update(ImportModel importModel) {
+	public boolean update(ImportModel importmodel) {
 		System.out.println("(IMportController)실행중");
-		return importService.update(importModel);
+		return importService.update(importmodel);
 	}
-}
+
+	public DefaultTableModel getImportdayselect(String[] header) {
+		DefaultTableModel importModel = new DefaultTableModel(header, 0) {
+			public boolean isCellEditable(int rowIndex, int mColindex) {
+				return false;
+			}
+		};
+		
+		importModel.setRowCount(0);
+		String[][] rowData = importService.getImportdayselect();
+		
+		for(String[] row: rowData) {
+			importModel.addRow(row);
+		}
+		
+		return importModel;
+		
+	}
+	}

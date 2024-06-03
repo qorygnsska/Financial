@@ -64,7 +64,8 @@ public class ExportView extends JPanel {
 	private JScrollPane sp = new JScrollPane();
 	private JTabbedPane tabPanel = new JTabbedPane();
 	private JPanel mainPanel, btnPanel, checkPanel, totalPanel, dayPanel, monthPanel, btnsPanel, updatePanel,
-			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
+			selectPanel, datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL,
+			memoPanelR;
 	private JTextField amountField;
 	private JTextField memoField;
 	private JComboBox typeBox;
@@ -244,6 +245,13 @@ public class ExportView extends JPanel {
 
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
 				if (ec.add(exportModel)) {
+					
+					tabPanel.removeAll();
+					tabPanel.add("전체", dayPanel.add(totalCheck()));
+					tabPanel.add("일별", dayPanel.add(dayCheck()));
+					tabPanel.add("월별", dayPanel.add(monthCheck()));
+					tabPanel.revalidate();
+					tabPanel.repaint();
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -278,6 +286,13 @@ public class ExportView extends JPanel {
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
 						selectrownum);
 				if (ec.update(exportModel)) {
+					
+					tabPanel.removeAll();
+					tabPanel.add("전체", dayPanel.add(totalCheck()));
+					tabPanel.add("일별", dayPanel.add(dayCheck()));
+					tabPanel.add("월별", dayPanel.add(monthCheck()));
+					tabPanel.revalidate();
+					tabPanel.repaint();
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -406,7 +421,7 @@ public class ExportView extends JPanel {
 
 	public JScrollPane dayCheck() {
 		String[] header = { "날짜", "금        액", "구분", "비        고" };
-		exportModel[0] = ec.getExport(header);
+		exportModel[0] = ec.getExportdayselect(header);
 
 		dayTable = new JTable(exportModel[0]);
 		dayTable.getTableHeader().setReorderingAllowed(false);
@@ -454,6 +469,47 @@ public class ExportView extends JPanel {
 		TableColumnModel tcm = monthTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
+
+		totalTable.getColumn("날짜").setPreferredWidth(50);
+		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
+		totalTable.getColumn("금        액").setPreferredWidth(230);
+		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
+		totalTable.getColumn("구분").setPreferredWidth(30);
+		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
+		totalTable.getColumn("비        고").setPreferredWidth(250);
+		totalTable.getColumn("비        고").setCellRenderer(dtcrCenter);
+
+		return scrollpane;
+	}
+
+	private JScrollPane selectCheck() {
+		String[] header = { "날짜", "금        액", "구분", "비        고" };
+		exportModel[0] = ec.getExport(header);
+
+		JTable totalTable = new JTable(exportModel[0]);
+		totalTable.getTableHeader().setReorderingAllowed(false);
+		totalTable.getTableHeader().setResizingAllowed(false);
+		totalTable.setRowHeight(20);
+		JScrollPane scrollpane = new JScrollPane(totalTable);
+		scrollpane.setPreferredSize(new Dimension(700, 550));
+
+		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
+		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
+		dtcrCenter.setHorizontalAlignment(JLabel.CENTER);
+		DefaultTableCellRenderer dtcrRight = new DefaultTableCellRenderer();
+		dtcrRight.setHorizontalAlignment(JLabel.RIGHT);
+		TableColumnModel tcm = totalTable.getColumnModel();
+
+		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
+		totalTable.getColumn("날짜").setPreferredWidth(50);
+		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
+		totalTable.getColumn("금        액").setPreferredWidth(230);
+		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
+		totalTable.getColumn("구분").setPreferredWidth(30);
+		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
+		totalTable.getColumn("비        고").setPreferredWidth(250);
+		totalTable.getColumn("비        고").setCellRenderer(dtcrCenter);
+
 		monthTable.getColumn("날짜").setPreferredWidth(50);
 		monthTable.getColumn("날짜").setCellRenderer(dtcrCenter);
 		monthTable.getColumn("금        액").setPreferredWidth(230);
@@ -463,6 +519,7 @@ public class ExportView extends JPanel {
 		monthTable.getColumn("비        고").setPreferredWidth(250);
 		monthTable.getColumn("비        고").setCellRenderer(dtcrCenter);
 		monthTable.addMouseListener(new MyMouseListener3());
+
 		return scrollpane;
 	}
 
@@ -493,14 +550,25 @@ public class ExportView extends JPanel {
 		return monthPanel;
 	}
 
+	// 기간 조회 패널
+	private Component selectPanel() {
+		selectPanel = new JPanel();
+		selectPanel.setBounds(100, 50, 1000, 600);
+		selectPanel.setBackground(Color.white);
+		selectPanel.add(selectCheck());
+		return null;
+	}
+
 //캘린더
 	public JPanel imprtJDatePickerEx() {
+
 		JPanel j1 = new JPanel();
 		// 현재 날짜를 가져옴...
 		LocalDate now = LocalDate.now();
 		int year = now.getYear();// 년도 저장
 		int month = now.getMonthValue();// 월 저장
 		int day = now.getDayOfMonth();// 일 저장
+
 
 		model.setDate(year, month - 1, day);// 현재날짜를 표시
 		model.setSelected(true); // 텍스트 필드에 보이기
@@ -514,22 +582,29 @@ public class ExportView extends JPanel {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
 
-		// 날짜가 변경될 때마다 호출되는 listener 추가
-		tabPanel.setSelectedIndex(1);
-		model.addPropertyChangeListener(new PropertyChangeListener() {
-
+		
+		
+	
+	datePanel.addActionListener(new ActionListener() {
+			
 			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-
-				if ("value".equals(evt.getPropertyName()) && "value" != null) {
+			public void actionPerformed(ActionEvent e) {
+			
+					tabPanel.setSelectedIndex(1);
 					date = dateFormat.format(model.getValue());
 					datelist[num] = date;
-					tabPanel.setSelectedIndex(1);
 					if (datelist[0] != null) {
 
 						if (dpc.exportsearch(datelist)) {
 							System.out.println("검색 성공");
 
+							tabPanel.removeAll();
+							tabPanel.add("전체", dayPanel.add(totalCheck()));
+							tabPanel.add("일별", dayPanel.add(dayCheck()));
+							tabPanel.add("월별", dayPanel.add(monthCheck()));
+							tabPanel.revalidate();
+							tabPanel.repaint();
+							tabPanel.setSelectedIndex(1);
 							datelist[0] = null;
 						} else {
 							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
@@ -539,10 +614,45 @@ public class ExportView extends JPanel {
 
 					}
 
-				}
-
+			
 			}
 		});
+		
+		
+		
+		// 날짜가 변경될 때마다 호출되는 listener 추가
+	
+//		model.addPropertyChangeListener(new PropertyChangeListener() {
+//
+//			@Override
+//			public void propertyChange(PropertyChangeEvent evt) {
+//
+//				if ("value".equals(evt.getPropertyName()) && "value" != null) {
+//
+//					date = dateFormat.format(model.getValue());
+//					date = dateFormat.format(model.getValue());
+//
+//					date = dateFormat.format(model.getValue());
+//					datelist[num] = date;
+//					tabPanel.setSelectedIndex(1);
+//					if (datelist[0] != null) {
+//
+//						if (dpc.exportsearch(datelist)) {
+//							System.out.println("검색 성공");
+//
+//							datelist[0] = null;
+//						} else {
+//							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+//							System.out.println("검색 실패");
+//							datelist[0] = null;
+//						}
+//
+//					}
+//
+//				}
+//
+//			}
+//		});
 		return j1;
 
 	}

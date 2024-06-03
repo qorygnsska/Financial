@@ -142,4 +142,30 @@ public class AmountDAO {
 		}
 
 	}
+	
+	
+	public String amount() {
+		con = DBUtil.getConnection();
+		String sql = "select (select sum(price) from amount where user_id = ? and (type = '수입' or type = '고정수입') ) - (select sum(price) from amount where user_id = ? and (type = '지출' or type = '고정지출')) as 합 from amount where rownum <= 1";
+		String realamount = "";
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, UsersModel.user.getId());
+			ps.setInt(2, UsersModel.user.getId());
+			
+			rs = ps.executeQuery();
+			
+			int amount = 0;
+			if (rs.next()) {
+				amount = rs.getInt(1);
+			}
+			realamount = String.format("%,d원", amount);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return realamount;
+	}
 }
