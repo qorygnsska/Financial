@@ -25,4 +25,12 @@ public class MainImportController {
 
 		return model;
 	}
+	
+	public String thisMonth() {
+		return service.thisMonth();
+	}
+	
+	public String beforeMonth() {
+		return service.beforeMonth();
+	}
 }

@@ -18,13 +18,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import Controller.LoginController;
 import Model.UsersModel;
 
 public class LoginView extends JFrame {
-	private static Font font1 = new Font("휴먼편지체", Font.BOLD, 20);
-	private static Font font2 = new Font("휴먼편지체", Font.BOLD, 30);
+	private static Font font1 = new Font("나눔고딕", Font.BOLD, 19);
+	private static Font font2 = new Font("나눔고딕", Font.BOLD, 30);
+	private static Font font3 = new Font("나눔고딕", Font.BOLD, 13);
+	private Color colBack = new Color(204, 255, 204);
+	private Color colBack2 = new Color(255, 247, 242);
 	
 	LoginController loginController = new LoginController();	
 	
@@ -34,7 +39,8 @@ public class LoginView extends JFrame {
 
 		setTitle("재무관리");
 		JPanel back = new JPanel();
-		back.setBackground(Color.CYAN);
+		back.setBackground(colBack);
+		back.setBorder(new LineBorder(Color.GREEN, 3));
 		
 		setIconImage(new ImageIcon("coin.png").getImage());
 		
@@ -45,7 +51,7 @@ public class LoginView extends JFrame {
 		login.setForeground(Color.black);
 
 		login.setFont(font2);
-		title.setBackground(Color.CYAN);
+		title.setBackground(colBack);
 		title.add(login);
 
 		JPanel jp1 = new JPanel();
@@ -55,11 +61,11 @@ public class LoginView extends JFrame {
 		JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JLabel jlid = new JLabel("아이디 : ", JLabel.CENTER);
 		jlid.setFont(font1);
-		idPanel.setBackground(Color.CYAN);
+		idPanel.setBackground(colBack);
 
 		JPanel idPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JTextField jtid = new JTextField(10);
-		idPanel2.setBackground(Color.CYAN);
+		idPanel2.setBackground(colBack);
 
 		idPanel.add(jlid);
 		idPanel2.add(jtid);
@@ -70,11 +76,11 @@ public class LoginView extends JFrame {
 		JPanel pwdPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JLabel jlpw = new JLabel("비밀번호 : ", JLabel.CENTER);
 		jlpw.setFont(font1);
-		pwdPanel.setBackground(Color.CYAN);
+		pwdPanel.setBackground(colBack);
 
 		JPanel pwdPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JPasswordField jtpw = new JPasswordField(10);
-		pwdPanel2.setBackground(Color.CYAN);
+		pwdPanel2.setBackground(colBack);
 
 		pwdPanel.add(jlpw);
 		pwdPanel2.add(jtpw);
@@ -84,11 +90,15 @@ public class LoginView extends JFrame {
 
 		JPanel loginPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JButton jLogin = new JButton("로그인");
-		loginPanel.setBackground(Color.CYAN);
+		jLogin.setBackground(colBack2);
+		jLogin.setFont(font3);
+		loginPanel.setBackground(colBack);
 
 		JPanel joinPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JButton join = new JButton("회원가입");
-		joinPanel.setBackground(Color.CYAN);
+		join.setBackground(colBack2);
+		join.setFont(font3);
+		joinPanel.setBackground(colBack);
 
 		loginPanel.add(jLogin);
 		joinPanel.add(join);
@@ -97,14 +107,16 @@ public class LoginView extends JFrame {
 		jp1.add(joinPanel);
 
 		JPanel jp2 = new JPanel();
-		jp2.setBackground(Color.CYAN);
+		jp2.setBackground(colBack);
 		jp2.setLayout(new FlowLayout());
 		jp2.add(jp1);
 
 		JPanel jp3 = new JPanel();
-		jp3.setBackground(Color.CYAN);
+		jp3.setBackground(colBack);
 		JLabel idsearch = new JLabel("아이디 찾기 /");
 		JLabel pwsearch = new JLabel("비밀번호 찾기");
+		idsearch.setFont(font3);
+		pwsearch.setFont(font3);
 		jp3.add(idsearch);
 		jp3.add(pwsearch);
 

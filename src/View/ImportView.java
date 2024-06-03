@@ -135,6 +135,7 @@ public class ImportView extends JPanel {
 			selectrownum = selectRow + 1;
 			// 선택한 행이 있는지 확인
 			if (selectRow != -1) {
+			
 				String datetext = (String)dayTable.getValueAt(selectRow, 0);
 				System.out.println((String)dayTable.getValueAt(selectRow, 0));
 				

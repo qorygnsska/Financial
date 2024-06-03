@@ -71,4 +71,81 @@ public class MainImportDAO {
 
 		return result;
 	}
+	
+	// 이번달 수입
+		public int thisMonth() {
+			int money = 0;
+			
+			try {
+
+				conn = DBUtil.getConnection();
+
+				String sql = "select nvl(sum(price),0)\r\n" + 
+						"from import\r\n" + 
+						"where user_id = ? and substr(day,0,5) = substr(SYSDATE,0,5)";
+				
+				pt = conn.prepareStatement(sql);
+				pt.setInt(1, UsersModel.user.getId());
+				rs = pt.executeQuery();
+
+				
+				if (rs.next()) {
+					money = rs.getInt(1);
+				
+				} else {
+					return money;
+				}
+
+				
+				// 닫기
+				rs.close();
+				pt.close();
+				conn.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			return money;
+		}
+		
+		
+		// 저번달 수입
+		public int beforeMonth() {
+			int money = 0;
+			
+			try {
+
+				conn = DBUtil.getConnection();
+
+				String sql = "select nvl(sum(price),0)\r\n" + 
+						"from import\r\n" + 
+						"where user_id = ? and substr(day,0,5) = substr(to_char(add_months(sysdate,-1)),0,5)";
+				
+				pt = conn.prepareStatement(sql);
+				pt.setInt(1, UsersModel.user.getId());
+				rs = pt.executeQuery();
+
+				
+				if (rs.next()) {
+					money = rs.getInt(1);
+				
+				} else {
+					return money;
+				}
+
+				
+				// 닫기
+				rs.close();
+				pt.close();
+				conn.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			return money;
+		}
 }
