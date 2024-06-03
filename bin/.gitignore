@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-/DAO/
-/View/
 /Controller/
-=======
-/View/
 /DAO/
-/Controller/
-/Model/
->>>>>>> master
 /Service/
+/View/
