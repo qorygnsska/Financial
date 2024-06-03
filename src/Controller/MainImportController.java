@@ -15,7 +15,6 @@ public class MainImportController {
 				return false;
 			}
 		};
-		System.out.println("임포트 컨트롤러 2차원 배열 값 넣기 전");
 		
 		String[][] rowData = service.select();
 

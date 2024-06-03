@@ -180,6 +180,7 @@ public class MainMenuView extends JPanel {
 		// 내용 수정 불가
 		model[0] = IC.getImportModel(header);
 
+
 		tableList[0] = new JTable(model[0]);
 		// 테이블 컬럼 이동불가
 		tableList[0].getTableHeader().setReorderingAllowed(false);

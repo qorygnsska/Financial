@@ -48,7 +48,7 @@ public class ViewFrame{
 
 		mainFrame.add(mainFan);
 
-		mainFrame.setResizable(false);
+//		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
