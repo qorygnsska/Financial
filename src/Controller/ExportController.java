@@ -56,6 +56,24 @@ public class ExportController {
 		
 		return exportModel;
 	}
+//월별 조회
+	public DefaultTableModel getExportmonthselect(String[] header) {
+		DefaultTableModel exportModel = new DefaultTableModel(header, 0) {
+			public boolean isCellEditable(int rowIndex, int mColindex) {
+				return false;
+			}
+		};
+		
+		String[][] rowData = exportService.getExportmonthselect();
+		
+		exportModel.setRowCount(0);
+		
+		for(String[] row: rowData) {
+			exportModel.addRow(row);
+		}
+		
+		return exportModel;
+	}
 	
 
 }
