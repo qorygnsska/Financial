@@ -8,6 +8,7 @@ public class AmountModel {
 	private String type;
 	private String content;
 	private String memo;
+	private int rownum;
 	
 	public AmountModel() {}
 	
@@ -17,6 +18,23 @@ public class AmountModel {
 		this.type = type;
 		this.content = content;
 		this.memo = memo;
+	}
+	
+	public AmountModel(String day, int price, String type, String content, String memo, int rownum) {
+		this.day = day;
+		this.price = price;
+		this.type = type;
+		this.content = content;
+		this.memo = memo;
+		this.rownum = rownum;
+	}
+
+	public int getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
 	}
 
 	public int getId() {

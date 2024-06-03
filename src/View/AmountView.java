@@ -22,9 +22,12 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import Controller.AmountController;
+import DAO.AmountDAO;
+import Model.AmountModel;
 import Model.UsersModel;
 
 public class AmountView extends JPanel {
+	AmountDAO amountDAO = new AmountDAO();
 
 	JPanel panMain;
 	Font font = new Font("함초롱돋움", Font.BOLD, 30);
@@ -116,6 +119,11 @@ public class AmountView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				AmountModel amountModel = new AmountModel("24/06/03", 9000, "지출", "식비", "영진식당 감", 5);
+				amountDAO.delete(3);
+				
+				
+				
 				// 메인으로 이동
 				panMain.removeAll(); // 현재 패널 내용 지움
 				panMain.add(new MainMenuView(panMain)); // 현재 패널에 메인메뉴 패널 추가
@@ -161,6 +169,6 @@ public class AmountView extends JPanel {
 
 		TableColumn column = tcm.getColumn(targetColumnIndex);
 		column.setCellRenderer(new CustomTableCellRenderer(targetColumnIndex));
-	}
 
+	}
 }
