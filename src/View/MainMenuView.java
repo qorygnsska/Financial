@@ -38,7 +38,7 @@ public class MainMenuView extends JPanel {
 	MainImportController IC = new MainImportController();
 	MainExportController EC = new MainExportController();
 	SaveController SC = new SaveController();
-	ConsumeController CC = new ConsumeController(); 
+	ConsumeController CC = new ConsumeController();
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -48,19 +48,19 @@ public class MainMenuView extends JPanel {
 	JScrollPane[] paneList = new JScrollPane[2];
 	JPanel btnPan = new JPanel();
 	JButton[] btnList = new JButton[2];
-	JPanel userPan = new JPanel(new GridLayout(2,2));
+	JPanel userPan = new JPanel(new GridLayout(2, 2));
 	DefaultTableModel saveModel;
-	
+
 	AmountDAO amountDAO = new AmountDAO();
-	
+
 	public MainMenuView(JPanel panel) {
 		panMain = panel;
 		Rectangle rect = panel.getBounds();
 		setPreferredSize(rect.getSize());
-		
+
 		setLayout(null);
 		setBorder(new LineBorder(Color.white, 100));
-		
+
 		setBackground(Color.white);
 
 		importTable();
@@ -73,7 +73,7 @@ public class MainMenuView extends JPanel {
 
 		setVisible(true);
 	}
-	
+
 	// 테이블 몸체 클릭
 	private class MyMouseListener1 extends MouseAdapter {
 
@@ -139,41 +139,36 @@ public class MainMenuView extends JPanel {
 	}
 
 	// 유저 정보 패널
-		public void userInfo() {
-			
-			userPan.setBackground(Color.white);
-			JLabel nameTitle = new JLabel("이름 : ");
-			System.out.println(UsersModel.user.getName());
-			JLabel name = new JLabel(UsersModel.user.getName());
-			JLabel dayTitle = new JLabel("날짜 : ");
-			JLabel day = new JLabel(LocalDate.now().toString());
-			
-			
-			nameTitle.setHorizontalAlignment(JLabel.RIGHT);
-			name.setHorizontalAlignment(JLabel.LEFT);
-			
-			dayTitle.setHorizontalAlignment(JLabel.RIGHT);
-			day.setHorizontalAlignment(JLabel.LEFT);
-			
-			nameTitle.setFont(new Font("기본글씨", Font.BOLD, 18));
-			name.setFont(new Font("기본글씨", Font.BOLD, 18));
-			dayTitle.setFont(new Font("기본글씨", Font.BOLD, 18));
-			day.setFont(new Font("기본글씨", Font.BOLD, 18));
-			
-			
-			userPan.setBounds(900, 10, 200, 100);
-			userPan.add(nameTitle);
-			userPan.add(name);
-			userPan.add(dayTitle);
-			userPan.add(day);
-			
-			
-			
-			add(userPan);
-			
-		}
-	
-	
+	public void userInfo() {
+
+		userPan.setBackground(Color.white);
+		JLabel nameTitle = new JLabel("이름 : ");
+		System.out.println(UsersModel.user.getName());
+		JLabel name = new JLabel(UsersModel.user.getName());
+		JLabel dayTitle = new JLabel("날짜 : ");
+		JLabel day = new JLabel(LocalDate.now().toString());
+
+		nameTitle.setHorizontalAlignment(JLabel.RIGHT);
+		name.setHorizontalAlignment(JLabel.LEFT);
+
+		dayTitle.setHorizontalAlignment(JLabel.RIGHT);
+		day.setHorizontalAlignment(JLabel.LEFT);
+
+		nameTitle.setFont(new Font("기본글씨", Font.BOLD, 18));
+		name.setFont(new Font("기본글씨", Font.BOLD, 18));
+		dayTitle.setFont(new Font("기본글씨", Font.BOLD, 18));
+		day.setFont(new Font("기본글씨", Font.BOLD, 18));
+
+		userPan.setBounds(900, 10, 200, 100);
+		userPan.add(nameTitle);
+		userPan.add(name);
+		userPan.add(dayTitle);
+		userPan.add(day);
+
+		add(userPan);
+
+	}
+
 	// 수입 테이블
 	public void importTable() {
 
@@ -281,8 +276,8 @@ public class MainMenuView extends JPanel {
 		String amount = amountDAO.amount();
 
 		String[] str = { "잔고", "이 달 수입", "이 달 지출", "지난 달 수입", "지난 달 지출" };
-		
-		String[] money = { amount, "z", "z", "z", "z"};
+
+		String[] money = { amount, IC.thisMonth(), EC.thisMonth(), IC.beforeMonth(), EC.beforeMonth() };
 
 		for (int i = 0; i < moneyList.length; i++) {
 			moneyList[i] = new JPanel();
@@ -342,16 +337,26 @@ public class MainMenuView extends JPanel {
 		}
 
 		String[] ar = CC.consumeTag();
-		
+		System.out.println(ar.length);
+
 		try {
 			list[0].setText("1. " + ar[0]);
+		} catch (Exception e) {
+			list[0].setText("");
+		}
+
+		try {
 			list[1].setText("2. " + ar[1]);
+		} catch (Exception e) {
+			list[1].setText("");
+		}
+
+		
+		try {
 			list[2].setText("3. " + ar[2]);
 		} catch (Exception e) {
 			list[2].setText("");
 		}
-
-
 		add(conPan);
 
 		conPan.addMouseListener(new MouseAdapter() {
@@ -373,10 +378,9 @@ public class MainMenuView extends JPanel {
 
 		sPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "저축"));
 		String[] header = { "날짜", "금액", "유형", "비고" };
-
+		
 		saveModel = SC.getSaveModel(header);
 		
-
 		JTable table = new JTable(saveModel);
 
 		// 테이블 컬럼 이동불가

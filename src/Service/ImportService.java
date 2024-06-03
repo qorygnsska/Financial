@@ -26,4 +26,9 @@ public class ImportService {
 		
 		return  dpdao.getImportdayselect();
 	}
+
+	public String[][] getImportmonthselect() {
+		
+		return dpdao.getImportmonthselect();
+	}
 }
