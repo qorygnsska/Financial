@@ -111,7 +111,7 @@ public class ExportDAO {
 
 			if (rs.next()) {
 			 sqlnum=rs.getInt("idnum");
-			
+			System.out.println("sdfsdf"+sqlnum);
 			}
 			String sql1 = "update export set price=?, day=?,type_id=?, memo=? where user_id=? and id=?";
 			pt = conn.prepareStatement(sql1);
