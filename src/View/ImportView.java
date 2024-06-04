@@ -456,22 +456,20 @@ public class ImportView extends JPanel {
 		totalTable = new JTable(importModel[0]);
 		totalTable.getTableHeader().setReorderingAllowed(false);
 		totalTable.getTableHeader().setResizingAllowed(false);
-		totalTable.setRowHeight(20);
+		totalTable.setRowHeight(30);
 		JScrollPane scrollpane = new JScrollPane(totalTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
 		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
 		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
 		dtcrCenter.setHorizontalAlignment(JLabel.CENTER);
-		DefaultTableCellRenderer dtcrRight = new DefaultTableCellRenderer();
-		dtcrRight.setHorizontalAlignment(JLabel.RIGHT);
 		TableColumnModel tcm = totalTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
 		totalTable.getColumn("날짜").setPreferredWidth(50);
 		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
 		totalTable.getColumn("금        액").setPreferredWidth(230);
-		totalTable.getColumn("금        액").setCellRenderer(dtcrRight);
+		totalTable.getColumn("금        액").setCellRenderer(dtcrCenter);
 		totalTable.getColumn("구분").setPreferredWidth(30);
 		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
 		totalTable.getColumn("비        고").setPreferredWidth(250);
@@ -488,22 +486,20 @@ public class ImportView extends JPanel {
 		dayTable = new JTable(importModel[0]);
 		dayTable.getTableHeader().setReorderingAllowed(false);
 		dayTable.getTableHeader().setResizingAllowed(false);
-		dayTable.setRowHeight(20);
+		dayTable.setRowHeight(30);
 		JScrollPane scrollpane = new JScrollPane(dayTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
 		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
 		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
 		dtcrCenter.setHorizontalAlignment(JLabel.CENTER);
-		DefaultTableCellRenderer dtcrRight = new DefaultTableCellRenderer();
-		dtcrRight.setHorizontalAlignment(JLabel.RIGHT);
 		TableColumnModel tcm = dayTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
 		dayTable.getColumn("날짜").setPreferredWidth(50);
 		dayTable.getColumn("날짜").setCellRenderer(dtcrCenter);
 		dayTable.getColumn("금        액").setPreferredWidth(230);
-		dayTable.getColumn("금        액").setCellRenderer(dtcrRight);
+		dayTable.getColumn("금        액").setCellRenderer(dtcrCenter);
 		dayTable.getColumn("구분").setPreferredWidth(30);
 		dayTable.getColumn("구분").setCellRenderer(dtcrCenter);
 		dayTable.getColumn("비        고").setPreferredWidth(250);
@@ -519,22 +515,20 @@ public class ImportView extends JPanel {
 		monthTable = new JTable(importModel[0]);
 		monthTable.getTableHeader().setReorderingAllowed(false);
 		monthTable.getTableHeader().setResizingAllowed(false);
-		monthTable.setRowHeight(20);
+		monthTable.setRowHeight(30);
 		JScrollPane scrollpane = new JScrollPane(monthTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
 
 		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
 		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
 		dtcrCenter.setHorizontalAlignment(JLabel.CENTER);
-		DefaultTableCellRenderer dtcrRight = new DefaultTableCellRenderer();
-		dtcrRight.setHorizontalAlignment(JLabel.RIGHT);
 		TableColumnModel tcm = monthTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
 		monthTable.getColumn("날짜").setPreferredWidth(50);
 		monthTable.getColumn("날짜").setCellRenderer(dtcrCenter);
 		monthTable.getColumn("금        액").setPreferredWidth(230);
-		monthTable.getColumn("금        액").setCellRenderer(dtcrRight);
+		monthTable.getColumn("금        액").setCellRenderer(dtcrCenter);
 		monthTable.getColumn("구분").setPreferredWidth(30);
 		monthTable.getColumn("구분").setCellRenderer(dtcrCenter);
 		monthTable.getColumn("비        고").setPreferredWidth(250);
