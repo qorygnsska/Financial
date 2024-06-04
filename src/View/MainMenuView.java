@@ -217,7 +217,13 @@ public class MainMenuView extends JPanel {
 		JLabel day = new JLabel(LocalDate.now().toString());
 		
 		// 오늘날짜
-//		LocalDate today = LocalDate.now();
+		LocalDate today = LocalDate.now();
+		System.out.println(today);
+		String t = today.toString();
+		t = t.replace('-','/');
+		t = t.substring(2, 10);
+		System.out.println(t);
+		
 //		int whatDay = today.getDayOfMonth();
 //		System.out.println(whatDay);
 
