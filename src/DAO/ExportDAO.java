@@ -219,7 +219,7 @@ public class ExportDAO {
 				pt.setInt(3, UsersModel.user.getId());
 				
 				rs2 = pt.executeQuery();
-				
+
 				if (!rs2.next()) {
 					System.out.println("너 데이터베이스에 price랑 메모 일치하는 값이 없네! 추가할게!!");
 					if (checkday.substring(6, 8).equals(LocalDate.now().toString().substring(8, 10))) {
