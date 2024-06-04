@@ -16,6 +16,7 @@ public class ExportDAO {
 	private Connection conn;
 	private PreparedStatement pt;
 	private ResultSet rs;
+	private ResultSet rs2;
 
 	private LoginDAO loginDAO = new LoginDAO();
 	
@@ -192,21 +193,15 @@ public class ExportDAO {
 		String memo = "";
 		
 		conn = DBUtil.getConnection();
-		String sql = "select * from export where type_id = 5 and user_id = ?";
-		String sql5 = "select count(*) from export where type_id = 5 and user_id = 1";
+		String sql = "select * from export where type_id = 6 and user_id = ?";
 		
 		try {
-			pt = conn.prepareStatement(sql5);
-			rs = pt.executeQuery();
-			
-			int row = rs.getInt(1);
 			
 			pt = conn.prepareStatement(sql);
 			
 			pt.setInt(1, UsersModel.user.getId());
 			
 			rs = pt.executeQuery();
-
 			
 			while (rs.next()) {
 			
@@ -215,7 +210,7 @@ public class ExportDAO {
 				checkday = rs.getString("day");
 				memo = rs.getString("memo");
 
-				String sql2 = "select * from export where price = ? and day = to_char(sysdate) and memo = ? and type_id = 5 and user_id = ?";
+				String sql2 = "select * from export where price = ? and day = to_char(sysdate) and memo = ? and type_id = 6 and user_id = ?";
 				
 				pt = conn.prepareStatement(sql2);
 				
@@ -223,9 +218,9 @@ public class ExportDAO {
 				pt.setString(2, memo);
 				pt.setInt(3, UsersModel.user.getId());
 				
-				rs = pt.executeQuery();
+				rs2 = pt.executeQuery();
 				
-				if (!rs.next()) {
+				if (!rs2.next()) {
 					System.out.println("너 데이터베이스에 price랑 메모 일치하는 값이 없네! 추가할게!!");
 					if (checkday.substring(6, 8).equals(LocalDate.now().toString().substring(8, 10))) {
 						System.out.println("오 오늘의 일자와 데이터베이스의 일자가 같네 insert 실행!");
@@ -243,7 +238,7 @@ public class ExportDAO {
 	// 고정지출의 일마다 데이터베이스에 값 넣기
 	public void insert(int price, String memo) {
 		ArrayList<ExportModel> list = new ArrayList<ExportModel>();
-		
+		System.out.println("넘어왔어");
 		String today = LocalDate.now().toString();
 		today = today.replace('-','/');
 		today = today.substring(2, 10);
@@ -263,7 +258,7 @@ public class ExportDAO {
 			pt.executeUpdate();
 			System.out.println("insert로 값 넣었어!!");
 			
-			String sql2 = "select * from export where id = (select max(id) from export where type_id = 5 and user_id = ?)";
+			String sql2 = "select * from export where id = (select max(id) from export where type_id = 6 and user_id = ?)";
 			
 			pt = conn.prepareStatement(sql2);
 			pt.setInt(1, UsersModel.user.getId());
@@ -281,10 +276,8 @@ public class ExportDAO {
 				amountDAO.fexinsert(list.get(i));
 			}
 			
-			 
-			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}
