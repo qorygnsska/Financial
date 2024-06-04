@@ -1,7 +1,7 @@
 package View;
 
 import java.awt.Color;
-
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -94,6 +94,29 @@ public class MainMenuView extends JPanel {
 			}
 
 		}
+
+		// 커서 변경 이벤트 위한 이벤트
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// 패널에서 포인터 변경
+			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// 패널 밖에서 포인터 원래대로
+			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}
 	}
 
 	// 테이블 행클릭
@@ -175,12 +198,11 @@ public class MainMenuView extends JPanel {
 
 		String[] header = { "날짜", "금액", "유형" };
 		portList[0] = new JPanel();
-		portList[0].setBorder(new TitledBorder(new LineBorder(colLine,7,true), "수입"));
+		portList[0].setBorder(new TitledBorder(new LineBorder(colLine, 7, true), "수입"));
 		portList[0].setBounds(30, 120, 400, 400);
 		portList[0].setBackground(colBack);
 		// 내용 수정 불가
 		model[0] = IC.getImportModel(header);
-
 
 		tableList[0] = new JTable(model[0]);
 		// 테이블 컬럼 이동불가
@@ -218,7 +240,7 @@ public class MainMenuView extends JPanel {
 	public void exportTable() {
 		String[] header = { "날짜", "금액", "유형" };
 		portList[1] = new JPanel();
-		portList[1].setBorder(new TitledBorder(new LineBorder(colLine,7,true), " 지출 "));
+		portList[1].setBorder(new TitledBorder(new LineBorder(colLine, 7, true), " 지출 "));
 		portList[1].setBounds(460, 120, 400, 400);
 		portList[1].setBackground(colBack);
 		// 내용 수정 불가
@@ -283,7 +305,7 @@ public class MainMenuView extends JPanel {
 
 		for (int i = 0; i < moneyList.length; i++) {
 			moneyList[i] = new JPanel();
-			moneyList[i].setBorder(new TitledBorder(new LineBorder(colLine,3,true), str[i]));
+			moneyList[i].setBorder(new TitledBorder(new LineBorder(colLine, 3, true), str[i]));
 			moneyList[i].setBackground(colBack);
 			add(moneyList[i]);
 			labelList[i] = new JLabel(money[i]);
@@ -292,7 +314,7 @@ public class MainMenuView extends JPanel {
 
 		}
 
-		moneyList[0].setBorder(new TitledBorder(new LineBorder(colLine,7,true), str[0]));
+		moneyList[0].setBorder(new TitledBorder(new LineBorder(colLine, 7, true), str[0]));
 		moneyList[0].addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -330,7 +352,7 @@ public class MainMenuView extends JPanel {
 		conPan.setBounds(30, 530, 300, 180);
 		conPan.setBackground(colBack);
 
-		conPan.setBorder(new TitledBorder(new LineBorder(colLine,3,true), "소비유형"));
+		conPan.setBorder(new TitledBorder(new LineBorder(colLine, 3, true), "소비유형"));
 		JLabel[] list = new JLabel[3];
 		for (int i = 0; i < list.length; i++) {
 			list[i] = new JLabel();
@@ -354,7 +376,6 @@ public class MainMenuView extends JPanel {
 			list[1].setText("");
 		}
 
-		
 		try {
 			list[2].setText("3. " + ar[2]);
 		} catch (Exception e) {
@@ -379,11 +400,11 @@ public class MainMenuView extends JPanel {
 		sPan.setBounds(400, 530, 460, 180);
 		sPan.setBackground(colBack);
 
-		sPan.setBorder(new TitledBorder(new LineBorder(colLine,3,true), "저축"));
+		sPan.setBorder(new TitledBorder(new LineBorder(colLine, 3, true), "저축"));
 		String[] header = { "날짜", "금액", "유형", "비고" };
-		
+
 		saveModel = SC.getSaveModel(header);
-		
+
 		JTable table = new JTable(saveModel);
 
 		// 테이블 컬럼 이동불가
