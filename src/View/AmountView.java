@@ -30,9 +30,9 @@ public class AmountView extends JPanel {
 	AmountDAO amountDAO = new AmountDAO();
 
 	JPanel panMain;
-	Font font = new Font("함초롱돋움", Font.BOLD, 30);
+	Font font = new Font("나눔고딕", Font.BOLD, 30);
 	Font font2 = new Font("함초롱돋움", Font.PLAIN, 15);
-	Font font3 = new Font("함초롱돋움", Font.BOLD, 15);
+	Font font3 = new Font("나눔고딕", Font.BOLD, 15);
 
 	AmountController amountController = new AmountController();
 

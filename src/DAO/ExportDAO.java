@@ -48,7 +48,9 @@ public class ExportDAO {
 
 			while (rs.next()) {
 				result[index][0] = rs.getString("day");
-				result[index][1] = rs.getString("price");
+				int price = rs.getInt("price");
+				String realprice = String.format("%,d원", price);
+				result[index][1] = realprice;
 				result[index][2] = rs.getString("type");
 				result[index][3] = rs.getString("memo");
 				index++;
