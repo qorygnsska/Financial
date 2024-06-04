@@ -139,7 +139,7 @@ public class ImportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String)totalTable.getValueAt(selectRow, 1);
+				String selPrice = (String)dayTable.getValueAt(selectRow, 1);
 				StringBuilder sb = new StringBuilder();
 				for(String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
@@ -167,7 +167,7 @@ public class ImportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String)totalTable.getValueAt(selectRow, 1);
+				String selPrice = (String)monthTable.getValueAt(selectRow, 1);
 				StringBuilder sb = new StringBuilder();
 				for(String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
@@ -431,7 +431,7 @@ public class ImportView extends JPanel {
 
 		// 유형 패널(오른쪽)
 		typePanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
-		String[] exportType = { "급여", "이자", "기타" };
+		String[] exportType = { "급여", "이자", "고정수입", "기타" };
 		typeBox = new JComboBox(exportType);
 		typePanelR.add(typeBox);
 		typePanelR.setBackground(Color.white);

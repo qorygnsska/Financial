@@ -137,7 +137,7 @@ public class ExportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String)totalTable.getValueAt(selectRow, 1);
+				String selPrice = (String)dayTable.getValueAt(selectRow, 1);
 				StringBuilder sb = new StringBuilder();
 				for(String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
@@ -165,7 +165,7 @@ public class ExportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String)totalTable.getValueAt(selectRow, 1);
+				String selPrice = (String)monthTable.getValueAt(selectRow, 1);
 				StringBuilder sb = new StringBuilder();
 				for(String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
