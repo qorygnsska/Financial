@@ -205,7 +205,7 @@ public class ExportDAO {
 			
 			while (rs.next()) {
 			
-				System.out.println("너 export에 typeid 5랑 userid1인게 있네");
+				System.out.println("너 export에 typeid 6랑 userid1인게 있네");
 				price = rs.getInt("price");
 				checkday = rs.getString("day");
 				memo = rs.getString("memo");
@@ -252,7 +252,7 @@ public class ExportDAO {
 			pt.setInt(1, UsersModel.user.getId());
 			pt.setInt(2, price);
 			pt.setString(3, today);
-			pt.setInt(4, 5);
+			pt.setInt(4, 6);
 			pt.setString(5, memo);
 			
 			pt.executeUpdate();
