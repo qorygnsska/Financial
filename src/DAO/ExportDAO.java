@@ -190,34 +190,39 @@ public class ExportDAO {
 		String checkday = "";
 		int price = 0;
 		String memo = "";
-		int i = 1;
+		
 		conn = DBUtil.getConnection();
 		String sql = "select * from export where type_id = 5 and user_id = ?";
+		String sql5 = "select count(*) from export where type_id = 5 and user_id = 1";
 		
 		try {
+			pt = conn.prepareStatement(sql5);
+			rs = pt.executeQuery();
+			
+			int row = rs.getInt(1);
+			
 			pt = conn.prepareStatement(sql);
 			
 			pt.setInt(1, UsersModel.user.getId());
 			
 			rs = pt.executeQuery();
+
 			
 			while (rs.next()) {
-				System.out.println("i = " + i);
-				i++;
+			
 				System.out.println("너 export에 typeid 5랑 userid1인게 있네");
 				price = rs.getInt("price");
-				System.out.println(price);
 				checkday = rs.getString("day");
 				memo = rs.getString("memo");
 
 				String sql2 = "select * from export where price = ? and day = to_char(sysdate) and memo = ? and type_id = 5 and user_id = ?";
-
+				
 				pt = conn.prepareStatement(sql2);
-
+				
 				pt.setInt(1, price);
 				pt.setString(2, memo);
 				pt.setInt(3, UsersModel.user.getId());
-
+				
 				rs = pt.executeQuery();
 				
 				if (!rs.next()) {
