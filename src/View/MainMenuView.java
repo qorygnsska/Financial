@@ -40,7 +40,7 @@ import Model.UsersModel;
 
 public class MainMenuView extends JPanel {
 
-	DecimalFormat df = new DecimalFormat("#,##0,000");
+	DecimalFormat df = new DecimalFormat("#,###,000");
 	MainImportController IC = new MainImportController();
 	MainExportController EC = new MainExportController();
 	SaveController SC = new SaveController();
@@ -56,6 +56,7 @@ public class MainMenuView extends JPanel {
 	JButton[] btnList = new JButton[2];
 	JPanel userPan = new JPanel(new GridLayout(2, 2));
 	DefaultTableModel saveModel;
+	
 	private Color colBack = new Color(255, 255, 255);
 	private Color colLine = new Color(225, 235, 255);
 	private Color colLineR = new Color(255, 230, 230);
@@ -109,22 +110,26 @@ public class MainMenuView extends JPanel {
 		public void mouseEntered(MouseEvent e) {
 			// 패널에서 포인터 변경
 			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			portList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// 패널 밖에서 포인터 원래대로
 			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			portList[1].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
 			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			portList[1].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			portList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 	}
 
@@ -147,14 +152,42 @@ public class MainMenuView extends JPanel {
 			}
 
 		}
+		
+		// 커서 변경 이벤트 위한 이벤트
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// 패널에서 포인터 변경
+					tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// 패널 밖에서 포인터 원래대로
+					tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+					tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				}
 	}
 
 	// 버튼 클릭
-	private class MyButtonListener implements ActionListener {
-
+	private class MyButtonListener extends MouseAdapter implements ActionListener {
+		JButton btn = null;
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JButton btn = (JButton) e.getSource();
+			btn = (JButton) e.getSource();
 			if (btn == btnList[0]) {
 				System.out.println("로그아웃 버튼");
 				ViewFrame.mainFan.removeAll();
@@ -168,6 +201,8 @@ public class MainMenuView extends JPanel {
 			}
 
 		}
+		
+				
 
 	}
 
@@ -180,6 +215,17 @@ public class MainMenuView extends JPanel {
 		JLabel name = new JLabel(UsersModel.user.getName());
 		JLabel dayTitle = new JLabel("날짜 : ");
 		JLabel day = new JLabel(LocalDate.now().toString());
+		
+		// 오늘날짜
+		LocalDate today = LocalDate.now();
+		System.out.println(today);
+		String t = today.toString();
+		t = t.replace('-','/');
+		t = t.substring(2, 10);
+		System.out.println(t);
+		
+//		int whatDay = today.getDayOfMonth();
+//		System.out.println(whatDay);
 
 		nameTitle.setHorizontalAlignment(JLabel.RIGHT);
 		name.setHorizontalAlignment(JLabel.LEFT);
@@ -352,7 +398,37 @@ public class MainMenuView extends JPanel {
 				panMain.revalidate();
 				panMain.repaint();
 			}
+			
+			
+			// 커서 변경 이벤트 위한 이벤트
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// 패널에서 포인터 변경
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// 패널 밖에서 포인터 원래대로
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
 		});
+		
+		
 
 	}
 
