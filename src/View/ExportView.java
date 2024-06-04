@@ -609,7 +609,8 @@ public class ExportView extends JPanel {
 					Calendar calendar = Calendar.getInstance();
 					calendar.setTime((Date) model.getValue());
 					calendar.set(Calendar.MONTH, selectedMonthIndex);
-					 calendar.add(Calendar.DATE, -1);
+					// calendar.add(Calendar.DATE, -1);
+					 calendar.set(Calendar.DAY_OF_MONTH,1);
 					model.setValue(calendar.getTime());
 
 					// 월탭 선택
