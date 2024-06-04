@@ -597,36 +597,6 @@ public class ImportView extends JPanel {
 		JComboBox<String> monthComboBox = new JComboBox<>(months);
 		j1.add(monthComboBox);
 
-<<<<<<< HEAD
-		 // JComboBox에서 월 선택시 JDatePicker의 월을 변경
-		 monthComboBox.addItemListener(new ItemListener() {
-		 public void itemStateChanged(ItemEvent e) {
-		 if (e.getStateChange() == ItemEvent.SELECTED) {
-		 int selectedMonthIndex = monthComboBox.getSelectedIndex();
-		 Calendar calendar = Calendar.getInstance();
-		 calendar.setTime((Date)model.getValue());
-		 calendar.set(Calendar.MONTH, selectedMonthIndex); 
-		 calendar.add(Calendar.DATE, -1);
-		 model.setValue(calendar.getTime());
-		
-		 	//월탭 선택
-			tabPanel.setSelectedIndex(2);
-			monthdate = dateFormat.format(model.getValue());
-			datelist[num] = monthdate;
-			
-			if (datelist[0] != null) {
-				//데이터가 있는지 확인하고 있다면 조건의맞는 값을 불러와 테이블을 지웠다가 다시 그린다.
-				if (dpc.importmonthsearch(datelist)) {
-					System.out.println("검색 성공");
-					
-					tabPanel.removeAll();
-					tabPanel.add("전체", monthPanel.add(totalCheck()));
-					tabPanel.add("일별", monthPanel.add(dayCheck()));
-					tabPanel.add("월별", monthPanel.add(monthCheck()));
-					
-					tabPanel.revalidate();
-					tabPanel.repaint();
-=======
 		// JComboBox에서 월 선택시 JDatePicker의 월을 변경
 		monthComboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
@@ -638,28 +608,10 @@ public class ImportView extends JPanel {
 					model.setValue(calendar.getTime());
 
 					// 월탭 선택
->>>>>>> master
 					tabPanel.setSelectedIndex(2);
 					monthdate = dateFormat.format(model.getValue());
 					datelist[num] = monthdate;
 
-<<<<<<< HEAD
-			}		 
-		 
-		 }
-		 }
-		 });	
-		//날짜 선택시 일별 조회		
-		datePanel.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			
-					tabPanel.setSelectedIndex(1);
-					date = dateFormat.format(model.getValue());
-					datelist[num] = date;
-=======
->>>>>>> master
 					if (datelist[0] != null) {
 						// 데이터가 있는지 확인하고 있다면 조건의맞는 값을 불러와 테이블을 지웠다가 다시 그린다.
 						if (dpc.importmonthsearch(datelist)) {
