@@ -119,6 +119,23 @@ public class ImportView extends JPanel {
 				}
 			
 				model.setDate(year, month - 1, day);
+				String sel = (String) totalTable.getValueAt(selectRow, 2);
+				int num = 0;
+				switch(sel) {
+				case "급여":
+					num = 0;
+					break;
+				case "이자":
+					num = 1;
+					break;
+				case "고정수입":
+					num = 2;
+					break;
+				case "기타":
+					num = 3;
+					break;
+				}
+				typeBox.setSelectedIndex(num);
 				amountField.setText(sb.toString());
 				memoField.setText((String) totalTable.getValueAt(selectRow, 3));
 			}
