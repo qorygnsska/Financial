@@ -49,12 +49,12 @@ public class AmountView extends JPanel {
 		JPanel mainPan = new JPanel();
 		mainPan.setBounds(100, 30, 1000, 600);
 		mainPan.setBackground(Color.white);
-		mainPan.setBorder(new LineBorder(Color.green, 4));
+		mainPan.setBorder(new LineBorder(new Color(225, 235, 255), 7, true)); // 메인 패널 테두리 색
 
 		// 타이틀 패널 생성!
 		JPanel titlePan = new JPanel();
 		titlePan.setBackground(new Color(255, 255, 255)); // 타이틀 배경색
-		titlePan.setBorder(new LineBorder(Color.green, 2));
+		//titlePan.setBorder(new LineBorder(new Color(225, 235, 255), 3, true)); // 타이틀 패널 테두리 색
 
 		// 타이틀 라벨 생성!
 		JLabel titleLabel = new JLabel("상세 거래내역 (최근 1년까지 조회)");
@@ -65,7 +65,7 @@ public class AmountView extends JPanel {
 
 		// 테이블 담당 패널 생성!
 		JPanel tablePan = new JPanel();
-		tablePan.setBorder(new LineBorder(Color.green, 2));
+		tablePan.setBorder(new LineBorder(new Color(225, 235, 255), 4, true)); // 테이블 패널 테두리 색
 
 		// 테이블의 열
 		Object[] tableHeader = { "날짜", "금액", "구분", "비고", "잔액" };
@@ -90,7 +90,7 @@ public class AmountView extends JPanel {
 		amountTable.getTableHeader().setResizingAllowed(false);
 		// 테이블 내용 가운데 정렬
 		tableCellCenter(amountTable);
-		// 테이블 셀 색깔 설정
+		// 테이블 셀 글자색 설정
 		tableCellColor(amountTable);
 
 		// 스크롤 생성
@@ -107,12 +107,12 @@ public class AmountView extends JPanel {
 		// 버튼 관리 패널 생성
 		JPanel btnPan = new JPanel(new GridLayout());
 		btnPan.setBounds(870, 650, 150, 50);
-		btnPan.setBorder(new LineBorder(Color.green, 4));
+		//btnPan.setBorder(new LineBorder(Color.green, 4));
 
 		// 버튼 생성
 		JButton mainBtn = new JButton("메인으로");
 		mainBtn.setFont(font3);
-		mainBtn.setBorder(BorderFactory.createLineBorder(Color.black)); // 버튼의 테두리 색
+		//mainBtn.setBorder(BorderFactory.createLineBorder(Color.black)); // 버튼의 테두리 색
 		mainBtn.setBackground(Color.white);
 
 		mainBtn.addActionListener(new ActionListener() {

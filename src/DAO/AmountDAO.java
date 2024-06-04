@@ -1,8 +1,11 @@
 package DAO;
 
+import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.util.Date;
 
 import Model.AmountModel;
 import Model.UsersModel;
@@ -17,12 +20,12 @@ public class AmountDAO {
 		System.out.println("Amount DAO의 select 실행!!");
 
 		con = DBUtil.getConnection();
-		String sql = "select day, price, type, content, memo from amount where user_id = ? order by day desc"; // 접속중인 아이디의 데이터값 찾기
+		String sql = "SELECT day, price, type, content, memo FROM amount WHERE user_id = ? AND day BETWEEN to_char(add_months(sysdate, -12), 'yy/mm/dd') AND sysdate ORDER BY day DESC"; // 접속중인 아이디의 1년전까지의 데이터값 찾기
 		
-		String sql2 = "select count(*) from amount where user_id = ?"; // 접속중인 아이디의 데이터 개수 sql
+		String sql2 = "select count(*) from amount where user_id = ? AND day BETWEEN to_char(add_months(sysdate, -12), 'yy/mm/dd') AND sysdate"; // 접속중인 아이디의 1년전까지의 데이터 개수 sql
 
 		// 접속중인 아이디의 총액 sql
-		String sql3 = "select (select sum(price) from amount where user_id = ? and (type = '수입' or type = '고정수입') ) - (select sum(price) from amount where user_id = ? and (type = '지출' or type = '고정지출')) as 합 from amount where rownum <= 1";
+		String sql3 = "select nvl((select sum(price) from amount where user_id = ? and (type = '수입' or type = '고정수입') ), 0) - nvl((select sum(price) from amount where user_id = ? and (type = '지출' or type = '고정지출')), 0) as 합 from amount where rownum <= 1";
 
 		try {
 			ps = con.prepareStatement(sql2);
@@ -50,9 +53,13 @@ public class AmountDAO {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, UsersModel.user.getId());
 			rs = ps.executeQuery();
+			
 			result = new String[row][5];
 			int index = 0;
-			while (rs.next()) {
+			
+			while (rs.next()) { // 반복문
+				System.out.println("메롱");
+				
 				if (rs.getString("type").equals("수입") || rs.getString("type").equals("고정수입")) {
 					result[index][0] = rs.getString("day");
 
@@ -84,6 +91,7 @@ public class AmountDAO {
 					index++;
 				}
 			}
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -135,7 +143,7 @@ public class AmountDAO {
 	// 총 잔액 구하기
 	public String amount() {
 		con = DBUtil.getConnection();
-		String sql = "select (select sum(price) from amount where user_id = ? and (type = '수입' or type = '고정수입') ) - (select sum(price) from amount where user_id = ? and (type = '지출' or type = '고정지출')) as 합 from amount where rownum <= 1";
+		String sql = "select nvl((select sum(price) from amount where user_id = ? and (type = '수입' or type = '고정수입') ), 0) - nvl((select sum(price) from amount where user_id = ? and (type = '지출' or type = '고정지출')), 0) as 합 from amount where rownum <= 1";
 		String realamount = "";
 		try {
 			ps = con.prepareStatement(sql);
