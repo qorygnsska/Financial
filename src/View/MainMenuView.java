@@ -7,7 +7,10 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -64,6 +67,14 @@ public class MainMenuView extends JPanel {
 	private Color colLineR = new Color(255, 230, 230);
 	private Font f = new Font("나눔고딕", Font.BOLD, 15);
 	private Font title = new Font("나눔고딕", Font.BOLD, 15);
+	private Toolkit tk = Toolkit.getDefaultToolkit();
+	private Image imageExport = tk.getImage("export.png");
+	private Image imageImport = tk.getImage("import.png");
+	private Image imageAmount = tk.getImage("amount.png");
+	private Point point = new Point(10,10);
+	private Cursor csExport = tk.createCustomCursor(imageExport, point, "");
+	private Cursor csImport = tk.createCustomCursor(imageImport, point, "");
+	private Cursor csAmount = tk.createCustomCursor(imageAmount, point, "");
 
 	AmountDAO amountDAO = new AmountDAO();
 
@@ -111,8 +122,8 @@ public class MainMenuView extends JPanel {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// 패널에서 포인터 변경
-			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			portList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			portList[0].setCursor(csImport);
+			portList[1].setCursor(csExport);
 		}
 
 		@Override
@@ -130,8 +141,8 @@ public class MainMenuView extends JPanel {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			portList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			portList[0].setCursor(csImport);
+			portList[1].setCursor(csExport);
 		}
 	}
 
@@ -159,8 +170,8 @@ public class MainMenuView extends JPanel {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// 패널에서 포인터 변경
-			tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			tableList[0].setCursor(csImport);
+			tableList[1].setCursor(csExport);
 		}
 
 		@Override
@@ -178,8 +189,8 @@ public class MainMenuView extends JPanel {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			tableList[0].setCursor(csImport);
+			tableList[1].setCursor(csExport);
 		}
 	}
 
@@ -409,27 +420,23 @@ public class MainMenuView extends JPanel {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// 패널에서 포인터 변경
-				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				setCursor(csAmount);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// 패널 밖에서 포인터 원래대로
 				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				setCursor(csAmount);
 			}
 		});
 

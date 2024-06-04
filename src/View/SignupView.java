@@ -25,14 +25,14 @@ public class SignupView extends JFrame {
 	private Font font1 = new Font("나눔고딕", Font.BOLD, 20);
 	private Font font2 = new Font("나눔고딕", Font.BOLD, 30);
 	private Font font3 = new Font("나눔고딕", Font.BOLD, 13);
-	private Color colBack = new Color(204, 255, 204);
+	private Color colBack = new Color(225, 235, 255);
 	private Color colBack2 = new Color(255, 247, 242);
 
 	public void newUser() {
 
 		setTitle("회원가입");
-		JPanel black = new JPanel();
-		black.setBackground(colBack);
+		JPanel mainPan = new JPanel();
+		mainPan.setBackground(colBack);
 		JPanel title = new JPanel();
 		JLabel Jtitle = new JLabel("회원가입");
 		Jtitle.setFont(font2);
@@ -99,10 +99,10 @@ public class SignupView extends JFrame {
 
 		jp1.add(juminPanel);
 		jp1.add(juminPanel2);
-		black.add(jp1);
+		mainPan.add(jp1);
 		JPanel jp2 = new JPanel();
 		jp2.setLayout(new FlowLayout());
-		jp2.add(black);
+		jp2.add(mainPan);
 
 		setLayout(new BorderLayout());
 
@@ -120,7 +120,7 @@ public class SignupView extends JFrame {
 		add(jp2, BorderLayout.CENTER);
 		add(jp3, BorderLayout.SOUTH);
 
-		add(black);
+		add(mainPan);
 		setBounds(0, 0, 300, 300);
 
 		//되돌아가기 버튼 이벤트

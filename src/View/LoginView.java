@@ -29,7 +29,7 @@ public class LoginView extends JFrame {
 	private static Font font1 = new Font("나눔고딕", Font.BOLD, 19);
 	private static Font font2 = new Font("나눔고딕", Font.BOLD, 30);
 	private static Font font3 = new Font("나눔고딕", Font.BOLD, 13);
-	private Color colBack = new Color(235, 255, 235);
+	private Color colBack = new Color(225, 235, 255);
 	private Color colBack2 = new Color(255, 247, 242);
 	private ImageIcon img = new ImageIcon("search.png");
 	LoginController loginController = new LoginController();
