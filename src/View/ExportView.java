@@ -536,7 +536,6 @@ public class ExportView extends JPanel {
 		TableColumnModel tcm = monthTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
-
 		totalTable.getColumn("날짜").setPreferredWidth(50);
 		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
 		totalTable.getColumn("금        액").setPreferredWidth(230);
