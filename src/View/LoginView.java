@@ -2,6 +2,7 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -30,9 +31,9 @@ public class LoginView extends JFrame {
 	private static Font font3 = new Font("나눔고딕", Font.BOLD, 13);
 	private Color colBack = new Color(235, 255, 235);
 	private Color colBack2 = new Color(255, 247, 242);
-	private ImageIcon img= new ImageIcon("search.png");
-	LoginController loginController = new LoginController();	
-	
+	private ImageIcon img = new ImageIcon("search.png");
+	LoginController loginController = new LoginController();
+
 	UsersModel usersModel = new UsersModel();
 
 	public void user() {
@@ -41,9 +42,9 @@ public class LoginView extends JFrame {
 		JPanel back = new JPanel();
 		back.setBackground(colBack);
 		back.setBorder(new LineBorder(Color.GREEN, 3));
-		
+
 		setIconImage(new ImageIcon("coin.png").getImage());
-		
+
 		JPanel title = new JPanel();
 
 		JLabel login = new JLabel("로그인 화면");
@@ -113,7 +114,7 @@ public class LoginView extends JFrame {
 
 		JPanel jp3 = new JPanel();
 		jp3.setBackground(colBack);
-		JLabel idsearch = new JLabel("아이디 찾기 /",img,JLabel.CENTER);
+		JLabel idsearch = new JLabel("아이디 찾기 /", img, JLabel.CENTER);
 		JLabel pwsearch = new JLabel("비밀번호 찾기");
 		idsearch.setFont(font3);
 		pwsearch.setFont(font3);
@@ -128,38 +129,66 @@ public class LoginView extends JFrame {
 
 		idsearch.addMouseListener(new MouseListener() {
 			@Override
-			public void mouseReleased(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {
+			}
+
 			@Override
-			public void mousePressed(MouseEvent e) {}
+			public void mousePressed(MouseEvent e) {
+			}
+			
 			@Override
-			public void mouseExited(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {
+				// 라벨 밖에서 커서 원래대로
+				idsearch.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+
 			@Override
-			public void mouseEntered(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {
+
+				// 라벨에서 포인터 변경
+				idsearch.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+			}
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				UseridpwFindView uidpwfind=	new UseridpwFindView();
+				UseridpwFindView uidpwfind = new UseridpwFindView();
 				uidpwfind.idfind();
 				dispose();
 			}
+
 		});
-		pwsearch.addMouseListener(new MouseListener() {			
+
+		pwsearch.addMouseListener(new MouseListener() {
 			@Override
-			public void mouseReleased(MouseEvent e) {}
-			
+			public void mouseReleased(MouseEvent e) {
+			}
+
 			@Override
-			public void mousePressed(MouseEvent e) {}			
+			public void mousePressed(MouseEvent e) {
+			}
+
 			@Override
-			public void mouseExited(MouseEvent e) {}			
+			public void mouseExited(MouseEvent e) {
+				// 라벨 밖에서 커서 원래대로
+				idsearch.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+
 			@Override
-			public void mouseEntered(MouseEvent e) {}			
+			public void mouseEntered(MouseEvent e) {
+				// 라벨에서 포인터 변경
+				idsearch.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+			}
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				UseridpwFindView uidpwfind=	new UseridpwFindView();
+				UseridpwFindView uidpwfind = new UseridpwFindView();
 				uidpwfind.pwfind();
 				dispose();
 			}
 		});
-		
+
 		// 로그인 버튼 클릭시 이벤트
 		jLogin.addActionListener(new ActionListener() {
 
@@ -167,18 +196,16 @@ public class LoginView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String id = jtid.getText();
 				String pass = jtpw.getText();
-				
+
 				// 컨트롤러에 전송
-				if(loginController.login(id, pass)) {
+				if (loginController.login(id, pass)) {
 					usersModel.save(id, pass);
 					System.out.println(UsersModel.user.getName() + "님 로그인");
 					new ViewFrame();
 					dispose();
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호가 다릅니다!", "로그인 실패", JOptionPane.ERROR_MESSAGE);
 				}
-				
-				
 
 			}
 		});
@@ -200,8 +227,7 @@ public class LoginView extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-	
-	
+
 	public static void main(String[] args) {
 		new LoginView().user();
 	}
