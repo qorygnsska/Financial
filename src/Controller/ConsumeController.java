@@ -13,11 +13,7 @@ public class ConsumeController {
 		for(int i = 0; i < tag.length; i++) {
 			tag[i] = arr[i][1];
 		}
-		
-//		if (tag[2] == null) {
-//			tag[2] = "";
-//		}
-//		
+
 		return tag;
 		
 		
