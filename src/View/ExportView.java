@@ -115,6 +115,32 @@ public class ExportView extends JPanel {
 					sb.append(selPrice1);
 				}
 				model.setDate(year, month - 1, day);
+				String sel = (String) totalTable.getValueAt(selectRow, 2);
+				int num = 0;
+				switch(sel) {
+				case "교통비":
+					num = 0;
+					break;
+				case "식비":
+					num = 1;
+					break;
+				case "쇼핑":
+					num = 2;
+					break;
+				case "여가":
+					num = 3;
+					break;
+				case "저축":
+					num = 4;
+					break;
+				case "고정지출":
+					num = 5;
+					break;
+				case "기타":
+					num = 6;
+					break;
+				}
+				typeBox.setSelectedIndex(num);
 				amountField.setText(sb.toString());
 				memoField.setText((String) totalTable.getValueAt(selectRow, 3));
 
