@@ -117,6 +117,7 @@ public class ImportView extends JPanel {
 				for(String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
 				}
+			
 				model.setDate(year, month - 1, day);
 				amountField.setText(sb.toString());
 				memoField.setText((String) totalTable.getValueAt(selectRow, 3));
