@@ -16,6 +16,7 @@ public class ExportDAO {
 	private Connection conn;
 	private PreparedStatement pt;
 	private ResultSet rs;
+	private ResultSet rs2;
 
 	private LoginDAO loginDAO = new LoginDAO();
 	
@@ -185,14 +186,16 @@ public class ExportDAO {
 	public void check() {
 		String today = LocalDate.now().toString();
 		today = today.replace('-','/');
+		System.out.println(today);
 		today = today.substring(2, 10);
+		System.out.println(today);
 		
 		String checkday = "";
 		int price = 0;
 		String memo = "";
 		int i = 1;
 		conn = DBUtil.getConnection();
-		String sql = "select * from export where type_id = 5 and user_id = ?";
+		String sql = "select * from export where type_id = 6 and user_id = ?";
 		
 		try {
 			pt = conn.prepareStatement(sql);
@@ -210,7 +213,7 @@ public class ExportDAO {
 				checkday = rs.getString("day");
 				memo = rs.getString("memo");
 
-				String sql2 = "select * from export where price = ? and day = to_char(sysdate) and memo = ? and type_id = 5 and user_id = ?";
+				String sql2 = "select * from export where price = ? and day = to_char(sysdate) and memo = ? and type_id = 6 and user_id = ?";
 
 				pt = conn.prepareStatement(sql2);
 
@@ -218,9 +221,9 @@ public class ExportDAO {
 				pt.setString(2, memo);
 				pt.setInt(3, UsersModel.user.getId());
 
-				rs = pt.executeQuery();
+				rs2 = pt.executeQuery();
 				
-				if (!rs.next()) {
+				if (!rs2.next()) {
 					System.out.println("너 데이터베이스에 price랑 메모 일치하는 값이 없네! 추가할게!!");
 					if (checkday.substring(6, 8).equals(LocalDate.now().toString().substring(8, 10))) {
 						System.out.println("오 오늘의 일자와 데이터베이스의 일자가 같네 insert 실행!");
@@ -258,7 +261,7 @@ public class ExportDAO {
 			pt.executeUpdate();
 			System.out.println("insert로 값 넣었어!!");
 			
-			String sql2 = "select * from export where id = (select max(id) from export where type_id = 5 and user_id = ?)";
+			String sql2 = "select * from export where id = (select max(id) from export where type_id = 6 and user_id = ?)";
 			
 			pt = conn.prepareStatement(sql2);
 			pt.setInt(1, UsersModel.user.getId());

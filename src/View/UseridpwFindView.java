@@ -46,7 +46,7 @@ public class UseridpwFindView extends JFrame {
 		setTitle("아이디 찾기");
 		setBounds(0, 0, 300, 150);
 
-		jpmain.setBorder(new TitledBorder(new LineBorder(Color.green, 4), "아이디 찾기"));
+		jpmain.setBorder(new TitledBorder(new LineBorder(new Color(225, 235, 255), 4), "아이디 찾기"));
 		jpmain.setBackground(Color.white);
 	
 		jlid = new JLabel("주민번호");
@@ -110,7 +110,7 @@ public class UseridpwFindView extends JFrame {
 		setTitle("비밀번호 찾기");
 		setBounds(0, 0, 250, 180);
 
-		jpmain.setBorder(new TitledBorder(new LineBorder(Color.green, 4), "비밀번호 찾기"));
+		jpmain.setBorder(new TitledBorder(new LineBorder(new Color(225, 235, 255), 4), "비밀번호 찾기"));
 		jpmain.setBackground(Color.white);
 		jp = new JLabel("아이디", JLabel.CENTER);
 		jp.setFont(font1);
