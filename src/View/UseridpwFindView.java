@@ -2,6 +2,7 @@ package View;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,7 +32,9 @@ public class UseridpwFindView extends JFrame {
 	private JTextField jtp;
 	private JPanel jp1;
 	private JButton backbtn;
-
+	private static Font font1 = new Font("맑은고딕", Font.BOLD, 15);
+	private static Font font2 = new Font("맑은고딕", Font.BOLD, 16);
+	private Color btcolor = new Color(187, 250, 251);
 	//아이디 찾기 메소드
 	public void idfind() {
 		jpmain = new JPanel();
@@ -40,7 +43,9 @@ public class UseridpwFindView extends JFrame {
 
 		jpmain.setBorder(new TitledBorder(new LineBorder(Color.green, 4), "아이디 찾기"));
 		jpmain.setBackground(Color.white);
+	
 		jlid = new JLabel("주민번호");
+		jlid.setFont(font1);
 		jl1 = new JLabel("-");
 		jtjumin = new JTextField(6);
 		jpjumin = new JPasswordField(7);
@@ -49,7 +54,10 @@ public class UseridpwFindView extends JFrame {
 		jpmain.add(jl1);
 		jpmain.add(jpjumin);
 		idbtn = new JButton("검색");
+		idbtn.setFont(font2);
+		idbtn.setBackground(btcolor);
 		backbtn = new JButton("돌아가기");
+		backbtn.setFont(font2);
 		jpmain.add(backbtn);
 		jpmain.add(idbtn);
 
@@ -100,6 +108,7 @@ public class UseridpwFindView extends JFrame {
 		jpmain.setBorder(new TitledBorder(new LineBorder(Color.green, 4), "비밀번호 찾기"));
 		jpmain.setBackground(Color.white);
 		jp = new JLabel("아이디", JLabel.CENTER);
+		jp.setFont(font1);
 		JPanel jp1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		jp1.setBackground(Color.white);
 		jtp = new JTextField(10);
@@ -108,6 +117,7 @@ public class UseridpwFindView extends JFrame {
 		JPanel jp2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		jp2.setBackground(Color.white);
 		jlid = new JLabel("주민번호", JLabel.CENTER);
+		jlid.setFont(font1);
 		jl1 = new JLabel("-");
 		jtjumin = new JTextField(5);
 		jpjumin = new JPasswordField(5);
@@ -119,7 +129,9 @@ public class UseridpwFindView extends JFrame {
 		jp2.add(jpjumin);
 		jpmain.add(jp2);
 		idbtn = new JButton("검색");
+		idbtn.setFont(font2);
 		backbtn = new JButton("돌아가기");
+		backbtn.setFont(font2);
 		jpmain.add(backbtn);
 		jpmain.add(idbtn);
 

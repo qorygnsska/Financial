@@ -673,6 +673,7 @@ public class ImportView extends JPanel {
 		 Calendar calendar = Calendar.getInstance();
 		 calendar.setTime((Date)model.getValue());
 		 calendar.set(Calendar.MONTH, selectedMonthIndex); 
+		 calendar.add(Calendar.DATE, -1);
 		 model.setValue(calendar.getTime());
 		
 		 	//월탭 선택
@@ -705,7 +706,7 @@ public class ImportView extends JPanel {
 		 }
 		 }
 		 });	
-				
+		//날짜 선택시 일별 조회		
 		datePanel.addActionListener(new ActionListener() {
 			
 			@Override
