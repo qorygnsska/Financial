@@ -2,9 +2,11 @@ package View;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +16,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-
 import Controller.LoginController;
 import Model.UsersModel;
 
@@ -31,16 +32,25 @@ public class UseridpwFindView extends JFrame {
 	private JTextField jtp;
 	private JPanel jp1;
 	private JButton backbtn;
+	private static Font font1 = new Font("맑은고딕", Font.BOLD, 15);
+	private static Font font2 = new Font("맑은고딕", Font.BOLD, 16);
+	
+	
+
+
 
 	//아이디 찾기 메소드
 	public void idfind() {
+		setIconImage(new ImageIcon("coin.png").getImage());
 		jpmain = new JPanel();
 		setTitle("아이디 찾기");
 		setBounds(0, 0, 300, 150);
 
 		jpmain.setBorder(new TitledBorder(new LineBorder(Color.green, 4), "아이디 찾기"));
 		jpmain.setBackground(Color.white);
+	
 		jlid = new JLabel("주민번호");
+		jlid.setFont(font1);
 		jl1 = new JLabel("-");
 		jtjumin = new JTextField(6);
 		jpjumin = new JPasswordField(7);
@@ -49,7 +59,9 @@ public class UseridpwFindView extends JFrame {
 		jpmain.add(jl1);
 		jpmain.add(jpjumin);
 		idbtn = new JButton("검색");
+		idbtn.setFont(font2);
 		backbtn = new JButton("돌아가기");
+		backbtn.setFont(font2);
 		jpmain.add(backbtn);
 		jpmain.add(idbtn);
 
@@ -92,6 +104,7 @@ public class UseridpwFindView extends JFrame {
 	}
 	//비밀번호 찾기 메소드
 	public void pwfind() {
+		setIconImage(new ImageIcon("coin.png").getImage());
 		jp1 = new JPanel();
 		jpmain = new JPanel();
 		setTitle("비밀번호 찾기");
@@ -100,6 +113,7 @@ public class UseridpwFindView extends JFrame {
 		jpmain.setBorder(new TitledBorder(new LineBorder(Color.green, 4), "비밀번호 찾기"));
 		jpmain.setBackground(Color.white);
 		jp = new JLabel("아이디", JLabel.CENTER);
+		jp.setFont(font1);
 		JPanel jp1 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		jp1.setBackground(Color.white);
 		jtp = new JTextField(10);
@@ -108,6 +122,7 @@ public class UseridpwFindView extends JFrame {
 		JPanel jp2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		jp2.setBackground(Color.white);
 		jlid = new JLabel("주민번호", JLabel.CENTER);
+		jlid.setFont(font1);
 		jl1 = new JLabel("-");
 		jtjumin = new JTextField(5);
 		jpjumin = new JPasswordField(5);
@@ -119,7 +134,9 @@ public class UseridpwFindView extends JFrame {
 		jp2.add(jpjumin);
 		jpmain.add(jp2);
 		idbtn = new JButton("검색");
+		idbtn.setFont(font2);
 		backbtn = new JButton("돌아가기");
+		backbtn.setFont(font2);
 		jpmain.add(backbtn);
 		jpmain.add(idbtn);
 
@@ -161,5 +178,7 @@ public class UseridpwFindView extends JFrame {
 		setVisible(true);
 
 	}
+	
+	
 
 }

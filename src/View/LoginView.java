@@ -30,7 +30,7 @@ public class LoginView extends JFrame {
 	private static Font font3 = new Font("나눔고딕", Font.BOLD, 13);
 	private Color colBack = new Color(235, 255, 235);
 	private Color colBack2 = new Color(255, 247, 242);
-	
+	private ImageIcon img= new ImageIcon("search.png");
 	LoginController loginController = new LoginController();	
 	
 	UsersModel usersModel = new UsersModel();
@@ -113,7 +113,7 @@ public class LoginView extends JFrame {
 
 		JPanel jp3 = new JPanel();
 		jp3.setBackground(colBack);
-		JLabel idsearch = new JLabel("아이디 찾기 /");
+		JLabel idsearch = new JLabel("아이디 찾기 /",img,JLabel.CENTER);
 		JLabel pwsearch = new JLabel("비밀번호 찾기");
 		idsearch.setFont(font3);
 		pwsearch.setFont(font3);
