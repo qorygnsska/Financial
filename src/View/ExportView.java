@@ -437,7 +437,7 @@ public class ExportView extends JPanel {
 
 		// 유형 패널(오른쪽)
 		typePanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
-		String[] exportType = { "교통비", "식비", "쇼핑", "여가", "고정지출", "저축", "기타" };
+		String[] exportType = { "교통비", "식비", "쇼핑", "여가", "저축", "고정지출", "기타" };
 		typeBox = new JComboBox(exportType);
 		typePanelR.add(typeBox);
 		typePanelR.setBackground(Color.white);

@@ -186,7 +186,9 @@ public class ExportDAO {
 	public void check() {
 		String today = LocalDate.now().toString();
 		today = today.replace('-','/');
+		System.out.println(today);
 		today = today.substring(2, 10);
+		System.out.println(today);
 		
 		String checkday = "";
 		int price = 0;
@@ -217,7 +219,7 @@ public class ExportDAO {
 				pt.setInt(1, price);
 				pt.setString(2, memo);
 				pt.setInt(3, UsersModel.user.getId());
-				
+
 				rs2 = pt.executeQuery();
 				
 				if (!rs2.next()) {
