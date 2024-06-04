@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
@@ -74,7 +75,9 @@ public class ImportView extends JPanel {
 	private JTextField amountField;
 	private JTextField memoField;
 	private JComboBox typeBox;
-
+	
+	private Color colBack = new Color(255, 255, 255);
+	private Font f = new Font("나눔고딕", Font.BOLD, 15);
 	private int selectrownum = 0;
 
 	DefaultTableModel[] importModel = new DefaultTableModel[4];
@@ -119,6 +122,23 @@ public class ImportView extends JPanel {
 				}
 			
 				model.setDate(year, month - 1, day);
+				String sel = (String) totalTable.getValueAt(selectRow, 2);
+				int num = 0;
+				switch(sel) {
+				case "급여":
+					num = 0;
+					break;
+				case "이자":
+					num = 1;
+					break;
+				case "고정수입":
+					num = 2;
+					break;
+				case "기타":
+					num = 3;
+					break;
+				}
+				typeBox.setSelectedIndex(num);
 				amountField.setText(sb.toString());
 				memoField.setText((String) totalTable.getValueAt(selectRow, 3));
 			}
@@ -198,6 +218,8 @@ public class ImportView extends JPanel {
 		btnPanel = new JPanel();
 		btnPanel.setBackground(Color.white);
 		JButton menuBtn = new JButton("메인으로");
+		menuBtn.setBackground(colBack);
+		menuBtn.setFont(f);
 		menuBtn.addActionListener(new ActionListener() {
 
 			// 버튼 클릭 시 메인으로 돌아가는 이벤트
@@ -235,6 +257,8 @@ public class ImportView extends JPanel {
 
 		// 추가 버튼
 		JButton addBtn = new JButton("추가");
+		addBtn.setBackground(colBack);
+		addBtn.setFont(f);
 		btnsPanel.add(addBtn);
 		addBtn.addActionListener(new ActionListener() {
 
@@ -288,6 +312,8 @@ public class ImportView extends JPanel {
 
 		// 수정 버튼
 		JButton updateBtn = new JButton("수정");
+		updateBtn.setBackground(colBack);
+		updateBtn.setFont(f);
 		btnsPanel.add(updateBtn);
 		updateBtn.addActionListener(new ActionListener() {
 
@@ -342,6 +368,8 @@ public class ImportView extends JPanel {
 
 		// 삭제 버튼
 		JButton deleteBtn = new JButton("삭제");
+		deleteBtn.setBackground(colBack);
+		deleteBtn.setFont(f);
 		btnsPanel.add(deleteBtn);
 		deleteBtn.addActionListener(new ActionListener() {
 
