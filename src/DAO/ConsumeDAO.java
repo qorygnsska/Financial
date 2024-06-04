@@ -26,7 +26,7 @@ public class ConsumeDAO {
 					"SELECT SUM(price)\r\n" + 
 					"FROM export\r\n" + 
 					"WHERE\r\n" + 
-					"user_id = ? AND substr(day,0,5) = substr(sysdate,0,5)\r\n" + 
+					"user_id = ? AND substr(day,0,5) = substr(sysdate,0,5) and type_id in(1,2,3,4)\r\n" + 
 					"GROUP BY type_id\r\n" + 
 					")";
 
