@@ -211,7 +211,7 @@ public class DatePickerDAO {
 
 			String sql = "select day, price, im.type, memo " + " from users u " + " join import i on i.user_id = u.id "
 					+ " join imtype im on im.id = i.type_id "
-					+ " where u.user_id = ?  and substr(day, 1, 5)=?  order by day desc";
+					+ " where u.user_id = ?  and substr(day, 1, 5) = ?  order by day desc";
 
 			ps = con.prepareStatement(sql);
 			ps.setString(1, UsersModel.user.getUser_id());
@@ -284,9 +284,10 @@ public class DatePickerDAO {
 		System.out.println("DatePicker DAO 실행!");
 
 		con = DBUtil.getConnection();
-		String sql = "select day, price, im.type, memo " + "from users u "
-				+ "join export i on i.user_id = u.id " + "join extype im on im.id = i.type_id "
+		String sql = "select day, price, ex.type, memo " + "from users u "
+				+ "join export e on e.user_id = u.id " + "join extype ex on ex.id = e.type_id "
 				+ "where substr(day, 1, 5) >= ? and substr(day, 1, 5) <= ? order by day desc";
+		
 		date1 = datelist[0];
 
 		date2 = date1.substring(0, 5);
@@ -339,9 +340,9 @@ public class DatePickerDAO {
 				return result;
 			}
 
-			String sql = "select day, price, im.type, memo " + " from users u " + " join export i on i.user_id = u.id "
-					+ " join extype im on im.id = i.type_id "
-					+ " where u.user_id = ?  and substr(day, 1, 5)=?  order by day desc";
+			String sql = "select day, price, ex.type, memo " + " from users u " + " join export e on e.user_id = u.id "
+					+ " join extype ex on ex.id = e.type_id "
+					+ " where u.user_id = ? and substr(day, 1, 5) = ? order by day desc";
 
 			ps = con.prepareStatement(sql);
 			ps.setString(1, UsersModel.user.getUser_id());
