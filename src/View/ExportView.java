@@ -329,13 +329,13 @@ public class ExportView extends JPanel {
 					tabPanel.revalidate();
 					tabPanel.repaint();
 
-					ViewFrame.mainFan.removeAll();
-					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
-					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
-					// 구성 요소 가로/세로 속성 변경하여 호출
-					ViewFrame.mainFan.revalidate();
-					// 현재 재배치한 내용으로 보이기
-					ViewFrame.mainFan.repaint();
+//					ViewFrame.mainFan.removeAll();
+//					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
+//					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
+//					// 구성 요소 가로/세로 속성 변경하여 호출
+//					ViewFrame.mainFan.revalidate();
+//					// 현재 재배치한 내용으로 보이기
+//					ViewFrame.mainFan.repaint();
 					JOptionPane.showMessageDialog(null, "지출 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "지출 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -380,13 +380,13 @@ public class ExportView extends JPanel {
 					tabPanel.add("월별", dayPanel.add(monthCheck()));
 					tabPanel.revalidate();
 					tabPanel.repaint();
-					ViewFrame.mainFan.removeAll();
-					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
-					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
-					// 구성 요소 가로/세로 속성 변경하여 호출
-					ViewFrame.mainFan.revalidate();
-					// 현재 재배치한 내용으로 보이기
-					ViewFrame.mainFan.repaint();
+//					ViewFrame.mainFan.removeAll();
+//					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
+//					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
+//					// 구성 요소 가로/세로 속성 변경하여 호출
+//					ViewFrame.mainFan.revalidate();
+//					// 현재 재배치한 내용으로 보이기
+//					ViewFrame.mainFan.repaint();
 					JOptionPane.showMessageDialog(null, "수입 내역에 삭제되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 삭제되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
