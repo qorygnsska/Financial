@@ -8,7 +8,6 @@ public class ExportService {
 	private ExportDAO dao = new ExportDAO();
 	private DatePickerDAO dpdao=new DatePickerDAO();
 	public String[][] select() {
-
 		return dao.select();
 	}
 
@@ -24,14 +23,15 @@ public class ExportService {
 	}
 
 	public String[][] getExportdayselect() {
-		
 		return dpdao.getExportdayselect();
 	}
 
 	public String[][] getExportmonthselect() {
-		
 		return dpdao.getExportmonthselect();
 	}
 
-
+	public boolean delete(ExportModel exportmodel) {
+		System.out.println("ExportService 실행중");
+		return dao.delete(exportmodel);
+	}
 }

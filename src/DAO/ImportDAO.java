@@ -8,7 +8,6 @@ import Model.ImportModel;
 import Model.UsersModel;
 
 public class ImportDAO {
-
 	private Connection conn;
 	private PreparedStatement pt;
 	private ResultSet rs;
@@ -64,9 +63,7 @@ public class ImportDAO {
 
 		return result;
 	}
-
 	
-
 	// 수입 내역 추가
 	public boolean add(ImportModel importModel) {
 		System.out.println("(ImportDAO) 수입 내역 추가 중");
@@ -115,9 +112,8 @@ public class ImportDAO {
 			
 			}
 			
-			String sql1 = "update import set price=?, day=?,type_id=?, memo=? where user_id=? and id=?";
+			String sql1 = "update import set price=?, day=?, type_id=?, memo=? where user_id=? and id=?";
 			pt = conn.prepareStatement(sql1);
-
 			
 			pt.setInt(1, importModel.getPrice());
 			pt.setString(2, importModel.getDay());
@@ -139,32 +135,27 @@ public class ImportDAO {
 		return result;
 	}
 
-
-
 	public boolean delete(ImportModel importmodel) {
-		int sqlnum=0;
+		int sqlnum = 0;
 		System.out.println("importdao 실행");
 		boolean result = false;
 
 		conn = DBUtil.getConnection();
-		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id=? ";
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id = ? ";
 		try {
 
 			pt = conn.prepareStatement(sql);
 
 			pt.setInt(1, importmodel.getIdnum());
 			pt.setInt(2, UsersModel.user.getId());
-			rs=pt.executeQuery();
+			rs = pt.executeQuery();
 
 			if (rs.next()) {
 			 sqlnum=rs.getInt("idnum");
-			
 			}
 			
-			String sql1 = "delete import where user_id=? and id=?";
+			String sql1 = "delete import where user_id = ? and id = ?";
 			pt = conn.prepareStatement(sql1);
-
-			System.out.println("삭제"+sqlnum);
 		
 			pt.setInt(1, importmodel.getId());
 			pt.setInt(2, sqlnum);
@@ -172,7 +163,6 @@ public class ImportDAO {
 			int num = pt.executeUpdate();
 
 			if (num > 0) {
-			
 				result = true;
 			}
 		} catch (Exception e) {
@@ -181,5 +171,4 @@ public class ImportDAO {
 
 		return result;
 	}
-
 }
