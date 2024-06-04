@@ -14,17 +14,16 @@ public class ExportController {
 				return false;
 			}
 		};
-		
-		String[][] rowData = exportService.select();
-		
+
 		exportModel.setRowCount(0);
-		
-		for(String[] row: rowData) {
+		String[][] rowData = exportService.select();
+
+		for (String[] row : rowData) {
 			exportModel.addRow(row);
 		}
-		
+
 		return exportModel;
-		
+
 	}
 
 	public boolean add(ExportModel exportModel) {
@@ -32,48 +31,49 @@ public class ExportController {
 		return exportService.add(exportModel);
 	}
 
-	
 	public boolean update(ExportModel exportModel) {
 		System.out.println("(ExportController)실행중");
 		return exportService.update(exportModel);
 	}
 
-	//일별조회
+	// 일별조회
 	public DefaultTableModel getExportdayselect(String[] header) {
 		DefaultTableModel exportModel = new DefaultTableModel(header, 0) {
 			public boolean isCellEditable(int rowIndex, int mColindex) {
 				return false;
 			}
 		};
-		
-		String[][] rowData = exportService.getExportdayselect();
-		
+
 		exportModel.setRowCount(0);
-		
-		for(String[] row: rowData) {
+		String[][] rowData = exportService.getExportdayselect();
+
+		for (String[] row : rowData) {
 			exportModel.addRow(row);
 		}
-		
+
 		return exportModel;
 	}
-//월별 조회
+
+	// 월별 조회
 	public DefaultTableModel getExportmonthselect(String[] header) {
 		DefaultTableModel exportModel = new DefaultTableModel(header, 0) {
 			public boolean isCellEditable(int rowIndex, int mColindex) {
 				return false;
 			}
 		};
-		
-		String[][] rowData = exportService.getExportmonthselect();
-		
+
 		exportModel.setRowCount(0);
-		
-		for(String[] row: rowData) {
+		String[][] rowData = exportService.getExportmonthselect();
+
+		for (String[] row : rowData) {
 			exportModel.addRow(row);
 		}
-		
+
 		return exportModel;
 	}
-	
 
+	public boolean delete(ExportModel exportmodel) {
+		System.out.println("(ExportController)실행중");
+		return exportService.delete(exportmodel);
+	}
 }

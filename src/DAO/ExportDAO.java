@@ -14,42 +14,39 @@ public class ExportDAO {
 
 	private LoginDAO loginDAO = new LoginDAO();
 
-	public String[][] select(){
+	public String[][] select() {
 		String[][] result = null;
-		
+
 		try {
-			
+
 			conn = DBUtil.getConnection();
-			
+
 			String countSql = "select count(*) from export where user_id = ?";
-			
+
 			pt = conn.prepareStatement(countSql);
 			pt.setInt(1, UsersModel.user.getId());
 			rs = pt.executeQuery();
-			
+
 			int row = 0;
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				row = rs.getInt(1);
 				System.out.println(row);
-			}else {
+			} else {
 				return result;
 			}
-			
-			String sql = "select day, price, ex.type, memo " +
-						 " from users u " + 
-						 " join export e on e.user_id = u.id " + 
-						 " join extype ex on ex.id = e.type_id " +
-						 " where u.user_id = ? order by day desc";
+
+			String sql = "select day, price, ex.type, memo " + " from users u " + " join export e on e.user_id = u.id "
+					+ " join extype ex on ex.id = e.type_id " + " where u.user_id = ? order by day desc";
 			pt = conn.prepareStatement(sql);
 			pt.setString(1, UsersModel.user.getUser_id());
 			ResultSet rs = pt.executeQuery();
-			
+
 			result = new String[row][4];
-			
+
 			int index = 0;
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				result[index][0] = rs.getString("day");
 				result[index][1] = rs.getString("price");
 				result[index][2] = rs.getString("type");
@@ -59,10 +56,10 @@ public class ExportDAO {
 			rs.close();
 			pt.close();
 			conn.close();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 
@@ -70,22 +67,22 @@ public class ExportDAO {
 	public boolean add(ExportModel exportModel) {
 		System.out.println("(ExportDAO) 지출 내역 추가 중");
 		boolean result = false;
-		
+
 		conn = DBUtil.getConnection();
 		String sql = "insert into export(user_id, price, day, type_id, memo) values(?, ?, ?, ?, ?)";
-		
+
 		try {
-			
+
 			pt = conn.prepareStatement(sql);
 			pt.setInt(1, exportModel.getId());
 			pt.setInt(2, exportModel.getPrice());
 			pt.setString(3, exportModel.getDay());
 			pt.setInt(4, exportModel.getType_id());
 			pt.setString(5, exportModel.getMemo());
-			
+
 			int num = pt.executeUpdate();
-			
-			if(num > 0) {
+
+			if (num > 0) {
 				result = true;
 			}
 		} catch (Exception e) {
@@ -93,9 +90,9 @@ public class ExportDAO {
 		}
 		return result;
 	}
-	
+
 	public boolean update(ExportModel exportModel) {
-		int sqlnum=0;
+		int sqlnum = 0;
 		System.out.println("exportdao 실행");
 		boolean result = false;
 
@@ -107,31 +104,70 @@ public class ExportDAO {
 
 			pt.setInt(1, exportModel.getIdnum());
 			pt.setInt(2, UsersModel.user.getId());
-			rs=pt.executeQuery();
+			rs = pt.executeQuery();
 
 			if (rs.next()) {
-			 sqlnum=rs.getInt("idnum");
-			System.out.println("sdfsdf"+sqlnum);
+				sqlnum = rs.getInt("idnum");
+				System.out.println("sdfsdf" + sqlnum);
 			}
-			String sql1 = "update export set price=?, day=?,type_id=?, memo=? where user_id=? and id=?";
+			String sql1 = "update export set price=?, day=?, type_id=?, memo=? where user_id=? and id=?";
 			pt = conn.prepareStatement(sql1);
+			
 			pt.setInt(1, exportModel.getPrice());
 			pt.setString(2, exportModel.getDay());
 			pt.setInt(3, exportModel.getType_id());
 			pt.setString(4, exportModel.getMemo());
 			pt.setInt(5, exportModel.getId());
-			pt.setInt(6,sqlnum);
-	
+			pt.setInt(6, sqlnum);
+
 			int num = pt.executeUpdate();
 
 			if (num > 0) {
-			
+
 				result = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		return result;
+	}
+	
+	public boolean delete(ExportModel exportmodel) {
+		int sqlnum = 0;
+		System.out.println("exportdao 실행");
+		boolean result = false;
+		
+		conn = DBUtil.getConnection();
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id = ?";
+		
+		try {
+			
+			pt = conn.prepareStatement(sql);
+			
+			pt.setInt(1, exportmodel.getIdnum());
+			pt.setInt(2, UsersModel.user.getId());
+			rs = pt.executeQuery();
+			
+			if(rs.next()) {
+				sqlnum = rs.getInt("idnum");
+			}
+			
+			String sql1 = "delete export where user_id = ? and id = ?";
+			pt = conn.prepareStatement(sql1);
+			
+			pt.setInt(1, exportmodel.getId());
+			pt.setInt(2, sqlnum);
+			
+			int num = pt.executeUpdate();
+			
+			if(num > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return result;
 	}
 }
