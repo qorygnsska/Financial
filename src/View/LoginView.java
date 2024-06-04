@@ -171,13 +171,13 @@ public class LoginView extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// 라벨 밖에서 커서 원래대로
-				idsearch.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				pwsearch.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// 라벨에서 포인터 변경
-				idsearch.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				pwsearch.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 			}
 
