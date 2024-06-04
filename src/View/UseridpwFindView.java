@@ -178,5 +178,7 @@ public class UseridpwFindView extends JFrame {
 		setVisible(true);
 
 	}
+	
+	
 
 }
