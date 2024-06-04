@@ -18,6 +18,7 @@ import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
+import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,6 +42,8 @@ import Controller.MainExportController;
 import Controller.MainImportController;
 import Controller.SaveController;
 import DAO.AmountDAO;
+import DAO.ExportDAO;
+import DAO.ImportDAO;
 import Model.UsersModel;
 
 public class MainMenuView extends JPanel {
@@ -77,6 +80,7 @@ public class MainMenuView extends JPanel {
 	private Cursor csAmount = tk.createCustomCursor(imageAmount, point, "");
 
 	AmountDAO amountDAO = new AmountDAO();
+	ExportDAO exportDAO = new ExportDAO();
 
 	public MainMenuView(JPanel panel) {
 		panMain = panel;
@@ -86,7 +90,7 @@ public class MainMenuView extends JPanel {
 		setLayout(null);
 
 		setBackground(colBack);
-
+		checkfexport();
 		importTable();
 		exportTable();
 		moneyPrint();
@@ -97,6 +101,12 @@ public class MainMenuView extends JPanel {
 
 		setVisible(true);
 	}
+
+	private void checkfexport() {
+		exportDAO.check();
+	}
+			
+	
 
 	// 테이블 몸체 클릭
 	private class MyMouseListener1 extends MouseAdapter {

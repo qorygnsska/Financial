@@ -3,6 +3,11 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import Model.ExportModel;
 import Model.UsersModel;
@@ -13,6 +18,8 @@ public class ExportDAO {
 	private ResultSet rs;
 
 	private LoginDAO loginDAO = new LoginDAO();
+	
+	AmountDAO amountDAO = new AmountDAO();
 
 	public String[][] select() {
 		String[][] result = null;
@@ -171,5 +178,109 @@ public class ExportDAO {
 		}
 		
 		return result;
+	}
+	
+	
+	// 고정지출 날짜 비교
+	public void check() {
+		String today = LocalDate.now().toString();
+		today = today.replace('-','/');
+		today = today.substring(2, 10);
+		
+		String checkday = "";
+		int price = 0;
+		String memo = "";
+		int i = 1;
+		conn = DBUtil.getConnection();
+		String sql = "select * from export where type_id = 5 and user_id = ?";
+		
+		try {
+			pt = conn.prepareStatement(sql);
+			
+			pt.setInt(1, UsersModel.user.getId());
+			
+			rs = pt.executeQuery();
+			
+			while (rs.next()) {
+				System.out.println("i = " + i);
+				i++;
+				System.out.println("너 export에 typeid 5랑 userid1인게 있네");
+				price = rs.getInt("price");
+				System.out.println(price);
+				checkday = rs.getString("day");
+				memo = rs.getString("memo");
+
+				String sql2 = "select * from export where price = ? and day = to_char(sysdate) and memo = ? and type_id = 5 and user_id = ?";
+
+				pt = conn.prepareStatement(sql2);
+
+				pt.setInt(1, price);
+				pt.setString(2, memo);
+				pt.setInt(3, UsersModel.user.getId());
+
+				rs = pt.executeQuery();
+				
+				if (!rs.next()) {
+					System.out.println("너 데이터베이스에 price랑 메모 일치하는 값이 없네! 추가할게!!");
+					if (checkday.substring(6, 8).equals(LocalDate.now().toString().substring(8, 10))) {
+						System.out.println("오 오늘의 일자와 데이터베이스의 일자가 같네 insert 실행!");
+						insert(price, memo);	
+					}
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();			
+		}
+		
+	}
+	
+	// 고정지출의 일마다 데이터베이스에 값 넣기
+	public void insert(int price, String memo) {
+		ArrayList<ExportModel> list = new ArrayList<ExportModel>();
+		
+		String today = LocalDate.now().toString();
+		today = today.replace('-','/');
+		today = today.substring(2, 10);
+		 
+		conn = DBUtil.getConnection();
+
+		String sql = "insert into export(user_id, price, day, type_id, memo) values(?, ?, ?, ?, ?)";
+		try {
+			pt = conn.prepareStatement(sql);
+			
+			pt.setInt(1, UsersModel.user.getId());
+			pt.setInt(2, price);
+			pt.setString(3, today);
+			pt.setInt(4, 5);
+			pt.setString(5, memo);
+			
+			pt.executeUpdate();
+			System.out.println("insert로 값 넣었어!!");
+			
+			String sql2 = "select * from export where id = (select max(id) from export where type_id = 5 and user_id = ?)";
+			
+			pt = conn.prepareStatement(sql2);
+			pt.setInt(1, UsersModel.user.getId());
+			
+			rs = pt.executeQuery();
+			JOptionPane.showMessageDialog(null, "고정지출 \"" + memo + "\" 출금", "고정지출", JOptionPane.PLAIN_MESSAGE);
+			
+			while(rs.next()) {
+				System.out.println("가장 최근에 넣은 값 list에 넣을게~");
+				list.add(new ExportModel(rs.getInt("id"), rs.getString("day"), rs.getInt("price"),  rs.getInt("type_id"), rs.getString("memo")));
+			}
+			
+			for(int i = 0; i < list.size(); i++) {
+				System.out.println("amount로 출동!!");
+				amountDAO.fexinsert(list.get(i));
+			}
+			
+			 
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 }

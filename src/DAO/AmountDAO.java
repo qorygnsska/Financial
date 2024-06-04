@@ -5,9 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 import Model.AmountModel;
+import Model.ExportModel;
 import Model.UsersModel;
 
 public class AmountDAO {
@@ -58,7 +60,6 @@ public class AmountDAO {
 			int index = 0;
 			
 			while (rs.next()) { // 반복문
-				System.out.println("메롱");
 				
 				if (rs.getString("type").equals("수입") || rs.getString("type").equals("고정수입")) {
 					result[index][0] = rs.getString("day");
@@ -249,4 +250,31 @@ public class AmountDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	// 고정지출 매번 넣기
+	public void fexinsert(ExportModel exportModel) {
+		con = DBUtil.getConnection();
+		String sql = "insert into amount(user_id, price, day, type, content, memo, foreign_id) values(?, ?, ?, ?, ?, ?, ?)";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, UsersModel.user.getId());
+			ps.setInt(2, exportModel.getPrice());
+			ps.setString(3, exportModel.getDay());
+			ps.setString(4, "지출");
+			ps.setString(5, "고정지출");
+			ps.setString(6, exportModel.getMemo());
+			ps.setInt(7, exportModel.getId());
+			
+			ps.executeQuery();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	
 }
