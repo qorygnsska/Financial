@@ -1,8 +1,10 @@
 package View;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
@@ -56,13 +58,13 @@ public class MainMenuView extends JPanel {
 	JButton[] btnList = new JButton[2];
 	JPanel userPan = new JPanel(new GridLayout(2, 2));
 	DefaultTableModel saveModel;
-	
+
 	private Color colBack = new Color(255, 255, 255);
 	private Color colLine = new Color(225, 235, 255);
 	private Color colLineR = new Color(255, 230, 230);
 	private Font f = new Font("나눔고딕", Font.BOLD, 15);
 	private Font title = new Font("나눔고딕", Font.BOLD, 15);
-	
+
 	AmountDAO amountDAO = new AmountDAO();
 
 	public MainMenuView(JPanel panel) {
@@ -152,39 +154,39 @@ public class MainMenuView extends JPanel {
 			}
 
 		}
-		
+
 		// 커서 변경 이벤트 위한 이벤트
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					// 패널에서 포인터 변경
-					tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-					tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// 패널에서 포인터 변경
+			tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}
 
-				@Override
-				public void mouseExited(MouseEvent e) {
-					// 패널 밖에서 포인터 원래대로
-					tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-					tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-				}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// 패널 밖에서 포인터 원래대로
+			tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		}
 
-				@Override
-				public void mousePressed(MouseEvent e) {
-					tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-					tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-				}
+		@Override
+		public void mousePressed(MouseEvent e) {
+			tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		}
 
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-					tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				}
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}
 	}
 
 	// 버튼 클릭
 	private class MyButtonListener extends MouseAdapter implements ActionListener {
 		JButton btn = null;
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			btn = (JButton) e.getSource();
@@ -201,31 +203,26 @@ public class MainMenuView extends JPanel {
 			}
 
 		}
-		
-				
 
 	}
 
 	// 유저 정보 패널
 	public void userInfo() {
-
+		JPanel upPanel = new JPanel();
+		JPanel myPanel = new MyPanel();
+		myPanel.setBounds(0, 0, 900, 115);
+		
 		userPan.setBackground(colBack);
 		JLabel nameTitle = new JLabel("이름 : ");
-		System.out.println(UsersModel.user.getName());
 		JLabel name = new JLabel(UsersModel.user.getName());
 		JLabel dayTitle = new JLabel("날짜 : ");
 		JLabel day = new JLabel(LocalDate.now().toString());
-		
-		// 오늘날짜
+
+		// 오늘날짜1
 		LocalDate today = LocalDate.now();
-		System.out.println(today);
 		String t = today.toString();
-		t = t.replace('-','/');
+		t = t.replace('-', '/');
 		t = t.substring(2, 10);
-		System.out.println(t);
-		
-//		int whatDay = today.getDayOfMonth();
-//		System.out.println(whatDay);
 
 		nameTitle.setHorizontalAlignment(JLabel.RIGHT);
 		name.setHorizontalAlignment(JLabel.LEFT);
@@ -233,19 +230,22 @@ public class MainMenuView extends JPanel {
 		dayTitle.setHorizontalAlignment(JLabel.RIGHT);
 		day.setHorizontalAlignment(JLabel.LEFT);
 
-		nameTitle.setFont(new Font("D2coding", Font.BOLD, 18));
-		name.setFont(new Font("D2coding", Font.BOLD, 18));
-		dayTitle.setFont(new Font("D2coding", Font.BOLD, 18));
-		day.setFont(new Font("D2coding", Font.BOLD, 18));
+		nameTitle.setFont(new Font("나눔고딕", Font.BOLD, 18));
+		name.setFont(new Font("나눔고딕", Font.BOLD, 18));
+		dayTitle.setFont(new Font("나눔고딕", Font.BOLD, 18));
+		day.setFont(new Font("나눔고딕", Font.BOLD, 18));
 
-		userPan.setBounds(900, 10, 200, 100);
+		userPan.setBounds(1000, 10, 200, 100);
 		userPan.add(nameTitle);
 		userPan.add(name);
 		userPan.add(dayTitle);
 		userPan.add(day);
-
-		add(userPan);
-
+		
+		upPanel.add(myPanel);
+		upPanel.add(userPan);
+		upPanel.setBounds(-100, 0, 1200, 115);
+		upPanel.setBackground(new Color(255, 255, 255));
+		add(upPanel);
 	}
 
 	// 수입 테이블
@@ -254,7 +254,8 @@ public class MainMenuView extends JPanel {
 		String[] header = { "날짜", "금액", "유형" };
 		portList[0] = new JPanel();
 
-		portList[0].setBorder(BorderFactory.createTitledBorder(new LineBorder(colLine,7,true)," 수입 ", TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
+		portList[0].setBorder(BorderFactory.createTitledBorder(new LineBorder(colLine, 7, true), " 수입 ",
+				TitledBorder.LEFT, TitledBorder.TOP, f, Color.black));
 
 		portList[0].setBounds(30, 120, 400, 400);
 		portList[0].setBackground(colBack);
@@ -298,7 +299,8 @@ public class MainMenuView extends JPanel {
 		String[] header = { "날짜", "금액", "유형" };
 		portList[1] = new JPanel();
 
-		portList[1].setBorder(new TitledBorder(new LineBorder(colLine,7,true), " 지출 ", TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
+		portList[1].setBorder(new TitledBorder(new LineBorder(colLine, 7, true), " 지출 ", TitledBorder.LEFT,
+				TitledBorder.TOP, f, Color.black));
 
 		portList[1].setBounds(460, 120, 400, 400);
 		portList[1].setBackground(colBack);
@@ -375,17 +377,21 @@ public class MainMenuView extends JPanel {
 			moneyList[i].setBounds(900, 120 + 90 * i, 240, 60);
 
 		}
-		
+
 		// 라인색
-		moneyList[1].setBorder(new TitledBorder(new LineBorder(colLineR,3,true), str[2], TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
-		moneyList[2].setBorder(new TitledBorder(new LineBorder(colLine,3,true), str[2], TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
-		moneyList[3].setBorder(new TitledBorder(new LineBorder(colLineR,3,true), str[2], TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
-		moneyList[4].setBorder(new TitledBorder(new LineBorder(colLine,3,true), str[2], TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
+		moneyList[1].setBorder(new TitledBorder(new LineBorder(colLineR, 3, true), str[2], TitledBorder.LEFT,
+				TitledBorder.TOP, f, Color.black));
+		moneyList[2].setBorder(new TitledBorder(new LineBorder(colLine, 3, true), str[2], TitledBorder.LEFT,
+				TitledBorder.TOP, f, Color.black));
+		moneyList[3].setBorder(new TitledBorder(new LineBorder(colLineR, 3, true), str[2], TitledBorder.LEFT,
+				TitledBorder.TOP, f, Color.black));
+		moneyList[4].setBorder(new TitledBorder(new LineBorder(colLine, 3, true), str[2], TitledBorder.LEFT,
+				TitledBorder.TOP, f, Color.black));
 		// 배경색
-		moneyList[1].setBackground(new Color(255,245,245));
-		moneyList[2].setBackground(new Color(245,245,255));
-		moneyList[3].setBackground(new Color(255,245,245));
-		moneyList[4].setBackground(new Color(245,245,255));		
+		moneyList[1].setBackground(new Color(255, 245, 245));
+		moneyList[2].setBackground(new Color(245, 245, 255));
+		moneyList[3].setBackground(new Color(255, 245, 245));
+		moneyList[4].setBackground(new Color(245, 245, 255));
 
 		moneyList[0].setBorder(new TitledBorder(new LineBorder(colLine, 7, true), str[0]));
 		moneyList[0].addMouseListener(new MouseAdapter() {
@@ -398,8 +404,7 @@ public class MainMenuView extends JPanel {
 				panMain.revalidate();
 				panMain.repaint();
 			}
-			
-			
+
 			// 커서 변경 이벤트 위한 이벤트
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -427,8 +432,6 @@ public class MainMenuView extends JPanel {
 				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 		});
-		
-		
 
 	}
 
@@ -457,7 +460,8 @@ public class MainMenuView extends JPanel {
 		conPan.setBounds(520, 580, 300, 80);
 		conPan.setBackground(colBack);
 
-		conPan.setBorder(new TitledBorder(new LineBorder(colLine,3,true), " 소비유형 ", TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
+		conPan.setBorder(new TitledBorder(new LineBorder(colLine, 3, true), " 소비유형 ", TitledBorder.LEFT,
+				TitledBorder.TOP, f, Color.black));
 
 		JLabel[] list = new JLabel[3];
 		for (int i = 0; i < list.length; i++) {
@@ -506,11 +510,10 @@ public class MainMenuView extends JPanel {
 		sPan.setBounds(30, 530, 460, 190);
 		sPan.setBackground(colBack);
 
-
-
-		sPan.setBorder(new TitledBorder(new LineBorder(colLine,3,true), "저축", TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
+		sPan.setBorder(new TitledBorder(new LineBorder(colLine, 3, true), "저축", TitledBorder.LEFT, TitledBorder.TOP, f,
+				Color.black));
 		String[] header = { "날짜", "금액", "유형", "비고" };
-		
+
 		saveModel = SC.getSaveModel(header);
 
 		JTable table = new JTable(saveModel);
