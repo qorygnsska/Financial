@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +16,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-
 import Controller.LoginController;
 import Model.UsersModel;
 
@@ -34,9 +34,14 @@ public class UseridpwFindView extends JFrame {
 	private JButton backbtn;
 	private static Font font1 = new Font("맑은고딕", Font.BOLD, 15);
 	private static Font font2 = new Font("맑은고딕", Font.BOLD, 16);
-	private Color btcolor = new Color(187, 250, 251);
+	
+	
+
+
+
 	//아이디 찾기 메소드
 	public void idfind() {
+		setIconImage(new ImageIcon("coin.png").getImage());
 		jpmain = new JPanel();
 		setTitle("아이디 찾기");
 		setBounds(0, 0, 300, 150);
@@ -55,7 +60,6 @@ public class UseridpwFindView extends JFrame {
 		jpmain.add(jpjumin);
 		idbtn = new JButton("검색");
 		idbtn.setFont(font2);
-		idbtn.setBackground(btcolor);
 		backbtn = new JButton("돌아가기");
 		backbtn.setFont(font2);
 		jpmain.add(backbtn);
@@ -100,6 +104,7 @@ public class UseridpwFindView extends JFrame {
 	}
 	//비밀번호 찾기 메소드
 	public void pwfind() {
+		setIconImage(new ImageIcon("coin.png").getImage());
 		jp1 = new JPanel();
 		jpmain = new JPanel();
 		setTitle("비밀번호 찾기");
