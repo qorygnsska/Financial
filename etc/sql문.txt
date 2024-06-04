@@ -120,3 +120,869 @@ insert into saveprice(user_id, price, day, type_id, memo) values( , , , , );
 
 -- 잔고
 insert into amount(fimport_id, fexport_id, import_id, export_id) values( , , , );
+
+
+
+
+-- 유저정보
+insert into users (user_id,user_pass,name,jumin)
+values('aaaa','aaaa','에이','1111111111111');
+
+insert into users (user_id,user_pass,name,jumin)
+values('bbbb','bbbb','비','2222222222222');
+
+
+insert into users (user_id,user_pass,name,jumin)
+values('cccc','cccc','씨','3333333333333');
+
+insert into users (user_id,user_pass,name,jumin)
+values('dddd','dddd','디','4444444444444');
+
+
+
+
+-- 수입
+-- a
+insert into import(user_id, price, day, type_id, memo)
+values (1, 2000000, '24/02/22', 1, '월급이닷!');
+insert into import(user_id, price, day, type_id, memo)
+values (1, 2000000, '24/03/22', 1, '월급이닷!');
+insert into import(user_id, price, day, type_id, memo)
+values (1, 2000000, '24/04/22', 1, '월급이닷!');
+insert into import(user_id, price, day, type_id, memo)
+values (1, 2100000, '24/05/22', 1, '월급이닷!');
+
+-- b
+insert into import(user_id, price, day, type_id, memo)
+values (2, 1800000, '24/02/12', 1, '월급이닷!');
+insert into import(user_id, price, day, type_id, memo)
+values (2, 1800000, '24/03/12', 1, '월급이닷!');
+insert into import(user_id, price, day, type_id, memo)
+values (2, 1800000, '24/04/12', 1, '월급이닷!');
+insert into import(user_id, price, day, type_id, memo)
+values (2, 1800000, '24/05/12', 1, '월급이닷!');
+
+-- c
+insert into import(user_id, price, day, type_id, memo)
+values (3, 3000000, '24/02/07', 1, '앗싸~! 월급');
+insert into import(user_id, price, day, type_id, memo)
+values (3, 3000000, '24/03/07', 1, '앗싸~! 월급');
+insert into import(user_id, price, day, type_id, memo)
+values (3, 3000000, '24/04/07', 1, '앗싸~! 월급');
+insert into import(user_id, price, day, type_id, memo)
+values (3, 3000000, '24/05/07', 1, '앗싸~! 월급');
+
+-- d
+insert into import(user_id, price, day, type_id, memo)
+values (4, 5000000, '24/02/18', 1, '달달하다~ 월급');
+insert into import(user_id, price, day, type_id, memo)
+values (4, 5000000, '24/03/18', 1, '달달하다~ 월급');
+insert into import(user_id, price, day, type_id, memo)
+values (4, 5000000, '24/04/18', 1, '달달하다~ 월급');
+insert into import(user_id, price, day, type_id, memo)
+values (4, 5000000, '24/05/18', 1, '달달하다~ 월급');
+
+-- 6월4일 지출부터 데이터 넣어야 함
+-- 지출
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/02/23',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/02/26',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/02/27',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/02/28',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/02/29',1,'지하철');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/02/23',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/02/26',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/02/27',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/02/28',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/02/29',2,'밥값');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,200000,'24/02/22',5,'저축');
+insert into export(user_id,price,day,type_id,memo)
+values(1,4500,'24/02/23',3,'버츠비 립밤');
+insert into export(user_id,price,day,type_id,memo)
+values(1,142000,'24/02/23',6,'관리비');
+insert into export(user_id,price,day,type_id,memo)
+values(1,13390,'24/02/23',3,'깨끗한나라 순수 프리미엄 화장지');
+insert into export(user_id,price,day,type_id,memo)
+values(1,149000,'24/02/24',3,'뉴발란스(신발)CM878MC1');
+insert into export(user_id,price,day,type_id,memo)
+values(1,59000,'24/02/26',3,'옥스퍼드 셔츠');
+insert into export(user_id,price,day,type_id,memo)
+values(1,35000,'24/02/26',3,'티셔츠');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,15000,'24/03/03',4,'영화');
+insert into export(user_id,price,day,type_id,memo)
+values(1,120000,'24/03/04',6,'보험비');
+insert into export(user_id,price,day,type_id,memo)
+values(1,150000,'24/03/09',2,'식자재');
+insert into export(user_id,price,day,type_id,memo)
+values(1,55000,'24/03/12',2,'술값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,4500,'24/03/14',2,'간식(젤리)');
+insert into export(user_id,price,day,type_id,memo)
+values(1,13000,'24/03/19',7,'병원비');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,200000,'24/03/22',5,'저축');
+insert into export(user_id,price,day,type_id,memo)
+values(1,350000,'24/03/23',3,'젠틀몬스터 노이저');
+insert into export(user_id,price,day,type_id,memo)
+values(1,142000,'24/03/23',6,'관리비');
+insert into export(user_id,price,day,type_id,memo)
+values(1,15000,'24/03/26',7,'미용실');
+
+-- 교통비
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/04',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/05',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/06',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/07',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/08',1,'지하철');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/11',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/12',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/13',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/14',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/15',1,'지하철');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/18',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/19',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/20',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/21',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/22',1,'지하철');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/25',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/26',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/27',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/28',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/03/29',1,'지하철');
+
+-- 식비
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/04',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/05',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/06',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/07',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/08',2,'밥값');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/11',1,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/12',1,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/13',1,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/14',1,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/15',1,'밥값');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/18',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/19',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/20',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/21',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/22',2,'밥값');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/25',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/26',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/27',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/28',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/03/29',2,'밥값');
+
+-- 4월
+
+
+-- insert into export(user_id,price,day,type_id,memo)
+-- values(1,59000,'24/02/26',3,'옥스퍼드 셔츠');
+-- insert into export(user_id,price,day,type_id,memo)
+-- values(1,35000,'24/02/26',3,'티셔츠');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,4500,'24/04/01',3,'인공눈물');
+insert into export(user_id,price,day,type_id,memo)
+values(1,4500,'24/04/02',2,'아메리카노');
+
+
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,120000,'24/04/04',6,'보험비');
+insert into export(user_id,price,day,type_id,memo)
+values(1,15000,'24/04/06',4,'영화');
+insert into export(user_id,price,day,type_id,memo)
+values(1,149000,'24/04/07',3,'나이키V2K');
+insert into export(user_id,price,day,type_id,memo)
+values(1,55000,'24/04/09',2,'술값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,150000,'24/04/13',2,'식자재');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,4500,'24/04/15',2,'간식(젤리)');
+
+-- insert into export(user_id,price,day,type_id,memo)
+-- values(1,13000,'24/03/19',7,'병원비');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,200000,'24/04/22',5,'저축');
+
+-- insert into export(user_id,price,day,type_id,memo)
+-- values(1,350000,'24/03/23',3,'젠틀몬스터 노이저');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,142000,'24/04/23',6,'관리비');
+insert into export(user_id,price,day,type_id,memo)
+values(1,15000,'24/04/27',7,'미용실');
+
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/01',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/02',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/03',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/04',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/05',1,'지하철');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/08',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/09',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/11',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/12',1,'지하철');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/15',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/16',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/17',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/18',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/19',1,'지하철');
+
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/22',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/23',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/24',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/25',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/26',1,'지하철');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/29',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/30',1,'지하철');
+
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/01',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/02',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/03',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/04',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/05',2,'밥값');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/08',1,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/09',1,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/11',1,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/12',1,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/15',1,'밥값');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/16',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/17',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/18',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/19',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/22',2,'밥값');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/23',2,'밥값');
+insert into export(uer_id,price,day,type_id,memo)
+values(1,10000,'24/04/24',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/25',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/26',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/29',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/04/30',2,'밥값');
+
+-- 5월
+
+
+
+
+-- insert into export(user_id,price,day,type_id,memo)
+-- values(1,4500,'24/04/01',3,'인공눈물');
+insert into export(user_id,price,day,type_id,memo)
+values(1,4500,'24/05/02',2,'아메리카노');
+
+
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,120000,'24/05/04',6,'보험비');
+insert into export(user_id,price,day,type_id,memo)
+values(1,79000,'24/05/04',3,'사이먼 포켓 맨투맨');
+insert into export(user_id,price,day,type_id,memo)
+values(1,35000,'24/05/04',3,'티셔츠');
+insert into export(user_id,price,day,type_id,memo)
+values(1,15000,'24/05/06',4,'영화');
+-- insert into export(user_id,price,day,type_id,memo)
+-- values(1,149000,'24/05/07',3,'나이키V2K');
+insert into export(user_id,price,day,type_id,memo)
+values(1,32000,'24/05/09',2,'디저트값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,150000,'24/05/12',2,'식자재');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,4500,'24/05/15',2,'간식(젤리)');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3200,'24/05/15',2,'음료');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,13000,'24/05/19',7,'병원비');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,200000,'24/05/22',5,'저축');
+
+-- insert into export(user_id,price,day,type_id,memo)
+-- values(1,350000,'24/03/23',3,'젠틀몬스터 노이저');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,142000,'24/05/23',6,'관리비');
+insert into export(user_id,price,day,type_id,memo)
+values(1,15000,'24/05/27',7,'미용실');
+
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/01',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/02',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/03',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/07',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/08',1,'지하철');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/09',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/10',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/13',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/14',1,'지하철');
+
+-- insert into export(user_id,price,day,type_id,memo)
+-- values(1,3400,'24/04/15',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/16',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/17',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/20',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/21',1,'지하철');
+
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/22',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/23',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/04/24',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/27',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/28',1,'지하철');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/29',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/30',1,'지하철');
+insert into export(user_id,price,day,type_id,memo)
+values(1,3400,'24/05/31',1,'지하철');
+
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/01',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/02',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/03',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/07',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/08',2,'밥값');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/09',1,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/10',1,'밥값');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/13',1,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/14',1,'밥값');
+
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/16',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/17',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/20',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/21',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/22',2,'밥값');
+
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/23',2,'밥값');
+insert into export(uer_id,price,day,type_id,memo)
+values(1,10000,'24/05/24',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/27',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/28',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/29',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/30',2,'밥값');
+insert into export(user_id,price,day,type_id,memo)
+values(1,10000,'24/05/31',2,'밥값');
+
+
+-- amount
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,2000000,'24/02/22','수입','급여','월급이닷!',1);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,2000000,'24/03/22','수입','급여','월급이닷!',2);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,2000000,'24/04/22','수입','급여','월급이닷!',3);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,2000000,'24/05/22','수입','급여','월급이닷!',4);
+
+
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/02/23','지출','교통비','지하철', 1);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/02/26','지출','교통비','지하철', 2);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/02/27','지출','교통비','지하철', 3);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/02/28','지출','교통비','지하철', 4);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/02/29','지출','교통비','지하철', 5);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/02/23','지출','식비','밥값', 6);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/02/26','지출','식비','밥값', 7);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/02/27','지출','식비','밥값', 8);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/02/28','지출','식비','밥값', 9);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/02/29','지출','식비','밥값', 10);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,4500,'24/02/23','지출','쇼핑','버츠비 립밤', 12);
+-- ************************
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,142000,'24/02/23','지출','고정지출','관리비', 13);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,13390,'24/02/23','지출','쇼핑','깨끗한나라 순수 프리미엄 화장지', 14);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,149000,'24/02/24','지출','쇼핑','뉴발란스(신발)CM878MC1', 15);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,59000,'24/02/26','지출','쇼핑','옥스퍼드 셔츠', 16);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,35000,'24/02/26','지출','쇼핑','티셔츠', 17);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,15000,'24/03/03','지출','여가','영화', 18);
+-- ********************************
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,120000,'24/03/04','지출','고정지출','보험비', 19);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,150000,'24/03/09','지출','식비','식자재', 20);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,55000,'24/03/12','지출','식비','술값', 21);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,4500,'24/03/14','지출','식비','간식(젤리)', 22);
+-- ******************************
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,13000,'24/03/19','지출','기타','병원비', 23);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,350000,'24/03/23','지출','쇼핑','젠틀몬스터 노이저', 25);
+-- ******************
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,142000,'24/03/23','지출','고정지출','관리비', 26);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,15000,'24/03/26','지출','기타','미용실', 27);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/04','지출','교통비','지하철', 28);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/05','지출','교통비','지하철', 29);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/06','지출','교통비','지하철', 30);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/07','지출','교통비','지하철', 31);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/08','지출','교통비','지하철', 32);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/11','지출','교통비','지하철', 33);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/12','지출','교통비','지하철', 34);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/13','지출','교통비','지하철', 35);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/14','지출','교통비','지하철', 36);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/15','지출','교통비','지하철', 37);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/18','지출','교통비','지하철', 38);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/19','지출','교통비','지하철', 39);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/20','지출','교통비','지하철', 40);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/21','지출','교통비','지하철', 41);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/22','지출','교통비','지하철', 42);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/25','지출','교통비','지하철', 43);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/26','지출','교통비','지하철', 44);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/27','지출','교통비','지하철', 45);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/28','지출','교통비','지하철', 46);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/03/29','지출','교통비','지하철', 47);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/04','지출','식비','밥값', 48);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/05','지출','식비','밥값', 49);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/06','지출','식비','밥값', 50);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/07','지출','식비','밥값', 51);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/08','지출','식비','밥값', 52);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/11','지출','식비','밥값', 53);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/12','지출','식비','밥값', 54);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/13','지출','식비','밥값', 55);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/14','지출','식비','밥값', 56);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/15','지출','식비','밥값', 57);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/18','지출','식비','밥값', 58);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/19','지출','식비','밥값', 59);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/20','지출','식비','밥값', 60);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/21','지출','식비','밥값', 61);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/22','지출','식비','밥값', 62);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/25','지출','식비','밥값', 63);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/26','지출','식비','밥값', 64);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/27','지출','식비','밥값', 65);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/28','지출','식비','밥값', 66);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/03/29','지출','식비','밥값', 67);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,4500,'24/04/01','지출','쇼핑','인공눈물', 68);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,4500,'24/04/02','지출','식비','아메리카노', 69);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,120000,'24/04/04','지출','지출','보험비', 70);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,15000,'24/04/06','지출','여가','영화', 71);
+
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,149000,'24/04/07','지출','쇼핑','나이키V2K', 72);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,55000,'24/04/09','지출','식비','술값', 73);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,150000,'24/04/13','지출','식비','식자재', 74);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,15000,'24/04/15','지출','식비','간식(젤리)', 75);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,142000,'24/04/23','지출','고정지출','관리비', 77);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,15000,'24/04/27','지출','기타','미용실', 78);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/01','지출','교통비','지하철', 79);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/02','지출','교통비','지하철', 80);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/03','지출','교통비','지하철', 81);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/04','지출','교통비','지하철', 82);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/05','지출','교통비','지하철', 83);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/08','지출','교통비','지하철', 84);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/09','지출','교통비','지하철', 85);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/11','지출','교통비','지하철', 86);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/12','지출','교통비','지하철', 87);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/15','지출','교통비','지하철', 88);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/16','지출','교통비','지하철', 89);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/17','지출','교통비','지하철', 90);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/18','지출','교통비','지하철', 91);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/19','지출','교통비','지하철', 92);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/22','지출','교통비','지하철', 93);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/23','지출','교통비','지하철', 94);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/24','지출','교통비','지하철', 95);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/25','지출','교통비','지하철', 96);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/26','지출','교통비','지하철', 97);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/29','지출','교통비','지하철', 98);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/04/30','지출','교통비','지하철', 99);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/01','지출','식비','밥값', 100);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/02','지출','식비','밥값', 101);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/03','지출','식비','밥값', 102);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/04','지출','식비','밥값', 103);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/05','지출','식비','밥값', 104);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/08','지출','식비','밥값', 105);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/09','지출','식비','밥값', 106);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/11','지출','식비','밥값', 107);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/12','지출','식비','밥값', 108);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/15','지출','식비','밥값', 119);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/16','지출','식비','밥값', 110);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/17','지출','식비','밥값', 111);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/18','지출','식비','밥값', 112);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/19','지출','식비','밥값', 113);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/22','지출','식비','밥값', 114);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/23','지출','식비','밥값', 115);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/25','지출','식비','밥값', 116);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/26','지출','식비','밥값', 117);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/29','지출','식비','밥값', 118);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/04/30','지출','식비','밥값', 119);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,4500,'24/05/02','지출','식비','아메리카노', 120);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,120000,'24/05/04','지출','관리비','보험비', 121);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,79000,'24/05/04','지출','쇼핑','사이먼 포켓 맨투맨', 122);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,35000,'24/05/04','지출','쇼핑','티셔츠', 123);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,15000,'24/05/06','지출','여가','영화', 124);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,32000,'24/05/09','지출','식비','디저트값', 125);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,150000,'24/05/12','지출','식비','식자재', 126);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,4500,'24/05/15','지출','식비','간식(젤리)', 127);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3200,'24/05/15','지출','식비','음료', 128);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,13000,'24/05/19','지출','기타','병원비', 129);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,142000,'24/05/23','지출','고정지출','관리비', 131);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,15000,'24/05/27','지출','기타','미용실', 132);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/01','지출','교통비','지하철', 133);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/02','지출','교통비','지하철', 134);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/03','지출','교통비','지하철', 135);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/07','지출','교통비','지하철', 136);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/08','지출','교통비','지하철', 137);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/09','지출','교통비','지하철', 138);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/10','지출','교통비','지하철', 139);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/13','지출','교통비','지하철', 140);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/14','지출','교통비','지하철', 141);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/16','지출','교통비','지하철', 142);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/17','지출','교통비','지하철', 143);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/20','지출','교통비','지하철', 144);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/21','지출','교통비','지하철', 145);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/22','지출','교통비','지하철', 146);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/23','지출','교통비','지하철', 147);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/24','지출','교통비','지하철', 148);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/27','지출','교통비','지하철', 149);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/28','지출','교통비','지하철', 150);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/29','지출','교통비','지하철', 151);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/30','지출','교통비','지하철', 152);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,3400,'24/05/31','지출','교통비','지하철', 153);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/01','지출','식비','밥값', 154);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/02','지출','식비','밥값', 155);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/03','지출','식비','밥값', 156);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/07','지출','식비','밥값', 157);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/08','지출','식비','밥값', 158);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/09','지출','식비','밥값', 159);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/10','지출','식비','밥값', 160);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/13','지출','식비','밥값', 161);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/14','지출','식비','밥값', 162);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/16','지출','식비','밥값', 163);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/17','지출','식비','밥값', 164);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/20','지출','식비','밥값', 165);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/21','지출','식비','밥값', 166);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/22','지출','식비','밥값', 167);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/23','지출','식비','밥값', 168);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/27','지출','식비','밥값', 169);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/28','지출','식비','밥값', 170);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/29','지출','식비','밥값', 171);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/30','지출','식비','밥값', 172);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,10000,'24/05/31','지출','식비','밥값', 173);
+
+-- saveprice
+insert into saveprice(user_id,price,day,type_id,memo)
+values(1,200000,'24/02/22',5,'저축');
+insert into saveprice(user_id,price,day,type_id,memo)
+values(1,200000,'24/03/22',5,'저축');
+insert into saveprice(user_id,price,day,type_id,memo)
+values(1,200000,'24/04/22',5,'저축');
+insert into saveprice(user_id,price,day,type_id,memo)
+values(1,200000,'24/05/22',5,'저축');
+
+
+commit;
