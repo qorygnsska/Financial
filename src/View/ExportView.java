@@ -519,7 +519,7 @@ public class ExportView extends JPanel {
 
 	public JScrollPane monthCheck() {
 		String[] header = { "날짜", "금        액", "구분", "비        고" };
-		exportModel[0] = ec.getExport(header);
+		exportModel[0] = ec.getExportmonthselect(header);
 
 		monthTable = new JTable(exportModel[0]);
 		monthTable.getTableHeader().setReorderingAllowed(false);
