@@ -13,17 +13,23 @@ import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import Controller.ConsumeController;
 import Controller.MainExportController;
@@ -52,7 +58,10 @@ public class MainMenuView extends JPanel {
 	DefaultTableModel saveModel;
 	private Color colBack = new Color(255, 255, 255);
 	private Color colLine = new Color(225, 235, 255);
-
+	private Color colLineR = new Color(255, 230, 230);
+	private Font f = new Font("나눔고딕", Font.BOLD, 15);
+	private Font title = new Font("나눔고딕", Font.BOLD, 15);
+	
 	AmountDAO amountDAO = new AmountDAO();
 
 	public MainMenuView(JPanel panel) {
@@ -155,10 +164,10 @@ public class MainMenuView extends JPanel {
 		dayTitle.setHorizontalAlignment(JLabel.RIGHT);
 		day.setHorizontalAlignment(JLabel.LEFT);
 
-		nameTitle.setFont(new Font("기본글씨", Font.BOLD, 18));
-		name.setFont(new Font("기본글씨", Font.BOLD, 18));
-		dayTitle.setFont(new Font("기본글씨", Font.BOLD, 18));
-		day.setFont(new Font("기본글씨", Font.BOLD, 18));
+		nameTitle.setFont(new Font("D2coding", Font.BOLD, 18));
+		name.setFont(new Font("D2coding", Font.BOLD, 18));
+		dayTitle.setFont(new Font("D2coding", Font.BOLD, 18));
+		day.setFont(new Font("D2coding", Font.BOLD, 18));
 
 		userPan.setBounds(900, 10, 200, 100);
 		userPan.add(nameTitle);
@@ -175,7 +184,7 @@ public class MainMenuView extends JPanel {
 
 		String[] header = { "날짜", "금액", "유형" };
 		portList[0] = new JPanel();
-		portList[0].setBorder(new TitledBorder(new LineBorder(colLine,7,true), "수입"));
+		portList[0].setBorder(BorderFactory.createTitledBorder(new LineBorder(colLine,7,true)," 수입 ", TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
 		portList[0].setBounds(30, 120, 400, 400);
 		portList[0].setBackground(colBack);
 		// 내용 수정 불가
@@ -218,7 +227,8 @@ public class MainMenuView extends JPanel {
 	public void exportTable() {
 		String[] header = { "날짜", "금액", "유형" };
 		portList[1] = new JPanel();
-		portList[1].setBorder(new TitledBorder(new LineBorder(colLine,7,true), " 지출 "));
+		portList[1].setBorder(new TitledBorder(new LineBorder(colLine,7,true), " 지출 ", TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
+		
 		portList[1].setBounds(460, 120, 400, 400);
 		portList[1].setBackground(colBack);
 		// 내용 수정 불가
@@ -277,20 +287,32 @@ public class MainMenuView extends JPanel {
 	public void moneyPrint() {
 		String amount = amountDAO.amount();
 
-		String[] str = { "잔고", "이 달 수입", "이 달 지출", "지난 달 수입", "지난 달 지출" };
+		String[] str = { " 잔고 ", " 이 달 수입 ", " 이 달 지출 ", " 지난 달 수입 ", " 지난 달 지출 " };
 
 		String[] money = { amount, IC.thisMonth(), EC.thisMonth(), IC.beforeMonth(), EC.beforeMonth() };
 
 		for (int i = 0; i < moneyList.length; i++) {
 			moneyList[i] = new JPanel();
-			moneyList[i].setBorder(new TitledBorder(new LineBorder(colLine,3,true), str[i]));
-			moneyList[i].setBackground(colBack);
+			moneyList[0].setBackground(Color.white);
+		
 			add(moneyList[i]);
 			labelList[i] = new JLabel(money[i]);
 			moneyList[i].add(labelList[i]);
+			labelList[i].setFont(title);
 			moneyList[i].setBounds(900, 120 + 90 * i, 240, 60);
 
 		}
+		
+		// 라인색
+		moneyList[1].setBorder(new TitledBorder(new LineBorder(colLineR,3,true), str[2], TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
+		moneyList[2].setBorder(new TitledBorder(new LineBorder(colLine,3,true), str[2], TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
+		moneyList[3].setBorder(new TitledBorder(new LineBorder(colLineR,3,true), str[2], TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
+		moneyList[4].setBorder(new TitledBorder(new LineBorder(colLine,3,true), str[2], TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
+		// 배경색
+		moneyList[1].setBackground(new Color(255,245,245));
+		moneyList[2].setBackground(new Color(245,245,255));
+		moneyList[3].setBackground(new Color(255,245,245));
+		moneyList[4].setBackground(new Color(245,245,255));		
 
 		moneyList[0].setBorder(new TitledBorder(new LineBorder(colLine,7,true), str[0]));
 		moneyList[0].addMouseListener(new MouseAdapter() {
@@ -320,6 +342,8 @@ public class MainMenuView extends JPanel {
 			btnList[i] = new JButton(list[i]);
 			btnPan.add(btnList[i]);
 			btnList[i].addActionListener(new MyButtonListener());
+			btnList[i].setBackground(Color.white);
+
 		}
 
 	}
@@ -327,16 +351,16 @@ public class MainMenuView extends JPanel {
 	// 소비태크
 	public void consume() {
 		JPanel conPan = new JPanel(new GridLayout(0, 3));
-		conPan.setBounds(30, 530, 300, 180);
+		conPan.setBounds(30, 530, 300, 80);
 		conPan.setBackground(colBack);
 
-		conPan.setBorder(new TitledBorder(new LineBorder(colLine,3,true), "소비유형"));
+		conPan.setBorder(new TitledBorder(new LineBorder(colLine,3,true), " 소비유형 ", TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
 		JLabel[] list = new JLabel[3];
 		for (int i = 0; i < list.length; i++) {
 			list[i] = new JLabel();
 			conPan.add(list[i]);
 			list[i].setHorizontalAlignment(JLabel.CENTER);
-			list[i].setFont(new Font("기본글씨", Font.BOLD, 18));
+			list[i].setFont(f);
 		}
 
 		String[] ar = CC.consumeTag();
@@ -376,10 +400,10 @@ public class MainMenuView extends JPanel {
 	// 저축
 	public void savingMoney() {
 		JPanel sPan = new JPanel();
-		sPan.setBounds(400, 530, 460, 180);
+		sPan.setBounds(400, 530, 460, 190);
 		sPan.setBackground(colBack);
 
-		sPan.setBorder(new TitledBorder(new LineBorder(colLine,3,true), "저축"));
+		sPan.setBorder(new TitledBorder(new LineBorder(colLine,3,true), "저축", TitledBorder.LEFT, TitledBorder.TOP, f ,Color.black));
 		String[] header = { "날짜", "금액", "유형", "비고" };
 		
 		saveModel = SC.getSaveModel(header);
