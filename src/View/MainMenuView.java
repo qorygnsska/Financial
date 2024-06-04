@@ -379,13 +379,13 @@ public class MainMenuView extends JPanel {
 		}
 
 		// 라인색
-		moneyList[1].setBorder(new TitledBorder(new LineBorder(colLineR, 3, true), str[2], TitledBorder.LEFT,
+		moneyList[1].setBorder(new TitledBorder(new LineBorder(colLineR, 3, true), str[1], TitledBorder.LEFT,
 				TitledBorder.TOP, f, Color.black));
 		moneyList[2].setBorder(new TitledBorder(new LineBorder(colLine, 3, true), str[2], TitledBorder.LEFT,
 				TitledBorder.TOP, f, Color.black));
-		moneyList[3].setBorder(new TitledBorder(new LineBorder(colLineR, 3, true), str[2], TitledBorder.LEFT,
+		moneyList[3].setBorder(new TitledBorder(new LineBorder(colLineR, 3, true), str[3], TitledBorder.LEFT,
 				TitledBorder.TOP, f, Color.black));
-		moneyList[4].setBorder(new TitledBorder(new LineBorder(colLine, 3, true), str[2], TitledBorder.LEFT,
+		moneyList[4].setBorder(new TitledBorder(new LineBorder(colLine, 3, true), str[4], TitledBorder.LEFT,
 				TitledBorder.TOP, f, Color.black));
 		// 배경색
 		moneyList[1].setBackground(new Color(255, 245, 245));
