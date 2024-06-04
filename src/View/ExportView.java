@@ -109,9 +109,13 @@ public class ExportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-
+				String selPrice = (String)totalTable.getValueAt(selectRow, 1);
+				StringBuilder sb = new StringBuilder();
+				for(String selPrice1 : selPrice.split(",|원")) {
+					sb.append(selPrice1);
+				}
 				model.setDate(year, month - 1, day);
-				amountField.setText((String) totalTable.getValueAt(selectRow, 1));
+				amountField.setText(sb.toString());
 				memoField.setText((String) totalTable.getValueAt(selectRow, 3));
 
 			}
@@ -133,10 +137,13 @@ public class ExportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-
+				String selPrice = (String)totalTable.getValueAt(selectRow, 1);
+				StringBuilder sb = new StringBuilder();
+				for(String selPrice1 : selPrice.split(",|원")) {
+					sb.append(selPrice1);
+				}
 				model.setDate(year, month - 1, day);
-
-				amountField.setText((String) dayTable.getValueAt(selectRow, 1));
+				amountField.setText(sb.toString());
 				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
 
 			}
@@ -158,10 +165,13 @@ public class ExportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-
+				String selPrice = (String)totalTable.getValueAt(selectRow, 1);
+				StringBuilder sb = new StringBuilder();
+				for(String selPrice1 : selPrice.split(",|원")) {
+					sb.append(selPrice1);
+				}
 				model.setDate(year, month - 1, day);
-
-				amountField.setText((String) monthTable.getValueAt(selectRow, 1));
+				amountField.setText(sb.toString());
 				memoField.setText((String) monthTable.getValueAt(selectRow, 3));
 
 			}
@@ -258,13 +268,13 @@ public class ExportView extends JPanel {
 						// amount 추가 코드 끝
 
 						JOptionPane.showMessageDialog(null, "지출 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
-						ViewFrame.mainFan.removeAll();
-						ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
-						ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
-						// 구성 요소 가로/세로 속성 변경하여 호출
-						ViewFrame.mainFan.revalidate();
-						// 현재 재배치한 내용으로 보이기
-						ViewFrame.mainFan.repaint();
+//						ViewFrame.mainFan.removeAll();
+//						ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
+//						ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
+//						// 구성 요소 가로/세로 속성 변경하여 호출
+//						ViewFrame.mainFan.revalidate();
+//						// 현재 재배치한 내용으로 보이기
+//						ViewFrame.mainFan.repaint();
 
 						tabPanel.removeAll();
 						tabPanel.add("전체", dayPanel.add(totalCheck()));
