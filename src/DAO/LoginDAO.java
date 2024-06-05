@@ -14,7 +14,6 @@ public class LoginDAO {
 	
 	public boolean login(String id, String pass) {
 		boolean result = false;
-		System.out.println("로그인 DAO 실행!");
 		
 		con = DBUtil.getConnection();
 		String sql = "select * from users where user_id = ? and user_pass = ?";

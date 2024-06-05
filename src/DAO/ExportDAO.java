@@ -20,7 +20,7 @@ public class ExportDAO {
 
 	private LoginDAO loginDAO = new LoginDAO();
 	
-	AmountDAO amountDAO = new AmountDAO();
+	private AmountDAO amountDAO = new AmountDAO();
 
 	public String[][] select() {
 		String[][] result = null;
@@ -186,9 +186,7 @@ public class ExportDAO {
 	public void check() {
 		String today = LocalDate.now().toString();
 		today = today.replace('-','/');
-		System.out.println(today);
 		today = today.substring(2, 10);
-		System.out.println(today);
 		
 		String checkday = "";
 		int price = 0;
@@ -207,7 +205,6 @@ public class ExportDAO {
 			
 			while (rs.next()) {
 			
-				System.out.println("너 export에 typeid 6랑 userid1인게 있네");
 				price = rs.getInt("price");
 				checkday = rs.getString("day");
 				memo = rs.getString("memo");
@@ -223,9 +220,7 @@ public class ExportDAO {
 				rs2 = pt.executeQuery();
 
 				if (!rs2.next()) {
-					System.out.println("너 데이터베이스에 price랑 메모 일치하는 값이 없네! 추가할게!!");
 					if (checkday.substring(6, 8).equals(LocalDate.now().toString().substring(8, 10))) {
-						System.out.println("오 오늘의 일자와 데이터베이스의 일자가 같네 insert 실행!");
 						insert(price, memo);	
 					}
 				}
@@ -240,7 +235,6 @@ public class ExportDAO {
 	// 고정지출의 일마다 데이터베이스에 값 넣기
 	public void insert(int price, String memo) {
 		ArrayList<ExportModel> list = new ArrayList<ExportModel>();
-		System.out.println("넘어왔어");
 		String today = LocalDate.now().toString();
 		today = today.replace('-','/');
 		today = today.substring(2, 10);
@@ -258,7 +252,6 @@ public class ExportDAO {
 			pt.setString(5, memo);
 			
 			pt.executeUpdate();
-			System.out.println("insert로 값 넣었어!!");
 			
 			String sql2 = "select * from export where id = (select max(id) from export where type_id = 6 and user_id = ?)";
 			
@@ -266,15 +259,13 @@ public class ExportDAO {
 			pt.setInt(1, UsersModel.user.getId());
 			
 			rs = pt.executeQuery();
-			JOptionPane.showMessageDialog(null, "고정지출 \"" + memo + "\" 출금", "고정지출", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null, "고정지출 \"" + memo + "\"" + price + "원 출금", "고정지출", JOptionPane.PLAIN_MESSAGE);
 			
 			while(rs.next()) {
-				System.out.println("가장 최근에 넣은 값 list에 넣을게~");
 				list.add(new ExportModel(rs.getInt("id"), rs.getString("day"), rs.getInt("price"),  rs.getInt("type_id"), rs.getString("memo")));
 			}
 			
 			for(int i = 0; i < list.size(); i++) {
-				System.out.println("amount로 출동!!");
 				amountDAO.fexinsert(list.get(i));
 			}
 			

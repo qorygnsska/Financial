@@ -10,6 +10,7 @@ import java.util.Date;
 
 import Model.AmountModel;
 import Model.ExportModel;
+import Model.ImportModel;
 import Model.UsersModel;
 
 public class AmountDAO {
@@ -19,8 +20,7 @@ public class AmountDAO {
 
 	public Object[][] selecet() {
 		Object[][] result = null;
-		System.out.println("Amount DAO의 select 실행!!");
-
+		
 		con = DBUtil.getConnection();
 		String sql = "SELECT day, price, type, content, memo FROM amount WHERE user_id = ? AND day BETWEEN to_char(add_months(sysdate, -12), 'yy/mm/dd') AND sysdate ORDER BY day DESC"; // 접속중인 아이디의 1년전까지의 데이터값 찾기
 		
@@ -130,11 +130,8 @@ public class AmountDAO {
 			ps.setString(6, amountModel.getMemo());
 			ps.setInt(7, maxid);
 			
-			int res = ps.executeUpdate();
+			ps.executeUpdate();
 			
-			if(res > 0) {
-				System.out.println("저장 성공");
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -274,6 +271,30 @@ public class AmountDAO {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	// 고정수입 매번 넣기
+	public void fiminsert(ImportModel importModel) {
+		con = DBUtil.getConnection();
+		String sql = "insert into amount(user_id, price, day, type, content, memo, foreign_id) values(?, ?, ?, ?, ?, ?, ?)";
+
+		try {
+			ps = con.prepareStatement(sql);
+
+			ps.setInt(1, UsersModel.user.getId());
+			ps.setInt(2, importModel.getPrice());
+			ps.setString(3, importModel.getDay());
+			ps.setString(4, "수입");
+			ps.setString(5, "고정수입");
+			ps.setString(6, importModel.getMemo());
+			ps.setInt(7, importModel.getId());
+
+			ps.executeQuery();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	
