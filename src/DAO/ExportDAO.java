@@ -40,7 +40,6 @@ public class ExportDAO {
 
 			if (rs.next()) {
 				row = rs.getInt(1);
-				System.out.println(row);
 			} else {
 				return result;
 			}
@@ -76,7 +75,6 @@ public class ExportDAO {
 
 	// 지출 내역 추가
 	public boolean add(ExportModel exportModel) {
-		System.out.println("(ExportDAO) 지출 내역 추가 중");
 		boolean result = false;
 
 		conn = DBUtil.getConnection();
@@ -104,7 +102,6 @@ public class ExportDAO {
 
 	public boolean update(ExportModel exportModel) {
 		int sqlnum = 0;
-		System.out.println("exportdao 실행");
 		boolean result = false;
 
 		conn = DBUtil.getConnection();
@@ -119,7 +116,6 @@ public class ExportDAO {
 
 			if (rs.next()) {
 				sqlnum = rs.getInt("idnum");
-				System.out.println("sdfsdf" + sqlnum);
 			}
 			String sql1 = "update export set price=?, day=?, type_id=?, memo=? where user_id=? and id=?";
 			pt = conn.prepareStatement(sql1);
@@ -146,7 +142,6 @@ public class ExportDAO {
 	
 	public boolean delete(ExportModel exportmodel) {
 		int sqlnum = 0;
-		System.out.println("exportdao 실행");
 		boolean result = false;
 		
 		conn = DBUtil.getConnection();

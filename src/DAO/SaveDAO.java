@@ -32,7 +32,6 @@ public class SaveDAO {
 
 			if (rs.next()) {
 				row = rs.getInt(1);
-//				System.out.println(row);
 			} else {
 				return result;
 			}
@@ -55,7 +54,6 @@ public class SaveDAO {
 			while (rs.next()) {
 				// 결과를 받아와서 테이블에 추가하는
 				// 명령문!
-				System.out.println();
 				result[index][0] = rs.getString("day");
 				result[index][1] = rs.getString("price");
 				result[index][2] = rs.getString("type");
@@ -69,7 +67,6 @@ public class SaveDAO {
 			conn.close();
 
 		} catch (Exception e) {
-//			System.out.println("저축테이블에 데이터가 없음");
 			e.printStackTrace();
 		}
 
@@ -93,10 +90,8 @@ public class SaveDAO {
 			pt.setInt(4, model.getType_id());
 			pt.setString(5, model.getMemo());
 			
-			int row = pt.executeUpdate();
-			if(row > 0) {
-				System.out.println("추가 성공");
-			}
+			pt.executeUpdate();
+			
 			
 		} catch (Exception e) {}
 	}
@@ -120,8 +115,6 @@ public class SaveDAO {
 			
 			if(rs.next()) {
 				sqlid = rs.getInt(1);
-			}else {
-				System.out.println("없는데?");
 			}
 			
 			
@@ -135,11 +128,9 @@ public class SaveDAO {
 			pt.setInt(5, UsersModel.user.getId());
 			pt.setInt(6, sqlid);
 			
-			int row = pt.executeUpdate();
+			pt.executeUpdate();
 			
-			if(row > 0) {
-				 System.out.println("저축 수정 완료");
-			}
+		
 			
 		} catch (Exception e) {
 		}

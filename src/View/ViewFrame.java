@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import Model.UsersModel;
+
 public class ViewFrame{
 
 	
@@ -21,7 +23,7 @@ public class ViewFrame{
 
 	public ViewFrame() {
 
-		mainFrame.setTitle("재무관리");
+		mainFrame.setTitle("[재무관리]  " + UsersModel.user.getName() + "님 환영합니다");
 
 //		mainFan.setLayout(null);
 		mainFan.setBounds(0, 0, 1200, 800);
@@ -50,7 +52,7 @@ public class ViewFrame{
 
 		mainFrame.add(mainFan,BorderLayout.CENTER);
 
-//		mainFrame.setResizable(false);
+		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

@@ -16,14 +16,12 @@ public class LoginService {
 
 
 	public Object idfind(String jumin) {
-		System.out.println("아이디 찾기 서비스 실행");
 		return loginDAO.idfind(jumin);
 	}
 
 
 
 	public Object pwfind(String jumin, String uid) {
-		System.out.println("비번 찾기 서비스 실행");
 		return  loginDAO.pwfind(jumin,uid);
 	}
 

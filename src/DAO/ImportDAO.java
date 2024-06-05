@@ -39,7 +39,6 @@ public class ImportDAO {
 
 			if (rs.next()) {
 				row = rs.getInt(1);
-				System.out.println(row);
 			} else {
 				return result;
 			}
@@ -76,7 +75,6 @@ public class ImportDAO {
 	
 	// 수입 내역 추가
 	public boolean add(ImportModel importModel) {
-		System.out.println("(ImportDAO) 수입 내역 추가 중");
 		boolean result = false;
 
 		conn = DBUtil.getConnection();
@@ -104,7 +102,6 @@ public class ImportDAO {
 
 	public boolean update(ImportModel importModel) {
 		int sqlnum=0;
-		System.out.println("importdao 실행");
 		boolean result = false;
 
 		conn = DBUtil.getConnection();
@@ -147,7 +144,6 @@ public class ImportDAO {
 
 	public boolean delete(ImportModel importmodel) {
 		int sqlnum = 0;
-		System.out.println("importdao 실행");
 		boolean result = false;
 
 		conn = DBUtil.getConnection();

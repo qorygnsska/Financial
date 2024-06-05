@@ -61,14 +61,15 @@ public class MainMenuView extends JPanel {
 	private Color colLine = new Color(225, 235, 255);
 	private Color colLineR = new Color(255, 230, 230);
 	private Color colBtn = new Color(240, 248, 255);
-	private Color colHeaderEx = new Color(224, 255, 255);
-	private Color colTableEx = new Color(224, 255, 255);
-	private Color colHeaderIm = new Color(224, 255, 255);
-	private Color colTableIm = new Color(224, 255, 255);
-	private Color colHeaderSa = new Color(224, 255, 255);
-	private Color colTableSa = new Color(224, 255, 255);
+	private Color colHeaderEx = new Color(225, 235, 255);
+	private Color colTableEx = new Color(225, 235, 255);
+	private Color colHeaderIm = new Color(255, 230, 230);
+	private Color colTableIm = new Color(255, 230, 230);
+	private Color colHeaderSa = new Color(235, 255, 245);
+	private Color colTableSa = new Color(235, 255, 245);
 	private Font f = new Font("나눔고딕", Font.BOLD, 15);
 	private Font f1 = new Font("나눔고딕", Font.BOLD, 17);
+	private Font f2 = new Font("나눔고딕", Font.PLAIN, 13);
 	private Font title = new Font("나눔고딕", Font.BOLD, 15);
 	private Toolkit tk = Toolkit.getDefaultToolkit();
 	private Image imageExport = tk.getImage("image/export.png");
@@ -214,13 +215,11 @@ public class MainMenuView extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			btn = (JButton) e.getSource();
 			if (btn == btnList[0]) {
-				System.out.println("로그아웃 버튼");
 				ViewFrame.mainFan.removeAll();
 				ViewFrame.mainFrame.dispose();
 				new LoginView().user();
 
 			} else {
-				System.out.println("종료 버튼");
 				System.exit(0);
 
 			}
@@ -286,6 +285,7 @@ public class MainMenuView extends JPanel {
 		model[0] = IC.getImportModel(header);
 
 		tableList[0] = new JTable(model[0]);
+		tableList[0].setFont(f2);
 		// 테이블 컬럼 이동불가
 		tableList[0].getTableHeader().setReorderingAllowed(false);
 		// 컬럼 크기 조절 불가
@@ -333,6 +333,8 @@ public class MainMenuView extends JPanel {
 		model[1] = EC.getExportModel(header);
 
 		tableList[1] = new JTable(model[1]);
+		
+		tableList[1].setFont(f2);
 
 		// 테이블 컬럼 이동불가
 		tableList[1].getTableHeader().setReorderingAllowed(false);
@@ -469,6 +471,7 @@ public class MainMenuView extends JPanel {
 			btnPan.add(btnList[i]);
 			btnList[i].addActionListener(new MyButtonListener());
 			btnList[i].setBackground(colBtn);
+			btnList[i].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		}
 
@@ -492,7 +495,6 @@ public class MainMenuView extends JPanel {
 		}
 
 		String[] ar = CC.consumeTag();
-		System.out.println(ar.length);
 
 		try {
 			list[0].setText("1. " + ar[0]);
@@ -517,7 +519,6 @@ public class MainMenuView extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("소비 태크 클릭");
 			}
 
 		});
@@ -537,6 +538,8 @@ public class MainMenuView extends JPanel {
 		saveModel = SC.getSaveModel(header);
 
 		JTable table = new JTable(saveModel);
+		
+		table.setFont(f2);
 
 		// 테이블 컬럼 이동불가
 		table.getTableHeader().setReorderingAllowed(false);
@@ -559,10 +562,10 @@ public class MainMenuView extends JPanel {
 		savePane.setPreferredSize(new Dimension(440, 150));
 		savePane.getViewport().setBackground(colTableSa);
 		// 컬럼 사이즈
-		table.getColumn("날짜").setPreferredWidth(60);
-		table.getColumn("금액").setPreferredWidth(120);
-		table.getColumn("유형").setPreferredWidth(60);
-		table.getColumn("비고").setPreferredWidth(180);
+		table.getColumn("날짜").setPreferredWidth(70);
+		table.getColumn("금액").setPreferredWidth(140);
+		table.getColumn("유형").setPreferredWidth(40);
+		table.getColumn("비고").setPreferredWidth(170);
 		sPan.add(savePane);
 
 		add(sPan);

@@ -28,7 +28,6 @@ public class MainExportDAO {
 
 			if (rs.next()) {
 				row = rs.getInt(1);
-//				System.out.println(row);
 			} else {				
 				return result;
 			}

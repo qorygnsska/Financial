@@ -27,12 +27,10 @@ public class ImportController {
 	}
 
 	public boolean add(ImportModel importModel) {
-		System.out.println("(ImportController)지출 내역 추가 중");
 		return importService.add(importModel);
 	}
 
 	public boolean update(ImportModel importmodel) {
-		System.out.println("(IMportController)실행중");
 		return importService.update(importmodel);
 	}
 
@@ -72,7 +70,6 @@ public class ImportController {
 	}
 
 	public boolean delete(ImportModel importmodel) {
-		System.out.println("(IMportController)실행중");
 		return importService.delete(importmodel);
 	}
 	

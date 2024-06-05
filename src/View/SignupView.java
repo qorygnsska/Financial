@@ -2,12 +2,14 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,7 +32,7 @@ public class SignupView extends JFrame {
 
 	public void newUser() {
 
-		setTitle("회원가입");
+		setTitle("[재무관리]");
 		JPanel mainPan = new JPanel();
 		mainPan.setBackground(colBack);
 		JPanel title = new JPanel();
@@ -38,7 +40,9 @@ public class SignupView extends JFrame {
 		Jtitle.setFont(font2);
 		title.setBackground(colBack);
 		title.add(Jtitle);
-
+		
+		setIconImage(new ImageIcon("image/coin.png").getImage());
+		
 		JPanel jp1 = new JPanel();
 
 		jp1.setLayout(new GridLayout(4, 2));
@@ -109,10 +113,12 @@ public class SignupView extends JFrame {
 		JPanel jp3 = new JPanel();
 		JButton back= new JButton("돌아가기");
 		JButton btuser = new JButton("회원가입");
+		back.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		back.setBackground(colBack2);
 		btuser.setBackground(colBack2);
 		back.setFont(font3);
 		btuser.setFont(font3);
+		btuser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		jp3.setBackground(colBack);
 		jp3.add(back);
 		jp3.add(btuser);

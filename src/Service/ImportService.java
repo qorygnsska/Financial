@@ -12,12 +12,10 @@ public class ImportService {
 	}
 	
 	public boolean add(ImportModel importModel) {
-		System.out.println("(ImportService)지출 내역 추가 중");
 		return dao.add(importModel);
 	}
 
 	public boolean update(ImportModel importmodel) {
-		System.out.println("ImportService 실행중");
 		return dao.update(importmodel);
 	}
 
@@ -30,7 +28,6 @@ public class ImportService {
 	}
 
 	public boolean delete(ImportModel importmodel) {
-		System.out.println("ImportService 실행중");
 		return dao.delete(importmodel);
 	}
 	

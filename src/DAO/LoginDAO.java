@@ -43,7 +43,6 @@ public class LoginDAO {
 	public Object idfind(String jumin) {
 		
 		String id=null;
-		System.out.println("아이디 찾기 DAO 실행!");
 		
 		con = DBUtil.getConnection();
 		String sql = "select user_id from users where jumin=?";
@@ -57,7 +56,6 @@ public class LoginDAO {
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				System.out.println(rs.getString("user_id"));
 				
 				id=rs.getString("user_id");
 				
@@ -73,9 +71,7 @@ public class LoginDAO {
 
 	public Object pwfind(String jumin, String uid) {
 		String pw=null;
-		System.out.println("비번 찾기 DAO 실행!");
-		System.out.println(jumin);
-		System.out.println(uid);
+		
 
 		con = DBUtil.getConnection();
 		String sql = "select user_pass from users where jumin=? and user_id=?";
@@ -89,7 +85,6 @@ public class LoginDAO {
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				System.out.println(rs.getString("user_pass"));
 				
 				pw=rs.getString("user_pass");
 				

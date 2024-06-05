@@ -12,13 +12,11 @@ public class ExportService {
 	}
 
 	public boolean add(ExportModel exportModel) {
-		System.out.println("(ExportService)지출 내역 추가 중");
 		return dao.add(exportModel);
 	}
 
 	
 	public boolean update(ExportModel exportModel) {
-		System.out.println("ExportService 실행중");
 		return dao.update(exportModel);
 	}
 
@@ -31,7 +29,6 @@ public class ExportService {
 	}
 
 	public boolean delete(ExportModel exportmodel) {
-		System.out.println("ExportService 실행중");
 		return dao.delete(exportmodel);
 	}
 	

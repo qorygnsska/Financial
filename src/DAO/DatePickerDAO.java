@@ -17,7 +17,6 @@ public class DatePickerDAO {
 
 	public boolean importseracht(String[] datelist) {
 		boolean result = false;
-		System.out.println("DatePicker DAO 실행!");
 
 		con = DBUtil.getConnection();
 		String sql = "select day, price, im.type, memo from import e " + " join imtype im on e.type_id = im.id "
@@ -32,13 +31,6 @@ public class DatePickerDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-
-				System.out.print(rs.getString("day") + " ");
-				System.out.print(rs.getInt("price") + " ");
-				System.out.print(rs.getString("type") + " ");
-				System.out.print(rs.getString("memo"));
-				System.out.println();
-
 				result = true;
 			}
 
@@ -51,7 +43,6 @@ public class DatePickerDAO {
 
 	public boolean exportseracht(String[] datelist) {
 		boolean result = false;
-		System.out.println("DatePicker DAO 실행!");
 
 		con = DBUtil.getConnection();
 		String sql = "select day, price, ex.type, memo from export e " + "join extype ex on e.type_id = ex.id "
@@ -66,13 +57,6 @@ public class DatePickerDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-
-				System.out.print(rs.getString("day") + " ");
-				System.out.print(rs.getInt("price") + " ");
-				System.out.print(rs.getString("type") + " ");
-				System.out.print(rs.getString("memo"));
-				System.out.println();
-
 				result = true;
 			}
 
@@ -101,7 +85,6 @@ public class DatePickerDAO {
 
 			if (rs.next()) {
 				row = rs.getInt(1);
-				System.out.println(row);
 			} else {
 				return result;
 			}
@@ -153,7 +136,6 @@ public class DatePickerDAO {
 
 			if (rs.next()) {
 				row = rs.getInt(1);
-				System.out.println(row);
 			} else {
 				return result;
 			}
@@ -204,7 +186,6 @@ public class DatePickerDAO {
 
 			if (rs.next()) {
 				row = rs.getInt(1);
-				System.out.println(row);
 			} else {
 				return result;
 			}
@@ -243,7 +224,6 @@ public class DatePickerDAO {
 	// 수입 월 데이터가 있는지 확인하는 dao
 	public boolean importmonthseracht(String[] datelist) {
 		boolean result = false;
-		System.out.println("DatePicker DAO 실행!");
 
 		con = DBUtil.getConnection();
 		String sql = "select day, price, im.type, memo " + "from users u "
@@ -262,12 +242,6 @@ public class DatePickerDAO {
 
 			while (rs.next()) {
 
-				System.out.print(rs.getString("day") + " ");
-				System.out.print(rs.getInt("price") + " ");
-				System.out.print(rs.getString("type") + " ");
-				System.out.print(rs.getString("memo"));
-				System.out.println();
-
 				result = true;
 			}
 
@@ -281,7 +255,6 @@ public class DatePickerDAO {
 
 	public boolean exportmonthseracht(String[] datelist) {
 		boolean result = false;
-		System.out.println("DatePicker DAO 실행!");
 
 		con = DBUtil.getConnection();
 		String sql = "select day, price, ex.type, memo " + "from users u "
@@ -300,12 +273,6 @@ public class DatePickerDAO {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-
-				System.out.print(rs.getString("day") + " ");
-				System.out.print(rs.getInt("price") + " ");
-				System.out.print(rs.getString("type") + " ");
-				System.out.print(rs.getString("memo"));
-				System.out.println();
 
 				result = true;
 			}
@@ -335,7 +302,6 @@ public class DatePickerDAO {
 
 			if (rs.next()) {
 				row = rs.getInt(1);
-				System.out.println(row);
 			} else {
 				return result;
 			}

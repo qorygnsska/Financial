@@ -12,7 +12,6 @@ public class SignupDAO {
 	ResultSet rs;
 	
 	public boolean signup(UsersModel user) {
-		System.out.println("signup DAO 실행");
 		boolean result = false;
 		
 		con = DBUtil.getConnection();

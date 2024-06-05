@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -35,8 +36,8 @@ public class AmountView extends JPanel {
 
 	AmountController amountController = new AmountController();
 	
-	private Color colHeader = new Color(224, 255, 255);
-	private Color colTable = new Color(224, 255, 255);
+	private Color colHeader = new Color(225, 235, 255);
+	private Color colTable = new Color(225, 235, 255);
 
 	public AmountView(JPanel panel) {
 		setLayout(null);
@@ -116,6 +117,7 @@ public class AmountView extends JPanel {
 		// 버튼 생성
 		JButton mainBtn = new JButton("메인으로");
 		mainBtn.setFont(font3);
+		mainBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		//mainBtn.setBorder(BorderFactory.createLineBorder(Color.black)); // 버튼의 테두리 색
 		mainBtn.setBackground(colBtn); // 버튼 배경색
 

@@ -38,7 +38,7 @@ public class LoginView extends JFrame {
 
 	public void user() {
 
-		setTitle("재무관리");
+		setTitle("[재무관리]");
 		JPanel back = new JPanel();
 		back.setBackground(colBack);
 		back.setBorder(new LineBorder(Color.GREEN, 3));

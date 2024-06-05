@@ -44,7 +44,7 @@ public class UseridpwFindView extends JFrame {
 	public void idfind() {
 		setIconImage(new ImageIcon("image/coin.png").getImage());
 		jpmain = new JPanel();
-		setTitle("아이디 찾기");
+		setTitle("아이디");
 		setBounds(0, 0, 300, 150);
 		jpmain.setBorder(new TitledBorder(new LineBorder(new Color(225, 235, 255), 4),"아이디 찾기",TitledBorder.LEFT, TitledBorder.TOP, font3));
 		jpmain.setBackground(Color.white);
@@ -110,7 +110,7 @@ public class UseridpwFindView extends JFrame {
 		setIconImage(new ImageIcon("image/coin.png").getImage());
 		jp1 = new JPanel();
 		jpmain = new JPanel();
-		setTitle("비밀번호 찾기");
+		setTitle("비밀번호");
 		setBounds(0, 0, 250, 180);
 
 		jpmain.setBorder(new TitledBorder(new LineBorder(new Color(225, 235, 255), 4), "비밀번호 찾기",TitledBorder.LEFT, TitledBorder.TOP, font3));

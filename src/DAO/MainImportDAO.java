@@ -14,7 +14,6 @@ public class MainImportDAO {
 	
 	public String[][] select() {
 		String[][] result = null;
-		System.out.println("다오 셀렉트");
 
 		try {
 
@@ -30,7 +29,6 @@ public class MainImportDAO {
 
 			if (rs.next()) {
 				row = rs.getInt(1);
-//				System.out.println(row);
 			} else {
 
 				return result;
@@ -50,7 +48,6 @@ public class MainImportDAO {
 			// 저장하는 변수
 			int index = 0;
 
-			System.out.println("와일문 시작 전");
 			
 			while (rs.next()) {
 				

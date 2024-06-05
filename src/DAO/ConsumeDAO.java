@@ -32,7 +32,6 @@ public class ConsumeDAO {
 
 			if (rs.next()) {
 				row = rs.getInt(1);
-//				System.out.println(row);
 			} else {
 				return result;
 			}
@@ -55,7 +54,6 @@ public class ConsumeDAO {
 			while (rs.next()) {
 				// 결과를 받아와서 테이블에 추가하는
 				// 명령문!
-				System.out.println();
 				result[index][0] = rs.getString("합계");
 				result[index][1] = rs.getString("type");
 

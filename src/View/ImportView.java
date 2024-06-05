@@ -3,6 +3,7 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -78,9 +79,10 @@ public class ImportView extends JPanel {
 	
 	private Color colBack = new Color(255, 255, 255);
 	private Color colBtn = new Color(240, 248, 255);
-	private Color colHeader = new Color(224, 255, 255);
-	private Color colTable = new Color(224, 255, 255);
+	private Color colHeader = new Color(255, 230, 230);
+	private Color colTable = new Color(255, 230, 230);
 	private Font f = new Font("나눔고딕", Font.BOLD, 16);
+	private Font f2 = new Font("나눔고딕", Font.PLAIN, 15); // 테이블 폰트
 	private Font fMain = new Font("나눔고딕", Font.BOLD, 17);
 	private int selectrownum = 0;
 
@@ -258,6 +260,7 @@ public class ImportView extends JPanel {
 		btnPanel = new JPanel();
 		btnPanel.setBackground(Color.white);
 		JButton menuBtn = new JButton("메인으로");
+		menuBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		menuBtn.setBackground(colBtn);
 		menuBtn.setFont(fMain);
 		menuBtn.addActionListener(new ActionListener() {
@@ -297,6 +300,7 @@ public class ImportView extends JPanel {
 
 		// 추가 버튼
 		JButton addBtn = new JButton("추가");
+		addBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		addBtn.setBackground(colBtn);
 		addBtn.setFont(f);
 		btnsPanel.add(addBtn);
@@ -346,6 +350,7 @@ public class ImportView extends JPanel {
 
 		// 수정 버튼
 		JButton updateBtn = new JButton("수정");
+		updateBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		updateBtn.setBackground(colBtn);
 		updateBtn.setFont(f);
 		btnsPanel.add(updateBtn);
@@ -396,6 +401,7 @@ public class ImportView extends JPanel {
 
 		// 삭제 버튼
 		JButton deleteBtn = new JButton("삭제");
+		deleteBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		deleteBtn.setBackground(colBtn);
 		deleteBtn.setFont(f);
 		btnsPanel.add(deleteBtn);
@@ -514,6 +520,7 @@ public class ImportView extends JPanel {
 		importModel[0] = ic.getImport(header);
 
 		totalTable = new JTable(importModel[0]);
+		totalTable.setFont(f2);
 		totalTable.getTableHeader().setReorderingAllowed(false);
 		totalTable.getTableHeader().setResizingAllowed(false);
 		totalTable.setRowHeight(30);
@@ -546,6 +553,7 @@ public class ImportView extends JPanel {
 		importModel[0] = ic.getImportdayselect(header);
 
 		dayTable = new JTable(importModel[0]);
+		dayTable.setFont(f2);
 		dayTable.getTableHeader().setReorderingAllowed(false);
 		dayTable.getTableHeader().setResizingAllowed(false);
 		dayTable.setRowHeight(30);
@@ -577,6 +585,7 @@ public class ImportView extends JPanel {
 		importModel[0] = ic.getImportmonthselect(header);
 
 		monthTable = new JTable(importModel[0]);
+		monthTable.setFont(f2);
 		monthTable.getTableHeader().setReorderingAllowed(false);
 		monthTable.getTableHeader().setResizingAllowed(false);
 		monthTable.setRowHeight(30);
@@ -677,7 +686,6 @@ public class ImportView extends JPanel {
 					if (datelist[0] != null) {
 						// 데이터가 있는지 확인하고 있다면 조건의맞는 값을 불러와 테이블을 지웠다가 다시 그린다.
 						if (dpc.importmonthsearch(datelist)) {
-							System.out.println("검색 성공");
 
 							tabPanel.removeAll();
 							tabPanel.add("전체", monthPanel.add(totalCheck()));
@@ -690,7 +698,6 @@ public class ImportView extends JPanel {
 							datelist[0] = null;
 						} else {
 							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
-							System.out.println("검색 실패");
 							datelist[0] = null;
 						}
 
