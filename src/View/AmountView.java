@@ -110,7 +110,7 @@ public class AmountView extends JPanel {
 		JButton mainBtn = new JButton("메인으로");
 		mainBtn.setFont(font3);
 		//mainBtn.setBorder(BorderFactory.createLineBorder(Color.black)); // 버튼의 테두리 색
-		mainBtn.setBackground(Color.white);
+		mainBtn.setBackground(new Color(240, 248, 255)); // 버튼 배경색
 
 		mainBtn.addActionListener(new ActionListener() {
 

@@ -17,6 +17,7 @@ public class ImportDAO {
 	private PreparedStatement pt;
 	private ResultSet rs;
 	private ResultSet rs2;
+	private ResultSet rs3;
 
 	private LoginDAO loginDAO = new LoginDAO();
 	private AmountDAO amountDAO = new AmountDAO();
@@ -257,11 +258,11 @@ public class ImportDAO {
 				pt = conn.prepareStatement(sql2);
 				pt.setInt(1, UsersModel.user.getId());
 				
-				rs = pt.executeQuery();
-				JOptionPane.showMessageDialog(null, "고정수입 \"" + memo + "\"" + price + "원 입금", "고정수입", JOptionPane.PLAIN_MESSAGE);
+				rs3 = pt.executeQuery();
+				JOptionPane.showMessageDialog(null, "고정수입 \"" + memo + "\" " + price + "원 입금", "고정수입", JOptionPane.PLAIN_MESSAGE);
 				
-				while(rs.next()) {
-					list.add(new ImportModel(rs.getInt("id"), rs.getString("day"), rs.getInt("price"),  rs.getInt("type_id"), rs.getString("memo")));
+				while(rs3.next()) {
+					list.add(new ImportModel(rs3.getInt("id"), rs3.getString("day"), rs3.getInt("price"),  rs3.getInt("type_id"), rs3.getString("memo")));
 				}
 				
 				for(int i = 0; i < list.size(); i++) {
