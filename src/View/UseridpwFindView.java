@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -60,8 +61,10 @@ public class UseridpwFindView extends JFrame {
 		jpmain.add(jpjumin);
 		idbtn = new JButton("검색");
 		idbtn.setFont(font2);
+		idbtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		backbtn = new JButton("돌아가기");
 		backbtn.setFont(font2);
+		backbtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		jpmain.add(backbtn);
 		jpmain.add(idbtn);
 
@@ -135,8 +138,10 @@ public class UseridpwFindView extends JFrame {
 		jpmain.add(jp2);
 		idbtn = new JButton("검색");
 		idbtn.setFont(font2);
+		idbtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		backbtn = new JButton("돌아가기");
 		backbtn.setFont(font2);
+		backbtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		jpmain.add(backbtn);
 		jpmain.add(idbtn);
 
