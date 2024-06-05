@@ -228,16 +228,17 @@ public class DatePickerDAO {
 		con = DBUtil.getConnection();
 		String sql = "select day, price, im.type, memo " + "from users u "
 				+ "join import i on i.user_id = u.id " + "join imtype im on im.id = i.type_id "
-				+ "where substr(day, 1, 5) >= ? and substr(day, 1, 5) <= ? order by day desc";
+				+ "where substr(day, 1, 5) >= ? and substr(day, 1, 5) <= ? and i.user_id=? order by day desc";
 		date1 = datelist[0];
 
 		date2 = date1.substring(0, 5);
-
+	
 		try {
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, date2);
 			ps.setString(2, date2);
+			ps.setInt(3, UsersModel.user.getId());
 			rs = ps.executeQuery();
 
 			while (rs.next()) {

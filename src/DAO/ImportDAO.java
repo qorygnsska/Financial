@@ -103,17 +103,17 @@ public class ImportDAO {
 	public boolean update(ImportModel importModel) {
 		int sqlnum=0;
 		boolean result = false;
-		System.out.println("날짜 : " + importModel.getDay());
-		System.out.println("행번호 : " + importModel.getIdnum());
+	
+	
 		conn = DBUtil.getConnection();
-		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id=? and day = ?";
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id=? ";
 		try {
 
 			pt = conn.prepareStatement(sql);
 			
 			pt.setInt(1, importModel.getIdnum());
 			pt.setInt(2, UsersModel.user.getId());
-			pt.setString(3, importModel.getDay());
+		
 			rs=pt.executeQuery();
 
 			if (rs.next()) {
@@ -271,6 +271,171 @@ public class ImportDAO {
 				e.printStackTrace();
 			}
 			
+		}
+
+		public boolean dayupdate(ImportModel importmodel) {
+			int sqlnum=0;
+			boolean result = false;
+		
+			conn = DBUtil.getConnection();
+			String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id=? and day=?";
+			try {
+
+				pt = conn.prepareStatement(sql);
+				
+				pt.setInt(1, importmodel.getIdnum());
+				pt.setInt(2, UsersModel.user.getId());
+				pt.setString(3, importmodel.getDay() );
+			
+				rs=pt.executeQuery();
+
+				if (rs.next()) {
+				 sqlnum=rs.getInt("idnum");
+				
+				}
+				
+				String sql1 = "update import set price=?, day=?, type_id=?, memo=? where user_id=? and id=?";
+				pt = conn.prepareStatement(sql1);
+				
+				pt.setInt(1, importmodel.getPrice());
+				pt.setString(2, importmodel.getDay());
+				pt.setInt(3, importmodel.getType_id());
+				pt.setString(4, importmodel.getMemo());
+				pt.setInt(5, importmodel.getId());
+				pt.setInt(6, sqlnum);
+
+				int num = pt.executeUpdate();
+
+				if (num > 0) {
+				
+					result = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return result;
+		}
+
+		public boolean monthupdate(ImportModel importmodel) {
+			int sqlnum=0;
+			String mdate=importmodel.getDay().substring(0,5);
+			boolean result = false;
+		
+			conn = DBUtil.getConnection();
+			String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id=? and substr(day, 1, 5) >= ? and substr(day, 1, 5) <=?";
+			try {
+
+				pt = conn.prepareStatement(sql);
+				
+				pt.setInt(1, importmodel.getIdnum());
+				pt.setInt(2, UsersModel.user.getId());
+				pt.setString(3, mdate);		
+				pt.setString(4, mdate);
+				rs=pt.executeQuery();
+
+				if (rs.next()) {
+				 sqlnum=rs.getInt("idnum");
+				
+				}
+				
+				String sql1 = "update import set price=?, day=?, type_id=?, memo=? where user_id=? and id=?";
+				pt = conn.prepareStatement(sql1);
+				
+				pt.setInt(1, importmodel.getPrice());
+				pt.setString(2, importmodel.getDay());
+				pt.setInt(3, importmodel.getType_id());
+				pt.setString(4, importmodel.getMemo());
+				pt.setInt(5, importmodel.getId());
+				pt.setInt(6, sqlnum);
+
+				int num = pt.executeUpdate();
+
+				if (num > 0) {
+				
+					result = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return result;
+		}
+
+		public boolean daydelete(ImportModel importmodel) {
+			int sqlnum = 0;
+			boolean result = false;
+
+			conn = DBUtil.getConnection();
+			String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id = ? and day=?";
+			try {
+
+				pt = conn.prepareStatement(sql);
+
+				pt.setInt(1, importmodel.getIdnum());
+				pt.setInt(2, UsersModel.user.getId());
+				pt.setString(3, importmodel.getDay() );
+				rs = pt.executeQuery();
+
+				if (rs.next()) {
+				 sqlnum=rs.getInt("idnum");
+				}
+				
+				String sql1 = "delete import where user_id = ? and id = ?";
+				pt = conn.prepareStatement(sql1);
+			
+				pt.setInt(1, importmodel.getId());
+				pt.setInt(2, sqlnum);
+
+				int num = pt.executeUpdate();
+
+				if (num > 0) {
+					result = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return result;
+			
+		}
+
+		public boolean monthdelete(ImportModel importmodel) {
+			int sqlnum = 0;
+			boolean result = false;
+			String mdate=importmodel.getDay().substring(0,5);
+			conn = DBUtil.getConnection();
+			String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id = ? and substr(day, 1, 5) >= ? and substr(day, 1, 5) <=?";
+			try {
+
+				pt = conn.prepareStatement(sql);
+
+				pt.setInt(1, importmodel.getIdnum());
+				pt.setInt(2, UsersModel.user.getId());
+				pt.setString(3, mdate );
+				pt.setString(4, mdate );
+				rs = pt.executeQuery();
+
+				if (rs.next()) {
+				 sqlnum=rs.getInt("idnum");
+				}
+				
+				String sql1 = "delete import where user_id = ? and id = ?";
+				pt = conn.prepareStatement(sql1);
+			
+				pt.setInt(1, importmodel.getId());
+				pt.setInt(2, sqlnum);
+
+				int num = pt.executeUpdate();
+
+				if (num > 0) {
+					result = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return result;
 		}
 
 }

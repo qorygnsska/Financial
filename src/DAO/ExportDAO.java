@@ -270,4 +270,166 @@ public class ExportDAO {
 		}
 		
 	}
+
+	public boolean dayupdate(ExportModel exportModel) {
+		int sqlnum = 0;
+		boolean result = false;
+
+		conn = DBUtil.getConnection();
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id=? and day=?";
+		try {
+
+			pt = conn.prepareStatement(sql);
+
+			pt.setInt(1, exportModel.getIdnum());
+			pt.setInt(2, UsersModel.user.getId());
+			pt.setString(3, exportModel.getDay() );
+			rs = pt.executeQuery();
+
+			if (rs.next()) {
+				sqlnum = rs.getInt("idnum");
+			}
+			String sql1 = "update export set price=?, day=?, type_id=?, memo=? where user_id=? and id=?";
+			pt = conn.prepareStatement(sql1);
+			
+			pt.setInt(1, exportModel.getPrice());
+			pt.setString(2, exportModel.getDay());
+			pt.setInt(3, exportModel.getType_id());
+			pt.setString(4, exportModel.getMemo());
+			pt.setInt(5, exportModel.getId());
+			pt.setInt(6, sqlnum);
+
+			int num = pt.executeUpdate();
+
+			if (num > 0) {
+
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	public boolean monthupdate(ExportModel exportModel) {
+		int sqlnum = 0;
+		String mdate=exportModel.getDay().substring(0,5);
+		boolean result = false;
+
+		conn = DBUtil.getConnection();
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id=? and substr(day, 1, 5) >= ? and substr(day, 1, 5) <=?";
+		try {
+
+			pt = conn.prepareStatement(sql);
+
+			pt.setInt(1, exportModel.getIdnum());
+			pt.setInt(2, UsersModel.user.getId());
+			pt.setString(3, mdate);		
+			pt.setString(4, mdate);
+			rs = pt.executeQuery();
+
+			if (rs.next()) {
+				sqlnum = rs.getInt("idnum");
+			}
+			String sql1 = "update export set price=?, day=?, type_id=?, memo=? where user_id=? and id=?";
+			pt = conn.prepareStatement(sql1);
+			
+			pt.setInt(1, exportModel.getPrice());
+			pt.setString(2, exportModel.getDay());
+			pt.setInt(3, exportModel.getType_id());
+			pt.setString(4, exportModel.getMemo());
+			pt.setInt(5, exportModel.getId());
+			pt.setInt(6, sqlnum);
+
+			int num = pt.executeUpdate();
+
+			if (num > 0) {
+
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+		
+	}
+
+	public boolean daydelete(ExportModel exportmodel) {
+		int sqlnum = 0;
+		boolean result = false;
+		
+		conn = DBUtil.getConnection();
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id = ? and day=?";
+		
+		try {
+			
+			pt = conn.prepareStatement(sql);
+			
+			pt.setInt(1, exportmodel.getIdnum());
+			pt.setInt(2, UsersModel.user.getId());
+			pt.setString(3, exportmodel.getDay() );
+			rs = pt.executeQuery();
+			
+			if(rs.next()) {
+				sqlnum = rs.getInt("idnum");
+			}
+			
+			String sql1 = "delete export where user_id = ? and id = ?";
+			pt = conn.prepareStatement(sql1);
+			
+			pt.setInt(1, exportmodel.getId());
+			pt.setInt(2, sqlnum);
+			
+			int num = pt.executeUpdate();
+			
+			if(num > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	public boolean monthdelete(ExportModel exportmodel) {
+		int sqlnum = 0;
+		boolean result = false;
+		String mdate=exportmodel.getDay().substring(0,5);
+		conn = DBUtil.getConnection();
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id = ?  and substr(day, 1, 5) >= ? and substr(day, 1, 5) <=?";
+		
+		try {
+			
+			pt = conn.prepareStatement(sql);
+			
+			pt.setInt(1, exportmodel.getIdnum());
+			pt.setInt(2, UsersModel.user.getId());
+			pt.setString(3, mdate );
+			pt.setString(4, mdate );
+			rs = pt.executeQuery();
+			
+			if(rs.next()) {
+				sqlnum = rs.getInt("idnum");
+			}
+			
+			String sql1 = "delete export where user_id = ? and id = ?";
+			pt = conn.prepareStatement(sql1);
+			
+			pt.setInt(1, exportmodel.getId());
+			pt.setInt(2, sqlnum);
+			
+			int num = pt.executeUpdate();
+			
+			if(num > 0) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

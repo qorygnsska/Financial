@@ -77,4 +77,24 @@ public class ExportController {
 	public void check() {
 		exportService.check();
 	}
+
+	public boolean dayupdate(ExportModel exportModel) {
+		
+		return exportService.dayupdate(exportModel);
+	}
+
+	public boolean monthupdate(ExportModel exportModel) {
+		
+		return  exportService.monthupdate(exportModel);
+	}
+
+	public boolean daydelete(ExportModel exportmodel) {
+		
+		return exportService.daydelete(exportmodel);
+	}
+
+	public boolean monthdelete(ExportModel exportmodel) {
+		
+		return exportService.monthdelete(exportmodel);
+	}
 }
