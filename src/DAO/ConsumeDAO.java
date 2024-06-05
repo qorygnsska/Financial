@@ -12,7 +12,6 @@ public class ConsumeDAO {
 	private PreparedStatement pt;
 	private ResultSet rs;
 
-	
 	// 소비태그 1위부터 3위까지
 	public String[][] select() {
 		String[][] result = null;
@@ -21,14 +20,9 @@ public class ConsumeDAO {
 
 			conn = DBUtil.getConnection();
 
-			String countSql = "SELECT count(*)\r\n" + 
-					"from (\r\n" + 
-					"SELECT SUM(price)\r\n" + 
-					"FROM export\r\n" + 
-					"WHERE\r\n" + 
-					"user_id = ? AND substr(day,0,5) = substr(sysdate,0,5) and type_id in(1,2,3,4)\r\n" + 
-					"GROUP BY type_id\r\n" + 
-					")";
+			String countSql = "SELECT count(*) "
+					+ " from ( SELECT SUM(price) FROM export "
+					+ " WHERE user_id = ? AND substr(day,0,5) = substr(sysdate,0,5) and type_id in(1,2,3,4,7) GROUP BY type_id )";
 
 			pt = conn.prepareStatement(countSql);
 			pt.setInt(1, UsersModel.user.getId());
@@ -43,12 +37,11 @@ public class ConsumeDAO {
 				return result;
 			}
 			// 조회하는 sql문 작성
-			String sql = "select sum(price) as 합계, type from export\r\n" + 
-					"join extype on extype.id = export.type_id\r\n" + 
-					"where user_id = ? and substr(day,0,5) = substr(sysdate,0,5) and export.type_id in(1,2,3,4)\r\n" + 
-					"group by type_id, type\r\n" + 
-					"order by sum(price) desc";
-			
+			String sql = "select sum(price) as 합계, type "
+					+ " from export join extype on extype.id = export.type_id "
+					+ " where user_id = ? and substr(day,0,5) = substr(sysdate,0,5) and export.type_id in(1,2,3,4,7) "
+					+ " group by type_id, type order by sum(price) desc";
+
 			pt = conn.prepareStatement(sql);
 			pt.setInt(1, UsersModel.user.getId());
 			ResultSet rs = pt.executeQuery();
@@ -65,10 +58,10 @@ public class ConsumeDAO {
 				System.out.println();
 				result[index][0] = rs.getString("합계");
 				result[index][1] = rs.getString("type");
-				
+
 				index++;
 			}
-			
+
 			// 닫기
 			rs.close();
 			pt.close();

@@ -27,7 +27,7 @@ public class MyPanel extends JPanel implements ActionListener {
 		setBackground(new Color(255, 255, 255));
 		setPreferredSize(new Dimension(width, height));
 		// 이미지 파일 객체 생성
-		File input = new File("수정.png");
+		File input = new File("image/수정.png");
 		try {
 			// input에 가져온 이미지 파일을 버퍼 이미지에 저장
 			image = ImageIO.read(input);
