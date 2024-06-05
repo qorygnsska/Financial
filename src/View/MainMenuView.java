@@ -68,7 +68,9 @@ public class MainMenuView extends JPanel {
 	private Color colBack = new Color(255, 255, 255);
 	private Color colLine = new Color(225, 235, 255);
 	private Color colLineR = new Color(255, 230, 230);
+	private Color colBtn = new Color(240, 255, 255);
 	private Font f = new Font("나눔고딕", Font.BOLD, 15);
+	private Font f1 = new Font("나눔고딕", Font.BOLD, 17);
 	private Font title = new Font("나눔고딕", Font.BOLD, 15);
 	private Toolkit tk = Toolkit.getDefaultToolkit();
 	private Image imageExport = tk.getImage("export.png");
@@ -463,9 +465,10 @@ public class MainMenuView extends JPanel {
 
 		for (int i = 0; i < btnList.length; i++) {
 			btnList[i] = new JButton(list[i]);
+			btnList[i].setFont(f1);
 			btnPan.add(btnList[i]);
 			btnList[i].addActionListener(new MyButtonListener());
-			btnList[i].setBackground(Color.white);
+			btnList[i].setBackground(colBtn);
 
 		}
 
