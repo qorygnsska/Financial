@@ -79,7 +79,8 @@ public class ExportView extends JPanel {
 	private Color colTable = new Color(225, 235, 255);
 	private Font f = new Font("나눔고딕", Font.BOLD, 16);
 	private Font f2 = new Font("나눔고딕", Font.PLAIN, 15); // 테이블 폰트
-	private Font f3 = new Font("나눔고딕", Font.PLAIN, 13); 
+	private Font f3 = new Font("나눔고딕", Font.PLAIN, 13); // 콤보박스 폰트
+	private Font f4 = new Font("나눔고딕", Font.BOLD, 13); // 탭 폰트
 	private Font fMain = new Font("나눔고딕", Font.BOLD, 17);
 	private int selectrownum = 0;
 
@@ -328,6 +329,9 @@ public class ExportView extends JPanel {
 		tabPanel.add("일별", dayPanel());
 		tabPanel.add("월별", monthPanel());
 
+		tabPanel.setBackground(colTable);
+		tabPanel.setFont(f4);
+
 		checkPanel.add(tabPanel);
 		checkPanel.setBounds(40, 50, 750, 600);
 		mainPanel.add(checkPanel);
@@ -553,7 +557,7 @@ public class ExportView extends JPanel {
 		typePanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
 		String[] exportType = { "교통비", "식비", "쇼핑", "여가", "저축", "고정지출", "기타" };
 		typeBox = new JComboBox(exportType);
-		typeBox.setBackground(new Color(255, 247, 242));
+		typeBox.setBackground(Color.white);
 		typeBox.setFont(f3);
 		typePanelR.add(typeBox);
 		typePanelR.setBackground(Color.white);
@@ -732,7 +736,7 @@ public class ExportView extends JPanel {
 		String[] months = { "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" };
 		JComboBox<String> monthComboBox = new JComboBox<>(months);
 		monthComboBox.setFont(f3);
-		monthComboBox.setBackground(new Color(255, 247, 242));
+		monthComboBox.setBackground(Color.white);
 		j1.add(monthComboBox);
 
 		// JComboBox에서 월 선택시 JDatePicker의 월을 변경
