@@ -73,7 +73,9 @@ public class ExportView extends JPanel {
 	private JComboBox typeBox;
 
 	private Color colBack = new Color(255, 255, 255);
-	private Font f = new Font("나눔고딕", Font.BOLD, 15);
+	private Color colBtn = new Color(240, 248, 255);
+	private Font f = new Font("나눔고딕", Font.BOLD, 16);
+	private Font fMain = new Font("나눔고딕", Font.BOLD, 17);
 	private int selectrownum = 0;
 
 	DefaultTableModel[] exportModel = new DefaultTableModel[4];
@@ -224,8 +226,8 @@ public class ExportView extends JPanel {
 		btnPanel = new JPanel();
 		btnPanel.setBackground(Color.white);
 		JButton menuBtn = new JButton("메인으로");
-		menuBtn.setBackground(colBack);
-		menuBtn.setFont(f);
+		menuBtn.setBackground(colBtn);
+		menuBtn.setFont(fMain);
 		menuBtn.addActionListener(new ActionListener() {
 
 			// 버튼 클릭 시 메인으로 돌아가는 이벤트
@@ -263,7 +265,7 @@ public class ExportView extends JPanel {
 
 		// 추가 버튼
 		JButton addBtn = new JButton("추가");
-		addBtn.setBackground(colBack);
+		addBtn.setBackground(colBtn);
 		addBtn.setFont(f);
 		btnsPanel.add(addBtn);
 		addBtn.addActionListener(new ActionListener() {
@@ -326,7 +328,7 @@ public class ExportView extends JPanel {
 
 		// 수정 버튼
 		JButton updateBtn = new JButton("수정");
-		updateBtn.setBackground(colBack);
+		updateBtn.setBackground(colBtn);
 		updateBtn.setFont(f);
 		btnsPanel.add(updateBtn);
 		updateBtn.addActionListener(new ActionListener() {
@@ -382,7 +384,7 @@ public class ExportView extends JPanel {
 
 		// 삭제 버튼
 		JButton deleteBtn = new JButton("삭제");
-		deleteBtn.setBackground(colBack);
+		deleteBtn.setBackground(colBtn);
 		deleteBtn.setFont(f);
 		btnsPanel.add(deleteBtn);
 		deleteBtn.addActionListener(new ActionListener() {
@@ -673,7 +675,7 @@ public class ExportView extends JPanel {
 							tabPanel.setSelectedIndex(2);
 							datelist[0] = null;
 						} else {
-							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+//							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
 							System.out.println("검색 실패");
 							datelist[0] = null;
 						}
@@ -705,7 +707,7 @@ public class ExportView extends JPanel {
 						tabPanel.setSelectedIndex(1);
 						datelist[0] = null;
 					} else {
-						JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+						//JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
 						datelist[0] = null;
 					}
 
