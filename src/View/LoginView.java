@@ -200,7 +200,6 @@ public class LoginView extends JFrame {
 				// 컨트롤러에 전송
 				if (loginController.login(id, pass)) {
 					usersModel.save(id, pass);
-					System.out.println(UsersModel.user.getName() + "님 로그인");
 					new ViewFrame();
 					dispose();
 				} else {

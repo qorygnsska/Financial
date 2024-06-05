@@ -40,7 +40,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import Controller.ImportController;
-import DAO.AmountDAO;
+import Controller.AmountController;
 import Controller.DatePickerController;
 import DatePickerEx.Dateformet;
 import Model.AmountModel;
@@ -83,7 +83,7 @@ public class ImportView extends JPanel {
 	DefaultTableModel[] importModel = new DefaultTableModel[4];
 	ImportController ic = new ImportController();
 
-	AmountDAO amountDAO = new AmountDAO();
+	AmountController amountController = new AmountController();
 
 	public ImportView() {
 	}
@@ -284,7 +284,7 @@ public class ImportView extends JPanel {
 					String amounttype = "수입";
 
 					AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
-					amountDAO.insert(amountModel);
+					amountController.insert(amountModel);
 					// amount 추가 코드 끝
 
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
@@ -336,7 +336,7 @@ public class ImportView extends JPanel {
 				// amount 수정 코드
 				String amounttype = "수입";
 				AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo, selectrownum);
-				amountDAO.update(amountModel);
+				amountController.update(amountModel);
 				// amount 수정 코드 끝
 
 				ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
@@ -390,7 +390,7 @@ public class ImportView extends JPanel {
 
 				// amount 삭제 코드
 				String amounttype = "수입";
-				amountDAO.delete(selectrownum, amounttype);
+				amountController.delete(selectrownum, amounttype);
 				// amount 삭제 코드 끝
 
 				ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,

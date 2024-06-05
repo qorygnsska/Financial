@@ -3,7 +3,12 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+import Model.ExportModel;
 import Model.ImportModel;
 import Model.UsersModel;
 
@@ -11,8 +16,10 @@ public class ImportDAO {
 	private Connection conn;
 	private PreparedStatement pt;
 	private ResultSet rs;
+	private ResultSet rs2;
 
 	private LoginDAO loginDAO = new LoginDAO();
+	private AmountDAO amountDAO = new AmountDAO();
 
 	public String[][] select() {
 		String[][] result = null;
@@ -173,5 +180,98 @@ public class ImportDAO {
 
 		return result;
 	}
+	
+	// 고정수입 날짜 비교
+	public void check() {
+		String today = LocalDate.now().toString();
+		today = today.replace('-', '/');
+		today = today.substring(2, 10);
+
+		String checkday = "";
+		int price = 0;
+		String memo = "";
+
+		conn = DBUtil.getConnection();
+		String sql = "select * from import where type_id = 3 and user_id = ?";
+
+		try {
+
+			pt = conn.prepareStatement(sql);
+
+			pt.setInt(1, UsersModel.user.getId());
+
+			rs = pt.executeQuery();
+
+			while (rs.next()) {
+
+				price = rs.getInt("price");
+				checkday = rs.getString("day");
+				memo = rs.getString("memo");
+
+				String sql2 = "select * from import where price = ? and day = to_char(sysdate) and memo = ? and type_id = 3 and user_id = ?";
+
+				pt = conn.prepareStatement(sql2);
+
+				pt.setInt(1, price);
+				pt.setString(2, memo);
+				pt.setInt(3, UsersModel.user.getId());
+
+				rs2 = pt.executeQuery();
+
+				if (!rs2.next()) {
+					if (checkday.substring(6, 8).equals(LocalDate.now().toString().substring(8, 10))) {
+						insert(price, memo);
+					}
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	// 고정지출의 일마다 데이터베이스에 값 넣기
+		public void insert(int price, String memo) {
+			ArrayList<ImportModel> list = new ArrayList<ImportModel>();
+			String today = LocalDate.now().toString();
+			today = today.replace('-','/');
+			today = today.substring(2, 10);
+			 
+			conn = DBUtil.getConnection();
+
+			String sql = "insert into import(user_id, price, day, type_id, memo) values(?, ?, ?, ?, ?)";
+			try {
+				pt = conn.prepareStatement(sql);
+				
+				pt.setInt(1, UsersModel.user.getId());
+				pt.setInt(2, price);
+				pt.setString(3, today);
+				pt.setInt(4, 3);
+				pt.setString(5, memo);
+				
+				pt.executeUpdate();
+				
+				String sql2 = "select * from import where id = (select max(id) from import where type_id = 3 and user_id = ?)";
+				
+				pt = conn.prepareStatement(sql2);
+				pt.setInt(1, UsersModel.user.getId());
+				
+				rs = pt.executeQuery();
+				JOptionPane.showMessageDialog(null, "고정수입 \"" + memo + "\"" + price + "원 입금", "고정수입", JOptionPane.PLAIN_MESSAGE);
+				
+				while(rs.next()) {
+					list.add(new ImportModel(rs.getInt("id"), rs.getString("day"), rs.getInt("price"),  rs.getInt("type_id"), rs.getString("memo")));
+				}
+				
+				for(int i = 0; i < list.size(); i++) {
+					amountDAO.fiminsert(list.get(i));
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 
 }
