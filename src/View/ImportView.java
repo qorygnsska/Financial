@@ -67,7 +67,7 @@ public class ImportView extends JPanel {
 	private JTextField amountField;
 	private JTextField memoField;
 	private JComboBox<String> typeBox;
-	
+
 	private Color colBack = new Color(255, 255, 255);
 	private Color colBtn = new Color(240, 248, 255);
 	private Color colHeader = new Color(255, 230, 230);
@@ -114,16 +114,15 @@ public class ImportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String)totalTable.getValueAt(selectRow, 1);
+				String selPrice = (String) totalTable.getValueAt(selectRow, 1);
 				StringBuilder sb = new StringBuilder();
-				for(String selPrice1 : selPrice.split(",|원")) {
+				for (String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
 				}
-			
-				
+
 				String sel = (String) totalTable.getValueAt(selectRow, 2);
 				int num = 0;
-				switch(sel) {
+				switch (sel) {
 				case "급여":
 					num = 0;
 					break;
@@ -160,15 +159,15 @@ public class ImportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String)dayTable.getValueAt(selectRow, 1);
+				String selPrice = (String) dayTable.getValueAt(selectRow, 1);
 				StringBuilder sb = new StringBuilder();
-				for(String selPrice1 : selPrice.split(",|원")) {
+				for (String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
 				}
-				
+
 				String sel = (String) dayTable.getValueAt(selectRow, 2);
 				int num = 0;
-				switch(sel) {
+				switch (sel) {
 				case "급여":
 					num = 0;
 					break;
@@ -206,14 +205,14 @@ public class ImportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String)monthTable.getValueAt(selectRow, 1);
+				String selPrice = (String) monthTable.getValueAt(selectRow, 1);
 				StringBuilder sb = new StringBuilder();
-				for(String selPrice1 : selPrice.split(",|원")) {
+				for (String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
 				}
 				String sel = (String) monthTable.getValueAt(selectRow, 2);
 				int num = 0;
-				switch(sel) {
+				switch (sel) {
 				case "급여":
 					num = 0;
 					break;
@@ -304,40 +303,43 @@ public class ImportView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String dateText = date;
-				int amount = Integer.parseInt(amountField.getText());
-				String type = typeBox.getSelectedItem().toString();
-				int type_id = 1;
+				if (!amountField.getText().isEmpty()) {
+					int amount = Integer.parseInt(amountField.getText());
+					String type = typeBox.getSelectedItem().toString();
+					int type_id = 1;
 
-				// 콤보박스에서 type을 받으면 type_id로 저장하는 반복문
-				for (int i = 0; i < typeBox.getItemCount(); i++) {
-					if (type.equals(typeBox.getItemAt(i))) {
-						type_id = i + 1;
+					// 콤보박스에서 type을 받으면 type_id로 저장하는 반복문
+					for (int i = 0; i < typeBox.getItemCount(); i++) {
+						if (type.equals(typeBox.getItemAt(i))) {
+							type_id = i + 1;
+						}
 					}
-				}
-				String memo = memoField.getText();
+					String memo = memoField.getText();
 
-				ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
-				if (ic.add(importModel)) {
+					ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
+					if (ic.add(importModel)) {
 
-					// amount 추가 코드
-					String amounttype = "수입";
+						// amount 추가 코드
+						String amounttype = "수입";
 
-					AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
-					amountController.insert(amountModel);
-					// amount 추가 코드 끝
+						AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
+						amountController.insert(amountModel);
+						// amount 추가 코드 끝
 
-					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+						JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 
+						tabPanel.removeAll();
+						tabPanel.add("전체", dayPanel.add(totalCheck()));
+						tabPanel.add("일별", dayPanel.add(dayCheck()));
+						tabPanel.add("월별", dayPanel.add(monthCheck()));
+						tabPanel.revalidate();
+						tabPanel.repaint();
 
-					tabPanel.removeAll();
-					tabPanel.add("전체", dayPanel.add(totalCheck()));
-					tabPanel.add("일별", dayPanel.add(dayCheck()));
-					tabPanel.add("월별", dayPanel.add(monthCheck()));
-					tabPanel.revalidate();
-					tabPanel.repaint();
-
-				} else {
-					JOptionPane.showMessageDialog(null, "수입 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "수입 내역에 기입되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "금액 부분을 채워주세요!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
 
 			}
@@ -355,42 +357,44 @@ public class ImportView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				String dateText = date;
-				int amount = Integer.parseInt(amountField.getText());
-				String type = typeBox.getSelectedItem().toString();
-				int type_id = 1;
-
-				// 콤보박스에서 type을 받으면 type_id로 저장하는 반복문
-				for (int i = 0; i < typeBox.getItemCount(); i++) {
-					if (type.equals(typeBox.getItemAt(i))) {
-						type_id = i + 1;
+				if (!amountField.getText().isEmpty() && selectrownum != 0) {
+					int amount = Integer.parseInt(amountField.getText());
+					String type = typeBox.getSelectedItem().toString();
+					int type_id = 1;
+					// 콤보박스에서 type을 받으면 type_id로 저장하는 반복문
+					for (int i = 0; i < typeBox.getItemCount(); i++) {
+						if (type.equals(typeBox.getItemAt(i))) {
+							type_id = i + 1;
+						}
 					}
-				}
-				String memo = memoField.getText();
+					String memo = memoField.getText();
 
-				// amount 수정 코드
-				String amounttype = "수입";
-				AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo, selectrownum);
-				amountController.update(amountModel);
-				// amount 수정 코드 끝
+					// amount 수정 코드
+					String amounttype = "수입";
+					AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo, selectrownum);
+					amountController.update(amountModel);
+					// amount 수정 코드 끝
 
-				ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
-						selectrownum);
+					ImportModel importmodel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
+							selectrownum);
 
-				if (ic.update(importmodel)) {
-					tabPanel.removeAll();
-					tabPanel.add("전체", dayPanel.add(totalCheck()));
-					tabPanel.add("일별", dayPanel.add(dayCheck()));
-					tabPanel.add("월별", dayPanel.add(monthCheck()));
-					tabPanel.revalidate();
-					tabPanel.repaint();
+					if (ic.update(importmodel)) {
+						tabPanel.removeAll();
+						tabPanel.add("전체", dayPanel.add(totalCheck()));
+						tabPanel.add("일별", dayPanel.add(dayCheck()));
+						tabPanel.add("월별", dayPanel.add(monthCheck()));
+						tabPanel.revalidate();
+						tabPanel.repaint();
 
-
-					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+						JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
+					}
+					amountField.setText("");
+					memoField.setText("");
 				} else {
-					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "수정할 셀을 선택해주세요!!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
-				amountField.setText("");
-				memoField.setText("");
 			}
 		});
 
@@ -405,6 +409,7 @@ public class ImportView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String dateText = date;
+				if(!amountField.getText().isEmpty() && selectrownum != 0) {
 				int amount = Integer.parseInt(amountField.getText());
 				String type = typeBox.getSelectedItem().toString();
 				int type_id = 1;
@@ -439,6 +444,9 @@ public class ImportView extends JPanel {
 				}
 				amountField.setText("");
 				memoField.setText("");
+			}else {
+				JOptionPane.showMessageDialog(null, "삭제할 셀을 선택해주세요!", "실패", JOptionPane.ERROR_MESSAGE);
+			}
 			}
 		});
 
@@ -491,7 +499,7 @@ public class ImportView extends JPanel {
 		typeBox = new JComboBox<>(exportType);
 		typeBox.setBackground(Color.white);
 		typeBox.setFont(f3);
-		
+
 		typePanelR.add(typeBox);
 		typePanelR.setBackground(Color.white);
 		updatePanel.add(typePanelR);
@@ -668,12 +676,12 @@ public class ImportView extends JPanel {
 		// JComboBox 생성
 		String[] months = { "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" };
 		JComboBox<String> monthComboBox = new JComboBox<>(months);
-		
+
 		monthComboBox.setBackground(Color.white);
 		monthComboBox.setFont(f3);
 
 		j1.add(monthComboBox);
-		
+
 		// JComboBox에서 월 선택시 JDatePicker의 월을 변경
 		monthComboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
@@ -682,7 +690,7 @@ public class ImportView extends JPanel {
 					Calendar calendar = Calendar.getInstance();
 					calendar.setTime((Date) model.getValue());
 					calendar.set(Calendar.MONTH, selectedMonthIndex);
-					calendar.set(Calendar.DAY_OF_MONTH,1);
+					calendar.set(Calendar.DAY_OF_MONTH, 1);
 					// calendar.add(Calendar.DATE, -1);
 					model.setValue(calendar.getTime());
 
@@ -736,7 +744,8 @@ public class ImportView extends JPanel {
 						tabPanel.setSelectedIndex(1);
 						datelist[0] = null;
 					} else {
-					//	JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+						// JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패",
+						// JOptionPane.ERROR_MESSAGE);
 						datelist[0] = null;
 					}
 
