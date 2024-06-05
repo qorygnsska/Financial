@@ -207,7 +207,7 @@ insert into export(user_id,price,day,type_id,memo)
 values(1,10000,'24/02/29',2,'밥값');
 
 insert into export(user_id,price,day,type_id,memo)
-values(1,200000,'24/02/22',5,'저축');
+values(1,15000,'24/02/22',4,'영화');
 insert into export(user_id,price,day,type_id,memo)
 values(1,4500,'24/02/23',3,'버츠비 립밤');
 insert into export(user_id,price,day,type_id,memo)
@@ -235,7 +235,7 @@ insert into export(user_id,price,day,type_id,memo)
 values(1,13000,'24/03/19',7,'병원비');
 
 insert into export(user_id,price,day,type_id,memo)
-values(1,200000,'24/03/22',5,'저축');
+values(1,100000,'24/03/22',3,'백팩');
 insert into export(user_id,price,day,type_id,memo)
 values(1,350000,'24/03/23',3,'젠틀몬스터 노이저');
 insert into export(user_id,price,day,type_id,memo)
@@ -366,7 +366,7 @@ values(1,4500,'24/04/15',2,'간식(젤리)');
 -- values(1,13000,'24/03/19',7,'병원비');
 
 insert into export(user_id,price,day,type_id,memo)
-values(1,200000,'24/04/22',5,'저축');
+values(1,14300,'24/04/22',2,'맥주와 주전부리');
 
 -- insert into export(user_id,price,day,type_id,memo)
 -- values(1,350000,'24/03/23',3,'젠틀몬스터 노이저');
@@ -508,7 +508,7 @@ insert into export(user_id,price,day,type_id,memo)
 values(1,13000,'24/05/19',7,'병원비');
 
 insert into export(user_id,price,day,type_id,memo)
-values(1,200000,'24/05/22',5,'저축');
+values(1,250000,'24/05/22',7,'부모님 생신 저녁식사');
 
 -- insert into export(user_id,price,day,type_id,memo)
 -- values(1,350000,'24/03/23',3,'젠틀몬스터 노이저');
@@ -673,6 +673,8 @@ values(1,10000,'24/02/28','지출','식비','밥값', 9);
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,10000,'24/02/29','지출','식비','밥값', 10);
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,15000,'24/02/22','지출','여가','영화', 11);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,4500,'24/02/23','지출','쇼핑','버츠비 립밤', 12);
 -- ************************
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
@@ -699,6 +701,8 @@ values(1,4500,'24/03/14','지출','식비','간식(젤리)', 22);
 -- ******************************
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,13000,'24/03/19','지출','기타','병원비', 23);
+insert into amount(user_id,price,day,type_id,memo,foreign_id)
+values(1,100000,'24/03/22',3,'백팩',24);
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,350000,'24/03/23','지출','쇼핑','젠틀몬스터 노이저', 25);
 -- ******************
@@ -803,6 +807,8 @@ insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,150000,'24/04/13','지출','식비','식자재', 74);
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,15000,'24/04/15','지출','식비','간식(젤리)', 75);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,14300,'24/04/22','지출','2','맥주와 주전부리', 76);
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,142000,'24/04/23','지출','고정지출','관리비', 77);
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
@@ -909,6 +915,8 @@ insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,3200,'24/05/15','지출','식비','음료', 128);
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,13000,'24/05/19','지출','기타','병원비', 129);
+insert into amount(user_id,price,day,type,content,memo,foreign_id)
+values(1,250000,'24/05/22','지출','기타','부모님 생신 저녁식사', 130);
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,142000,'24/05/23','지출','고정지출','관리비', 131);
 insert into amount(user_id,price,day,type,content,memo,foreign_id)

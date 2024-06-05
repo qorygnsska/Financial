@@ -61,6 +61,12 @@ public class MainMenuView extends JPanel {
 	private Color colLine = new Color(225, 235, 255);
 	private Color colLineR = new Color(255, 230, 230);
 	private Color colBtn = new Color(240, 248, 255);
+	private Color colHeaderEx = new Color(224, 255, 255);
+	private Color colTableEx = new Color(224, 255, 255);
+	private Color colHeaderIm = new Color(224, 255, 255);
+	private Color colTableIm = new Color(224, 255, 255);
+	private Color colHeaderSa = new Color(224, 255, 255);
+	private Color colTableSa = new Color(224, 255, 255);
 	private Font f = new Font("나눔고딕", Font.BOLD, 15);
 	private Font f1 = new Font("나눔고딕", Font.BOLD, 17);
 	private Font title = new Font("나눔고딕", Font.BOLD, 15);
@@ -294,11 +300,13 @@ public class MainMenuView extends JPanel {
 		// 테이블 셀 배경
 		tableList[0].setBackground(Color.white);
 //		model[0].addRow(new Object[] { "5월7일", "100000", "급여" });
+		tableList[0].getTableHeader().setBackground(colHeaderIm);
 
 		paneList[0] = new JScrollPane(tableList[0]);
 
 		// JScrollPane 사이즈
 		paneList[0].setPreferredSize(new Dimension(350, 360));
+		paneList[0].getViewport().setBackground(colTableIm);
 		// 컬럼 사이즈
 		tableList[0].getColumn("날짜").setPreferredWidth(60);
 		tableList[0].getColumn("금액").setPreferredWidth(120);
@@ -340,10 +348,12 @@ public class MainMenuView extends JPanel {
 		// 테이블 셀 배경
 		tableList[1].setBackground(Color.white);
 //		model[1].addRow(new Object[] { "5월7일", "100000", "급여" });
+		tableList[1].getTableHeader().setBackground(colHeaderEx);
 
 		paneList[1] = new JScrollPane(tableList[1]);
 		// JScrollPane 사이즈
 		paneList[1].setPreferredSize(new Dimension(350, 360));
+		paneList[1].getViewport().setBackground(colTableEx);
 		// 컬럼 사이즈
 		tableList[1].getColumn("날짜").setPreferredWidth(60);
 		tableList[1].getColumn("금액").setPreferredWidth(120);
@@ -542,10 +552,12 @@ public class MainMenuView extends JPanel {
 		// 테이블 셀 배경
 		table.setBackground(Color.white);
 //		saveModel.addRow(new Object[] { "5월7일", "100000", "여가", "태국" });
+		table.getTableHeader().setBackground(colHeaderSa);
 
 		JScrollPane savePane = new JScrollPane(table);
 		// JScrollPane 사이즈
 		savePane.setPreferredSize(new Dimension(440, 150));
+		savePane.getViewport().setBackground(colTableSa);
 		// 컬럼 사이즈
 		table.getColumn("날짜").setPreferredWidth(60);
 		table.getColumn("금액").setPreferredWidth(120);

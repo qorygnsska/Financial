@@ -93,12 +93,14 @@ public class LoginView extends JFrame {
 		JButton jLogin = new JButton("로그인");
 		jLogin.setBackground(colBack2);
 		jLogin.setFont(font3);
+		jLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		loginPanel.setBackground(colBack);
 
 		JPanel joinPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JButton join = new JButton("회원가입");
 		join.setBackground(colBack2);
 		join.setFont(font3);
+		join.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		joinPanel.setBackground(colBack);
 
 		loginPanel.add(jLogin);
