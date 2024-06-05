@@ -75,4 +75,8 @@ public class ImportController {
 		System.out.println("(IMportController)실행중");
 		return importService.delete(importmodel);
 	}
+	
+	public void check() {
+		importService.check();
+	}
 }

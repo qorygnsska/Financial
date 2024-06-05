@@ -33,10 +33,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import Controller.AmountController;
 import Controller.DatePickerController;
 import Controller.ExportController;
 import Controller.SaveController;
-import DAO.AmountDAO;
 import DatePickerEx.Dateformet;
 import Model.AmountModel;
 import Model.ExportModel;
@@ -73,13 +73,15 @@ public class ExportView extends JPanel {
 	private JComboBox typeBox;
 
 	private Color colBack = new Color(255, 255, 255);
-	private Font f = new Font("나눔고딕", Font.BOLD, 15);
+	private Color colBtn = new Color(240, 248, 255);
+	private Font f = new Font("나눔고딕", Font.BOLD, 16);
+	private Font fMain = new Font("나눔고딕", Font.BOLD, 17);
 	private int selectrownum = 0;
 
 	DefaultTableModel[] exportModel = new DefaultTableModel[4];
 	ExportController ec = new ExportController();
 
-	AmountDAO amountDAO = new AmountDAO();
+	AmountController amountController = new AmountController();
 	SaveController SC = new SaveController();
 
 	public ExportView() {
@@ -224,8 +226,8 @@ public class ExportView extends JPanel {
 		btnPanel = new JPanel();
 		btnPanel.setBackground(Color.white);
 		JButton menuBtn = new JButton("메인으로");
-		menuBtn.setBackground(colBack);
-		menuBtn.setFont(f);
+		menuBtn.setBackground(colBtn);
+		menuBtn.setFont(fMain);
 		menuBtn.addActionListener(new ActionListener() {
 
 			// 버튼 클릭 시 메인으로 돌아가는 이벤트
@@ -263,7 +265,7 @@ public class ExportView extends JPanel {
 
 		// 추가 버튼
 		JButton addBtn = new JButton("추가");
-		addBtn.setBackground(colBack);
+		addBtn.setBackground(colBtn);
 		addBtn.setFont(f);
 		btnsPanel.add(addBtn);
 		addBtn.addActionListener(new ActionListener() {
@@ -297,7 +299,7 @@ public class ExportView extends JPanel {
 						String amounttype = "지출";
 
 						AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
-						amountDAO.insert(amountModel);
+						amountController.insert(amountModel);
 						// amount 추가 코드 끝
 
 						JOptionPane.showMessageDialog(null, "지출 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
@@ -326,7 +328,7 @@ public class ExportView extends JPanel {
 
 		// 수정 버튼
 		JButton updateBtn = new JButton("수정");
-		updateBtn.setBackground(colBack);
+		updateBtn.setBackground(colBtn);
 		updateBtn.setFont(f);
 		btnsPanel.add(updateBtn);
 		updateBtn.addActionListener(new ActionListener() {
@@ -350,7 +352,7 @@ public class ExportView extends JPanel {
 				// amount 수정 코드
 				String amounttype = "지출";
 				AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo, selectrownum);
-				amountDAO.update(amountModel);
+				amountController.update(amountModel);
 				// amount 수정 코드 끝
 
 				ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,
@@ -382,7 +384,7 @@ public class ExportView extends JPanel {
 
 		// 삭제 버튼
 		JButton deleteBtn = new JButton("삭제");
-		deleteBtn.setBackground(colBack);
+		deleteBtn.setBackground(colBtn);
 		deleteBtn.setFont(f);
 		btnsPanel.add(deleteBtn);
 		deleteBtn.addActionListener(new ActionListener() {
@@ -404,7 +406,7 @@ public class ExportView extends JPanel {
 
 				// amount 삭제 코드
 				String amounttype = "지출";
-				amountDAO.delete(selectrownum, amounttype);
+				amountController.delete(selectrownum, amounttype);
 				// amount 삭제 코드 끝
 
 				ExportModel exportmodel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo,

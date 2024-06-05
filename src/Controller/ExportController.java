@@ -76,4 +76,8 @@ public class ExportController {
 		System.out.println("(ExportController)실행중");
 		return exportService.delete(exportmodel);
 	}
+	
+	public void check() {
+		exportService.check();
+	}
 }

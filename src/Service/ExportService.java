@@ -34,4 +34,8 @@ public class ExportService {
 		System.out.println("ExportService 실행중");
 		return dao.delete(exportmodel);
 	}
+	
+	public void check() {
+		dao.check();
+	}
 }

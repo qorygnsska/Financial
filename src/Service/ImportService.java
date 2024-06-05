@@ -33,4 +33,8 @@ public class ImportService {
 		System.out.println("ImportService 실행중");
 		return dao.delete(importmodel);
 	}
+	
+	public void check() {
+		dao.check();
+	}
 }

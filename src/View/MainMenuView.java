@@ -1,10 +1,8 @@
 package View;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -18,32 +16,26 @@ import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import javax.swing.text.StyledEditorKit.BoldAction;
 
+import Controller.AmountController;
 import Controller.ConsumeController;
+import Controller.ExportController;
+import Controller.ImportController;
 import Controller.MainExportController;
 import Controller.MainImportController;
 import Controller.SaveController;
-import DAO.AmountDAO;
-import DAO.ExportDAO;
-import DAO.ImportDAO;
 import Model.UsersModel;
 
 public class MainMenuView extends JPanel {
@@ -68,7 +60,9 @@ public class MainMenuView extends JPanel {
 	private Color colBack = new Color(255, 255, 255);
 	private Color colLine = new Color(225, 235, 255);
 	private Color colLineR = new Color(255, 230, 230);
+	private Color colBtn = new Color(240, 248, 255);
 	private Font f = new Font("나눔고딕", Font.BOLD, 15);
+	private Font f1 = new Font("나눔고딕", Font.BOLD, 17);
 	private Font title = new Font("나눔고딕", Font.BOLD, 15);
 	private Toolkit tk = Toolkit.getDefaultToolkit();
 	private Image imageExport = tk.getImage("export.png");
@@ -79,9 +73,10 @@ public class MainMenuView extends JPanel {
 	private Cursor csImport = tk.createCustomCursor(imageImport, point, "");
 	private Cursor csAmount = tk.createCustomCursor(imageAmount, point, "");
 
-	AmountDAO amountDAO = new AmountDAO();
-	ExportDAO exportDAO = new ExportDAO();
-
+	private AmountController amountController = new AmountController();
+	private ImportController importController = new ImportController();
+	private ExportController exportController = new ExportController();
+	
 	public MainMenuView(JPanel panel) {
 		panMain = panel;
 		Rectangle rect = panel.getBounds();
@@ -90,7 +85,7 @@ public class MainMenuView extends JPanel {
 		setLayout(null);
 
 		setBackground(colBack);
-		checkfexport();
+		checkfport();
 		importTable();
 		exportTable();
 		moneyPrint();
@@ -102,8 +97,9 @@ public class MainMenuView extends JPanel {
 		setVisible(true);
 	}
 
-	private void checkfexport() {
-		exportDAO.check();
+	private void checkfport() {
+		exportController.check();
+		importController.check();
 	}
 			
 	
@@ -379,7 +375,7 @@ public class MainMenuView extends JPanel {
 
 	// 잔고 및 수입지출
 	public void moneyPrint() {
-		String amount = amountDAO.amount();
+		String amount = amountController.amount();
 
 		String[] str = { " 잔고 ", " 이 달 수입 ", " 이 달 지출 ", " 지난 달 수입 ", " 지난 달 지출 " };
 
@@ -463,9 +459,10 @@ public class MainMenuView extends JPanel {
 
 		for (int i = 0; i < btnList.length; i++) {
 			btnList[i] = new JButton(list[i]);
+			btnList[i].setFont(f1);
 			btnPan.add(btnList[i]);
 			btnList[i].addActionListener(new MyButtonListener());
-			btnList[i].setBackground(Color.white);
+			btnList[i].setBackground(colBtn);
 
 		}
 

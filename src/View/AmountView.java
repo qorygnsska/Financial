@@ -22,12 +22,10 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import Controller.AmountController;
-import DAO.AmountDAO;
 import Model.AmountModel;
 import Model.UsersModel;
 
 public class AmountView extends JPanel {
-	AmountDAO amountDAO = new AmountDAO();
 
 	JPanel panMain;
 	Font font = new Font("나눔고딕", Font.BOLD, 30);
@@ -38,7 +36,6 @@ public class AmountView extends JPanel {
 
 	public AmountView(JPanel panel) {
 		setLayout(null);
-		System.out.println(UsersModel.user.getName());
 
 		panMain = panel; // MainMenuView의 패널 가져옴
 		Rectangle rect = panel.getBounds(); // 패널의 정보 저장
