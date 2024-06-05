@@ -79,7 +79,7 @@ public class ExportView extends JPanel {
 	private Color colTable = new Color(225, 235, 255);
 	private Font f = new Font("나눔고딕", Font.BOLD, 16);
 	private Font f2 = new Font("나눔고딕", Font.PLAIN, 15); // 테이블 폰트
-	private Font f3 = new Font("나눔고딕", Font.BOLD, 12); 
+	private Font f3 = new Font("나눔고딕", Font.PLAIN, 13); 
 	private Font fMain = new Font("나눔고딕", Font.BOLD, 17);
 	private int selectrownum = 0;
 

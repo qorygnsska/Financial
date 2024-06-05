@@ -75,6 +75,7 @@ public class ImportView extends JPanel {
 	private Font f = new Font("나눔고딕", Font.BOLD, 16);
 	private Font f2 = new Font("나눔고딕", Font.PLAIN, 15); // 테이블 폰트
 	private Font f3 = new Font("나눔고딕", Font.PLAIN, 13); // 콤보박스 폰트
+	private Font f4 = new Font("나눔고딕", Font.BOLD, 13); // 탭 폰트
 	private Font fMain = new Font("나눔고딕", Font.BOLD, 17);
 	private int selectrownum = 0;
 
@@ -280,6 +281,8 @@ public class ImportView extends JPanel {
 		tabPanel.add("전체", totalPanel());
 		tabPanel.add("일별", dayPanel());
 		tabPanel.add("월별", monthPanel());
+		tabPanel.setBackground(colTable);
+		tabPanel.setFont(f4);
 
 		checkPanel.add(tabPanel);
 		checkPanel.setBounds(40, 50, 750, 600);
@@ -447,6 +450,7 @@ public class ImportView extends JPanel {
 		// 날짜 패널(왼쪽)
 		datePanelL = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // 오른쪽부터 정렬
 		JLabel dateLabel = new JLabel("날    짜 : ", 10);
+		dateLabel.setFont(f);
 		datePanelL.add(dateLabel);
 		datePanelL.setBackground(Color.white);
 		updatePanel.add(datePanelL);
@@ -460,6 +464,7 @@ public class ImportView extends JPanel {
 		// 금액 패널(왼쪽)
 		amountPanelL = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JLabel amountLabel = new JLabel("금    액 : ", 10);
+		amountLabel.setFont(f);
 		amountPanelL.add(amountLabel);
 		amountPanelL.setBackground(Color.white);
 		updatePanel.add(amountPanelL);
@@ -467,6 +472,7 @@ public class ImportView extends JPanel {
 		// 금액 패널(오른쪽)
 		amountPanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
 		amountField = new JTextField(20);
+		amountField.setFont(f3);
 		amountPanelR.add(amountField);
 		amountPanelR.setBackground(Color.white);
 		updatePanel.add(amountPanelR);
@@ -474,6 +480,7 @@ public class ImportView extends JPanel {
 		// 유형 패널(왼쪽)
 		typePanelL = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JLabel typeLabel = new JLabel("유    형 : ", 10);
+		typeLabel.setFont(f);
 		typePanelL.add(typeLabel);
 		typePanelL.setBackground(Color.white);
 		updatePanel.add(typePanelL);
@@ -492,6 +499,7 @@ public class ImportView extends JPanel {
 		// 비고 패널(왼쪽)
 		memoPanelL = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JLabel memoLabel = new JLabel("비    고 : ", 10);
+		memoLabel.setFont(f);
 		memoPanelL.add(memoLabel);
 		memoPanelL.setBackground(Color.white);
 		updatePanel.add(memoPanelL);
@@ -499,6 +507,7 @@ public class ImportView extends JPanel {
 		// 비고 패널(오른쪽)
 		memoPanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
 		memoField = new JTextField(20);
+		memoField.setFont(f3);
 		memoPanelR.add(memoField);
 		memoPanelR.setBackground(Color.white);
 		updatePanel.add(memoPanelR);
