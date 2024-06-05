@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.swing.JOptionPane;
+
 import Model.UsersModel;
 
 public class SignupDAO {
@@ -30,7 +32,7 @@ public class SignupDAO {
 				result = true;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 		
 		return result;
