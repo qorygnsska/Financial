@@ -21,9 +21,9 @@ public class MyPanel extends JPanel implements ActionListener {
 	private Timer timer;
 	private int x, y;
 
-	// 초기 이미지 조건 파일 객체 등 생성만 담당
+	
 	public MyPanel() {
-		// 패널 배경식 지정, 패널 크기와 JFrame 크기가 동일
+	
 		setBackground(new Color(255, 255, 255));
 		setPreferredSize(new Dimension(width, height));
 		// 이미지 파일 객체 생성
@@ -38,12 +38,10 @@ public class MyPanel extends JPanel implements ActionListener {
 		y = start_y;
 
 		// 타이머 생성자 
-		// 1이상이면 어떤 값이 들어와도 동일한 결과가 수행되고, 0이하에서는 매우 빠른 속도로 움직인다.
 		timer = new Timer(1, this);
 		timer.start();
 	}
 
-	// 이미지 동작 메서드
 	@Override
 	// 그래픽을 출력하는 메서드
 	public void paintComponent(Graphics g) {
@@ -54,6 +52,7 @@ public class MyPanel extends JPanel implements ActionListener {
 		g.drawImage(image, x, y, this);
 	}
 
+	// 이미지 동작 메서드
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// 이벤트 발생 시 좌표를 해당 픽셀 만큼 이동
