@@ -68,7 +68,7 @@ public class MainMenuView extends JPanel {
 	private Color colBack = new Color(255, 255, 255);
 	private Color colLine = new Color(225, 235, 255);
 	private Color colLineR = new Color(255, 230, 230);
-	private Color colBtn = new Color(240, 255, 255);
+	private Color colBtn = new Color(240, 248, 255);
 	private Font f = new Font("나눔고딕", Font.BOLD, 15);
 	private Font f1 = new Font("나눔고딕", Font.BOLD, 17);
 	private Font title = new Font("나눔고딕", Font.BOLD, 15);
