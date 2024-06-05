@@ -114,15 +114,15 @@ public class ExportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String)totalTable.getValueAt(selectRow, 1);
+				String selPrice = (String) totalTable.getValueAt(selectRow, 1);
 				StringBuilder sb = new StringBuilder();
-				for(String selPrice1 : selPrice.split(",|원")) {
+				for (String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
 				}
-				model.setDate(year, month - 1, day);
+
 				String sel = (String) totalTable.getValueAt(selectRow, 2);
 				int num = 0;
-				switch(sel) {
+				switch (sel) {
 				case "교통비":
 					num = 0;
 					break;
@@ -145,6 +145,7 @@ public class ExportView extends JPanel {
 					num = 6;
 					break;
 				}
+				model.setDate(year, month - 1, day);
 				typeBox.setSelectedIndex(num);
 				amountField.setText(sb.toString());
 				memoField.setText((String) totalTable.getValueAt(selectRow, 3));
@@ -168,12 +169,39 @@ public class ExportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String)dayTable.getValueAt(selectRow, 1);
+				String selPrice = (String) dayTable.getValueAt(selectRow, 1);
 				StringBuilder sb = new StringBuilder();
-				for(String selPrice1 : selPrice.split(",|원")) {
+				for (String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
 				}
+
+				String sel = (String) dayTable.getValueAt(selectRow, 2);
+				int num = 0;
+				switch (sel) {
+				case "교통비":
+					num = 0;
+					break;
+				case "식비":
+					num = 1;
+					break;
+				case "쇼핑":
+					num = 2;
+					break;
+				case "여가":
+					num = 3;
+					break;
+				case "저축":
+					num = 4;
+					break;
+				case "고정지출":
+					num = 5;
+					break;
+				case "기타":
+					num = 6;
+					break;
+				}
 				model.setDate(year, month - 1, day);
+				typeBox.setSelectedIndex(num);
 				amountField.setText(sb.toString());
 				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
 
@@ -196,12 +224,39 @@ public class ExportView extends JPanel {
 				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
 				int month = Integer.parseInt(datetext.substring(4, 5));
 				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String)monthTable.getValueAt(selectRow, 1);
+				String selPrice = (String) monthTable.getValueAt(selectRow, 1);
 				StringBuilder sb = new StringBuilder();
-				for(String selPrice1 : selPrice.split(",|원")) {
+				for (String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
 				}
+
+				String sel = (String) monthTable.getValueAt(selectRow, 2);
+				int num = 0;
+				switch (sel) {
+				case "교통비":
+					num = 0;
+					break;
+				case "식비":
+					num = 1;
+					break;
+				case "쇼핑":
+					num = 2;
+					break;
+				case "여가":
+					num = 3;
+					break;
+				case "저축":
+					num = 4;
+					break;
+				case "고정지출":
+					num = 5;
+					break;
+				case "기타":
+					num = 6;
+					break;
+				}
 				model.setDate(year, month - 1, day);
+				typeBox.setSelectedIndex(num);
 				amountField.setText(sb.toString());
 				memoField.setText((String) monthTable.getValueAt(selectRow, 3));
 
@@ -303,13 +358,7 @@ public class ExportView extends JPanel {
 						// amount 추가 코드 끝
 
 						JOptionPane.showMessageDialog(null, "지출 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
-//						ViewFrame.mainFan.removeAll();
-//						ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
-//						ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
-//						// 구성 요소 가로/세로 속성 변경하여 호출
-//						ViewFrame.mainFan.revalidate();
-//						// 현재 재배치한 내용으로 보이기
-//						ViewFrame.mainFan.repaint();
+
 
 						tabPanel.removeAll();
 						tabPanel.add("전체", dayPanel.add(totalCheck()));
@@ -366,13 +415,7 @@ public class ExportView extends JPanel {
 					tabPanel.revalidate();
 					tabPanel.repaint();
 
-//					ViewFrame.mainFan.removeAll();
-//					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
-//					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
-//					// 구성 요소 가로/세로 속성 변경하여 호출
-//					ViewFrame.mainFan.revalidate();
-//					// 현재 재배치한 내용으로 보이기
-//					ViewFrame.mainFan.repaint();
+
 					JOptionPane.showMessageDialog(null, "지출 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "지출 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -579,14 +622,15 @@ public class ExportView extends JPanel {
 		TableColumnModel tcm = monthTable.getColumnModel();
 
 		// "금액"만 오른쪽 정렬, 나머지는 가운데 정렬
-		totalTable.getColumn("날짜").setPreferredWidth(50);
-		totalTable.getColumn("날짜").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("금        액").setPreferredWidth(230);
-		totalTable.getColumn("금        액").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("구분").setPreferredWidth(30);
-		totalTable.getColumn("구분").setCellRenderer(dtcrCenter);
-		totalTable.getColumn("비        고").setPreferredWidth(250);
-		totalTable.getColumn("비        고").setCellRenderer(dtcrCenter);
+		monthTable.getColumn("날짜").setPreferredWidth(50);
+		monthTable.getColumn("날짜").setCellRenderer(dtcrCenter);
+		monthTable.getColumn("금        액").setPreferredWidth(230);
+		monthTable.getColumn("금        액").setCellRenderer(dtcrCenter);
+		monthTable.getColumn("구분").setPreferredWidth(30);
+		monthTable.getColumn("구분").setCellRenderer(dtcrCenter);
+		monthTable.getColumn("비        고").setPreferredWidth(250);
+		monthTable.getColumn("비        고").setCellRenderer(dtcrCenter);
+		monthTable.addMouseListener(new MyMouseListener3());
 		return scrollpane;
 	}
 
@@ -652,7 +696,7 @@ public class ExportView extends JPanel {
 					Calendar calendar = Calendar.getInstance();
 					calendar.setTime((Date) model.getValue());
 					calendar.set(Calendar.MONTH, selectedMonthIndex);
-					 calendar.set(Calendar.DAY_OF_MONTH,1);
+					calendar.set(Calendar.DAY_OF_MONTH, 1);
 					model.setValue(calendar.getTime());
 
 					// 월탭 선택
@@ -707,7 +751,8 @@ public class ExportView extends JPanel {
 						tabPanel.setSelectedIndex(1);
 						datelist[0] = null;
 					} else {
-						//JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+						// JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패",
+						// JOptionPane.ERROR_MESSAGE);
 						datelist[0] = null;
 					}
 

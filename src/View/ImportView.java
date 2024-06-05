@@ -123,7 +123,7 @@ public class ImportView extends JPanel {
 					sb.append(selPrice1);
 				}
 			
-				model.setDate(year, month - 1, day);
+				
 				String sel = (String) totalTable.getValueAt(selectRow, 2);
 				int num = 0;
 				switch(sel) {
@@ -140,6 +140,7 @@ public class ImportView extends JPanel {
 					num = 3;
 					break;
 				}
+				model.setDate(year, month - 1, day);
 				typeBox.setSelectedIndex(num);
 				amountField.setText(sb.toString());
 				memoField.setText((String) totalTable.getValueAt(selectRow, 3));
@@ -167,7 +168,25 @@ public class ImportView extends JPanel {
 				for(String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
 				}
+				
+				String sel = (String) dayTable.getValueAt(selectRow, 2);
+				int num = 0;
+				switch(sel) {
+				case "급여":
+					num = 0;
+					break;
+				case "이자":
+					num = 1;
+					break;
+				case "고정수입":
+					num = 2;
+					break;
+				case "기타":
+					num = 3;
+					break;
+				}
 				model.setDate(year, month - 1, day);
+				typeBox.setSelectedIndex(num);
 				amountField.setText(sb.toString());
 				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
 
@@ -195,7 +214,24 @@ public class ImportView extends JPanel {
 				for(String selPrice1 : selPrice.split(",|원")) {
 					sb.append(selPrice1);
 				}
+				String sel = (String) monthTable.getValueAt(selectRow, 2);
+				int num = 0;
+				switch(sel) {
+				case "급여":
+					num = 0;
+					break;
+				case "이자":
+					num = 1;
+					break;
+				case "고정수입":
+					num = 2;
+					break;
+				case "기타":
+					num = 3;
+					break;
+				}
 				model.setDate(year, month - 1, day);
+				typeBox.setSelectedIndex(num);
 				amountField.setText(sb.toString());
 				memoField.setText((String) monthTable.getValueAt(selectRow, 3));
 
@@ -290,13 +326,7 @@ public class ImportView extends JPanel {
 					// amount 추가 코드 끝
 
 					JOptionPane.showMessageDialog(null, "수입 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
-//					ViewFrame.mainFan.removeAll();
-//					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
-//					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
-//					// 구성 요소 가로/세로 속성 변경하여 호출
-//					ViewFrame.mainFan.revalidate();
-//					// 현재 재배치한 내용으로 보이기
-//					ViewFrame.mainFan.repaint();
+
 
 					tabPanel.removeAll();
 					tabPanel.add("전체", dayPanel.add(totalCheck()));
@@ -352,13 +382,7 @@ public class ImportView extends JPanel {
 					tabPanel.revalidate();
 					tabPanel.repaint();
 
-//					ViewFrame.mainFan.removeAll();
-//					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
-//					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
-//					// 구성 요소 가로/세로 속성 변경하여 호출
-//					ViewFrame.mainFan.revalidate();
-//					// 현재 재배치한 내용으로 보이기
-//					ViewFrame.mainFan.repaint();
+
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 수정되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -405,13 +429,7 @@ public class ImportView extends JPanel {
 					tabPanel.add("월별", dayPanel.add(monthCheck()));
 					tabPanel.revalidate();
 					tabPanel.repaint();
-//					ViewFrame.mainFan.removeAll();
-//					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
-//					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
-//					// 구성 요소 가로/세로 속성 변경하여 호출
-//					ViewFrame.mainFan.revalidate();
-//					// 현재 재배치한 내용으로 보이기
-//					ViewFrame.mainFan.repaint();
+
 					JOptionPane.showMessageDialog(null, "수입 내역에 삭제되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 삭제되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
