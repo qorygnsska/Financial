@@ -701,7 +701,7 @@ values(1,4500,'24/03/14','지출','식비','간식(젤리)', 22);
 -- ******************************
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,13000,'24/03/19','지출','기타','병원비', 23);
-insert into export(user_id,price,day,type_id,memo,foreign_id)
+insert into amount(user_id,price,day,type_id,memo,foreign_id)
 values(1,100000,'24/03/22',3,'백팩',24);
 insert into amount(user_id,price,day,type,content,memo,foreign_id)
 values(1,350000,'24/03/23','지출','쇼핑','젠틀몬스터 노이저', 25);
