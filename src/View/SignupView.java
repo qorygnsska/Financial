@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,7 +25,7 @@ import Model.UsersModel;
 
 public class SignupView extends JFrame {
 	SignupController signupController = new SignupController();
-	
+
 	private Font font1 = new Font("나눔고딕", Font.BOLD, 20);
 	private Font font2 = new Font("나눔고딕", Font.BOLD, 30);
 	private Font font3 = new Font("나눔고딕", Font.BOLD, 13);
@@ -40,9 +42,9 @@ public class SignupView extends JFrame {
 		Jtitle.setFont(font2);
 		title.setBackground(colBack);
 		title.add(Jtitle);
-		
+
 		setIconImage(new ImageIcon("image/coin.png").getImage());
-		
+
 		JPanel jp1 = new JPanel();
 
 		jp1.setLayout(new GridLayout(4, 2));
@@ -54,6 +56,7 @@ public class SignupView extends JFrame {
 
 		JPanel idPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JTextField jtid = new JTextField(10);
+
 		idPanel2.setBackground(colBack);
 		idPanel2.add(jtid);
 
@@ -66,6 +69,7 @@ public class SignupView extends JFrame {
 		pwdPanel.setBackground(colBack);
 		JPanel pwdPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JPasswordField jtpw = new JPasswordField(10);
+
 		pwdPanel2.setBackground(colBack);
 		pwdPanel.add(jlpw);
 		pwdPanel2.add(jtpw);
@@ -79,6 +83,7 @@ public class SignupView extends JFrame {
 		namePanel.setBackground(colBack);
 		JPanel namePanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JTextField jtname = new JTextField(10);
+
 		namePanel2.setBackground(colBack);
 		namePanel.add(jlname);
 		namePanel2.add(jtname);
@@ -92,6 +97,7 @@ public class SignupView extends JFrame {
 		juminPanel.setBackground(colBack);
 		JPanel juminPanel2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JTextField jtjumin = new JTextField(5);
+
 		juminPanel2.setBackground(colBack);
 		JLabel jlumin2 = new JLabel("-");
 		JPasswordField jtjumin2 = new JPasswordField(5);
@@ -111,7 +117,7 @@ public class SignupView extends JFrame {
 		setLayout(new BorderLayout());
 
 		JPanel jp3 = new JPanel();
-		JButton back= new JButton("돌아가기");
+		JButton back = new JButton("돌아가기");
 		JButton btuser = new JButton("회원가입");
 		back.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		back.setBackground(colBack2);
@@ -129,38 +135,44 @@ public class SignupView extends JFrame {
 		add(mainPan);
 		setBounds(0, 0, 300, 300);
 
-		//되돌아가기 버튼 이벤트
+		// 되돌아가기 버튼 이벤트
 		back.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				new LoginView().user();
 				dispose();
 			}
 		});
-		
+
 		// 회원가입 버튼 이벤트
 		btuser.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String user_id = jtid.getText();
 				String user_pass = jtpw.getText();
 				String name = jtname.getText();
-				String jumin = jtjumin.getText() + jtjumin2.getText();
+				String jumin1 = jtjumin.getText();
+				String jumin2 = jtjumin2.getText();
+				String jumin = jumin1 + jumin2;
 				
-				// user 객체 생성
-				UsersModel user = new UsersModel(user_id, user_pass, name, jumin);
-				if(signupController.signup(user)) {
-					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
-					new LoginView().user();
-					dispose();
+				if (!user_id.isEmpty() && !user_pass.isEmpty() && !name.isEmpty() && !jumin1.isEmpty() && !jumin2.isEmpty()) {
+					// user 객체 생성
+					UsersModel user = new UsersModel(user_id, user_pass, name, jumin);
+					if (signupController.signup(user)) {
+						JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+						new LoginView().user();
+						dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "회원가입 실패(중복)", "실패", JOptionPane.ERROR_MESSAGE);
+					}
 				}else {
-					JOptionPane.showMessageDialog(null, "회원가입 실패(중복 or 빈 칸)", "실패", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "모든 입력 칸을 채워주세요!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
-				
+
 			}
 		});
 
@@ -171,6 +183,5 @@ public class SignupView extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-
 
 }
