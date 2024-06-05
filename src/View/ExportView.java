@@ -79,6 +79,7 @@ public class ExportView extends JPanel {
 	private Color colTable = new Color(225, 235, 255);
 	private Font f = new Font("나눔고딕", Font.BOLD, 16);
 	private Font f2 = new Font("나눔고딕", Font.PLAIN, 15); // 테이블 폰트
+	private Font f3 = new Font("나눔고딕", Font.BOLD, 12); 
 	private Font fMain = new Font("나눔고딕", Font.BOLD, 17);
 	private int selectrownum = 0;
 
@@ -271,12 +272,10 @@ public class ExportView extends JPanel {
 	public void print() {
 		Rectangle rect = panMain.getBounds();
 		setPreferredSize(rect.getSize());
-		// setBounds(7, 0, 1170, 765);
 		setLayout(null);
 
 		// main 패널 (tab 생성 포함)
 		mainPanel = new JPanel();
-		// mainPanel.setBorder(new LineBorder(Color.green, 8));
 		mainPanel.setBackground(Color.white);
 		mainPanel.setBounds(0, 0, 1200, 800);
 		mainPanel.setLayout(null);
@@ -470,13 +469,6 @@ public class ExportView extends JPanel {
 					tabPanel.add("월별", dayPanel.add(monthCheck()));
 					tabPanel.revalidate();
 					tabPanel.repaint();
-//					ViewFrame.mainFan.removeAll();
-//					ViewFrame.mainMenu = new MainMenuView(ViewFrame.mainFan);
-//					ViewFrame.mainFan.add(ViewFrame.mainMenu, BorderLayout.CENTER);
-//					// 구성 요소 가로/세로 속성 변경하여 호출
-//					ViewFrame.mainFan.revalidate();
-//					// 현재 재배치한 내용으로 보이기
-//					ViewFrame.mainFan.repaint();
 					JOptionPane.showMessageDialog(null, "수입 내역에 삭제되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(null, "수입 내역에 삭제되지 않았습니다!", "실패", JOptionPane.ERROR_MESSAGE);
@@ -494,6 +486,7 @@ public class ExportView extends JPanel {
 		// 날짜 패널(왼쪽)
 		datePanelL = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // 오른쪽부터 정렬
 		JLabel dateLabel = new JLabel("날    짜 : ", 10);
+		dateLabel.setFont(f);
 		datePanelL.add(dateLabel);
 		datePanelL.setBackground(Color.white);
 		updatePanel.add(datePanelL);
@@ -507,6 +500,7 @@ public class ExportView extends JPanel {
 		// 금액 패널(왼쪽)
 		amountPanelL = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JLabel amountLabel = new JLabel("금    액 : ", 10);
+		amountLabel.setFont(f);
 		amountPanelL.add(amountLabel);
 		amountPanelL.setBackground(Color.white);
 		updatePanel.add(amountPanelL);
@@ -514,6 +508,7 @@ public class ExportView extends JPanel {
 		// 금액 패널(오른쪽)
 		amountPanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
 		amountField = new JTextField(20);
+		amountField.setFont(f3);
 		amountPanelR.add(amountField);
 		amountPanelR.setBackground(Color.white);
 		updatePanel.add(amountPanelR);
@@ -521,6 +516,7 @@ public class ExportView extends JPanel {
 		// 유형 패널(왼쪽)
 		typePanelL = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JLabel typeLabel = new JLabel("유    형 : ", 10);
+		typeLabel.setFont(f);
 		typePanelL.add(typeLabel);
 		typePanelL.setBackground(Color.white);
 		updatePanel.add(typePanelL);
@@ -529,6 +525,8 @@ public class ExportView extends JPanel {
 		typePanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
 		String[] exportType = { "교통비", "식비", "쇼핑", "여가", "저축", "고정지출", "기타" };
 		typeBox = new JComboBox(exportType);
+		typeBox.setBackground(new Color(255, 247, 242));
+		typeBox.setFont(f3);
 		typePanelR.add(typeBox);
 		typePanelR.setBackground(Color.white);
 		updatePanel.add(typePanelR);
@@ -536,6 +534,7 @@ public class ExportView extends JPanel {
 		// 비고 패널(왼쪽)
 		memoPanelL = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		JLabel memoLabel = new JLabel("비    고 : ", 10);
+		memoLabel.setFont(f);
 		memoPanelL.add(memoLabel);
 		memoPanelL.setBackground(Color.white);
 		updatePanel.add(memoPanelL);
@@ -543,6 +542,7 @@ public class ExportView extends JPanel {
 		// 비고 패널(오른쪽)
 		memoPanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
 		memoField = new JTextField(20);
+		memoField.setFont(f3);
 		memoPanelR.add(memoField);
 		memoPanelR.setBackground(Color.white);
 		updatePanel.add(memoPanelR);
@@ -690,7 +690,7 @@ public class ExportView extends JPanel {
 
 		model.setDate(year, month - 1, day);// 현재날짜를 표시
 		model.setSelected(true); // 텍스트 필드에 보이기
-
+	
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
 
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new Dateformet());
@@ -699,10 +699,12 @@ public class ExportView extends JPanel {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
 		date = dateFormat.format(model.getValue());
-
+		
 		// JComboBox 생성
 		String[] months = { "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" };
 		JComboBox<String> monthComboBox = new JComboBox<>(months);
+		monthComboBox.setFont(f3);
+		monthComboBox.setBackground(new Color(255, 247, 242));
 		j1.add(monthComboBox);
 
 		// JComboBox에서 월 선택시 JDatePicker의 월을 변경
@@ -711,6 +713,7 @@ public class ExportView extends JPanel {
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					int selectedMonthIndex = monthComboBox.getSelectedIndex();
 					Calendar calendar = Calendar.getInstance();
+					
 					calendar.setTime((Date) model.getValue());
 					calendar.set(Calendar.MONTH, selectedMonthIndex);
 					calendar.set(Calendar.DAY_OF_MONTH, 1);
@@ -724,7 +727,6 @@ public class ExportView extends JPanel {
 					if (datelist[0] != null) {
 						// 데이터가 있는지 확인하고 있다면 조건의맞는 값을 불러와 테이블을 지웠다가 다시 그린다.
 						if (dpc.exportmonthsearch(datelist)) {
-
 							tabPanel.removeAll();
 							tabPanel.add("전체", monthPanel.add(totalCheck()));
 							tabPanel.add("일별", monthPanel.add(dayCheck()));
