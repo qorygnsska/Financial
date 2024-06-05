@@ -107,7 +107,7 @@ public class SignupView extends JFrame {
 		setLayout(new BorderLayout());
 
 		JPanel jp3 = new JPanel();
-		JButton back= new JButton("되돌아가기");
+		JButton back= new JButton("돌아가기");
 		JButton btuser = new JButton("회원가입");
 		back.setBackground(colBack2);
 		btuser.setBackground(colBack2);

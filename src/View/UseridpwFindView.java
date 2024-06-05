@@ -34,7 +34,7 @@ public class UseridpwFindView extends JFrame {
 	private JButton backbtn;
 	private static Font font1 = new Font("나눔고딕", Font.BOLD, 15);
 	private static Font font2 = new Font("나눔고딕", Font.BOLD, 16);
-	private static Font font3 = new Font("나눔고딕", Font.BOLD, 12);
+	private static Font font3 = new Font("나눔고딕", Font.BOLD, 14);
 	
 
 
@@ -45,7 +45,7 @@ public class UseridpwFindView extends JFrame {
 		jpmain = new JPanel();
 		setTitle("아이디 찾기");
 		setBounds(0, 0, 300, 150);
-		jpmain.setBorder(new TitledBorder(new LineBorder(new Color(225, 235, 255), 4),"아이디 찾기"));
+		jpmain.setBorder(new TitledBorder(new LineBorder(new Color(225, 235, 255), 4),"아이디 찾기",TitledBorder.LEFT, TitledBorder.TOP, font3));
 		jpmain.setBackground(Color.white);
 		
 		
@@ -110,7 +110,7 @@ public class UseridpwFindView extends JFrame {
 		setTitle("비밀번호 찾기");
 		setBounds(0, 0, 250, 180);
 
-		jpmain.setBorder(new TitledBorder(new LineBorder(new Color(225, 235, 255), 4), "비밀번호 찾기"));
+		jpmain.setBorder(new TitledBorder(new LineBorder(new Color(225, 235, 255), 4), "비밀번호 찾기",TitledBorder.LEFT, TitledBorder.TOP, font3));
 		jpmain.setBackground(Color.white);
 		jp = new JLabel("아이디", JLabel.CENTER);
 		jp.setFont(font1);
