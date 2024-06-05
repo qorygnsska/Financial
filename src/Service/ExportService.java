@@ -35,4 +35,24 @@ public class ExportService {
 	public void check() {
 		dao.check();
 	}
+
+	public boolean dayupdate(ExportModel exportModel) {
+		
+		return dao.dayupdate(exportModel);
+	}
+
+	public boolean monthupdate(ExportModel exportModel) {
+		// TODO Auto-generated method stub
+		return dao.monthupdate(exportModel);
+	}
+
+	public boolean daydelete(ExportModel exportmodel) {
+	
+		return dao.daydelete(exportmodel);
+	}
+	
+	public boolean monthdelete(ExportModel exportmodel) {
+		
+		return dao.monthdelete(exportmodel);
+	}
 }

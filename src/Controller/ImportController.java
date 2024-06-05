@@ -76,4 +76,24 @@ public class ImportController {
 	public void check() {
 		importService.check();
 	}
+
+	public boolean dayupdate(ImportModel importmodel) {
+		// TODO Auto-generated method stub
+		return importService.dayupdate(importmodel);
+	}
+
+	public boolean monthupdate(ImportModel importmodel) {
+		// TODO Auto-generated method stub
+		return importService.monthupdate(importmodel);
+	}
+
+	public boolean daydelete(ImportModel importmodel) {
+		
+	return importService.daydelete(importmodel);
+	}
+
+	public boolean monthdelete(ImportModel importmodel) {
+		
+		return importService.monthdelete(importmodel);
+	}
 }

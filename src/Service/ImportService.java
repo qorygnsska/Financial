@@ -34,4 +34,23 @@ public class ImportService {
 	public void check() {
 		dao.check();
 	}
+
+	public boolean dayupdate(ImportModel importmodel) {
+		
+		return dao.dayupdate(importmodel);
+	}
+
+	public boolean monthupdate(ImportModel importmodel) {
+		// TODO Auto-generated method stub
+		return dao.monthupdate(importmodel);
+	}
+
+	public boolean daydelete(ImportModel importmodel) {
+		
+		return dao.daydelete(importmodel);
+	}
+
+	public boolean monthdelete(ImportModel importmodel) {
+		return dao.monthdelete(importmodel);
+	}
 }
