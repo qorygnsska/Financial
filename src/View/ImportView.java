@@ -107,39 +107,44 @@ public class ImportView extends JPanel {
 			// 테이블에서 선택한 행 가져오기
 			int selectRow = totalTable.getSelectedRow();
 			selectrownum = selectRow + 1;
-			// 선택한 행이 있는지 확인
-			if (selectRow != -1) {
-				String datetext = (String) totalTable.getValueAt(selectRow, 0);
-
-				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
-				int month = Integer.parseInt(datetext.substring(4, 5));
-				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String) totalTable.getValueAt(selectRow, 1);
-				StringBuilder sb = new StringBuilder();
-				for (String selPrice1 : selPrice.split(",|원")) {
-					sb.append(selPrice1);
+			try {
+				
+				// 선택한 행이 있는지 확인
+				if (selectRow != -1) {
+					String datetext = (String) totalTable.getValueAt(selectRow, 0);
+					
+					int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
+					int month = Integer.parseInt(datetext.substring(4, 5));
+					int day = Integer.parseInt(datetext.substring(6));
+					String selPrice = (String) totalTable.getValueAt(selectRow, 1);
+					StringBuilder sb = new StringBuilder();
+					for (String selPrice1 : selPrice.split(",|원")) {
+						sb.append(selPrice1);
+					}
+					
+					String sel = (String) totalTable.getValueAt(selectRow, 2);
+					int num = 0;
+					switch (sel) {
+					case "급여":
+						num = 0;
+						break;
+					case "이자":
+						num = 1;
+						break;
+					case "고정수입":
+						num = 2;
+						break;
+					case "기타":
+						num = 3;
+						break;
+					}
+					model.setDate(year, month - 1, day);
+					typeBox.setSelectedIndex(num);
+					amountField.setText(sb.toString());
+					memoField.setText((String) totalTable.getValueAt(selectRow, 3));
 				}
-
-				String sel = (String) totalTable.getValueAt(selectRow, 2);
-				int num = 0;
-				switch (sel) {
-				case "급여":
-					num = 0;
-					break;
-				case "이자":
-					num = 1;
-					break;
-				case "고정수입":
-					num = 2;
-					break;
-				case "기타":
-					num = 3;
-					break;
-				}
-				model.setDate(year, month - 1, day);
-				typeBox.setSelectedIndex(num);
-				amountField.setText(sb.toString());
-				memoField.setText((String) totalTable.getValueAt(selectRow, 3));
+			} catch (Exception e2) {
+				// TODO: handle exception
 			}
 		}
 	}
@@ -152,40 +157,45 @@ public class ImportView extends JPanel {
 			// 테이블에서 선택한 행 가져오기
 			int selectRow = dayTable.getSelectedRow();
 			selectrownum = selectRow + 1;
-			// 선택한 행이 있는지 확인
-			if (selectRow != -1) {
-				String datetext = (String) dayTable.getValueAt(selectRow, 0);
-
-				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
-				int month = Integer.parseInt(datetext.substring(4, 5));
-				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String) dayTable.getValueAt(selectRow, 1);
-				StringBuilder sb = new StringBuilder();
-				for (String selPrice1 : selPrice.split(",|원")) {
-					sb.append(selPrice1);
+			try {
+				
+				// 선택한 행이 있는지 확인
+				if (selectRow != -1) {
+					String datetext = (String) dayTable.getValueAt(selectRow, 0);
+					
+					int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
+					int month = Integer.parseInt(datetext.substring(4, 5));
+					int day = Integer.parseInt(datetext.substring(6));
+					String selPrice = (String) dayTable.getValueAt(selectRow, 1);
+					StringBuilder sb = new StringBuilder();
+					for (String selPrice1 : selPrice.split(",|원")) {
+						sb.append(selPrice1);
+					}
+					
+					String sel = (String) dayTable.getValueAt(selectRow, 2);
+					int num = 0;
+					switch (sel) {
+					case "급여":
+						num = 0;
+						break;
+					case "이자":
+						num = 1;
+						break;
+					case "고정수입":
+						num = 2;
+						break;
+					case "기타":
+						num = 3;
+						break;
+					}
+					model.setDate(year, month - 1, day);
+					typeBox.setSelectedIndex(num);
+					amountField.setText(sb.toString());
+					memoField.setText((String) dayTable.getValueAt(selectRow, 3));
+					
 				}
-
-				String sel = (String) dayTable.getValueAt(selectRow, 2);
-				int num = 0;
-				switch (sel) {
-				case "급여":
-					num = 0;
-					break;
-				case "이자":
-					num = 1;
-					break;
-				case "고정수입":
-					num = 2;
-					break;
-				case "기타":
-					num = 3;
-					break;
-				}
-				model.setDate(year, month - 1, day);
-				typeBox.setSelectedIndex(num);
-				amountField.setText(sb.toString());
-				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
-
+			} catch (Exception e2) {
+				// TODO: handle exception
 			}
 		}
 	}
@@ -195,42 +205,47 @@ public class ImportView extends JPanel {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// 테이블에서 선택한 행 가져오기
-			int selectRow = monthTable.getSelectedRow();
-			selectrownum = selectRow + 1;
-			// 선택한 행이 있는지 확인
-			if (selectRow != -1) {
-				String datetext = (String) monthTable.getValueAt(selectRow, 0);
-
-				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
-				int month = Integer.parseInt(datetext.substring(4, 5));
-				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String) monthTable.getValueAt(selectRow, 1);
-				StringBuilder sb = new StringBuilder();
-				for (String selPrice1 : selPrice.split(",|원")) {
-					sb.append(selPrice1);
+			try {
+				
+				// 테이블에서 선택한 행 가져오기
+				int selectRow = monthTable.getSelectedRow();
+				selectrownum = selectRow + 1;
+				// 선택한 행이 있는지 확인
+				if (selectRow != -1) {
+					String datetext = (String) monthTable.getValueAt(selectRow, 0);
+					
+					int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
+					int month = Integer.parseInt(datetext.substring(4, 5));
+					int day = Integer.parseInt(datetext.substring(6));
+					String selPrice = (String) monthTable.getValueAt(selectRow, 1);
+					StringBuilder sb = new StringBuilder();
+					for (String selPrice1 : selPrice.split(",|원")) {
+						sb.append(selPrice1);
+					}
+					String sel = (String) monthTable.getValueAt(selectRow, 2);
+					int num = 0;
+					switch (sel) {
+					case "급여":
+						num = 0;
+						break;
+					case "이자":
+						num = 1;
+						break;
+					case "고정수입":
+						num = 2;
+						break;
+					case "기타":
+						num = 3;
+						break;
+					}
+					model.setDate(year, month - 1, day);
+					typeBox.setSelectedIndex(num);
+					amountField.setText(sb.toString());
+					memoField.setText((String) monthTable.getValueAt(selectRow, 3));
+					
 				}
-				String sel = (String) monthTable.getValueAt(selectRow, 2);
-				int num = 0;
-				switch (sel) {
-				case "급여":
-					num = 0;
-					break;
-				case "이자":
-					num = 1;
-					break;
-				case "고정수입":
-					num = 2;
-					break;
-				case "기타":
-					num = 3;
-					break;
-				}
-				model.setDate(year, month - 1, day);
-				typeBox.setSelectedIndex(num);
-				amountField.setText(sb.toString());
-				memoField.setText((String) monthTable.getValueAt(selectRow, 3));
-
+			} catch (Exception e2) {
+				// TODO: handle exception
 			}
 		}
 	}
