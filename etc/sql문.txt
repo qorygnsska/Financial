@@ -92,7 +92,7 @@ CREATE TABLE amount (
 -- insert문
 
 -- 회원 users
-insert into users(user_id, user_pass, name, jumin) values( , , , );
+-- insert into users(user_id, user_pass, name, jumin) values( , , , );
 
 -- 지출 extype
 insert into extype(type) values('교통비');
@@ -110,16 +110,16 @@ insert into imtype(type) values('고정수입');
 insert into imtype(type) values('기타');
 
 -- 지출 export
-insert into export(user_id, price, day, type_id, memo) values( , , , , );
+-- insert into export(user_id, price, day, type_id, memo) values( , , , , );
 
 -- 수입 import
-insert into import(user_id, price, day, type_id, memo) values( , , , , );
+-- insert into import(user_id, price, day, type_id, memo) values( , , , , );
 
 -- 저축 saveprice
-insert into saveprice(user_id, price, day, type_id, memo) values( , , , , );
+-- insert into saveprice(user_id, price, day, type_id, memo) values( , , , , );
 
 -- 잔고
-insert into amount(fimport_id, fexport_id, import_id, export_id) values( , , , );
+-- insert into amount(fimport_id, fexport_id, import_id, export_id) values( , , , );
 
 
 
@@ -461,7 +461,7 @@ values(1,10000,'24/04/22',2,'밥값');
 
 insert into export(user_id,price,day,type_id,memo)
 values(1,10000,'24/04/23',2,'밥값');
-insert into export(uer_id,price,day,type_id,memo)
+insert into export(user_id,price,day,type_id,memo)
 values(1,10000,'24/04/24',2,'밥값');
 insert into export(user_id,price,day,type_id,memo)
 values(1,10000,'24/04/25',2,'밥값');
@@ -605,7 +605,7 @@ values(1,10000,'24/05/22',2,'밥값');
 
 insert into export(user_id,price,day,type_id,memo)
 values(1,10000,'24/05/23',2,'밥값');
-insert into export(uer_id,price,day,type_id,memo)
+insert into export(user_id,price,day,type_id,memo)
 values(1,10000,'24/05/24',2,'밥값');
 insert into export(user_id,price,day,type_id,memo)
 values(1,10000,'24/05/27',2,'밥값');
