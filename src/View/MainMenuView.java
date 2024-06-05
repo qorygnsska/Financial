@@ -391,7 +391,7 @@ public class MainMenuView extends JPanel {
 			moneyList[i] = new JPanel();
 			moneyList[i].setBackground(colBack);
 
-			moneyList[0].setBackground(Color.white);
+			moneyList[i].setBackground(Color.white);
 
 			add(moneyList[i]);
 			labelList[i] = new JLabel(money[i]);
@@ -399,22 +399,18 @@ public class MainMenuView extends JPanel {
 			labelList[i].setFont(title);
 			moneyList[i].setBounds(900, 120 + 90 * i, 240, 60);
 
+			if (i >= 1 && i % 2 == 1) {
+				moneyList[i].setBorder(new TitledBorder(new LineBorder(colLineR, 3, true), str[i], TitledBorder.LEFT,
+						TitledBorder.TOP, f, Color.black));
+				moneyList[i].setBackground(new Color(255, 245, 245));
+			}else if (i >= 1 && i % 2 == 0) {
+				moneyList[i].setBorder(new TitledBorder(new LineBorder(colLine, 3, true), str[i], TitledBorder.LEFT,
+						TitledBorder.TOP, f, Color.black));
+				moneyList[i].setBackground(new Color(245, 245, 255));
+			}
+			
+			
 		}
-
-		// 라인색
-		moneyList[1].setBorder(new TitledBorder(new LineBorder(colLineR, 3, true), str[1], TitledBorder.LEFT,
-				TitledBorder.TOP, f, Color.black));
-		moneyList[2].setBorder(new TitledBorder(new LineBorder(colLine, 3, true), str[2], TitledBorder.LEFT,
-				TitledBorder.TOP, f, Color.black));
-		moneyList[3].setBorder(new TitledBorder(new LineBorder(colLineR, 3, true), str[3], TitledBorder.LEFT,
-				TitledBorder.TOP, f, Color.black));
-		moneyList[4].setBorder(new TitledBorder(new LineBorder(colLine, 3, true), str[4], TitledBorder.LEFT,
-				TitledBorder.TOP, f, Color.black));
-		// 배경색
-		moneyList[1].setBackground(new Color(255, 245, 245));
-		moneyList[2].setBackground(new Color(245, 245, 255));
-		moneyList[3].setBackground(new Color(255, 245, 245));
-		moneyList[4].setBackground(new Color(245, 245, 255));
 
 		moneyList[0].setBorder(new TitledBorder(new LineBorder(colLine, 7, true), str[0]));
 		moneyList[0].addMouseListener(new MouseAdapter() {
