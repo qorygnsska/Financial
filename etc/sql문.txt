@@ -985,4 +985,7 @@ insert into saveprice(user_id,price,day,type_id,memo)
 values(1,200000,'24/05/22',5,'저축');
 
 
+
+
+
 commit;
