@@ -32,9 +32,9 @@ public class UseridpwFindView extends JFrame {
 	private JTextField jtp;
 	private JPanel jp1;
 	private JButton backbtn;
-	private static Font font1 = new Font("맑은고딕", Font.BOLD, 15);
-	private static Font font2 = new Font("맑은고딕", Font.BOLD, 16);
-	
+	private static Font font1 = new Font("나눔고딕", Font.BOLD, 15);
+	private static Font font2 = new Font("나눔고딕", Font.BOLD, 16);
+	private static Font font3 = new Font("나눔고딕", Font.BOLD, 12);
 	
 
 
@@ -45,10 +45,10 @@ public class UseridpwFindView extends JFrame {
 		jpmain = new JPanel();
 		setTitle("아이디 찾기");
 		setBounds(0, 0, 300, 150);
-
-		jpmain.setBorder(new TitledBorder(new LineBorder(new Color(225, 235, 255), 4), "아이디 찾기"));
+		jpmain.setBorder(new TitledBorder(new LineBorder(new Color(225, 235, 255), 4),"아이디 찾기"));
 		jpmain.setBackground(Color.white);
-	
+		
+		
 		jlid = new JLabel("주민번호");
 		jlid.setFont(font1);
 		jl1 = new JLabel("-");
