@@ -112,49 +112,54 @@ public class ExportView extends JPanel {
 			// 테이블에서 선택한 행 가져오기
 			int selectRow = totalTable.getSelectedRow();
 			selectrownum = selectRow + 1;
-			// 선택한 행이 있는지 확인
-			if (selectRow != -1) {
-				String datetext = (String) totalTable.getValueAt(selectRow, 0);
-
-				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
-				int month = Integer.parseInt(datetext.substring(4, 5));
-				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String) totalTable.getValueAt(selectRow, 1);
-				StringBuilder sb = new StringBuilder();
-				for (String selPrice1 : selPrice.split(",|원")) {
-					sb.append(selPrice1);
+			try {
+				// 선택한 행이 있는지 확인
+				if (selectRow != -1) {
+					String datetext = (String) totalTable.getValueAt(selectRow, 0);
+					
+					int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
+					int month = Integer.parseInt(datetext.substring(4, 5));
+					int day = Integer.parseInt(datetext.substring(6));
+					String selPrice = (String) totalTable.getValueAt(selectRow, 1);
+					StringBuilder sb = new StringBuilder();
+					for (String selPrice1 : selPrice.split(",|원")) {
+						sb.append(selPrice1);
+					}
+					
+					String sel = (String) totalTable.getValueAt(selectRow, 2);
+					int num = 0;
+					switch (sel) {
+					case "교통비":
+						num = 0;
+						break;
+					case "식비":
+						num = 1;
+						break;
+					case "쇼핑":
+						num = 2;
+						break;
+					case "여가":
+						num = 3;
+						break;
+					case "저축":
+						num = 4;
+						break;
+					case "고정지출":
+						num = 5;
+						break;
+					case "기타":
+						num = 6;
+						break;
+					}
+					model.setDate(year, month - 1, day);
+					typeBox.setSelectedIndex(num);
+					amountField.setText(sb.toString());
+					memoField.setText((String) totalTable.getValueAt(selectRow, 3));
+					
 				}
-
-				String sel = (String) totalTable.getValueAt(selectRow, 2);
-				int num = 0;
-				switch (sel) {
-				case "교통비":
-					num = 0;
-					break;
-				case "식비":
-					num = 1;
-					break;
-				case "쇼핑":
-					num = 2;
-					break;
-				case "여가":
-					num = 3;
-					break;
-				case "저축":
-					num = 4;
-					break;
-				case "고정지출":
-					num = 5;
-					break;
-				case "기타":
-					num = 6;
-					break;
-				}
-				model.setDate(year, month - 1, day);
-				typeBox.setSelectedIndex(num);
-				amountField.setText(sb.toString());
-				memoField.setText((String) totalTable.getValueAt(selectRow, 3));
-
+				
+			} catch (Exception e2) {
+				// TODO: handle exception
 			}
 		}
 	}
@@ -167,49 +172,54 @@ public class ExportView extends JPanel {
 			// 테이블에서 선택한 행 가져오기
 			int selectRow = dayTable.getSelectedRow();
 			selectrownum = selectRow + 1;
-			// 선택한 행이 있는지 확인
-			if (selectRow != -1) {
-				String datetext = (String) dayTable.getValueAt(selectRow, 0);
-
-				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
-				int month = Integer.parseInt(datetext.substring(4, 5));
-				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String) dayTable.getValueAt(selectRow, 1);
-				StringBuilder sb = new StringBuilder();
-				for (String selPrice1 : selPrice.split(",|원")) {
-					sb.append(selPrice1);
+			try {
+				// 선택한 행이 있는지 확인
+				if (selectRow != -1) {
+					String datetext = (String) dayTable.getValueAt(selectRow, 0);
+					
+					int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
+					int month = Integer.parseInt(datetext.substring(4, 5));
+					int day = Integer.parseInt(datetext.substring(6));
+					String selPrice = (String) dayTable.getValueAt(selectRow, 1);
+					StringBuilder sb = new StringBuilder();
+					for (String selPrice1 : selPrice.split(",|원")) {
+						sb.append(selPrice1);
+					}
+					
+					String sel = (String) dayTable.getValueAt(selectRow, 2);
+					int num = 0;
+					switch (sel) {
+					case "교통비":
+						num = 0;
+						break;
+					case "식비":
+						num = 1;
+						break;
+					case "쇼핑":
+						num = 2;
+						break;
+					case "여가":
+						num = 3;
+						break;
+					case "저축":
+						num = 4;
+						break;
+					case "고정지출":
+						num = 5;
+						break;
+					case "기타":
+						num = 6;
+						break;
+					}
+					model.setDate(year, month - 1, day);
+					typeBox.setSelectedIndex(num);
+					amountField.setText(sb.toString());
+					memoField.setText((String) dayTable.getValueAt(selectRow, 3));
+					
 				}
-
-				String sel = (String) dayTable.getValueAt(selectRow, 2);
-				int num = 0;
-				switch (sel) {
-				case "교통비":
-					num = 0;
-					break;
-				case "식비":
-					num = 1;
-					break;
-				case "쇼핑":
-					num = 2;
-					break;
-				case "여가":
-					num = 3;
-					break;
-				case "저축":
-					num = 4;
-					break;
-				case "고정지출":
-					num = 5;
-					break;
-				case "기타":
-					num = 6;
-					break;
-				}
-				model.setDate(year, month - 1, day);
-				typeBox.setSelectedIndex(num);
-				amountField.setText(sb.toString());
-				memoField.setText((String) dayTable.getValueAt(selectRow, 3));
-
+				
+			} catch (Exception e2) {
+				
 			}
 		}
 	}
@@ -222,49 +232,54 @@ public class ExportView extends JPanel {
 			// 테이블에서 선택한 행 가져오기
 			int selectRow = monthTable.getSelectedRow();
 			selectrownum = selectRow + 1;
-			// 선택한 행이 있는지 확인
-			if (selectRow != -1) {
-				String datetext = (String) monthTable.getValueAt(selectRow, 0);
-
-				int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
-				int month = Integer.parseInt(datetext.substring(4, 5));
-				int day = Integer.parseInt(datetext.substring(6));
-				String selPrice = (String) monthTable.getValueAt(selectRow, 1);
-				StringBuilder sb = new StringBuilder();
-				for (String selPrice1 : selPrice.split(",|원")) {
-					sb.append(selPrice1);
+			try {
+				// 선택한 행이 있는지 확인
+				if (selectRow != -1) {
+					String datetext = (String) monthTable.getValueAt(selectRow, 0);
+					
+					int year = 2000 + Integer.parseInt(datetext.substring(0, 2));
+					int month = Integer.parseInt(datetext.substring(4, 5));
+					int day = Integer.parseInt(datetext.substring(6));
+					String selPrice = (String) monthTable.getValueAt(selectRow, 1);
+					StringBuilder sb = new StringBuilder();
+					for (String selPrice1 : selPrice.split(",|원")) {
+						sb.append(selPrice1);
+					}
+					
+					String sel = (String) monthTable.getValueAt(selectRow, 2);
+					int num = 0;
+					switch (sel) {
+					case "교통비":
+						num = 0;
+						break;
+					case "식비":
+						num = 1;
+						break;
+					case "쇼핑":
+						num = 2;
+						break;
+					case "여가":
+						num = 3;
+						break;
+					case "저축":
+						num = 4;
+						break;
+					case "고정지출":
+						num = 5;
+						break;
+					case "기타":
+						num = 6;
+						break;
+					}
+					model.setDate(year, month - 1, day);
+					typeBox.setSelectedIndex(num);
+					amountField.setText(sb.toString());
+					memoField.setText((String) monthTable.getValueAt(selectRow, 3));
+					
 				}
-
-				String sel = (String) monthTable.getValueAt(selectRow, 2);
-				int num = 0;
-				switch (sel) {
-				case "교통비":
-					num = 0;
-					break;
-				case "식비":
-					num = 1;
-					break;
-				case "쇼핑":
-					num = 2;
-					break;
-				case "여가":
-					num = 3;
-					break;
-				case "저축":
-					num = 4;
-					break;
-				case "고정지출":
-					num = 5;
-					break;
-				case "기타":
-					num = 6;
-					break;
-				}
-				model.setDate(year, month - 1, day);
-				typeBox.setSelectedIndex(num);
-				amountField.setText(sb.toString());
-				memoField.setText((String) monthTable.getValueAt(selectRow, 3));
-
+				
+			} catch (Exception e2) {
+				// TODO: handle exception
 			}
 		}
 	}
@@ -333,6 +348,7 @@ public class ExportView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String dateText = date;
+				if(!amountField.getText().isEmpty()) {
 				int amount = Integer.parseInt(amountField.getText());
 				String type = typeBox.getSelectedItem().toString();
 				int type_id = 1;
@@ -377,7 +393,10 @@ public class ExportView extends JPanel {
 					}
 
 				} // saveprice 추가코드 끝
+			}else {
+				JOptionPane.showMessageDialog(null, "금액 부분을 채워주세요!", "실패", JOptionPane.ERROR_MESSAGE);
 			}
+				}
 		});
 
 		// 수정 버튼
@@ -392,6 +411,7 @@ public class ExportView extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				String dateText = date;
+				if(!amountField.getText().isEmpty()&& selectrownum != 0) {
 				int amount = Integer.parseInt(amountField.getText());
 				String type = typeBox.getSelectedItem().toString();
 				int type_id = 1;
@@ -428,6 +448,9 @@ public class ExportView extends JPanel {
 				}
 				amountField.setText("");
 				memoField.setText("");
+			}else {
+				JOptionPane.showMessageDialog(null, "수정할 셀을 선택해주세요!!", "실패", JOptionPane.ERROR_MESSAGE);
+			}
 			}
 		});
 
@@ -442,6 +465,7 @@ public class ExportView extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String dateText = date;
+				if(!amountField.getText().isEmpty()&& selectrownum != 0) {
 				int amount = Integer.parseInt(amountField.getText());
 				String type = typeBox.getSelectedItem().toString();
 				int type_id = 1;
@@ -475,7 +499,11 @@ public class ExportView extends JPanel {
 				}
 				amountField.setText("");
 				memoField.setText("");
+			}else {
+				JOptionPane.showMessageDialog(null, "삭제할 셀을 선택해주세요!", "실패", JOptionPane.ERROR_MESSAGE);
 			}
+				
+				}
 		});
 
 		// 수정 패널(추가, 수정, 삭제)
