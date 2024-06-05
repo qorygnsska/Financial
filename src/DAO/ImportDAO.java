@@ -103,15 +103,17 @@ public class ImportDAO {
 	public boolean update(ImportModel importModel) {
 		int sqlnum=0;
 		boolean result = false;
-
+		System.out.println("날짜 : " + importModel.getDay());
+		System.out.println("행번호 : " + importModel.getIdnum());
 		conn = DBUtil.getConnection();
-		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id=?";
+		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id=? and day = ?";
 		try {
 
 			pt = conn.prepareStatement(sql);
-
+			
 			pt.setInt(1, importModel.getIdnum());
 			pt.setInt(2, UsersModel.user.getId());
+			pt.setString(3, importModel.getDay());
 			rs=pt.executeQuery();
 
 			if (rs.next()) {

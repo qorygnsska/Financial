@@ -394,6 +394,7 @@ public class ImportView extends JPanel {
 							selectrownum);
 
 					if (ic.update(importmodel)) {
+						System.out.println("gggggggggggggg");
 						tabPanel.removeAll();
 						tabPanel.add("전체", dayPanel.add(totalCheck()));
 						tabPanel.add("일별", dayPanel.add(dayCheck()));
