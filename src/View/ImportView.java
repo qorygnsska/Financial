@@ -263,7 +263,7 @@ public class ImportView extends JPanel {
 
 		// main 패널 (tab 생성 포함)
 		mainPanel = new JPanel();
-		// mainPanel.setBorder(new LineBorder(Color.green, 8));
+		
 		mainPanel.setBackground(Color.white);
 		mainPanel.setBounds(0, 0, 1200, 800);
 		mainPanel.setLayout(null);
