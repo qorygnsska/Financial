@@ -74,6 +74,8 @@ public class ExportView extends JPanel {
 
 	private Color colBack = new Color(255, 255, 255);
 	private Color colBtn = new Color(240, 248, 255);
+	private Color colHeader = new Color(224, 255, 255);
+	private Color colTable = new Color(224, 255, 255);
 	private Font f = new Font("나눔고딕", Font.BOLD, 16);
 	private Font fMain = new Font("나눔고딕", Font.BOLD, 17);
 	private int selectrownum = 0;
@@ -554,8 +556,10 @@ public class ExportView extends JPanel {
 		totalTable.getTableHeader().setReorderingAllowed(false);
 		totalTable.getTableHeader().setResizingAllowed(false);
 		totalTable.setRowHeight(30);
+		totalTable.getTableHeader().setBackground(colHeader);
 		JScrollPane scrollpane = new JScrollPane(totalTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
+		scrollpane.getViewport().setBackground(colTable);
 
 		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
 		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
@@ -584,8 +588,10 @@ public class ExportView extends JPanel {
 		dayTable.getTableHeader().setReorderingAllowed(false);
 		dayTable.getTableHeader().setResizingAllowed(false);
 		dayTable.setRowHeight(30);
+		dayTable.getTableHeader().setBackground(colHeader);
 		JScrollPane scrollpane = new JScrollPane(dayTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
+		scrollpane.getViewport().setBackground(colTable);
 
 		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
 		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
@@ -613,8 +619,10 @@ public class ExportView extends JPanel {
 		monthTable.getTableHeader().setReorderingAllowed(false);
 		monthTable.getTableHeader().setResizingAllowed(false);
 		monthTable.setRowHeight(30);
+		monthTable.getTableHeader().setBackground(colHeader);
 		JScrollPane scrollpane = new JScrollPane(monthTable);
 		scrollpane.setPreferredSize(new Dimension(700, 550));
+		scrollpane.getViewport().setBackground(colTable);
 
 		// table의 data 가운데, 오른쪽 정렬하는 변수 선언
 		DefaultTableCellRenderer dtcrCenter = new DefaultTableCellRenderer();
