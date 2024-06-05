@@ -31,7 +31,7 @@ public class LoginView extends JFrame {
 	private static Font font3 = new Font("나눔고딕", Font.BOLD, 13);
 	private Color colBack = new Color(225, 235, 255);
 	private Color colBack2 = new Color(255, 247, 242);
-	private ImageIcon img = new ImageIcon("search.png");
+	private ImageIcon img = new ImageIcon("image/search.png");
 	LoginController loginController = new LoginController();
 
 	UsersModel usersModel = new UsersModel();
@@ -43,7 +43,7 @@ public class LoginView extends JFrame {
 		back.setBackground(colBack);
 		back.setBorder(new LineBorder(Color.GREEN, 3));
 
-		setIconImage(new ImageIcon("coin.png").getImage());
+		setIconImage(new ImageIcon("image/coin.png").getImage());
 
 		JPanel title = new JPanel();
 

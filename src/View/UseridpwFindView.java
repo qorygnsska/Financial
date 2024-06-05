@@ -41,7 +41,7 @@ public class UseridpwFindView extends JFrame {
 
 	//아이디 찾기 메소드
 	public void idfind() {
-		setIconImage(new ImageIcon("coin.png").getImage());
+		setIconImage(new ImageIcon("image/coin.png").getImage());
 		jpmain = new JPanel();
 		setTitle("아이디 찾기");
 		setBounds(0, 0, 300, 150);
@@ -104,7 +104,7 @@ public class UseridpwFindView extends JFrame {
 	}
 	//비밀번호 찾기 메소드
 	public void pwfind() {
-		setIconImage(new ImageIcon("coin.png").getImage());
+		setIconImage(new ImageIcon("image/coin.png").getImage());
 		jp1 = new JPanel();
 		jpmain = new JPanel();
 		setTitle("비밀번호 찾기");

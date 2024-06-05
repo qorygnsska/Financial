@@ -65,9 +65,9 @@ public class MainMenuView extends JPanel {
 	private Font f1 = new Font("나눔고딕", Font.BOLD, 17);
 	private Font title = new Font("나눔고딕", Font.BOLD, 15);
 	private Toolkit tk = Toolkit.getDefaultToolkit();
-	private Image imageExport = tk.getImage("export.png");
-	private Image imageImport = tk.getImage("import.png");
-	private Image imageAmount = tk.getImage("amount.png");
+	private Image imageExport = tk.getImage("image/export.png");
+	private Image imageImport = tk.getImage("image/import.png");
+	private Image imageAmount = tk.getImage("image/amount.png");
 	private Point point = new Point(10,10);
 	private Cursor csExport = tk.createCustomCursor(imageExport, point, "");
 	private Cursor csImport = tk.createCustomCursor(imageImport, point, "");
