@@ -1,8 +1,6 @@
 package View;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,24 +8,19 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,7 +28,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -47,7 +39,6 @@ import DatePickerEx.Dateformet;
 import Model.AmountModel;
 import Model.ImportModel;
 import Model.UsersModel;
-import net.sourceforge.jdatepicker.JDatePanel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -75,7 +66,7 @@ public class ImportView extends JPanel {
 			datePanelL, datePan, amountPanelL, amountPanelR, typePanelL, typePanelR, memoPanelL, memoPanelR;
 	private JTextField amountField;
 	private JTextField memoField;
-	private JComboBox typeBox;
+	private JComboBox<String> typeBox;
 	
 	private Color colBack = new Color(255, 255, 255);
 	private Color colBtn = new Color(240, 248, 255);
@@ -83,6 +74,7 @@ public class ImportView extends JPanel {
 	private Color colTable = new Color(255, 230, 230);
 	private Font f = new Font("나눔고딕", Font.BOLD, 16);
 	private Font f2 = new Font("나눔고딕", Font.PLAIN, 15); // 테이블 폰트
+	private Font f3 = new Font("나눔고딕", Font.PLAIN, 13); // 콤보박스 폰트
 	private Font fMain = new Font("나눔고딕", Font.BOLD, 17);
 	private int selectrownum = 0;
 
@@ -489,7 +481,10 @@ public class ImportView extends JPanel {
 		// 유형 패널(오른쪽)
 		typePanelR = new JPanel(new FlowLayout(FlowLayout.LEFT)); // 왼쪽부터 정렬
 		String[] exportType = { "급여", "이자", "고정수입", "기타" };
-		typeBox = new JComboBox(exportType);
+		typeBox = new JComboBox<>(exportType);
+		typeBox.setBackground(Color.white);
+		typeBox.setFont(f3);
+		
 		typePanelR.add(typeBox);
 		typePanelR.setBackground(Color.white);
 		updatePanel.add(typePanelR);
@@ -664,8 +659,12 @@ public class ImportView extends JPanel {
 		// JComboBox 생성
 		String[] months = { "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" };
 		JComboBox<String> monthComboBox = new JComboBox<>(months);
-		j1.add(monthComboBox);
+		
+		monthComboBox.setBackground(Color.white);
+		monthComboBox.setFont(f3);
 
+		j1.add(monthComboBox);
+		
 		// JComboBox에서 월 선택시 JDatePicker의 월을 변경
 		monthComboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {

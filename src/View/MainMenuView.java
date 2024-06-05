@@ -404,7 +404,9 @@ public class MainMenuView extends JPanel {
 			moneyList[i].add(labelList[i]);
 			labelList[i].setFont(title);
 			moneyList[i].setBounds(900, 120 + 90 * i, 240, 60);
-
+			moneyList[i].setBorder(new TitledBorder(new LineBorder(colLine, 7, true), str[i], TitledBorder.LEFT,
+					TitledBorder.TOP, f, Color.black));
+			
 			if (i >= 1 && i % 2 == 1) {
 				moneyList[i].setBorder(new TitledBorder(new LineBorder(colLineR, 3, true), str[i], TitledBorder.LEFT,
 						TitledBorder.TOP, f, Color.black));
@@ -417,8 +419,7 @@ public class MainMenuView extends JPanel {
 			
 			
 		}
-
-		moneyList[0].setBorder(new TitledBorder(new LineBorder(colLine, 7, true), str[0]));
+		
 		moneyList[0].addMouseListener(new MouseAdapter() {
 
 			@Override
