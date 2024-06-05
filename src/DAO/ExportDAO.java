@@ -17,6 +17,7 @@ public class ExportDAO {
 	private PreparedStatement pt;
 	private ResultSet rs;
 	private ResultSet rs2;
+	private ResultSet rs3;
 
 	private LoginDAO loginDAO = new LoginDAO();
 	
@@ -258,11 +259,11 @@ public class ExportDAO {
 			pt = conn.prepareStatement(sql2);
 			pt.setInt(1, UsersModel.user.getId());
 			
-			rs = pt.executeQuery();
-			JOptionPane.showMessageDialog(null, "고정지출 \"" + memo + "\"" + price + "원 출금", "고정지출", JOptionPane.PLAIN_MESSAGE);
+			rs3 = pt.executeQuery();
+			JOptionPane.showMessageDialog(null, "고정지출 \"" + memo + "\" " + price + "원 출금", "고정지출", JOptionPane.PLAIN_MESSAGE);
 			
-			while(rs.next()) {
-				list.add(new ExportModel(rs.getInt("id"), rs.getString("day"), rs.getInt("price"),  rs.getInt("type_id"), rs.getString("memo")));
+			while(rs3.next()) {
+				list.add(new ExportModel(rs3.getInt("id"), rs3.getString("day"), rs3.getInt("price"),  rs3.getInt("type_id"), rs3.getString("memo")));
 			}
 			
 			for(int i = 0; i < list.size(); i++) {
