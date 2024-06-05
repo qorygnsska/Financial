@@ -33,7 +33,7 @@ public class ViewFrame{
 
 		mainFrame.setBounds(scrSize.width / 2 - 600, scrSize.height / 2 - 400, 1200, 800);
 
-		mainFrame.setIconImage(new ImageIcon("coin.png").getImage());
+		mainFrame.setIconImage(new ImageIcon("image/coin.png").getImage());
 
 		
 		mainFan.removeAll();
