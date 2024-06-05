@@ -31,8 +31,10 @@ public class AmountView extends JPanel {
 	Font font = new Font("나눔고딕", Font.BOLD, 30);
 	Font font2 = new Font("함초롱돋움", Font.PLAIN, 15);
 	Font font3 = new Font("나눔고딕", Font.BOLD, 15);
-
 	AmountController amountController = new AmountController();
+	
+	private Color colHeader = new Color(224, 255, 255);
+	private Color colTable = new Color(224, 255, 255);
 
 	public AmountView(JPanel panel) {
 		setLayout(null);
@@ -89,15 +91,18 @@ public class AmountView extends JPanel {
 		tableCellCenter(amountTable);
 		// 테이블 셀 글자색 설정
 		tableCellColor(amountTable);
+		// 테이블 헤더 색상 설정
+		amountTable.getTableHeader().setBackground(colHeader);
 
 		// 스크롤 생성
 		JScrollPane js = new JScrollPane();
 
 		// 테이블의 크기 설정
 		js.setPreferredSize(new Dimension(800, 500));
-
 		// 스크롤과 테이블 연결
 		js.setViewportView(amountTable);
+		// 스크롤 배경 색상 설정
+		js.getViewport().setBackground(colTable);
 
 		tablePan.add(js);
 
