@@ -719,7 +719,7 @@ public class ExportView extends JPanel {
 							tabPanel.setSelectedIndex(2);
 							datelist[0] = null;
 						} else {
-//							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "선택날짜에 내용이 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
 							System.out.println("검색 실패");
 							datelist[0] = null;
 						}
