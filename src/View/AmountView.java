@@ -28,9 +28,13 @@ import Model.UsersModel;
 public class AmountView extends JPanel {
 
 	JPanel panMain;
-	Font font = new Font("나눔고딕", Font.BOLD, 30);
-	Font font2 = new Font("함초롱돋움", Font.PLAIN, 15);
-	Font font3 = new Font("나눔고딕", Font.BOLD, 15);
+	private Font font = new Font("나눔고딕", Font.BOLD, 30);
+	private Font font2 = new Font("함초롱돋움", Font.PLAIN, 15);
+	private Font font3 = new Font("나눔고딕", Font.BOLD, 15);
+	
+	private Color colBack = new Color(255, 255, 255);
+	private Color colBtn = new Color(240, 248, 255);
+	private Color colLine = new Color(225, 235, 255);
 
 	AmountController amountController = new AmountController();
 
@@ -41,16 +45,16 @@ public class AmountView extends JPanel {
 		Rectangle rect = panel.getBounds(); // 패널의 정보 저장
 		setPreferredSize(rect.getSize()); // 패널의 사이즈 지정
 
-		setBackground(new Color(255, 255, 255)); // 프레임 배경색 설정
+		setBackground(colBack); // 프레임 배경색 설정
 
 		JPanel mainPan = new JPanel();
 		mainPan.setBounds(100, 30, 1000, 600);
-		mainPan.setBackground(Color.white);
-		mainPan.setBorder(new LineBorder(new Color(225, 235, 255), 7, true)); // 메인 패널 테두리 색
+		mainPan.setBackground(colBack);
+		mainPan.setBorder(new LineBorder(colLine, 7, true)); // 메인 패널 테두리 색
 
 		// 타이틀 패널 생성!
 		JPanel titlePan = new JPanel();
-		titlePan.setBackground(new Color(255, 255, 255)); // 타이틀 배경색
+		titlePan.setBackground(colBack); // 타이틀 배경색
 		//titlePan.setBorder(new LineBorder(new Color(225, 235, 255), 3, true)); // 타이틀 패널 테두리 색
 
 		// 타이틀 라벨 생성!
@@ -62,7 +66,7 @@ public class AmountView extends JPanel {
 
 		// 테이블 담당 패널 생성!
 		JPanel tablePan = new JPanel();
-		tablePan.setBorder(new LineBorder(new Color(225, 235, 255), 4, true)); // 테이블 패널 테두리 색
+		tablePan.setBorder(new LineBorder(colLine, 4, true)); // 테이블 패널 테두리 색
 
 		// 테이블의 열
 		Object[] tableHeader = { "날짜", "금액", "구분", "비고", "잔액" };
@@ -110,7 +114,7 @@ public class AmountView extends JPanel {
 		JButton mainBtn = new JButton("메인으로");
 		mainBtn.setFont(font3);
 		//mainBtn.setBorder(BorderFactory.createLineBorder(Color.black)); // 버튼의 테두리 색
-		mainBtn.setBackground(new Color(240, 248, 255)); // 버튼 배경색
+		mainBtn.setBackground(colBtn); // 버튼 배경색
 
 		mainBtn.addActionListener(new ActionListener() {
 
