@@ -12,41 +12,45 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-public class ViewFrame extends JFrame {
+import Model.UsersModel;
 
+public class ViewFrame{
 
+	
 	public static JFrame mainFrame = new JFrame();
-	MainMenuView mainMenu;
-	JPanel mainPan = new JPanel();
+	public static MainMenuView mainMenu;
+	public static JPanel mainFan = new JPanel();
 
 	public ViewFrame() {
 
-		mainFrame.setLayout(null);
-		mainFrame.setTitle("재무관리");
+		mainFrame.setTitle("[재무관리]  " + UsersModel.user.getName() + "님 환영합니다");
 
-
-		mainPan.setBounds(7, 0, 1170, 755);
+//		mainFan.setLayout(null);
+		mainFan.setBounds(0, 0, 1200, 800);
+//		mainFan.setBackground(new Color(255, 250, 255));
+		mainFan.setBackground(Color.white);
 		// 모니터 사이즈 받아오기
 		Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
 		// 사이즈 설정
 
 		mainFrame.setBounds(scrSize.width / 2 - 600, scrSize.height / 2 - 400, 1200, 800);
 
-		mainFrame.setIconImage(new ImageIcon("coin.png").getImage());
+		mainFrame.setIconImage(new ImageIcon("image/coin.png").getImage());
 
-		mainPan.removeAll();
+		
+		mainFan.removeAll();
 
-		mainMenu = new MainMenuView(mainPan);
+		mainMenu = new MainMenuView(mainFan);
 
-		mainPan.add(mainMenu, BorderLayout.CENTER);
+		mainFan.add(mainMenu, BorderLayout.CENTER);
 		// 구성 요소 가로/세로 속성 변경하여 호출
-		mainPan.revalidate();
+		mainFan.revalidate();
 		// 현재 재배치한 내용으로 보이기
-		mainPan.repaint();
+		mainFan.repaint();
 //		mainPan.setBackground(Color.blue);
 
 
-		mainFrame.add(mainPan);
+		mainFrame.add(mainFan,BorderLayout.CENTER);
 
 		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);
@@ -55,7 +59,4 @@ public class ViewFrame extends JFrame {
 
 	}
 
-	public static void main(String[] args) {
-		new ViewFrame();
-	}
 }

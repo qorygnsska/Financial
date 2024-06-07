@@ -8,7 +8,7 @@ import javax.swing.JFormattedTextField.AbstractFormatter;
 
 public class Dateformet extends AbstractFormatter{
 
-	 private String datePattern = "yyyy-MM-dd E요일";
+	 private String datePattern = "yy-MM-dd E요일";
 	    private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 	
 	@Override

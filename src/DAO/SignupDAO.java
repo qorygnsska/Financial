@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.swing.JOptionPane;
+
 import Model.UsersModel;
 
 public class SignupDAO {
@@ -12,7 +14,6 @@ public class SignupDAO {
 	ResultSet rs;
 	
 	public boolean signup(UsersModel user) {
-		System.out.println("signup DAO 실행");
 		boolean result = false;
 		
 		con = DBUtil.getConnection();
@@ -31,7 +32,7 @@ public class SignupDAO {
 				result = true;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 		
 		return result;

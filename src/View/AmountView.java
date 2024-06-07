@@ -1,17 +1,15 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,33 +18,45 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+
+import Controller.AmountController;
 
 public class AmountView extends JPanel {
 
 	JPanel panMain;
-	Font font = new Font("함초롱돋움", Font.BOLD, 30);
-	Font font2 = new Font("함초롱돋움", Font.PLAIN, 15);
-	Font font3 = new Font("함초롱돋움", Font.BOLD, 15);
+	private Font font = new Font("나눔고딕", Font.BOLD, 30);
+	private Font font2 = new Font("나눔고딕", Font.PLAIN, 15);
+	private Font font3 = new Font("나눔고딕", Font.BOLD, 15);
+	
+	private Color colBack = new Color(255, 255, 255);
+	private Color colBtn = new Color(240, 248, 255);
+	private Color colLine = new Color(225, 235, 255);
+
+	AmountController amountController = new AmountController();
+	
+	private Color colHeader = new Color(225, 235, 255);
+	private Color colTable = new Color(225, 235, 255);
 
 	public AmountView(JPanel panel) {
 		setLayout(null);
-		
+
 		panMain = panel; // MainMenuView의 패널 가져옴
 		Rectangle rect = panel.getBounds(); // 패널의 정보 저장
 		setPreferredSize(rect.getSize()); // 패널의 사이즈 지정
-		
-		setBackground(new Color(255, 255, 255)); // 프레임 배경색 설정
+
+		setBackground(colBack); // 프레임 배경색 설정
 
 		JPanel mainPan = new JPanel();
 		mainPan.setBounds(100, 30, 1000, 600);
-		mainPan.setBackground(Color.white);
-		mainPan.setBorder(new LineBorder(Color.green, 4));
+		mainPan.setBackground(colBack);
+		mainPan.setBorder(new LineBorder(colLine, 7, true)); // 메인 패널 테두리 색
 
 		// 타이틀 패널 생성!
 		JPanel titlePan = new JPanel();
-		titlePan.setBackground(new Color(235, 232, 255)); // 타이틀 배경색
-		titlePan.setBorder(new LineBorder(Color.green, 2));
+		titlePan.setBackground(colBack); // 타이틀 배경색
+		//titlePan.setBorder(new LineBorder(new Color(225, 235, 255), 3, true)); // 타이틀 패널 테두리 색
 
 		// 타이틀 라벨 생성!
 		JLabel titleLabel = new JLabel("상세 거래내역 (최근 1년까지 조회)");
@@ -57,24 +67,14 @@ public class AmountView extends JPanel {
 
 		// 테이블 담당 패널 생성!
 		JPanel tablePan = new JPanel();
-		tablePan.setBorder(new LineBorder(Color.green, 2));
+		tablePan.setBorder(new LineBorder(colLine, 4, true)); // 테이블 패널 테두리 색
 
 		// 테이블의 열
-		Object[] tableHeader = { "날짜", "금액", "구분", "잔액" };
-
-		// 테이블 데이터 생성
-		Object[][] data = { { "2024-05-27", "-10000", "까까 사먹음", "90000" }, { "2024-05-26", "+5000", "당근", "95000" },
-				{ "2024-05-27", "-10000", "까까 사먹음", "90000" }, { "2024-05-26", "+5000", "당근", "95000" },
-				{ "2024-05-27", "-10000", "까까 사먹음", "90000" }, { "2024-05-26", "+5000", "당근", "95000" },
-				{ "2024-05-27", "-10000", "까까 사먹음", "90000" }, { "2024-05-26", "+5000", "당근", "95000" },
-				{ "2024-05-27", "-10000", "까까 사먹음", "90000" }, { "2024-05-26", "+5000", "당근", "95000" },
-				{ "2024-05-27", "-10000", "까까 사먹음", "90000" }, { "2024-05-26", "+5000", "당근", "95000" },
-				{ "2024-05-27", "-10000", "까까 사먹음", "90000" }, { "2024-05-26", "+5000", "당근", "95000" },
-				{ "2024-05-27", "-10000", "까까 사먹음", "90000" }, { "2024-05-26", "+5000", "당근", "95000" },
-				{ "2024-05-27", "-10000", "까까 사먹음", "90000" }, { "2024-05-26", "+5000", "당근", "95000" } };
+		Object[] tableHeader = { "날짜", "금액", "구분", "비고", "잔액" };
+		Object[][] data1 = amountController.selecet();
 
 		// 데이터 모델 생성
-		DefaultTableModel model = new DefaultTableModel(data, tableHeader) {
+		DefaultTableModel model = new DefaultTableModel(data1, tableHeader) {
 			public boolean isCellEditable(int rowIndex, int mColindex) {
 				return false;
 			}
@@ -83,9 +83,6 @@ public class AmountView extends JPanel {
 		// 테이블 생성
 		JTable amountTable = new JTable(model);
 
-		amountTable.setBackground(Color.PINK); // 셀 배경색 변경
-		amountTable.setGridColor(Color.WHITE); // 셀 테두리색 변경
-		amountTable.setForeground(Color.WHITE); // 셀 글자색 변경
 		amountTable.setRowHeight(30); // 행의 높이 설정
 
 		amountTable.setFont(font2);
@@ -95,28 +92,34 @@ public class AmountView extends JPanel {
 		amountTable.getTableHeader().setResizingAllowed(false);
 		// 테이블 내용 가운데 정렬
 		tableCellCenter(amountTable);
+		// 테이블 셀 글자색 설정
+		tableCellColor(amountTable);
+		// 테이블 헤더 색상 설정
+		amountTable.getTableHeader().setBackground(colHeader);
 
 		// 스크롤 생성
 		JScrollPane js = new JScrollPane();
 
 		// 테이블의 크기 설정
 		js.setPreferredSize(new Dimension(800, 500));
-
 		// 스크롤과 테이블 연결
 		js.setViewportView(amountTable);
+		// 스크롤 배경 색상 설정
+		js.getViewport().setBackground(colTable);
 
 		tablePan.add(js);
 
 		// 버튼 관리 패널 생성
 		JPanel btnPan = new JPanel(new GridLayout());
 		btnPan.setBounds(870, 650, 150, 50);
-		btnPan.setBorder(new LineBorder(Color.green, 4));
+		//btnPan.setBorder(new LineBorder(Color.green, 4));
 
 		// 버튼 생성
 		JButton mainBtn = new JButton("메인으로");
 		mainBtn.setFont(font3);
-		mainBtn.setBorder(BorderFactory.createLineBorder(Color.black)); // 버튼의 테두리 색
-		mainBtn.setBackground(Color.white);
+		mainBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		//mainBtn.setBorder(BorderFactory.createLineBorder(Color.black)); // 버튼의 테두리 색
+		mainBtn.setBackground(colBtn); // 버튼 배경색
 
 		mainBtn.addActionListener(new ActionListener() {
 
@@ -125,9 +128,9 @@ public class AmountView extends JPanel {
 				// 메인으로 이동
 				panMain.removeAll(); // 현재 패널 내용 지움
 				panMain.add(new MainMenuView(panMain)); // 현재 패널에 메인메뉴 패널 추가
-				panMain.revalidate(); // 패널의 가로세로 다시 지정 
+				panMain.revalidate(); // 패널의 가로세로 다시 지정
 				panMain.repaint(); // 패널 그리기
-				
+
 			}
 		});
 
@@ -141,7 +144,6 @@ public class AmountView extends JPanel {
 
 		setVisible(true);
 	}
-
 
 	// 테이블 내용 가운데 정렬하기
 	public void tableCellCenter(JTable t) {
@@ -161,4 +163,13 @@ public class AmountView extends JPanel {
 
 	}
 
+	// 금액 색상 바꾸기
+	public void tableCellColor(JTable t) {
+		int targetColumnIndex = 1;
+		TableColumnModel tcm = t.getColumnModel();
+
+		TableColumn column = tcm.getColumn(targetColumnIndex);
+		column.setCellRenderer(new CustomTableCellRenderer(targetColumnIndex));
+
+	}
 }

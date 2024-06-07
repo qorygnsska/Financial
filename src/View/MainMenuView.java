@@ -1,10 +1,12 @@
 package View;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -12,10 +14,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 
-import javax.swing.ImageIcon;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -27,8 +29,22 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import Controller.AmountController;
+import Controller.ConsumeController;
+import Controller.ExportController;
+import Controller.ImportController;
+import Controller.MainExportController;
+import Controller.MainImportController;
+import Controller.SaveController;
+import Model.UsersModel;
+
 public class MainMenuView extends JPanel {
 
+	DecimalFormat df = new DecimalFormat("#,###,000");
+	MainImportController IC = new MainImportController();
+	MainExportController EC = new MainExportController();
+	SaveController SC = new SaveController();
+	ConsumeController CC = new ConsumeController();
 	JPanel panMain;
 	JPanel[] portList = new JPanel[2];
 	JPanel[] moneyList = new JPanel[5];
@@ -38,25 +54,62 @@ public class MainMenuView extends JPanel {
 	JScrollPane[] paneList = new JScrollPane[2];
 	JPanel btnPan = new JPanel();
 	JButton[] btnList = new JButton[2];
+	JPanel userPan = new JPanel(new GridLayout(2, 2));
+	DefaultTableModel saveModel;
 
+	private Color colBack = new Color(255, 255, 255);
+	private Color colLine = new Color(225, 235, 255);
+	private Color colLineR = new Color(255, 230, 230);
+	private Color colBtn = new Color(240, 248, 255);
+	private Color colHeaderEx = new Color(225, 235, 255);
+	private Color colTableEx = new Color(225, 235, 255);
+	private Color colHeaderIm = new Color(255, 230, 230);
+	private Color colTableIm = new Color(255, 230, 230);
+	private Color colHeaderSa = new Color(235, 255, 245);
+	private Color colTableSa = new Color(235, 255, 245);
+	private Font f = new Font("나눔고딕", Font.BOLD, 15);
+	private Font f1 = new Font("나눔고딕", Font.BOLD, 17);
+	private Font f2 = new Font("나눔고딕", Font.PLAIN, 13);
+	private Font title = new Font("나눔고딕", Font.BOLD, 15);
+	private Toolkit tk = Toolkit.getDefaultToolkit();
+	private Image imageExport = tk.getImage("image/export.png");
+	private Image imageImport = tk.getImage("image/import.png");
+	private Image imageAmount = tk.getImage("image/amount.png");
+	private Point point = new Point(10,10);
+	private Cursor csExport = tk.createCustomCursor(imageExport, point, "");
+	private Cursor csImport = tk.createCustomCursor(imageImport, point, "");
+	private Cursor csAmount = tk.createCustomCursor(imageAmount, point, "");
+
+	private AmountController amountController = new AmountController();
+	private ImportController importController = new ImportController();
+	private ExportController exportController = new ExportController();
+	
 	public MainMenuView(JPanel panel) {
-		setLayout(null);
-		setBorder(new LineBorder(Color.green, 8));
-		setBackground(Color.white);
 		panMain = panel;
-
 		Rectangle rect = panel.getBounds();
 		setPreferredSize(rect.getSize());
 
+		setLayout(null);
+
+		setBackground(colBack);
+		checkfport();
 		importTable();
 		exportTable();
 		moneyPrint();
 		userButton();
 		consume();
 		savingMoney();
+		userInfo();
 
 		setVisible(true);
 	}
+
+	private void checkfport() {
+		exportController.check();
+		importController.check();
+	}
+			
+	
 
 	// 테이블 몸체 클릭
 	private class MyMouseListener1 extends MouseAdapter {
@@ -76,6 +129,33 @@ public class MainMenuView extends JPanel {
 				panMain.repaint();
 			}
 
+		}
+
+		// 커서 변경 이벤트 위한 이벤트
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// 패널에서 포인터 변경
+			portList[0].setCursor(csImport);
+			portList[1].setCursor(csExport);
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// 패널 밖에서 포인터 원래대로
+			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			portList[1].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			portList[0].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			portList[1].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			portList[0].setCursor(csImport);
+			portList[1].setCursor(csExport);
 		}
 	}
 
@@ -98,21 +178,48 @@ public class MainMenuView extends JPanel {
 			}
 
 		}
+
+		// 커서 변경 이벤트 위한 이벤트
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// 패널에서 포인터 변경
+			tableList[0].setCursor(csImport);
+			tableList[1].setCursor(csExport);
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// 패널 밖에서 포인터 원래대로
+			tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			tableList[0].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			tableList[1].setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			tableList[0].setCursor(csImport);
+			tableList[1].setCursor(csExport);
+		}
 	}
 
 	// 버튼 클릭
-	private class MyButtonListener implements ActionListener {
+	private class MyButtonListener extends MouseAdapter implements ActionListener {
+		JButton btn = null;
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JButton btn = (JButton) e.getSource();
+			btn = (JButton) e.getSource();
 			if (btn == btnList[0]) {
-				System.out.println("로그아웃 버튼");
+				ViewFrame.mainFan.removeAll();
 				ViewFrame.mainFrame.dispose();
 				new LoginView().user();
 
 			} else {
-				System.out.println("종료 버튼");
 				System.exit(0);
 
 			}
@@ -121,22 +228,64 @@ public class MainMenuView extends JPanel {
 
 	}
 
+	// 유저 정보 패널
+	public void userInfo() {
+		JPanel upPanel = new JPanel();
+		JPanel myPanel = new MyPanel();
+		myPanel.setBounds(0, 0, 900, 115);
+		
+		userPan.setBackground(colBack);
+		JLabel nameTitle = new JLabel("이름 : ");
+		JLabel name = new JLabel(UsersModel.user.getName());
+		JLabel dayTitle = new JLabel("날짜 : ");
+		JLabel day = new JLabel(LocalDate.now().toString());
+
+		// 오늘날짜1
+		LocalDate today = LocalDate.now();
+		String t = today.toString();
+		t = t.replace('-', '/');
+		t = t.substring(2, 10);
+
+		nameTitle.setHorizontalAlignment(JLabel.RIGHT);
+		name.setHorizontalAlignment(JLabel.LEFT);
+
+		dayTitle.setHorizontalAlignment(JLabel.RIGHT);
+		day.setHorizontalAlignment(JLabel.LEFT);
+
+		nameTitle.setFont(new Font("나눔고딕", Font.BOLD, 18));
+		name.setFont(new Font("나눔고딕", Font.BOLD, 18));
+		dayTitle.setFont(new Font("나눔고딕", Font.BOLD, 18));
+		day.setFont(new Font("나눔고딕", Font.BOLD, 18));
+
+		userPan.setBounds(1000, 10, 200, 100);
+		userPan.add(nameTitle);
+		userPan.add(name);
+		userPan.add(dayTitle);
+		userPan.add(day);
+		
+		upPanel.add(myPanel);
+		upPanel.add(userPan);
+		upPanel.setBounds(-100, 0, 1200, 115);
+		upPanel.setBackground(new Color(255, 255, 255));
+		add(upPanel);
+	}
+
 	// 수입 테이블
 	public void importTable() {
 
 		String[] header = { "날짜", "금액", "유형" };
 		portList[0] = new JPanel();
-		portList[0].setBorder(new TitledBorder(new LineBorder(Color.green, 3), " 수입 "));
+
+		portList[0].setBorder(BorderFactory.createTitledBorder(new LineBorder(colLine, 7, true), " 수입 ",
+				TitledBorder.LEFT, TitledBorder.TOP, f, Color.black));
+
 		portList[0].setBounds(30, 120, 400, 400);
-		portList[0].setBackground(Color.white);
+		portList[0].setBackground(colBack);
 		// 내용 수정 불가
-		model[0] = new DefaultTableModel(header, 0) {
-			public boolean isCellEditable(int rowIndex, int mColindex) {
-				return false;
-			}
-		};
+		model[0] = IC.getImportModel(header);
 
 		tableList[0] = new JTable(model[0]);
+		tableList[0].setFont(f2);
 		// 테이블 컬럼 이동불가
 		tableList[0].getTableHeader().setReorderingAllowed(false);
 		// 컬럼 크기 조절 불가
@@ -150,12 +299,14 @@ public class MainMenuView extends JPanel {
 
 		// 테이블 셀 배경
 		tableList[0].setBackground(Color.white);
-		model[0].addRow(new Object[] { "5월7일", "100000", "급여" });
+//		model[0].addRow(new Object[] { "5월7일", "100000", "급여" });
+		tableList[0].getTableHeader().setBackground(colHeaderIm);
 
 		paneList[0] = new JScrollPane(tableList[0]);
 
 		// JScrollPane 사이즈
 		paneList[0].setPreferredSize(new Dimension(350, 360));
+		paneList[0].getViewport().setBackground(colTableIm);
 		// 컬럼 사이즈
 		tableList[0].getColumn("날짜").setPreferredWidth(60);
 		tableList[0].getColumn("금액").setPreferredWidth(120);
@@ -172,17 +323,18 @@ public class MainMenuView extends JPanel {
 	public void exportTable() {
 		String[] header = { "날짜", "금액", "유형" };
 		portList[1] = new JPanel();
-		portList[1].setBorder(new TitledBorder(new LineBorder(Color.green, 3), " 지출 "));
+
+		portList[1].setBorder(new TitledBorder(new LineBorder(colLine, 7, true), " 지출 ", TitledBorder.LEFT,
+				TitledBorder.TOP, f, Color.black));
+
 		portList[1].setBounds(460, 120, 400, 400);
-		portList[1].setBackground(Color.white);
+		portList[1].setBackground(colBack);
 		// 내용 수정 불가
-		model[1] = new DefaultTableModel(header, 0) {
-			public boolean isCellEditable(int rowIndex, int mColindex) {
-				return false;
-			}
-		};
+		model[1] = EC.getExportModel(header);
 
 		tableList[1] = new JTable(model[1]);
+		
+		tableList[1].setFont(f2);
 
 		// 테이블 컬럼 이동불가
 		tableList[1].getTableHeader().setReorderingAllowed(false);
@@ -197,11 +349,13 @@ public class MainMenuView extends JPanel {
 
 		// 테이블 셀 배경
 		tableList[1].setBackground(Color.white);
-		model[1].addRow(new Object[] { "5월7일", "100000", "급여" });
+//		model[1].addRow(new Object[] { "5월7일", "100000", "급여" });
+		tableList[1].getTableHeader().setBackground(colHeaderEx);
 
 		paneList[1] = new JScrollPane(tableList[1]);
 		// JScrollPane 사이즈
 		paneList[1].setPreferredSize(new Dimension(350, 360));
+		paneList[1].getViewport().setBackground(colTableEx);
 		// 컬럼 사이즈
 		tableList[1].getColumn("날짜").setPreferredWidth(60);
 		tableList[1].getColumn("금액").setPreferredWidth(120);
@@ -233,30 +387,71 @@ public class MainMenuView extends JPanel {
 
 	// 잔고 및 수입지출
 	public void moneyPrint() {
+		String amount = amountController.amount();
 
-		String[] str = { "잔고", "이 달 수입", "이 달 지출", "지난 달 수입", "지난 달 지출" };
-		DecimalFormat df = new DecimalFormat("#,##0.00");
-		int[] money = { 90000000, 80000, 7000000, 1000000, 5000000 };
+		String[] str = { " 잔고 ", " 이 달 수입 ", " 이 달 지출 ", " 지난 달 수입 ", " 지난 달 지출 " };
+
+		String[] money = { amount, IC.thisMonth(), EC.thisMonth(), IC.beforeMonth(), EC.beforeMonth() };
 
 		for (int i = 0; i < moneyList.length; i++) {
 			moneyList[i] = new JPanel();
-			moneyList[i].setBorder(new TitledBorder(new LineBorder(Color.green, 4), str[i]));
+			moneyList[i].setBackground(colBack);
+
 			moneyList[i].setBackground(Color.white);
+
 			add(moneyList[i]);
-			labelList[i] = new JLabel(df.format(money[i]) + "원");
+			labelList[i] = new JLabel(money[i]);
 			moneyList[i].add(labelList[i]);
+			labelList[i].setFont(title);
 			moneyList[i].setBounds(900, 120 + 90 * i, 240, 60);
-
+			moneyList[i].setBorder(new TitledBorder(new LineBorder(colLine, 7, true), str[i], TitledBorder.LEFT,
+					TitledBorder.TOP, f, Color.black));
+			
+			if (i >= 1 && i % 2 == 1) {
+				moneyList[i].setBorder(new TitledBorder(new LineBorder(colLineR, 3, true), str[i], TitledBorder.LEFT,
+						TitledBorder.TOP, f, Color.black));
+				moneyList[i].setBackground(new Color(255, 245, 245));
+			}else if (i >= 1 && i % 2 == 0) {
+				moneyList[i].setBorder(new TitledBorder(new LineBorder(colLine, 3, true), str[i], TitledBorder.LEFT,
+						TitledBorder.TOP, f, Color.black));
+				moneyList[i].setBackground(new Color(245, 245, 255));
+			}
+			
+			
 		}
-
+		
 		moneyList[0].addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				removeAll();
 				panMain.removeAll();
 				panMain.add(new AmountView(panMain));
 				panMain.revalidate();
 				panMain.repaint();
+			}
+
+			// 커서 변경 이벤트 위한 이벤트
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// 패널에서 포인터 변경
+				setCursor(csAmount);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// 패널 밖에서 포인터 원래대로
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				setCursor(csAmount);
 			}
 		});
 
@@ -267,14 +462,18 @@ public class MainMenuView extends JPanel {
 		btnPan.setBounds(900, 600, 200, 50);
 		add(btnPan);
 
-		btnPan.setBackground(Color.white);
+		btnPan.setBackground(colBack);
 
 		String[] list = { "로그아웃", "종료" };
 
 		for (int i = 0; i < btnList.length; i++) {
 			btnList[i] = new JButton(list[i]);
+			btnList[i].setFont(f1);
 			btnPan.add(btnList[i]);
 			btnList[i].addActionListener(new MyButtonListener());
+			btnList[i].setBackground(colBtn);
+			btnList[i].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
 		}
 
 	}
@@ -282,29 +481,45 @@ public class MainMenuView extends JPanel {
 	// 소비태크
 	public void consume() {
 		JPanel conPan = new JPanel(new GridLayout(0, 3));
-		conPan.setBounds(30, 550, 300, 180);
-		conPan.setBackground(Color.white);
+		conPan.setBounds(520, 580, 300, 80);
+		conPan.setBackground(colBack);
 
-		conPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "소비유형"));
+		conPan.setBorder(new TitledBorder(new LineBorder(colLine, 3, true), " 소비유형 ", TitledBorder.LEFT,
+				TitledBorder.TOP, f, Color.black));
+
 		JLabel[] list = new JLabel[3];
 		for (int i = 0; i < list.length; i++) {
 			list[i] = new JLabel();
 			conPan.add(list[i]);
 			list[i].setHorizontalAlignment(JLabel.CENTER);
-			list[i].setFont(new Font("기본글씨", Font.BOLD, 18));
+			list[i].setFont(f);
 		}
 
-		list[0].setText("1. 교통비");
-		list[1].setText("2. 식비");
-		list[2].setText("3. 쇼핑");
+		String[] ar = CC.consumeTag();
 
+		try {
+			list[0].setText("1. " + ar[0]);
+		} catch (Exception e) {
+			list[0].setText("");
+		}
+
+		try {
+			list[1].setText("2. " + ar[1]);
+		} catch (Exception e) {
+			list[1].setText("");
+		}
+
+		try {
+			list[2].setText("3. " + ar[2]);
+		} catch (Exception e) {
+			list[2].setText("");
+		}
 		add(conPan);
 
 		conPan.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("소비 태크 클릭");
 			}
 
 		});
@@ -314,19 +529,18 @@ public class MainMenuView extends JPanel {
 	// 저축
 	public void savingMoney() {
 		JPanel sPan = new JPanel();
-		sPan.setBounds(400, 550, 460, 180);
-		sPan.setBackground(Color.white);
+		sPan.setBounds(30, 530, 460, 190);
+		sPan.setBackground(colBack);
 
-		sPan.setBorder(new TitledBorder(new LineBorder(Color.green, 3), "저축"));
+		sPan.setBorder(new TitledBorder(new LineBorder(colLine, 3, true), "저축", TitledBorder.LEFT, TitledBorder.TOP, f,
+				Color.black));
 		String[] header = { "날짜", "금액", "유형", "비고" };
 
-		DefaultTableModel saveModel = new DefaultTableModel(header, 0) {
-			public boolean isCellEditable(int rowIndex, int mColindex) {
-				return false;
-			}
-		};
+		saveModel = SC.getSaveModel(header);
 
 		JTable table = new JTable(saveModel);
+		
+		table.setFont(f2);
 
 		// 테이블 컬럼 이동불가
 		table.getTableHeader().setReorderingAllowed(false);
@@ -341,23 +555,21 @@ public class MainMenuView extends JPanel {
 
 		// 테이블 셀 배경
 		table.setBackground(Color.white);
-		saveModel.addRow(new Object[] { "5월7일", "100000", "여가", "태국" });
+//		saveModel.addRow(new Object[] { "5월7일", "100000", "여가", "태국" });
+		table.getTableHeader().setBackground(colHeaderSa);
 
 		JScrollPane savePane = new JScrollPane(table);
 		// JScrollPane 사이즈
 		savePane.setPreferredSize(new Dimension(440, 150));
+		savePane.getViewport().setBackground(colTableSa);
 		// 컬럼 사이즈
-		table.getColumn("날짜").setPreferredWidth(60);
-		table.getColumn("금액").setPreferredWidth(120);
-		table.getColumn("유형").setPreferredWidth(60);
-		table.getColumn("비고").setPreferredWidth(180);
+		table.getColumn("날짜").setPreferredWidth(70);
+		table.getColumn("금액").setPreferredWidth(140);
+		table.getColumn("유형").setPreferredWidth(40);
+		table.getColumn("비고").setPreferredWidth(170);
 		sPan.add(savePane);
 
 		add(sPan);
-	}
-
-	public static void main(String[] args) {
-		// new MainMenuView();
 	}
 
 }
