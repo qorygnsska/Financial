@@ -78,7 +78,7 @@ public class ExportController {
 		exportService.check();
 	}
 
-	public boolean dayupdate(ExportModel exportModel) {
+	public int dayupdate(ExportModel exportModel) {
 		
 		return exportService.dayupdate(exportModel);
 	}
@@ -88,7 +88,7 @@ public class ExportController {
 		return  exportService.monthupdate(exportModel);
 	}
 
-	public boolean daydelete(ExportModel exportmodel) {
+	public int daydelete(ExportModel exportmodel) {
 		
 		return exportService.daydelete(exportmodel);
 	}

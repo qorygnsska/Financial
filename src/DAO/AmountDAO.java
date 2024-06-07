@@ -16,20 +16,21 @@ public class AmountDAO {
 
 	public Object[][] selecet() {
 		Object[][] result = null;
-		
-		con = DBUtil.getConnection();
-		String sql = "SELECT day, price, type, content, memo FROM amount WHERE user_id = ? AND day BETWEEN to_char(add_months(sysdate, -12), 'yy/mm/dd') AND sysdate ORDER BY day DESC"; // 접속중인 아이디의 1년전까지의 데이터값 찾기
-		
-		String sql2 = "select count(*) from amount where user_id = ? AND day BETWEEN to_char(add_months(sysdate, -12), 'yy/mm/dd') AND sysdate"; // 접속중인 아이디의 1년전까지의 데이터 개수 sql
 
+		con = DBUtil.getConnection();
+		
+		// 접속중인 아이디의 1년전까지의 데이터값 찾기
+		String sql = "SELECT day, price, type, content, memo FROM amount WHERE user_id = ? AND day BETWEEN to_char(add_months(sysdate, -12), 'yy/mm/dd') AND sysdate ORDER BY day DESC"; 
+		// 접속중인 아이디의 1년전까지의 데이터개수 sql
+		String sql2 = "select count(*) from amount where user_id = ? AND day BETWEEN to_char(add_months(sysdate, -12), 'yy/mm/dd') AND sysdate"; 
 		// 접속중인 아이디의 총액 sql
 		String sql3 = "select nvl((select sum(price) from amount where user_id = ? and (type = '수입' or type = '고정수입') ), 0) - nvl((select sum(price) from amount where user_id = ? and (type = '지출' or type = '고정지출')), 0) as 합 from amount where rownum <= 1";
 
 		try {
 			ps = con.prepareStatement(sql2);
-			
+
 			ps.setInt(1, UsersModel.user.getId());
-	
+
 			rs = ps.executeQuery();
 
 			int row = 0;
@@ -38,7 +39,7 @@ public class AmountDAO {
 			}
 
 			ps = con.prepareStatement(sql3);
-			
+
 			ps.setInt(1, UsersModel.user.getId());
 			ps.setInt(2, UsersModel.user.getId());
 
@@ -51,12 +52,12 @@ public class AmountDAO {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, UsersModel.user.getId());
 			rs = ps.executeQuery();
-			
+
 			result = new String[row][5];
 			int index = 0;
-			
+
 			while (rs.next()) { // 반복문
-				
+
 				if (rs.getString("type").equals("수입") || rs.getString("type").equals("고정수입")) {
 					result[index][0] = rs.getString("day");
 
@@ -88,7 +89,6 @@ public class AmountDAO {
 					index++;
 				}
 			}
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,20 +103,20 @@ public class AmountDAO {
 		String sql = "insert into amount(user_id, price, day, type, content, memo, foreign_id) values(?, ?, ?, ?, ?, ?, ?)";
 		String sql1 = "select max(id) from import";
 		String sql2 = "select max(id) from export";
-		
+
 		int maxid = 0;
 
 		try {
-			if(amountModel.getType().equals("수입")) {
+			if (amountModel.getType().equals("수입")) {
 				ps = con.prepareStatement(sql1);
-			}else if(amountModel.getType().equals("지출")) {
+			} else if (amountModel.getType().equals("지출")) {
 				ps = con.prepareStatement(sql2);
 			}
 			rs = ps.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				maxid = rs.getInt(1);
 			}
-			
+
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, UsersModel.user.getId());
 			ps.setInt(2, amountModel.getPrice());
@@ -125,15 +125,15 @@ public class AmountDAO {
 			ps.setString(5, amountModel.getContent());
 			ps.setString(6, amountModel.getMemo());
 			ps.setInt(7, maxid);
-			
+
 			ps.executeUpdate();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	// 총 잔액 구하기
 	public String amount() {
 		con = DBUtil.getConnection();
@@ -141,26 +141,25 @@ public class AmountDAO {
 		String realamount = "";
 		try {
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setInt(1, UsersModel.user.getId());
 			ps.setInt(2, UsersModel.user.getId());
-			
+
 			rs = ps.executeQuery();
-			
+
 			int amount = 0;
 			if (rs.next()) {
 				amount = rs.getInt(1);
 			}
 			realamount = String.format("%,d원", amount);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return realamount;
 	}
-	
-	
+
 	// 잔액 테이블 수정
 	public void update(AmountModel amountModel) {
 		int maxid = 0;
@@ -170,22 +169,22 @@ public class AmountDAO {
 		String sql3 = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id = ?";
 		// 수정하는 sql
 		String sql = "update amount set price=?, day=?, type=?, content=?, memo=? where user_id=? and foreign_id = ? and type = ?";
-		
+
 		try {
-			if(amountModel.getType().equals("수입")) {
+			if (amountModel.getType().equals("수입")) {
 				ps = con.prepareStatement(sql2);
-			}else if(amountModel.getType().equals("지출")) {
+			} else if (amountModel.getType().equals("지출")) {
 				ps = con.prepareStatement(sql3);
 			}
-			
+
 			ps.setInt(1, amountModel.getRownum());
 			ps.setInt(2, UsersModel.user.getId());
-			
+
 			rs = ps.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				maxid = rs.getInt(1);
 			}
-			
+
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, amountModel.getPrice());
 			ps.setString(2, amountModel.getDay());
@@ -195,64 +194,62 @@ public class AmountDAO {
 			ps.setInt(6, UsersModel.user.getId());
 			ps.setInt(7, maxid);
 			ps.setString(8, amountModel.getType());
-			
+
 			ps.executeUpdate();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
 	// 잔액 테이블 삭제
 	public void delete(int rownum, String amounttype) {
 		int maxid = 0;
 		con = DBUtil.getConnection();
-		
+
 		// 아이디 찾는 sql
 		String sql2 = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id = ?";
 		String sql3 = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id = ?";
 		// 삭제하는 sql
 		String sql = "delete from amount where foreign_id = ? and user_id = ? and type = ?";
-		
+
 		try {
-			if(amounttype.equals("수입")) {
+			if (amounttype.equals("수입")) {
 				ps = con.prepareStatement(sql2);
-			}else if(amounttype.equals("지출")) {
+			} else if (amounttype.equals("지출")) {
 				ps = con.prepareStatement(sql3);
 			}
-			
+
 			ps.setInt(1, rownum);
 			ps.setInt(2, UsersModel.user.getId());
-			
+
 			rs = ps.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				maxid = rs.getInt(1);
 			}
-			
+
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, maxid);
 			ps.setInt(2, UsersModel.user.getId());
 			ps.setString(3, amounttype);
-			
+
 			ps.executeUpdate();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	// 고정지출 매번 넣기
 	public void fexinsert(ExportModel exportModel) {
 		con = DBUtil.getConnection();
 		String sql = "insert into amount(user_id, price, day, type, content, memo, foreign_id) values(?, ?, ?, ?, ?, ?, ?)";
-		
+
 		try {
 			ps = con.prepareStatement(sql);
-			
+
 			ps.setInt(1, UsersModel.user.getId());
 			ps.setInt(2, exportModel.getPrice());
 			ps.setString(3, exportModel.getDay());
@@ -260,15 +257,15 @@ public class AmountDAO {
 			ps.setString(5, "고정지출");
 			ps.setString(6, exportModel.getMemo());
 			ps.setInt(7, exportModel.getId());
-			
+
 			ps.executeQuery();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	// 고정수입 매번 넣기
 	public void fiminsert(ImportModel importModel) {
 		con = DBUtil.getConnection();
@@ -293,5 +290,51 @@ public class AmountDAO {
 
 	}
 
-	
+	// 잔액 테이블 일별 수정
+	public void dayupdate(AmountModel amountModel) {
+		con = DBUtil.getConnection();
+		// 수정하는 sql
+		String sql = "update amount set price=?, day=?, type=?, content=?, memo=? where user_id=? and foreign_id = ? and type = ?";
+
+		try {
+
+			ps = con.prepareStatement(sql);
+
+			ps.setInt(1, amountModel.getPrice());
+			ps.setString(2, amountModel.getDay());
+			ps.setString(3, amountModel.getType());
+			ps.setString(4, amountModel.getContent());
+			ps.setString(5, amountModel.getMemo());
+			ps.setInt(6, UsersModel.user.getId());
+			ps.setInt(7, amountModel.getRownum());
+			ps.setString(8, amountModel.getType());
+
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	// 일별 잔액 테이블 삭제
+	public void daydelete(int id, String amounttype) {
+		con = DBUtil.getConnection();
+
+		String sql = "delete from amount where foreign_id = ? and user_id = ? and type = ?";
+
+		try {
+
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			ps.setInt(2, UsersModel.user.getId());
+			ps.setString(3, amounttype);
+
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

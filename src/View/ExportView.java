@@ -475,16 +475,18 @@ public class ExportView extends JPanel {
 					}
 					String memo = memoField.getText();
 
-					// amount 수정 코드
-					String amounttype = "지출";
-					AmountModel amountModel = new AmountModel(datetext, amount, amounttype, type, memo, selectrownum);
-					amountController.update(amountModel);
-					// amount 수정 코드 끝
 
 					ExportModel exportModel = new ExportModel(UsersModel.user.getId(), datetext, amount, type_id, memo,
 							selectrownum);
-
-					if (ec.dayupdate(exportModel)) {
+					
+					int res = ec.dayupdate(exportModel);
+					if (res > 0) {
+						// amount 수정 코드
+						String amounttype = "지출";
+						AmountModel amountModel = new AmountModel(datetext, amount, amounttype, type, memo, res);
+						amountController.dayupdate(amountModel);
+						// amount 수정 코드 끝
+						
 						tabPanel.removeAll();
 						tabPanel.add("전체", dayPanel.add(totalCheck()));
 						tabPanel.add("일별", dayPanel.add(dayCheck()));
@@ -618,15 +620,17 @@ public class ExportView extends JPanel {
 						}
 						String memo = memoField.getText();
 
-						// amount 삭제 코드
-						String amounttype = "지출";
-						amountController.delete(selectrownum, amounttype);
-						// amount 삭제 코드 끝
 
 						ExportModel exportmodel = new ExportModel(UsersModel.user.getId(), datetext, amount, type_id, memo,
 								selectrownum);
-
-						if (ec.daydelete(exportmodel)) {
+						int res = ec.daydelete(exportmodel);
+						
+						if (res > 0) {
+							// amount 삭제 코드
+							String amounttype = "지출";
+							amountController.daydelete(res, amounttype);
+							// amount 삭제 코드 끝
+							
 							tabPanel.removeAll();
 							tabPanel.add("전체", dayPanel.add(totalCheck()));
 							tabPanel.add("일별", dayPanel.add(dayCheck()));

@@ -36,5 +36,15 @@ public class AmountService {
 	public void fiminsert(ImportModel importModel) {
 		amountDAO.fiminsert(importModel);
 	}
+	
+	// 일별 수정
+	public void dayupdate(AmountModel amountModel) {
+		amountDAO.dayupdate(amountModel);
+	}
+	
+	// 일별 삭제
+	public void daydelete(int id, String amounttype) {
+		amountDAO.daydelete(id, amounttype);
+	}
 
 }

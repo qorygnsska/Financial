@@ -274,9 +274,8 @@ public class ExportDAO {
 
 	}
 
-	public boolean dayupdate(ExportModel exportModel) {
+	public int dayupdate(ExportModel exportModel) {
 		int sqlnum = 0;
-		boolean result = false;
 
 		conn = DBUtil.getConnection();
 		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day asc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id=? and day=?";
@@ -303,17 +302,13 @@ public class ExportDAO {
 			pt.setInt(5, exportModel.getId());
 			pt.setInt(6, sqlnum);
 
-			int num = pt.executeUpdate();
+			pt.executeUpdate();
 
-			if (num > 0) {
-
-				result = true;
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return sqlnum;
 	}
 
 	public boolean monthupdate(ExportModel exportModel) {
@@ -360,9 +355,8 @@ public class ExportDAO {
 
 	}
 
-	public boolean daydelete(ExportModel exportmodel) {
+	public int daydelete(ExportModel exportmodel) {
 		int sqlnum = 0;
-		boolean result = false;
 
 		conn = DBUtil.getConnection();
 		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day asc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from export where user_id = ? and day=?";
@@ -386,16 +380,13 @@ public class ExportDAO {
 			pt.setInt(1, exportmodel.getId());
 			pt.setInt(2, sqlnum);
 
-			int num = pt.executeUpdate();
+			pt.executeUpdate();
 
-			if (num > 0) {
-				result = true;
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return sqlnum;
 	}
 
 	public boolean monthdelete(ExportModel exportmodel) {

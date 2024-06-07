@@ -77,7 +77,7 @@ public class ImportController {
 		importService.check();
 	}
 
-	public boolean dayupdate(ImportModel importmodel) {
+	public int dayupdate(ImportModel importmodel) {
 		// TODO Auto-generated method stub
 		return importService.dayupdate(importmodel);
 	}
@@ -87,7 +87,7 @@ public class ImportController {
 		return importService.monthupdate(importmodel);
 	}
 
-	public boolean daydelete(ImportModel importmodel) {
+	public int daydelete(ImportModel importmodel) {
 		
 	return importService.daydelete(importmodel);
 	}

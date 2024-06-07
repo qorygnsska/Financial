@@ -35,7 +35,7 @@ public class ImportService {
 		dao.check();
 	}
 
-	public boolean dayupdate(ImportModel importmodel) {
+	public int dayupdate(ImportModel importmodel) {
 		
 		return dao.dayupdate(importmodel);
 	}
@@ -45,7 +45,7 @@ public class ImportService {
 		return dao.monthupdate(importmodel);
 	}
 
-	public boolean daydelete(ImportModel importmodel) {
+	public int daydelete(ImportModel importmodel) {
 		
 		return dao.daydelete(importmodel);
 	}
