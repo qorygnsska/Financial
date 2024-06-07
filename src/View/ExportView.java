@@ -353,7 +353,7 @@ public class ExportView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String dateText = date;
+				
 				if(!amountField.getText().isEmpty()) {
 				int amount = Integer.parseInt(amountField.getText());
 				String type = typeBox.getSelectedItem().toString();
@@ -369,18 +369,18 @@ public class ExportView extends JPanel {
 
 				// saveprice 추가코드 시작
 				if (type.equals("저축")) {
-					SaveModel model = new SaveModel(amount, dateText, type_id, memo, selectrownum);
+					SaveModel model = new SaveModel(amount, datetext, type_id, memo, selectrownum);
 					SC.insert(model);
 					JOptionPane.showMessageDialog(null, "저축 내역에 기입되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
 				} else {
 
-					ExportModel exportModel = new ExportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
+					ExportModel exportModel = new ExportModel(UsersModel.user.getId(), datetext, amount, type_id, memo);
 					if (ec.add(exportModel)) {
 
 						// amount 추가 코드
 						String amounttype = "지출";
 
-						AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
+						AmountModel amountModel = new AmountModel(datetext, amount, amounttype, type, memo);
 						amountController.insert(amountModel);
 						// amount 추가 코드 끝
 

@@ -322,7 +322,7 @@ public class ImportView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String dateText = date;
+			
 				if (!amountField.getText().isEmpty()) {
 					int amount = Integer.parseInt(amountField.getText());
 					String type = typeBox.getSelectedItem().toString();
@@ -336,13 +336,13 @@ public class ImportView extends JPanel {
 					}
 					String memo = memoField.getText();
 
-					ImportModel importModel = new ImportModel(UsersModel.user.getId(), dateText, amount, type_id, memo);
+					ImportModel importModel = new ImportModel(UsersModel.user.getId(), datetext, amount, type_id, memo);
 					if (ic.add(importModel)) {
 
 						// amount 추가 코드
 						String amounttype = "수입";
 
-						AmountModel amountModel = new AmountModel(dateText, amount, amounttype, type, memo);
+						AmountModel amountModel = new AmountModel(datetext, amount, amounttype, type, memo);
 						amountController.insert(amountModel);
 						// amount 추가 코드 끝
 
