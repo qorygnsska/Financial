@@ -136,49 +136,65 @@ public class SignupView extends JFrame {
 
 		add(mainPan);
 		setBounds(0, 0, 300, 300);
-		
+
 		jtjumin.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent e) {
-			//입력된 텍스트
+				// 입력된 텍스트
 				String jumintext = jtjumin.getText();
-				//글자 수 제한
-				int maxtext=6;
-				if(jumintext.length()>=maxtext) {
-					//입력된 텍스트가 6자리를 넘어가면 입력을 무시
+				// 글자 수 제한
+				int maxtext = 6;
+				if (jumintext.length() >= maxtext) {
+					// 입력된 텍스트가 6자리를 넘어가면 입력을 무시
 					e.consume();
-				}				
-			}	
+				}
+				// 숫자외의 텍스트는 입력되지 않고 비프음 추가
+				char c = e.getKeyChar();
+				if (!((Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+
 			@Override
-			public void keyReleased(KeyEvent e) {}			
+			public void keyReleased(KeyEvent e) {
+			}
+
 			@Override
-			public void keyPressed(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {
+			}
 		});
-		
-	jtjumin2.addKeyListener(new KeyListener() {
-			
+
+		jtjumin2.addKeyListener(new KeyListener() {
+
 			@Override
 			public void keyTyped(KeyEvent e) {
-			//입력된 텍스트
-				String jumintext2 =jtjumin2.getText();
-				//글자 수 제한
-				int maxtext2=7;
-				
-				
-				if(jumintext2.length()>=maxtext2) {
-					//입력된 텍스트가 7자리를 넘어가면 입력을 무시
+				// 입력된 텍스트
+				String jumintext2 = jtjumin2.getText();
+				// 글자 수 제한
+				int maxtext2 = 7;
+
+				if (jumintext2.length() >= maxtext2) {
+					// 입력된 텍스트가 7자리를 넘어가면 입력을 무시
 					e.consume();
-				}				
-			}	
+				}
+				// 숫자외의 텍스트는 입력되지 않고 비프음 추가
+				char c = e.getKeyChar();
+				if (!((Character.isDigit(c) || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+
 			@Override
-			public void keyReleased(KeyEvent e) {}			
+			public void keyReleased(KeyEvent e) {
+			}
+
 			@Override
-			public void keyPressed(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {
+			}
 		});
-		
-		
-		
 
 		// 되돌아가기 버튼 이벤트
 		back.addActionListener(new ActionListener() {
@@ -203,25 +219,26 @@ public class SignupView extends JFrame {
 				String jumin1 = jtjumin.getText();
 				String jumin2 = jtjumin2.getText();
 				String jumin = jumin1 + jumin2;
-				//숫자로만 입력가능
-				if(jumin.matches("[0-9]+")) {
-				if (!user_id.isEmpty() && !user_pass.isEmpty() && !name.isEmpty() && !jumin1.isEmpty() && !jumin2.isEmpty()) {
-					// user 객체 생성
-					UsersModel user = new UsersModel(user_id, user_pass, name, jumin);
-					if (signupController.signup(user)) {
-						JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
-						new LoginView().user();
-						dispose();
+				// 숫자로만 입력가능
+				if (jumin.matches("[0-9]+")) {
+					if (!user_id.isEmpty() && !user_pass.isEmpty() && !name.isEmpty() && !jumin1.isEmpty()
+							&& !jumin2.isEmpty()) {
+						// user 객체 생성
+						UsersModel user = new UsersModel(user_id, user_pass, name, jumin);
+						if (signupController.signup(user)) {
+							JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다!", "성공", JOptionPane.PLAIN_MESSAGE);
+							new LoginView().user();
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "회원가입 실패(중복)", "실패", JOptionPane.ERROR_MESSAGE);
+						}
 					} else {
-						JOptionPane.showMessageDialog(null, "회원가입 실패(중복)", "실패", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "모든 입력 칸을 채워주세요!", "실패", JOptionPane.ERROR_MESSAGE);
 					}
-				}else {
-					JOptionPane.showMessageDialog(null, "모든 입력 칸을 채워주세요!", "실패", JOptionPane.ERROR_MESSAGE);
-				}
 
-			}else {
-				JOptionPane.showMessageDialog(null, "주민등록 칸은 숫자로 입력해 주세요!(공백X)", "실패", JOptionPane.ERROR_MESSAGE);
-			}
+				} else {
+					JOptionPane.showMessageDialog(null, "주민등록 칸은 숫자로 입력해 주세요!(공백X)", "실패", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 
