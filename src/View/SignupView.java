@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -134,6 +136,49 @@ public class SignupView extends JFrame {
 
 		add(mainPan);
 		setBounds(0, 0, 300, 300);
+		
+		jtjumin.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+			//입력된 텍스트
+				String jumintext = jtjumin.getText();
+				//글자 수 제한
+				int maxtext=6;
+				if(jumintext.length()>=maxtext) {
+					//입력된 텍스트가 6자리를 넘어가면 입력을 무시
+					e.consume();
+				}				
+			}	
+			@Override
+			public void keyReleased(KeyEvent e) {}			
+			@Override
+			public void keyPressed(KeyEvent e) {}
+		});
+		
+	jtjumin2.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+			//입력된 텍스트
+				String jumintext2 =jtjumin2.getText();
+				//글자 수 제한
+				int maxtext2=7;
+				
+				
+				if(jumintext2.length()>=maxtext2) {
+					//입력된 텍스트가 7자리를 넘어가면 입력을 무시
+					e.consume();
+				}				
+			}	
+			@Override
+			public void keyReleased(KeyEvent e) {}			
+			@Override
+			public void keyPressed(KeyEvent e) {}
+		});
+		
+		
+		
 
 		// 되돌아가기 버튼 이벤트
 		back.addActionListener(new ActionListener() {
@@ -158,7 +203,8 @@ public class SignupView extends JFrame {
 				String jumin1 = jtjumin.getText();
 				String jumin2 = jtjumin2.getText();
 				String jumin = jumin1 + jumin2;
-				
+				//숫자로만 입력가능
+				if(jumin.matches("[0-9]+")) {
 				if (!user_id.isEmpty() && !user_pass.isEmpty() && !name.isEmpty() && !jumin1.isEmpty() && !jumin2.isEmpty()) {
 					// user 객체 생성
 					UsersModel user = new UsersModel(user_id, user_pass, name, jumin);
@@ -173,6 +219,9 @@ public class SignupView extends JFrame {
 					JOptionPane.showMessageDialog(null, "모든 입력 칸을 채워주세요!", "실패", JOptionPane.ERROR_MESSAGE);
 				}
 
+			}else {
+				JOptionPane.showMessageDialog(null, "주민등록 칸은 숫자로 입력해 주세요!(공백X)", "실패", JOptionPane.ERROR_MESSAGE);
+			}
 			}
 		});
 
