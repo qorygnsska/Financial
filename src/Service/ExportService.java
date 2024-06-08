@@ -36,7 +36,7 @@ public class ExportService {
 		dao.check();
 	}
 
-	public boolean dayupdate(ExportModel exportModel) {
+	public int dayupdate(ExportModel exportModel) {
 		
 		return dao.dayupdate(exportModel);
 	}
@@ -46,7 +46,7 @@ public class ExportService {
 		return dao.monthupdate(exportModel);
 	}
 
-	public boolean daydelete(ExportModel exportmodel) {
+	public int daydelete(ExportModel exportmodel) {
 	
 		return dao.daydelete(exportmodel);
 	}

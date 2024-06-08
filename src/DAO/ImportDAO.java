@@ -274,9 +274,8 @@ public class ImportDAO {
 
 	}
 
-	public boolean dayupdate(ImportModel importmodel) {
+	public int dayupdate(ImportModel importmodel) {
 		int sqlnum = 0;
-		boolean result = false;
 
 		conn = DBUtil.getConnection();
 		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id=? and day=?";
@@ -305,17 +304,13 @@ public class ImportDAO {
 			pt.setInt(5, importmodel.getId());
 			pt.setInt(6, sqlnum);
 
-			int num = pt.executeUpdate();
+			pt.executeUpdate();
 
-			if (num > 0) {
-
-				result = true;
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return sqlnum;
 	}
 
 	public boolean monthupdate(ImportModel importmodel) {
@@ -363,9 +358,8 @@ public class ImportDAO {
 		return result;
 	}
 
-	public boolean daydelete(ImportModel importmodel) {
+	public int daydelete(ImportModel importmodel) {
 		int sqlnum = 0;
-		boolean result = false;
 
 		conn = DBUtil.getConnection();
 		String sql = "select DISTINCT  NTH_VALUE(id, ?) OVER(order by day desc ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)as idnum from import where user_id = ? and day=?";
@@ -388,16 +382,13 @@ public class ImportDAO {
 			pt.setInt(1, importmodel.getId());
 			pt.setInt(2, sqlnum);
 
-			int num = pt.executeUpdate();
+			pt.executeUpdate();
 
-			if (num > 0) {
-				result = true;
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return sqlnum;
 
 	}
 

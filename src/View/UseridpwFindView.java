@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -86,6 +88,8 @@ public class UseridpwFindView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String jumin = jtjumin.getText() + jpjumin.getText();
+				//숫자로만 입력가능
+				if(jumin.matches("[0-9]+")) {				
 				if (loginController.idfind(jumin) != null) {
 					String id = String.valueOf(loginController.idfind(jumin));
 					JOptionPane.showMessageDialog(null, "아이디 : " + id, "성공", JOptionPane.PLAIN_MESSAGE);
@@ -94,10 +98,58 @@ public class UseridpwFindView extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "입력하신 정보가 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
 				}
-
+				
+				}else {
+					JOptionPane.showMessageDialog(null, "숫자를 입력하세요.", "실패", JOptionPane.ERROR_MESSAGE);
+				}
+				
 			}
 		});
 
+	jtjumin.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+			//입력된 텍스트
+				String jumintext = jtjumin.getText();
+				//글자 수 제한
+				int maxtext=6;		
+						
+				 if(jumintext.length()>=maxtext) {
+					//입력된 텍스트가 6자리를 넘어가면 입력을 무시
+					e.consume();
+				}
+			
+				
+			}	
+			@Override
+			public void keyReleased(KeyEvent e) {}			
+			@Override
+			public void keyPressed(KeyEvent e) {}
+		});
+	
+	jpjumin.addKeyListener(new KeyListener() {
+		
+		@Override
+		public void keyTyped(KeyEvent e) {
+		//입력된 텍스트
+			String jumintext = jpjumin.getText();
+			//글자 수 제한
+			int maxtext=7;
+			if(jumintext.length()>=maxtext) {
+				//입력된 텍스트가 7자리를 넘어가면 입력을 무시
+				e.consume();
+			}				
+		}	
+		@Override
+		public void keyReleased(KeyEvent e) {}			
+		@Override
+		public void keyPressed(KeyEvent e) {}
+	});
+		
+		
+		
+		
 		setResizable(false); // 화면 크기 고정하는 작업
 		// 화면 중앙에 배치할 수있도록 메서드
 		setLocationRelativeTo(null);
@@ -164,6 +216,8 @@ public class UseridpwFindView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String uid = jtp.getText();
 				String jumin = jtjumin.getText() + jpjumin.getText();
+				//숫자로만 입력가능
+				if(jumin.matches("[0-9]+")) {	
 				if (loginController.pwfind(jumin, uid) != null) {
 					String pw = String.valueOf(loginController.pwfind(jumin, uid));
 					JOptionPane.showMessageDialog(null, "비밀번호 : " + pw, "성공", JOptionPane.PLAIN_MESSAGE);
@@ -173,9 +227,54 @@ public class UseridpwFindView extends JFrame {
 				} else {
 					JOptionPane.showMessageDialog(null, "입력하신 정보가 없습니다.", "실패", JOptionPane.ERROR_MESSAGE);
 				}
+				}else {
+					JOptionPane.showMessageDialog(null, "숫자를 입력하세요", "실패", JOptionPane.ERROR_MESSAGE);
+					
+				}
 			}
 		});
 
+		
+	jtjumin.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+			//입력된 텍스트
+				String jumintext = jtjumin.getText();
+				//글자 수 제한
+				int maxtext=6;
+				if(jumintext.length()>=maxtext) {
+					//입력된 텍스트가 6자리를 넘어가면 입력을 무시
+					e.consume();
+				}				
+			}	
+			@Override
+			public void keyReleased(KeyEvent e) {}			
+			@Override
+			public void keyPressed(KeyEvent e) {}
+		});
+	
+	jpjumin.addKeyListener(new KeyListener() {
+		
+		@Override
+		public void keyTyped(KeyEvent e) {
+		//입력된 텍스트
+			String jumintext = jpjumin.getText();
+			//글자 수 제한
+			int maxtext=7;
+			if(jumintext.length()>=maxtext) {
+				//입력된 텍스트가 7자리를 넘어가면 입력을 무시
+				e.consume();
+			}				
+		}	
+		@Override
+		public void keyReleased(KeyEvent e) {}			
+		@Override
+		public void keyPressed(KeyEvent e) {}
+	});
+		
+		
+		
 		 setResizable(false); // 화면 크기 고정하는 작업
 		// 화면 중앙에 배치할 수있도록 메서드
 		setLocationRelativeTo(null);

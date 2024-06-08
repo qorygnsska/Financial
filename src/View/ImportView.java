@@ -322,8 +322,9 @@ public class ImportView extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String dateText = date;
+			
 				if (!amountField.getText().isEmpty()) {
+					String dateText = date;
 					int amount = Integer.parseInt(amountField.getText());
 					String type = typeBox.getSelectedItem().toString();
 					int type_id = 1;
@@ -434,17 +435,18 @@ public class ImportView extends JPanel {
 						}
 						String memo = memoField.getText();
 
-						// amount 수정 코드
-						String amounttype = "수입";
-						AmountModel amountModel = new AmountModel(datetext, amount, amounttype, type, memo,
-								selectrownum);
-						amountController.update(amountModel);
-						// amount 수정 코드 끝
 
 						ImportModel importmodel = new ImportModel(UsersModel.user.getId(), datetext, amount, type_id,
 								memo, selectrownum);
-					
-						if (ic.dayupdate(importmodel)) {
+	
+						int res = ic.dayupdate(importmodel);
+						if (res > 0) {
+							// amount 수정 코드
+							String amounttype = "수입";
+							AmountModel amountModel = new AmountModel(datetext, amount, amounttype, type, memo,
+									res);
+							amountController.dayupdate(amountModel);
+							// amount 수정 코드 끝
 							
 							tabPanel.removeAll();
 							tabPanel.add("전체", dayPanel.add(totalCheck()));
@@ -577,15 +579,16 @@ public class ImportView extends JPanel {
 						}
 						String memo = memoField.getText();
 						
-						// amount 삭제 코드
-						String amounttype = "수입";
-						amountController.delete(selectrownum, amounttype);
-						// amount 삭제 코드 끝
 						
 						ImportModel importmodel = new ImportModel(UsersModel.user.getId(), datetext, amount, type_id, memo,
 								selectrownum);
-						
-						if (ic.daydelete(importmodel)) {
+						int res = ic.daydelete(importmodel);
+						if (res > 0) {
+							// amount 삭제 코드
+							String amounttype = "수입";
+							amountController.daydelete(res, amounttype);
+							// amount 삭제 코드 끝
+							
 							tabPanel.removeAll();
 							tabPanel.add("전체", dayPanel.add(totalCheck()));
 							tabPanel.add("일별", dayPanel.add(dayCheck()));
